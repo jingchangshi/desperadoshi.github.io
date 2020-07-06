@@ -199,7 +199,7 @@ Xi’an, China
 </div>
 <p>I’m developing a code based on the flux reconstruction method and will use it to simulate the shock wave/turbulent boundary layer interaction. The code is called NFS. NFS is written in Fortran with useful programming features including OOP. Based on unstructured linear and high order meshes, NFS maintains a good scalability performance. 90% strong scalability using up to 2400 CPU cores. It is validated using various test cases, including the turbulent channel flow, double mach reflection, strong shock vortex interaction and others. Various shock sensors and limiters including various WENO limiters are implemented. An inflow turbulence generation BC is implemented using the digital filter approach. Due to my limited time, I focus on the feature required to do simulation of the SWBLI. The running speed and the scalability performance could be improved. A website showing details of NFS will be released soon.</p>
 <h1 class="unnumbered" id="publications"><span class="fa fa-pencil fa-fw"></span> Publications</h1>
-<p>Check the <a href="http://t02q7l.coding-pages.com/resume/publications.html">publication list</a>.</p>
+<p>Check the <a href="http://shijingchang.cn/resume/publications.html">publication list</a>.</p>
 <h2 id="wall-modelled-les">Wall modelled LES</h2>
 <p><img src="static/Shi_2020AIAAJ_Cover.png" width="800" /></p>
 <p>I studied the wall-stress approach for wall modelled LES using the flux reconstruction method. The wall-stress approach simply uses the wall-stress to model the dynamics near the wall. The fluid dynamics from the wall to a location in the log layer is modelled by this wall-stress. Therefore, the stringent requirement on the grid size near the wall is relaxed. The wall-stress is calculated through a wall function/model based on the flow solution at a location. It means that the wall function/model gets input from LES at such location and outputs the wall-stress at the wall. You can simply specify such location to be at the cell interface between the first cell and the second cell in the wall-normal direction. Then you could use a really coarse mesh to conduct your wall-modelled LES but finally get an accurate result. And this location is expected to be valid from the wall up to somewhere in the log-layer. However, my study shows that the location at which LES feeds the wall function/model is affected by the streamwise and spanwise grid resolutions. For details, check my <a href="https://doi.org/10.2514/1.j058957">AIAA Journal publication</a><span class="citation" data-cites="Shi_2020AIAAJ">[1]</span>.</p>
@@ -224,7 +224,7 @@ Xi’an, China
 <hr />
 <div id="refs" class="references" role="doc-bibliography">
 <div id="ref-Shi_2020AIAAJ">
-<p>[1] J. Shi, H. Yan, Z.J. Wang, Flux reconstruction implementation of an algebraic wall model for large-eddy simulation, AIAA Journal. (2020) 1–12. <a href="https://doi.org/10.2514/1.j058957">https://doi.org/10.2514/1.j058957</a>.</p>
+<p>[1] J. Shi, H. Yan, Z.J. Wang, Flux reconstruction implementation of an algebraic wall model for large-eddy simulation, AIAA Journal. 58 (2020) 3051–3062. <a href="https://doi.org/10.2514/1.j058957">https://doi.org/10.2514/1.j058957</a>.</p>
 </div>
 <div id="ref-Shi_2018AIAAConf_2">
 <p>[2] J. Shi, H. Yan, Z.J. Wang, Towards direct computation of aeroacoustic noise with the high-order FR/CPR method, in: 2018 AIAA/CEAS Aeroacoustics Conference, American Institute of Aeronautics; Astronautics, 2018. <a href="https://doi.org/10.2514/6.2018-4095">https://doi.org/10.2514/6.2018-4095</a>.</p>
