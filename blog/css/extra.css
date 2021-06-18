@@ -1,0 +1,35 @@
+.header-title {
+  font-family: 'Liu Jian Mao Cao', cursive;
+}
+
+h1 {
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+body {
+  font-family: 'Noto Serif SC', serif;
+}
+
+.post-author {
+  font-family: 'Liu Jian Mao Cao', cursive;
+}
+
+.post-date {
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+.markdown-body pre>code {
+  background-color: #f6f8fa;
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}

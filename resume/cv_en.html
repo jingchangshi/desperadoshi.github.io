@@ -352,8 +352,8 @@ HPC
 <li>To successfully simulate the hard case of STBLI requires sophisticated collaborations of multiple state-of-the-art CFD algorithms, which is achieved in NFS.</li>
 </ul></li>
 <li>Good scalability: <strong>The strong scalability test on the TianHe-2 shows 90% of ideal speed-up up to 2400 cores</strong>.</li>
-<li>Good HPC performance: Vectorization + template generated kernel function results in faster running speed than the baseline.</li>
-<li>Good Multigrid performance: The baseline implicit time solver is the Block LU-SGS solver, which splits the full matrix <span class="math inline"><em>A</em></span> of the fully implicit time scheme into smaller matrix and calls LU decomposition from MKL to solve <span class="math inline"><em>A</em><em>x</em> = <em>b</em></span>. It alleviates the burden of huge memory storage for the full matrix <span class="math inline"><em>A</em></span> but retains the good speed-up. Based on the BLUSGS solver, the V-cycle p-Multigrid, h-Multigrid and hp-Multigrid achieves one order of magnitude less running time. The <strong>hp-Multigrid is a new acceleration algorithm presented in this code</strong> and the basic idea is to stack the p-Multigrid on the h-Multigrid.</li>
+<li>Good HPC performance: <strong>Vectorization + template generated kernel function results in multiple times faster</strong> running speed than the baseline.</li>
+<li>Good Multigrid performance: The baseline implicit time solver is the Block LU-SGS solver, which splits the full matrix <span class="math inline"><em>A</em></span> of the fully implicit time scheme into smaller matrix and calls LU decomposition from MKL to solve <span class="math inline"><em>A</em><em>x</em> = <em>b</em></span>. It alleviates the burden of huge memory storage for the full matrix <span class="math inline"><em>A</em></span> but retains the good speed-up. Based on the BLUSGS solver, the V-cycle Multigrid achieves multiple times faster running speed.</li>
 </ul>
 <h1 class="unnumbered" id="profession-skills"><span class="fa fa-star fa-fw"></span> Profession skills</h1>
 <ol type="1">
@@ -376,6 +376,7 @@ HPC
 <li>Optimal design of data structure of CFD algorithm to help the compiler do vectorization</li>
 <li>Use Python template engine jinja2 to generate Fortran kernel function to reduce the instructions retired in CPU</li>
 <li>With the above tricks, the running speed of NFS reaches 3 times faster than the baseline</li>
+<li>Run parallel CFD simulations using NFS with more than 1M CPU core-hours on BSCC and TianHe-2.</li>
 </ul></li>
 </ul></li>
 <li><p>During the undergraduate stage, I used CUDA to implement a Poisson equation solver and employed multiple core CUDA optimization tricks including coalesced memory access, reduced threads divergence and redirected data access to shared memory to obtain a good performance.</p></li>
