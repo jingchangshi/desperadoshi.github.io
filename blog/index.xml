@@ -15,12 +15,11 @@
       <link>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</link>
       <pubDate>Fri, 18 Jun 2021 10:02:20 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</guid>
-      <description>&lt;h1 id=&#34;来源&#34;&gt;来源&lt;/h1&gt;
+      <guid>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</guid><description>&lt;h1 id=&#34;来源&#34;&gt;来源&lt;/h1&gt;
 &lt;p&gt;群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。&lt;/p&gt;
 &lt;h1 id=&#34;测试&#34;&gt;测试&lt;/h1&gt;
 &lt;p&gt;我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;node7_poor_performance.png&#34; alt=&#34;node7 节点上 NFR 比其它节点慢 24%&#34; title=&#34;node7 节点上 NFR 比其它节点慢 24%&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/node7_poor_performance.png&#34; alt=&#34;node7 节点上 NFR 比其它节点慢 24%&#34; title=&#34;node7 节点上 NFR 比其它节点慢 24%&#34;&gt;&lt;/p&gt;
 &lt;p&gt;node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。
 所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。&lt;/p&gt;
 &lt;p&gt;但是单核跑 NFR 在 node7 和 node4 上没有性能差异。&lt;/p&gt;
@@ -39,7 +38,7 @@ perf 可以直接统计 MPI 并行程序的性能。&lt;/p&gt;
 &lt;li&gt;需要访问的内存不在虚拟地址空间，但是在物理内存中，只需要MMU建立物理内存和虚拟地址空间的映射关系即可，minor page fault&lt;/li&gt;
 &lt;li&gt;进程需要访问的内存地址不在它的虚拟地址空间范围内，属于越界访问，内核会报segment fault错误&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;MMU.png&#34; alt=&#34;MMU&#34; title=&#34;MMU&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/MMU.png&#34; alt=&#34;MMU&#34; title=&#34;MMU&#34;&gt;&lt;/p&gt;
 &lt;p&gt;所以进一步来看下到底是 major 还是 minor 类型。&lt;/p&gt;
 &lt;p&gt;指定 perf 的具体分析类型：&lt;code&gt;perf stat -d -e major-faults,minor-faults,mem-loads,mem-stores mpirun -n 40 prog input.file&lt;/code&gt;，
 得到最上面对比图中 minor-faults 在 node7 上是 node4 的 3 倍。
@@ -48,11 +47,11 @@ perf 可以直接统计 MPI 并行程序的性能。&lt;/p&gt;
 &lt;p&gt;参考&lt;a href=&#34;http://cenalulu.github.io/linux/numa/&#34;&gt;NUMA架构的CPU &amp;ndash; 你真的用好了么？&lt;/a&gt;。要点如下&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;之前所有CPU Core都是通过共享一个北桥来读取内存，随着核数如何的发展，北桥在响应时间上的性能瓶颈越来越明显&lt;/li&gt;
-&lt;li&gt;NUMA 中，虽然内存直接与 CPU 紧邻，但是由于内存被平均分配在了各个裸晶 (die) &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;上。只有当 CPU 访问自身直接相连的内存对应的物理地址时，才会有较短的响应时间（后称 Local access ）。而如果需要访问其他 CPU 紧密相连的内存数据时，就需要通过 inter-connect 通道访问，响应时间就相比之前变慢了（后称 Remote access ）。所以 NUMA（Non-Uniform Memory Access）就此得名。&lt;/li&gt;
+&lt;li&gt;NUMA 中，虽然内存直接与 CPU 紧邻，但是由于内存被平均分配在了各个裸晶 (die) &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;上。只有当 CPU 访问自身直接相连的内存对应的物理地址时，才会有较短的响应时间（后称 Local access ）。而如果需要访问其他 CPU 紧密相连的内存数据时，就需要通过 inter-connect 通道访问，响应时间就相比之前变慢了（后称 Remote access ）。所以 NUMA（Non-Uniform Memory Access）就此得名。&lt;/li&gt;
 &lt;li&gt;Linux 识别到 NUMA 架构后，默认的内存分配方案就是：优先尝试在请求线程当前所处的 CPU 的本地内存上分配空间。如果本地内存不足，优先淘汰本地内存中无用的 page（Inactive，Unmapped）&lt;/li&gt;
 &lt;li&gt;此文主要讨论 NUMA 中 CPU 对远端内存访问慢的特点导致 MySQL 性能变差。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;http://cenalulu.github.io/images/linux/numa/numa.png&#34; alt=&#34;NUMA&#34; title=&#34;NUMA&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/http://cenalulu.github.io/images/linux/numa/numa.png&#34; alt=&#34;NUMA&#34; title=&#34;NUMA&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从此文中得到启发，进一步检查 node7 上 NUMA 状态。node7 上居然没有&lt;code&gt;numa_miss&lt;/code&gt;，如下&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ numastat
                            node0           node1
@@ -72,7 +71,7 @@ interleave_hit            266562          281401
 local_node           36120608738      7797778236
 other_node               7691320      1551461920
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进一步检查 NUMA 设定： &lt;code&gt;numactl --hardware&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;NUMA_hardware.png&#34; alt=&#34;NUMA hardware info&#34; title=&#34;NUMA hardware info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/NUMA_hardware.png&#34; alt=&#34;NUMA hardware info&#34; title=&#34;NUMA hardware info&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以看到 node7 上 NUMA 的 free 很少，只有 &lt;code&gt;435MB&lt;/code&gt;，正常的 node4 有 60GB。
 可以推测是 node7 上极少的 free NUMA 导致了 3 倍的 minor page faults。
 NUMA free 少应该是被缓存占了，相关术语是 page cache。
@@ -80,14 +79,14 @@ NUMA free 少应该是被缓存占了，相关术语是 page cache。
 上面文章中给出的一个解决 NUMA 问题的方案是&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;echo 3 &amp;gt; /proc/sys/vm/drop_caches
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 node7 上使用 root 执行上述命令后，node7 性能恢复正常。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;node7_node4_same_performance.png&#34; alt=&#34;node7 节点上 NFR 性能正常&#34; title=&#34;node7 节点上 NFR 性能正常&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/node7_node4_same_performance.png&#34; alt=&#34;node7 节点上 NFR 性能正常&#34; title=&#34;node7 节点上 NFR 性能正常&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果想令系统自动清理缓存，参考&lt;a href=&#34;https://developer.aliyun.com/article/91184&#34;&gt;Linux下清理内存和Cache方法 /proc/sys/vm/drop_caches&lt;/a&gt;，不过我并没有测试。
 留待以后尝试。&lt;/p&gt;
 &lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;A die, in the context of integrated circuits, is a small block of semiconducting material on which a given functional circuit is fabricated.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A die, in the context of integrated circuits, is a small block of semiconducting material on which a given functional circuit is fabricated.&amp;#160;&lt;a href=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
