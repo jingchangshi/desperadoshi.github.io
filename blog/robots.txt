@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://shijingchang.cn/sitemap.xml
