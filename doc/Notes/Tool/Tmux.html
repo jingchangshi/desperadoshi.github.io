@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2021-04-29" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Tmux</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Tmux</h1>
+<h3 class="date">2021-04-29</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#installation"><span class="toc-section-number">1.1</span> Installation</a></li>
+<li><a href="#manually-reload-config"><span class="toc-section-number">1.2</span> Manually Reload Config</a></li>
+</ul></li>
+<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<ul>
+<li><a href="#update-display"><span class="toc-section-number">2.1</span> Update DISPLAY</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="installation"><span class="header-section-number">1.1</span> Installation</h2>
+<p>Download sources from Github.</p>
+<pre><code>mkdir build
+cd build
+LIBEVENT_CORE_CFLAGS=&quot;-I$HOME/Softwares/libevent/include&quot; LIBEVENT_CFLAGS=&quot;-I$HOME/Softwares/libevent/include&quot; LIBEVENT_CORE_LIBS=&quot;-L$HOME/Softwares/libevent/lib -levent_core&quot; LIBEVENT_LIBS=&quot;-L$HOME/Softwares/libevent/lib -levent&quot; ../configure --prefix=$HOME/Softwares/tmux-3.2
+make
+make install</code></pre>
+<h2 data-number="1.2" id="manually-reload-config"><span class="header-section-number">1.2</span> Manually Reload Config</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.tmux.conf</span></code></pre></div>
+<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="update-display"><span class="header-section-number">2.1</span> Update DISPLAY</h2>
+<p>The problem: When you <code>ssh -X</code> into a machine and attach to an existing tmux session, the session contains the old $DISPLAY env variable. In order the x-server/client to work properly, you have to update $DISPLAY after connection. For example, the old $DISPLAY=:0 and you need to change to $DISPLAY=localhost:10.0 for my ssh session to perform x-forwarding properly.</p>
+<p>The solution: When attaching to tmux session, update $DISPLAY for each tmux pane in that session. This is performed by using tmux send-keys to the shell, so unfortunately $DISPLAY will not update for other active processes (vim, top, etc…) Keep this file in your $PATH, so you can run update these panes manually later</p>
+<p>Add to <code>tmux.conf</code>:</p>
+<pre><code>set-hook -g client-attached &#39;run-shell /bin/update_display.sh&#39;</code></pre>
+<p>Create <code>update_display.sh</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tmux will only send-keys to the following active processes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">shell_grep</span><span class="op">=</span><span class="st">&quot;bash|zsh&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Update $DISPLAY for each tmux pane that is currently running one of the $shell_grep processes</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> list-panes <span class="at">-s</span> <span class="at">-F</span> <span class="st">&quot;#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}&quot;</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="at">-E</span> <span class="va">$shell_grep</span><span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">&quot; &quot;</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xargs</span> <span class="at">-I</span> PANE tmux send-keys <span class="at">-t</span> PANE <span class="st">&#39;eval $(tmux showenv -s DISPLAY)&#39;</span> Enter</span></code></pre></div>
+<p>Note: tmux 2.9 does not recognize <code>DISPLAY</code>. You need to use tmux 3.2.</p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2021-04-29 with pandoc
+</footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2020-08-17" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Docker</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Docker</h1>
+<h3 class="date">2020-08-17</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#basic-commands"><span class="toc-section-number">1.1</span> Basic commands</a></li>
+</ul></li>
+<li><a href="#installation"><span class="toc-section-number">2</span> Installation</a>
+<ul>
+<li><a href="#centos-7"><span class="toc-section-number">2.1</span> CentOS 7</a>
+<ul>
+<li><a href="#error-container-selinux-2.9"><span class="toc-section-number">2.1.1</span> Error <code>container-selinux &gt;= 2.9</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#docker-hub"><span class="toc-section-number">3</span> Docker Hub</a>
+<ul>
+<li><a href="#use-the-mirror-in-the-mainland-of-china"><span class="toc-section-number">3.1</span> Use the mirror in the mainland of China</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="basic-commands"><span class="header-section-number">1.1</span> Basic commands</h2>
+<p>Run a container from an image</p>
+<pre><code>docker run -name learn -i -t rbnics/rbnics /bin/bash</code></pre>
+<ul>
+<li><code>-name learn</code> specifies the name of the container</li>
+<li><code>-i</code> keeps STDIN open even if not attached</li>
+<li><code>-t</code> allocates a pseudo-TTY</li>
+<li><code>/bin/bash</code> is the command name after the container starts</li>
+<li><code>rbnics/rbnics</code> is the image name</li>
+</ul>
+<h1 data-number="2" id="installation"><span class="header-section-number">2</span> Installation</h1>
+<h2 data-number="2.1" id="centos-7"><span class="header-section-number">2.1</span> CentOS 7</h2>
+<p>References</p>
+<ul>
+<li><a href="https://www.runoob.com/docker/centos-docker-install.html">1</a></li>
+</ul>
+<h3 data-number="2.1.1" id="error-container-selinux-2.9"><span class="header-section-number">2.1.1</span> Error <code>container-selinux &gt;= 2.9</code></h3>
+<p>You need to install the latest epel repo to install the required version of <code>container-selinux</code>.</p>
+<p><a href="https://blog.csdn.net/qq_41772936/article/details/81080284">Reference</a></p>
+<p>Remember to add the user to the docker group to avoid <code>sudo</code>.</p>
+<pre><code>sudo usermod -aG docker $USER</code></pre>
+<h1 data-number="3" id="docker-hub"><span class="header-section-number">3</span> Docker Hub</h1>
+<h2 data-number="3.1" id="use-the-mirror-in-the-mainland-of-china"><span class="header-section-number">3.1</span> Use the mirror in the mainland of China</h2>
+<p>Edit the config <code>/etc/docker/daemon.json</code> to add</p>
+<pre><code>{
+  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]
+}</code></pre>
+<p>Then restart docker</p>
+<pre><code>sudo systemctl restart docker</code></pre>
+<p><a href="http://mirrors.ustc.edu.cn/help/dockerhub.html?spm=a2c4e.10696291.0.0.5d1c19a4xMzbp0&amp;highlight=docker">Reference</a></p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2020-08-17 with pandoc
+</footer>
+</body>
+</html>

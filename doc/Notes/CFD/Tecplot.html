@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2020-09-14" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Tecplot</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Tecplot</h1>
+<h3 class="date">2020-09-14</h3>
+<div id="TOC">
+<ul>
+<li><a href="#macro"><span class="toc-section-number">1</span> Macro</a>
+<ul>
+<li><a href="#variable"><span class="toc-section-number">1.1</span> Variable</a>
+<ul>
+<li><a href="#using-format-in-variable"><span class="toc-section-number">1.1.1</span> Using format in variable</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#tips"><span class="toc-section-number">2</span> Tips</a>
+<ul>
+<li><a href="#annotation"><span class="toc-section-number">2.1</span> Annotation</a>
+<ul>
+<li><a href="#showing-time-while-creating-animation"><span class="toc-section-number">2.1.1</span> Showing time while creating animation</a></li>
+<li><a href="#add-greek-symbols"><span class="toc-section-number">2.1.2</span> Add Greek symbols</a></li>
+</ul></li>
+<li><a href="#special-operations"><span class="toc-section-number">2.2</span> Special operations</a>
+<ul>
+<li><a href="#data-cut-away-in-3d"><span class="toc-section-number">2.2.1</span> Data cut-away in 3D</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="macro"><span class="header-section-number">1</span> Macro</h1>
+<h2 data-number="1.1" id="variable"><span class="header-section-number">1.1</span> Variable</h2>
+<h3 data-number="1.1.1" id="using-format-in-variable"><span class="header-section-number">1.1.1</span> Using format in variable</h3>
+<pre><code>$!VarSet |p_no| = 1
+$!VarSet |case_name| = &quot;G|grid_no%d|R|run_no%d|P|p_no%d|&quot;</code></pre>
+<h1 data-number="2" id="tips"><span class="header-section-number">2</span> Tips</h1>
+<h2 data-number="2.1" id="annotation"><span class="header-section-number">2.1</span> Annotation</h2>
+<h3 data-number="2.1.1" id="showing-time-while-creating-animation"><span class="header-section-number">2.1.1</span> Showing time while creating animation</h3>
+<p>Create a text box on your plot and include the text “&amp;(SOLUTIONTIME.2f)” (the quotes are not necessary, but the ampersand and the parentheses are necessary) which will be replaced by the current solution time in each of the images that make up the AVI file.</p>
+<h3 data-number="2.1.2" id="add-greek-symbols"><span class="header-section-number">2.1.2</span> Add Greek symbols</h3>
+<ul>
+<li>Bold: <code>&lt;b&gt;...&lt;/b&gt;</code></li>
+<li>Italic: <code>&lt;i&gt;...&lt;/i&gt;</code></li>
+<li>Subscript: <code>&lt;sub&gt;...&lt;/sub&gt;</code></li>
+<li>Superscript: <code>&lt;sup&gt;...&lt;/sup&gt;</code></li>
+<li>Greek: <code>&lt;greek&gt;...&lt;/greek&gt;</code></li>
+<li>Math: <code>&lt;math&gt;...&lt;/math&gt;</code></li>
+<li>Special: <code>&lt;userdef&gt;...&lt;/userdef&gt;</code></li>
+</ul>
+<h2 data-number="2.2" id="special-operations"><span class="header-section-number">2.2</span> Special operations</h2>
+<h3 data-number="2.2.1" id="data-cut-away-in-3d"><span class="header-section-number">2.2.1</span> Data cut-away in 3D</h3>
+<p>Tecplot uses <code>Value Blanking</code> to do this. Note, <code>Value Blanking</code> applies only on a specific zone. It seems like it has no effects on derived objects, for example, ISO-surface.</p>
+<h4 data-number="2.2.1.1" id="export-zone"><span class="header-section-number">2.2.1.1</span> Export zone</h4>
+<p>Import data files and open <code>Iso-Surfaces</code> with value <code>0.55</code>,</p>
+<p><img src="tecplot_export_zone_01.png" /></p>
+<p>Remove the outermost iso-surfaces by <code>Data</code> –&gt; <code>Extract</code> –&gt; <code>Iso-Surfaces</code>,</p>
+<p><img src="tecplot_export_zone_02.png" /></p>
+<p>A new zone will be created,</p>
+<p><img src="tecplot_export_zone_03.png" /></p>
+<p>Filter the zones you want to show,</p>
+<p><img src="tecplot_export_zone_04.png" /></p>
+<h4 data-number="2.2.1.2" id="do-blank"><span class="header-section-number">2.2.1.2</span> Do <code>Blank</code></h4>
+<p><code>Plot</code> –&gt; <code>Blanking</code> –&gt; <code>Value Blanking</code>,</p>
+<p><img src="tecplot_export_zone_05.png" /></p>
+<p>Apply multiple criterion,</p>
+<p><img src="tecplot_export_zone_06.png" /></p>
+<p>where <code>X&gt;0.2</code> is not shown.</p>
+<h4 data-number="2.2.1.3" id="a-complex-region-to-show"><span class="header-section-number">2.2.1.3</span> A complex region to show</h4>
+<p>If you want to do <span class="math inline">\(y^2+z^2&lt;0.05^2\)</span>, accomplish that by <code>Data</code> –&gt; <code>Alter</code> –&gt; <code>Specify Equations</code>:</p>
+<pre><code>{Blank}=IF({Y}**2+{Z}**2&lt;0.05**2, 1, 0)</code></pre>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2020-09-14 with pandoc
+</footer>
+</body>
+</html>

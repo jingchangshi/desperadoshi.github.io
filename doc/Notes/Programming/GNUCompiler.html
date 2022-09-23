@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2021-04-28" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>GNU Compiler</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">GNU Compiler</h1>
+<h3 class="date">2021-04-28</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#compiler-options"><span class="toc-section-number">1.1</span> Compiler options</a>
+<ul>
+<li><a href="#wl-rpath."><span class="toc-section-number">1.1.1</span> <code>-Wl,-rpath,.</code></a></li>
+<li><a href="#ld_library_path-and-ldflags"><span class="toc-section-number">1.1.2</span> <code>LD_LIBRARY_PATH</code> and <code>LDFLAGS</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<ul>
+<li><a href="#floating-operation"><span class="toc-section-number">2.1</span> Floating operation</a>
+<ul>
+<li><a href="#precision-loss"><span class="toc-section-number">2.1.1</span> Precision loss</a></li>
+</ul></li>
+<li><a href="#misc"><span class="toc-section-number">2.2</span> Misc</a>
+<ul>
+<li><a href="#compile-mpich-using-gcc-version-10"><span class="toc-section-number">2.2.1</span> Compile MPICH using GCC version 10</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="compiler-options"><span class="header-section-number">1.1</span> Compiler options</h2>
+<h3 data-number="1.1.1" id="wl-rpath."><span class="header-section-number">1.1.1</span> <code>-Wl,-rpath,.</code></h3>
+<p>The <code>-Wl,xxx</code> option for gcc passes a comma-separated list of tokens as a space-separated list of arguments to the linker. So</p>
+<pre><code>gcc -Wl,aaa,bbb,ccc</code></pre>
+<p>which eventually becomes a linker call</p>
+<pre><code>ld aaa bbb ccc</code></pre>
+<p>In your case, you want to say <code>ld -rpath .</code>, so you pass this to gcc as <code>-Wl,-rpath,.</code> or <code>-Wl,-rpath -Wl,.</code>.</p>
+<h3 data-number="1.1.2" id="ld_library_path-and-ldflags"><span class="header-section-number">1.1.2</span> <code>LD_LIBRARY_PATH</code> and <code>LDFLAGS</code></h3>
+<p><code>LD_LIBRARY_PATH</code> is used at runtime not compile time to find the correct libraries. You need to set <code>LDFLAGS</code> or set a configure option to find the library.</p>
+<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="floating-operation"><span class="header-section-number">2.1</span> Floating operation</h2>
+<h3 data-number="2.1.1" id="precision-loss"><span class="header-section-number">2.1.1</span> Precision loss</h3>
+<p>With the debug mode <code>-O0 -g</code>, gfortran gives inaccurate result of the following code snippet while Intel compiler is OK.</p>
+<pre><code>usp_ngb(1) = matmul(extrapneighcell_mat(1, 1:9), usp_ghs(1:9, 1))</code></pre>
+<p>And the data are as follows. With the help of <a href="https://babbage.cs.qc.cuny.edu/IEEE-754.old/64bit.html">IEEE-754 Floating-Point Conversion: From 64-bit Hexadecimal Representation To Decimal Floating-Point</a>. The hex number of <code>usp_ghs</code> are <code>0x[4005d800daac1039, 3ffe80007746d2d2, 4000e6006365931d, 401fdf4953631862, 400566edb9b4edd3, 3ffc162669b0c434, 4018836ece868caa, 401eaa5c4c981115, 400976c7ef0d2624]</code>. The corresponding double precision floating values are <code>[2.7304703792342733, 1.9062504443401633, 2.1123054280636910, 7.9680531529648720, 2.6752581127491140, 1.7554077271017947, 6.1283523816702345, 7.6663677184881370, 3.1829985309493782]</code> The hex number of <code>extrapneighcell_mat</code> are <code>0x[4018000000008a60, c02000000000769b, 400800000000c5ad, 0, 0, 0, 0, 0, 0]</code>. The corresponding double precision floating values are <code>[6.0000000000314630, -8.0000000000539360, 3.0000000000224730, 0, 0, 0, 0, 0, 0]</code></p>
+<p>Use the raw hex number to do multiplication in this website: <a href="http://www.ecs.umass.edu/ece/koren/arith/simulator/FPMul/">Floating Point Multiplication/Division</a>.</p>
+<pre><code>4018000000008a60 * 4005d800daac1039 = 
+Round to Zero
+A*B  + 1.0000011000100000000010100100000000010110101010011111 *24 = 16.382822275491545
+Round to Nearest Even
+A*B  + 1.0000011000100000000010100100000000010110101010100000 *24 = 16.38282227549155
+Round to Plus Infinity
+A*B  + 1.0000011000100000000010100100000000010110101010100000 *24 = 16.38282227549155
+Round to Minus Infinity
+A*B  + 1.0000011000100000000010100100000000010110101010011111 *24 = 16.382822275491545</code></pre>
+<pre><code>c02000000000769b * 3ffe80007746d2d2 = 
+Round to Zero
+A*B  - 1.1110100000000000000001110111010001111011010011101001 *23 = -15.25000355482412
+Round to Nearest Even
+A*B  - 1.1110100000000000000001110111010001111011010011101001 *23 = -15.25000355482412
+Round to Plus Infinity
+A*B  - 1.1110100000000000000001110111010001111011010011101001 *23 = -15.25000355482412
+Round to Minus Infinity
+A*B  - 1.1110100000000000000001110111010001111011010011101010 *23 = -15.250003554824122</code></pre>
+<pre><code>400800000000c5ad * 4000e6006365931d = 
+Round to Zero
+A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425
+Round to Nearest Even
+A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425
+Round to Plus Infinity
+A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425
+Round to Minus Infinity
+A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425</code></pre>
+<p>With the python <code>mpmath</code> package, it shows that with rounding to the neatest even mode, the final accurate result should be</p>
+<pre><code>from mpmath import mp, mpf, matrix
+mp.dps = 32
+mpf(&#39;16.38282227549155&#39;) + mpf(&#39;-15.25000355482412&#39;) + mpf(&#39;6.3369162842385425&#39;)
+Out[67]: mpf(&#39;7.4697350049059724999999999999999923&#39;)</code></pre>
+<p>gfortran gives <code>usp_ngb(1) = 7.469735004905969</code> while the Intel compiler gives <code>7.4697350049059708</code>. Thus the Intel compiler gives more accurate result. Note that both gfortran enables <code>-fno-unsafe-math-optimizations -frounding-math</code> and Intel compiler enables <code>-fp-model fast</code>. Changing to <code>-fp-model precise</code> does not change the value.</p>
+<p>With <code>-fno-rounding-math</code>, the rounding mode is known to be round to even. With <code>-frounding-math</code>, it is round-to-zero for all floating point to integer conversions, and round-to-nearest for all other arithmetic truncations.</p>
+<p>In gfortran, setting <code>-frounding-math -fsignaling-nans</code> lead to full IEEE 754 compliance. “Support infinities, NaNs, gradual underflow, signed zeros, exception flags and traps, setting rounding modes. Compare with C99’s #pragma STDC FENV ACCESS ON. Warning! GCC currently assumes that the same rounding mode is in effect everywhere”.</p>
+<p>Probably this error is due to the rounding in the intermediate calculation. Intel compiler uses more digits to ensure the double precision while gfortran probably requires additional compilation flag to do that. For details, maybe check <a href="https://stackoverflow.com/questions/7517588/different-floating-point-result-with-optimization-enabled-compiler-bug">Different floating point result with optimization enabled - compiler bug?</a>.</p>
+<p>Reference</p>
+<ul>
+<li><a href="https://gcc.gnu.org/wiki/FloatingPointMath">Semantics of Floating Point Math in GCC</a></li>
+</ul>
+<h2 data-number="2.2" id="misc"><span class="header-section-number">2.2</span> Misc</h2>
+<h3 data-number="2.2.1" id="compile-mpich-using-gcc-version-10"><span class="header-section-number">2.2.1</span> Compile MPICH using GCC version 10</h3>
+<pre><code>export FFLAGS=&quot;-w -fallow-argument-mismatch -O2&quot;</code></pre>
+<p>Reference: <a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91731">Bug 91731 - Configure error on building MPICH</a></p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2021-04-28 with pandoc
+</footer>
+</body>
+</html>

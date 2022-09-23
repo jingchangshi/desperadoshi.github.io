@@ -1,0 +1,666 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2021-06-26" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Shell Script</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Shell Script</h1>
+<h3 class="date">2021-06-26</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#commands"><span class="toc-section-number">1.1</span> Commands</a>
+<ul>
+<li><a href="#sequence-of-number"><span class="toc-section-number">1.1.1</span> Sequence of number</a></li>
+</ul></li>
+<li><a href="#string"><span class="toc-section-number">1.2</span> String</a>
+<ul>
+<li><a href="#check-if-string-is-emptynull-or-space"><span class="toc-section-number">1.2.1</span> Check if string is empty/null or space</a></li>
+<li><a href="#check-if-substring-contained-in-a-string"><span class="toc-section-number">1.2.2</span> Check if substring contained in a string</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<ul>
+<li><a href="#string-1"><span class="toc-section-number">2.1</span> String</a>
+<ul>
+<li><a href="#compare-dates"><span class="toc-section-number">2.1.1</span> Compare dates</a></li>
+<li><a href="#get-unique-value-from-array"><span class="toc-section-number">2.1.2</span> Get unique value from array</a></li>
+<li><a href="#generate-random-number"><span class="toc-section-number">2.1.3</span> Generate random number</a></li>
+<li><a href="#extract-number-from-string"><span class="toc-section-number">2.1.4</span> Extract number from string</a></li>
+<li><a href="#remove-first-and-last-quote-from-a-variable"><span class="toc-section-number">2.1.5</span> Remove first and last quote from a variable</a></li>
+<li><a href="#replace-some-chars-with-another-char"><span class="toc-section-number">2.1.6</span> Replace some chars with another char</a></li>
+<li><a href="#replace-the-whole-line-containing-a-string"><span class="toc-section-number">2.1.7</span> Replace the whole line containing a string</a></li>
+<li><a href="#list-data-structure"><span class="toc-section-number">2.1.8</span> List data structure</a></li>
+<li><a href="#extract-number-from-string-1"><span class="toc-section-number">2.1.9</span> Extract number from string</a></li>
+<li><a href="#remove-leading-zero-from-string"><span class="toc-section-number">2.1.10</span> Remove leading zero from string</a></li>
+<li><a href="#split-filename-and-extension"><span class="toc-section-number">2.1.11</span> Split filename and extension</a></li>
+<li><a href="#color-text"><span class="toc-section-number">2.1.12</span> Color text</a></li>
+<li><a href="#trim-string"><span class="toc-section-number">2.1.13</span> Trim string</a></li>
+<li><a href="#convert-a-string-to-lower-case"><span class="toc-section-number">2.1.14</span> Convert a string to lower case</a></li>
+<li><a href="#print-multi-line-string-with-n"><span class="toc-section-number">2.1.15</span> Print multi-line string (with <code>\n</code>)</a></li>
+<li><a href="#removing-ansi-color-codes-from-text-stream"><span class="toc-section-number">2.1.16</span> Removing ANSI color codes from text stream</a></li>
+</ul></li>
+<li><a href="#system"><span class="toc-section-number">2.2</span> System</a>
+<ul>
+<li><a href="#get-the-source-directory-of-the-bash-script-in-the-script"><span class="toc-section-number">2.2.1</span> Get the source directory of the bash script in the script</a></li>
+<li><a href="#exit-script"><span class="toc-section-number">2.2.2</span> Exit script</a></li>
+<li><a href="#automatic-exit-from-bash-shell-script-on-error"><span class="toc-section-number">2.2.3</span> Automatic exit from Bash shell script on error</a></li>
+<li><a href="#redirect-stderr"><span class="toc-section-number">2.2.4</span> Redirect stderr</a></li>
+</ul></li>
+<li><a href="#file-and-directory"><span class="toc-section-number">2.3</span> File and Directory</a>
+<ul>
+<li><a href="#compare-2-file-modification-dates"><span class="toc-section-number">2.3.1</span> Compare 2 file modification dates</a></li>
+<li><a href="#find-the-line-number-of-a-matching-pattern"><span class="toc-section-number">2.3.2</span> Find the line number of a matching pattern</a></li>
+<li><a href="#find-out-which-directory-the-script-file-resides"><span class="toc-section-number">2.3.3</span> Find out which directory the script file resides</a></li>
+<li><a href="#check-if-command-exists-in-a-shell-script"><span class="toc-section-number">2.3.4</span> Check if Command Exists in a Shell Script</a></li>
+<li><a href="#change-directory-in-a-shell-script"><span class="toc-section-number">2.3.5</span> Change Directory in a Shell Script</a></li>
+</ul></li>
+<li><a href="#others"><span class="toc-section-number">2.4</span> Others</a>
+<ul>
+<li><a href="#run-nohup-and-write-its-pid-to-a-file"><span class="toc-section-number">2.4.1</span> Run <code>nohup</code> and write its pid to a file</a></li>
+<li><a href="#bash-warning-setlocale"><span class="toc-section-number">2.4.2</span> <code>-bash: warning: setlocale:</code></a></li>
+<li><a href="#set-bash-options"><span class="toc-section-number">2.4.3</span> Set bash options</a></li>
+<li><a href="#check-if-the-shell-is-interactive"><span class="toc-section-number">2.4.4</span> Check if the shell is interactive</a></li>
+<li><a href="#sum-integer-of-each-one-per-line"><span class="toc-section-number">2.4.5</span> Sum integer of each one per line</a></li>
+<li><a href="#compare-two-floating-number"><span class="toc-section-number">2.4.6</span> Compare two floating number</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="commands"><span class="header-section-number">1.1</span> Commands</h2>
+<h3 data-number="1.1.1" id="sequence-of-number"><span class="header-section-number">1.1.1</span> Sequence of number</h3>
+<pre><code>for i in $(seq 1 20); do
+  it_no=$((50*$i))
+  sed -i &quot;${line_no}ait_no = ${it_no}&quot; $py_fname
+  sed -i &quot;${line_no}d&quot; $py_fname
+  echo &quot;Running it = &quot;$it_no
+  pvpython $py_fname¶
+done¶</code></pre>
+<h2 data-number="1.2" id="string"><span class="header-section-number">1.2</span> String</h2>
+<h3 data-number="1.2.1" id="check-if-string-is-emptynull-or-space"><span class="header-section-number">1.2.1</span> Check if string is empty/null or space</h3>
+<pre><code>str=&quot;&quot;
+if [ &quot;$str&quot; == &quot;&quot; ];then
+  echo empty
+elif [ &quot;$str&quot; == &quot; &quot; ];then
+  echo space
+elif [ ! &quot;$str&quot; ];then
+  echo NULL
+fi
+
+if [ ! &quot;$str&quot; ];then
+  echo NULL
+fi
+$ ./test.sh
+empty
+NULL</code></pre>
+<h3 data-number="1.2.2" id="check-if-substring-contained-in-a-string"><span class="header-section-number">1.2.2</span> Check if substring contained in a string</h3>
+<pre><code>#!/bin/bash
+STR=&#39;GNU/Linux is an operating system&#39;
+SUB=&#39;Linux&#39;
+if [[ &quot;$STR&quot; == *&quot;$SUB&quot;* ]]; then
+  echo &quot;It&#39;s there.&quot;
+fi</code></pre>
+<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="string-1"><span class="header-section-number">2.1</span> String</h2>
+<h3 data-number="2.1.1" id="compare-dates"><span class="header-section-number">2.1.1</span> Compare dates</h3>
+<pre><code>todate=$(date -d 2013-07-18 +%s)
+cond=$(date -d 2014-08-19 +%s)
+
+if [ $todate -ge $cond ];
+then
+    break
+fi</code></pre>
+<h3 data-number="2.1.2" id="get-unique-value-from-array"><span class="header-section-number">2.1.2</span> Get unique value from array</h3>
+<pre><code>ids=(aa ab aa ac aa ad) &amp;&amp; echo &quot;${ids[@]}&quot; | tr &#39; &#39; &#39;\n&#39; | sort -u | tr &#39;\n&#39; &#39; &#39;</code></pre>
+<h3 data-number="2.1.3" id="generate-random-number"><span class="header-section-number">2.1.3</span> Generate random number</h3>
+<p>Generating random number between 1 and 10</p>
+<pre><code>$(( ( RANDOM % 10 )  + 1 ))</code></pre>
+<h3 data-number="2.1.4" id="extract-number-from-string"><span class="header-section-number">2.1.4</span> Extract number from string</h3>
+<pre><code>echo &quot;ref12345678&quot;|grep -o &#39;[0-9]\+&#39;</code></pre>
+<p>or</p>
+<pre><code>echo &quot;ref12345678&quot;| awk -F&#39;[^0-9]*&#39; &#39;{print $2}&#39;</code></pre>
+<h3 data-number="2.1.5" id="remove-first-and-last-quote-from-a-variable"><span class="header-section-number">2.1.5</span> Remove first and last quote from a variable</h3>
+<pre><code>temp=&quot;${opt%\&quot;}&quot;
+temp=&quot;${temp#\&quot;}&quot;
+echo &quot;$temp&quot;</code></pre>
+<p><code>${opt%\"}</code> will remove the suffix <code>"</code> (escaped with a backslash to prevent shell interpretation).</p>
+<p><code>${temp#\"}</code> will remove the prefix <code>"</code> (escaped with a backslash to prevent shell interpretation).</p>
+<h3 data-number="2.1.6" id="replace-some-chars-with-another-char"><span class="header-section-number">2.1.6</span> Replace some chars with another char</h3>
+<p>I have a string like <code>AxxBCyyyDEFzzLMN</code> and I want to replace all the occurrences of <code>x, y, z</code> with <code>_</code>.</p>
+<pre><code>echo &quot;$string&quot; | tr xyz _</code></pre>
+<p>would replace each occurrence of <code>x, y, z</code> with <code>_</code>, giving <code>A__BC___DEF__LMN</code> in your example.</p>
+<pre><code>echo &quot;$string&quot; | sed -r &#39;s/[xyz]+/_/g&#39;</code></pre>
+<p>would replace repeating occurrences of <code>x, y, z</code> with a single <code>_</code>, giving <code>A_BC_DEF_LMN</code> in your example.</p>
+<h3 data-number="2.1.7" id="replace-the-whole-line-containing-a-string"><span class="header-section-number">2.1.7</span> Replace the whole line containing a string</h3>
+<pre><code>$ cat test
+asdbl erwbniu
+assdbl ebniu
+asdbl1 erwbni
+3asdbl erwniu
+# Replace all occurences of asdbl in the text file with NEWTC
+$ sed &#39;s/asdbl/NEWTC/g&#39; test
+NEWTC erwbniu
+assdbl ebniu
+NEWTC1 erwbni
+3NEWTC erwniu
+# Replace all lines containing asdbl in the text file with NEWTC
+$ sed &#39;s/.*asdbl.*/NEWTC/g&#39; test
+NEWTC
+assdbl ebniu
+NEWTC
+NEWTC
+# Exact match of asdbl
+$ sed &#39;s/\&lt;asdbl\&gt;/NEWTC/g&#39; test
+NEWTC erwbniu
+assdbl ebniu
+asdbl1 erwbni
+3asdbl erwniu</code></pre>
+<p>Use <code>-i</code> to do the in-place modification.</p>
+<h3 data-number="2.1.8" id="list-data-structure"><span class="header-section-number">2.1.8</span> List data structure</h3>
+<pre><code>for i in 1 2 3; do
+    echo &quot;$i&quot;
+done</code></pre>
+<p>or</p>
+<pre><code>listVar=&quot;1 2 3&quot;
+for i in $listVar; do
+    echo &quot;$i&quot;
+done</code></pre>
+<h3 data-number="2.1.9" id="extract-number-from-string-1"><span class="header-section-number">2.1.9</span> Extract number from string</h3>
+<pre><code>$ NUMBER=$(echo &quot;I am 999 years old.&quot; | sed &#39;s/[^0-9]*//g&#39;)
+$ echo $NUMBER
+999</code></pre>
+<p>Or</p>
+<pre><code>$ STRING=&quot;I am 999 years old.&quot;
+$ echo &quot;${STRING//[!0-9]/}&quot;
+999
+OR
+$ echo &quot;${STRING//[^0-9]/}&quot;</code></pre>
+<h3 data-number="2.1.10" id="remove-leading-zero-from-string"><span class="header-section-number">2.1.10</span> Remove leading zero from string</h3>
+<p>Number sequences starting with a <code>0</code> are interpreted as octal numbers, i.e. base <code>8</code>.</p>
+<pre><code>$ cat test.sh
+var=&quot;00011&quot;
+echo &quot;The input is $var&quot;
+printf &quot;The number with leading zeros is defaultly treated as octals: %d\n&quot; $var
+var=$((10#$var))
+printf &quot;Convert the octals to the number of base 10: %d\n&quot; $var
+$ ./test.sh
+The input is 00011
+The number with leading zeros is defaultly treated as octals: 9
+Convert the octals to the number of base 10: 11</code></pre>
+<h3 data-number="2.1.11" id="split-filename-and-extension"><span class="header-section-number">2.1.11</span> Split filename and extension</h3>
+<pre><code>filename=$(basename -- &quot;$fullfile&quot;)
+extension=&quot;${filename##*.}&quot;
+filename=&quot;${filename%.*}&quot;</code></pre>
+<h3 data-number="2.1.12" id="color-text"><span class="header-section-number">2.1.12</span> Color text</h3>
+<p>Use these <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape codes</a>:</p>
+<pre><code>RED=&#39;\033[0;31m&#39;
+NC=&#39;\033[0m&#39; # No Color
+printf &quot;I ${RED}love${NC} Stack Overflow\n&quot;
+echo -e &quot;I ${RED}love${NC} Stack Overflow&quot;</code></pre>
+<h3 data-number="2.1.13" id="trim-string"><span class="header-section-number">2.1.13</span> Trim string</h3>
+<p>Use <code>xargs</code> in the pipe.</p>
+<pre><code>$ echo &quot; Bash Scripting Language &quot; | xargs
+Bash Scripting Language</code></pre>
+<h3 data-number="2.1.14" id="convert-a-string-to-lower-case"><span class="header-section-number">2.1.14</span> Convert a string to lower case</h3>
+<p>POSIX standard methods are as follows,</p>
+<p>Use <code>tr</code></p>
+<pre><code>$ echo &quot;$a&quot; | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39;
+hi all</code></pre>
+<p>Use awk</p>
+<pre><code>$ echo &quot;$a&quot; | awk &#39;{print tolower($0)}&#39;
+hi all</code></pre>
+<h3 data-number="2.1.15" id="print-multi-line-string-with-n"><span class="header-section-number">2.1.15</span> Print multi-line string (with <code>\n</code>)</h3>
+<pre><code>printf &quot;$text_content&quot;</code></pre>
+<h3 data-number="2.1.16" id="removing-ansi-color-codes-from-text-stream"><span class="header-section-number">2.1.16</span> Removing ANSI color codes from text stream</h3>
+<pre><code>sed &#39;s/\x1b\[[0-9;]*m//g&#39;</code></pre>
+<ul>
+<li><code>\x1b</code> (or <code>\x1B</code>) is the escape special character (<code>sed</code> does not support alternatives <code>\e</code> and <code>\033</code>)</li>
+<li><code>\[</code> is the second character of the escape sequence</li>
+<li><code>[0-9;]*</code> is the color value(s) regex</li>
+<li><code>m</code> is the last character of the escape sequence</li>
+</ul>
+<h2 data-number="2.2" id="system"><span class="header-section-number">2.2</span> System</h2>
+<h3 data-number="2.2.1" id="get-the-source-directory-of-the-bash-script-in-the-script"><span class="header-section-number">2.2.1</span> Get the source directory of the bash script in the script</h3>
+<pre><code>$ cat test.sh
+#!/bin/bash
+echo &quot;pwd: `pwd`&quot;
+echo &quot;\$0: $0&quot;
+echo &quot;basename: `basename $0`&quot;
+echo &quot;dirname: `dirname $0`&quot;
+echo &quot;dirname/readlink: $(dirname $(readlink -f $0))&quot;
+$ ./test.sh
+pwd: /home/data/jcshi
+$0: ./test.sh
+basename: test.sh
+dirname: .
+dirname/readlink: /home/data/jcshi</code></pre>
+<ul>
+<li><code>readlink</code> will resolve the script path to an absolute path from the root of the filesystem</li>
+</ul>
+<h3 data-number="2.2.2" id="exit-script"><span class="header-section-number">2.2.2</span> Exit script</h3>
+<p>Use <code>exit</code> or <code>return</code> under different running modes <code>./test.sh</code>, <code>source ./test.sh</code> and <code>. ./test.sh</code>.</p>
+<p><code>./test.sh</code> opens a sub-terminal while the sourced running mode <code>source ./test.sh</code> and <code>. ./test.sh</code> runs in the current terminal.</p>
+<pre><code>$ cat test.sh
+echo $?
+drga
+ierr=$?
+if [ &quot;$ierr&quot; = &#39;127&#39; ]; then
+  echo &quot;FAIL&quot;
+  exit -1
+  # return
+fi
+echo &quot;PASS&quot;
+$ ./test.sh
+0
+./test.sh: line 2: drga: command not found
+FAIL
+$ source ./test.sh
+# This command exits the terminal
+$ . ./test.sh
+# This command exits the terminal</code></pre>
+<pre><code>$ cat test.sh
+echo $?
+drga
+ierr=$?
+if [ &quot;$ierr&quot; = &#39;127&#39; ]; then
+  echo &quot;FAIL&quot;
+  # exit -1
+  return
+fi
+echo &quot;PASS&quot;
+$ ./test.sh
+0
+./test.sh: line 2: drga: command not found
+FAIL
+./test.sh: line 7: return: can only `return&#39; from a function or sourced script
+PASS
+$ source ./test.sh
+0
+./test.sh:2: command not found: drga
+FAIL
+$ . ./test.sh
+127
+./test.sh:2: command not found: drga
+FAIL</code></pre>
+<h3 data-number="2.2.3" id="automatic-exit-from-bash-shell-script-on-error"><span class="header-section-number">2.2.3</span> Automatic exit from Bash shell script on error</h3>
+<p>Use the <code>set -e</code> builtin:</p>
+<pre><code>#!/bin/bash
+set -e
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately</code></pre>
+<p>Alternatively, you can pass <code>-e</code> on the command line:</p>
+<pre><code>bash -e my_script.sh</code></pre>
+<h3 data-number="2.2.4" id="redirect-stderr"><span class="header-section-number">2.2.4</span> Redirect stderr</h3>
+<p>Use the following script as the example.</p>
+<pre><code>echo $?
+# This command is not a valid command. Thus it throws stderr.
+drga
+echo $?</code></pre>
+<ol type="1">
+<li>Redirect stdout to one file and stderr to another file:</li>
+</ol>
+<pre><code>$ ./test.sh &gt;out 2&gt;err
+$ cat out
+0
+127
+$ cat err
+./test.sh: line 2: drga: command not found</code></pre>
+<ol start="2" type="1">
+<li>Redirect stdout to a file (<code>&gt;out</code>), and then redirect stderr to stdout (<code>2&gt;&amp;1</code>):</li>
+</ol>
+<pre><code>$ ./test.sh &gt;out 2&gt;&amp;1
+$ cat out
+0
+./test.sh: line 2: drga: command not found
+127</code></pre>
+<ol start="3" type="1">
+<li>Redirect both to a file (this isn’t supported by all shells, bash and zsh support it, for example, but sh and ksh do not):</li>
+</ol>
+<pre><code>$ ./test.sh &amp;&gt;out
+$ cat out
+0
+./test.sh: line 2: drga: command not found
+127</code></pre>
+<ol start="4" type="1">
+<li>Pipe stderr instead of stdout</li>
+</ol>
+<p>First redirect stderr to stdout — the pipe; then redirect stdout to <code>/dev/null</code> (without changing where stderr is going):</p>
+<pre><code>$ ./test.sh 2&gt;&amp;1 &gt;/dev/null
+./test.sh: line 2: drga: command not found</code></pre>
+<p>Note the difference between this method and the 2nd point.</p>
+<p>For the details of I/O redirection in all its variety, see the chapter on <a href="For%20the%20details%20of%20I/O%20redirection%20in%20all%20its%20variety,%20see%20the%20chapter%20on%20Redirections%20in%20the%20Bash%20reference%20manual.">Redirections</a> in the Bash reference manual.</p>
+<h2 data-number="2.3" id="file-and-directory"><span class="header-section-number">2.3</span> File and Directory</h2>
+<h3 data-number="2.3.1" id="compare-2-file-modification-dates"><span class="header-section-number">2.3.1</span> Compare 2 file modification dates</h3>
+<pre><code>   FILE1 -nt FILE2
+          FILE1 is newer (modification date) than FILE2
+
+   FILE1 -ot FILE2
+          FILE1 is older than FILE2</code></pre>
+<pre><code>if [ &quot;$source_file&quot; -nt &quot;$target_file&quot; ]
+then
+    printf &#39;%s\n&#39; &quot;$source_file is newer than $target_file&quot;
+fi</code></pre>
+<h3 data-number="2.3.2" id="find-the-line-number-of-a-matching-pattern"><span class="header-section-number">2.3.2</span> Find the line number of a matching pattern</h3>
+<pre><code>line_no=$(grep -n &#39;it_no = &#39; $py_fname | awk -F&#39;:&#39; &#39;{print $1}&#39;)</code></pre>
+<h3 data-number="2.3.3" id="find-out-which-directory-the-script-file-resides"><span class="header-section-number">2.3.3</span> Find out which directory the script file resides</h3>
+<pre><code># Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f &quot;$0&quot;)
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname &quot;$SCRIPT&quot;)
+echo $SCRIPTPATH</code></pre>
+<h3 data-number="2.3.4" id="check-if-command-exists-in-a-shell-script"><span class="header-section-number">2.3.4</span> Check if Command Exists in a Shell Script</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ot">! </span><span class="bu">type</span> <span class="st">&quot;</span><span class="va">$foobar_command_name</span><span class="st">&quot;</span> <span class="op">&gt;</span> /dev/null<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># foobar_command_name does not exit</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+<h3 data-number="2.3.5" id="change-directory-in-a-shell-script"><span class="header-section-number">2.3.5</span> Change Directory in a Shell Script</h3>
+<p><code>cd $HOME</code> does not take effect if you do <code>./test.sh</code>. You should do as follows,</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ./test.sh# or. ./test.sh</span></code></pre></div>
+<h2 data-number="2.4" id="others"><span class="header-section-number">2.4</span> Others</h2>
+<h3 data-number="2.4.1" id="run-nohup-and-write-its-pid-to-a-file"><span class="header-section-number">2.4.1</span> Run <code>nohup</code> and write its pid to a file</h3>
+<pre><code>nohup ./myprogram.sh &gt; /dev/null 2&gt;&amp;1 &amp; echo $! &gt; run.pid</code></pre>
+<h3 data-number="2.4.2" id="bash-warning-setlocale"><span class="header-section-number">2.4.2</span> <code>-bash: warning: setlocale:</code></h3>
+<p>Warning is something like</p>
+<pre><code>-bash: warning: setlocale: LC_CTYPE: cannot change locale (en_US.UTF-8): No such file or directory</code></pre>
+<p>You need to generate the file.</p>
+<pre><code>[root@centos6-vm01 ~]# vim /etc/environment         #添加下面两行内容
+ LANG=&quot;en_US.UTF-8&quot;
+ LC_ALL=
+[root@centos6-vm01 ~]# source /etc/environment
+[root@centos6-vm01 ~]# localedef -v -c -i en_US -f UTF-8 en_US.UTF-8</code></pre>
+<p>You may need to install <code>localedef</code>.</p>
+<h3 data-number="2.4.3" id="set-bash-options"><span class="header-section-number">2.4.3</span> Set bash options</h3>
+<p><code>shopt</code> is a shell builtin command to set and unset (remove) various Bash shell options. To see current settings, type <code>shopt</code>.</p>
+<p>To enable (set) option use the following command:</p>
+<pre><code>shopt -s optionNameHere</code></pre>
+<p>To disable (unset) option use the following command:</p>
+<pre><code>shopt -u optionNameHere</code></pre>
+<h3 data-number="2.4.4" id="check-if-the-shell-is-interactive"><span class="header-section-number">2.4.4</span> Check if the shell is interactive</h3>
+<pre><code>if [ -z &quot;$PS1&quot; ]; then
+        echo This shell is not interactive
+else
+        echo This shell is interactive
+fi</code></pre>
+<p>Reference: <a href="https://www.gnu.org/software/bash/manual/html_node/Is-this-Shell-Interactive_003f.html">6.3.2 Is this Shell Interactive?</a></p>
+<h3 data-number="2.4.5" id="sum-integer-of-each-one-per-line"><span class="header-section-number">2.4.5</span> Sum integer of each one per line</h3>
+<pre><code>
+# jcshi @ master in ~ [13:03:51]
+$ awk &#39;{s+=$1} END {print s}&#39; tmp.dat
+10
+# jcshi @ master in ~ [13:04:25]
+$ cat tmp.dat
+1
+2
+3
+4</code></pre>
+<h3 data-number="2.4.6" id="compare-two-floating-number"><span class="header-section-number">2.4.6</span> Compare two floating number</h3>
+<p>Use <code>bc</code> program.</p>
+<pre><code>if (( $(echo &quot;$num1 &gt; $num2&quot; |bc -l) )); then
+  ...
+fi</code></pre>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2021-06-26 with pandoc
+</footer>
+</body>
+</html>

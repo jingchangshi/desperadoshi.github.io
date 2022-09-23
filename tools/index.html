@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<link href="https://cdn.bootcdn.net/ajax/libs/firacode/6.2.0/fira_code.min.css" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Fira Code';
+  }
+  .link_text {
+    font-weight: bold;
+  }
+  input {
+    display: inline-block;
+    padding: 0 1em 0 1em;
+    margin: 0 0.1em 0 0.5em;
+    border-width: 0 0.15em 0 0.15em;
+    border-style: solid;
+    border-color:  #CCCCCC;
+    box-sizing: border-box;
+    text-decoration:none;
+    /* font-family:'Segoe UI','Roboto',sans-serif; */
+    font-size: 0.8em;
+    color:#000000;
+    background-color:#CCCCCC;
+    text-align:center;
+    position:relative;
+  }
+  input:hover{
+    border-color:#7a7a7a;
+  }
+  input:active{
+    background-color:#999999;
+  }
+</style>
+<script>
+  function toggleSection(i) {
+    var sec = document.getElementById("section-".concat(i));
+    if (sec.style.display == "none") {
+      sec.style.display = "block";
+    } else {
+      sec.style.display = "none";
+    }
+    var butt = document.getElementById(i);
+    var plus_sym = "➕";
+    var minus_sym = "➖";
+    if (butt.value == plus_sym) {
+      butt.value = minus_sym;
+    } else {
+      butt.value = plus_sym;
+    }
+  }
+</script>
+</head>
+
+<body>
+
+<h1>Tools</h1>
+
+<ul>
+  <h2><input type="button" id="1" value="➕" onclick="toggleSection(this.id)"></button>Online tools</h2>
+  <div id="section-1" style="display: none">
+    <li><a href="massifjs/index.html" target="_blank"><span class="link_text">massif.js</span></a></li><br>
+  </div>
+  <h2><input type="button" id="2" value="➕" onclick="toggleSection(this.id)"></button>Research helper</h2>
+  <div id="section-2" style="display: none">
+    <li><a href="https://github.com/jingchangshi/SimpleNotesManager" target="_blank"><span class="link_text">Simple notes manager</span></a></li><br>
+    <li><a href="https://github.com/jingchangshi/SimpleClusterManager" target="_blank"><span class="link_text">Simple cluster manager</span></a></li><br>
+  </div>
+  <h2><input type="button" id="3" value="➕" onclick="toggleSection(this.id)"></button>CFD helper</h2>
+  <div id="section-3" style="display: none">
+    <li><a href="https://github.com/jingchangshi/Fluent_CGNS_Export" target="_blank"><span class="link_text">Auto-shrink CGNS file size during Fluent running</span></a></li><br>
+  </div>
+</ul>
+
+</body>
+
+</html>
+

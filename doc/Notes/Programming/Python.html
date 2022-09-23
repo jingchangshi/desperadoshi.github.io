@@ -1,0 +1,836 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2021-01-25" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Python</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Python</h1>
+<h3 class="date">2021-01-25</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#string-and-list-query"><span class="toc-section-number">1.1</span> String and List: Query</a>
+<ul>
+<li><a href="#length"><span class="toc-section-number">1.1.1</span> Length</a></li>
+<li><a href="#check-if-a-list-is-empty"><span class="toc-section-number">1.1.2</span> Check if a list is empty</a></li>
+<li><a href="#index-a-list-with-another-list-like-this"><span class="toc-section-number">1.1.3</span> Index a list with another list like this</a></li>
+<li><a href="#count-number-of-true-in-list"><span class="toc-section-number">1.1.4</span> Count number of True in list</a></li>
+</ul></li>
+<li><a href="#string-and-list-modify"><span class="toc-section-number">1.2</span> String and List: Modify</a>
+<ul>
+<li><a href="#remove-element-by-index-in-a-list"><span class="toc-section-number">1.2.1</span> Remove element by index in a list</a></li>
+<li><a href="#sort-string-by-the-number-inside"><span class="toc-section-number">1.2.2</span> Sort string by the number inside</a></li>
+<li><a href="#remove-specific-substrings-from-a-set-of-strings"><span class="toc-section-number">1.2.3</span> Remove specific substrings from a set of strings</a></li>
+<li><a href="#modify-items-in-string-by-slicing-and-combination"><span class="toc-section-number">1.2.4</span> Modify items in string by slicing and combination</a></li>
+<li><a href="#remove-all-special-characters-punctuation-and-spaces-from-a-string"><span class="toc-section-number">1.2.5</span> Remove all special characters, punctuation and spaces from a string</a></li>
+<li><a href="#replace-white-with-other-character"><span class="toc-section-number">1.2.6</span> Replace white with other character</a></li>
+<li><a href="#get-the-lower-case-of-string"><span class="toc-section-number">1.2.7</span> Get the lower-case of string</a></li>
+<li><a href="#trim-white-spaces-in-string"><span class="toc-section-number">1.2.8</span> Trim white spaces in string:</a></li>
+</ul></li>
+<li><a href="#string-and-list-conversion"><span class="toc-section-number">1.3</span> String and List: Conversion</a>
+<ul>
+<li><a href="#convert-float-type-to-string"><span class="toc-section-number">1.3.1</span> Convert float type to string</a></li>
+<li><a href="#convert-string-to-list"><span class="toc-section-number">1.3.2</span> Convert string to list</a></li>
+<li><a href="#convert-list-to-string"><span class="toc-section-number">1.3.3</span> Convert list to string:</a></li>
+<li><a href="#check-a-string-represents-an-int"><span class="toc-section-number">1.3.4</span> Check a string represents an int</a></li>
+</ul></li>
+<li><a href="#string-and-list-search"><span class="toc-section-number">1.4</span> String and List: Search</a>
+<ul>
+<li><a href="#search-str1-in-str2"><span class="toc-section-number">1.4.1</span> Search str1 in str2</a></li>
+<li><a href="#check-exact-word-in-strings"><span class="toc-section-number">1.4.2</span> Check exact word in strings</a></li>
+<li><a href="#extract-number-from-strings"><span class="toc-section-number">1.4.3</span> Extract number from strings</a></li>
+<li><a href="#find-the-first-iterm-matched"><span class="toc-section-number">1.4.4</span> Find the first iterm matched</a></li>
+<li><a href="#get-all-the-terms-matched"><span class="toc-section-number">1.4.5</span> Get all the terms matched:</a></li>
+<li><a href="#get-the-index-of-all-items-that-contain-specific-string"><span class="toc-section-number">1.4.6</span> Get the index of all items that contain specific string</a></li>
+</ul></li>
+<li><a href="#dict"><span class="toc-section-number">1.5</span> <code>dict</code></a>
+<ul>
+<li><a href="#basics-1"><span class="toc-section-number">1.5.1</span> Basics</a></li>
+<li><a href="#listdictionary.keys-raises-error-in-pdb"><span class="toc-section-number">1.5.2</span> list(dictionary.keys()) raises error in pdb</a></li>
+<li><a href="#convert-to-other-types"><span class="toc-section-number">1.5.3</span> Convert to Other Types</a></li>
+</ul></li>
+<li><a href="#range"><span class="toc-section-number">1.6</span> <code>range</code></a>
+<ul>
+<li><a href="#convert-range-to-list"><span class="toc-section-number">1.6.1</span> convert range to list</a></li>
+</ul></li>
+<li><a href="#tuple"><span class="toc-section-number">1.7</span> <code>tuple</code></a></li>
+<li><a href="#bytes"><span class="toc-section-number">1.8</span> <code>bytes</code></a></li>
+<li><a href="#io"><span class="toc-section-number">1.9</span> IO</a>
+<ul>
+<li><a href="#read-text-file"><span class="toc-section-number">1.9.1</span> Read Text File</a></li>
+<li><a href="#read-a-specific-line"><span class="toc-section-number">1.9.2</span> Read a specific line</a></li>
+<li><a href="#write-text-file"><span class="toc-section-number">1.9.3</span> Write Text File</a></li>
+<li><a href="#booleans-formatted-in-strings"><span class="toc-section-number">1.9.4</span> Booleans Formatted in Strings</a></li>
+<li><a href="#print-without-newline"><span class="toc-section-number">1.9.5</span> Print without Newline</a></li>
+<li><a href="#print-to-file"><span class="toc-section-number">1.9.6</span> Print to file</a></li>
+</ul></li>
+<li><a href="#function"><span class="toc-section-number">1.10</span> Function</a>
+<ul>
+<li><a href="#default-parameter"><span class="toc-section-number">1.10.1</span> Default Parameter</a></li>
+</ul></li>
+<li><a href="#control-statement"><span class="toc-section-number">1.11</span> Control Statement</a>
+<ul>
+<li><a href="#if-else"><span class="toc-section-number">1.11.1</span> <code>if-else</code></a></li>
+<li><a href="#while-loop"><span class="toc-section-number">1.11.2</span> <code>while</code> Loop</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#numpy-and-scipy"><span class="toc-section-number">2</span> Numpy and Scipy</a>
+<ul>
+<li><a href="#basics-2"><span class="toc-section-number">2.1</span> Basics</a>
+<ul>
+<li><a href="#nd-array-to-1d"><span class="toc-section-number">2.1.1</span> ND array to 1D</a></li>
+</ul></li>
+<li><a href="#advanced"><span class="toc-section-number">2.2</span> Advanced</a>
+<ul>
+<li><a href="#normality-test"><span class="toc-section-number">2.2.1</span> Normality test</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#advanced-1"><span class="toc-section-number">3</span> Advanced</a>
+<ul>
+<li><a href="#tips"><span class="toc-section-number">3.1</span> Tips</a>
+<ul>
+<li><a href="#check-the-normality-of-an-array"><span class="toc-section-number">3.1.1</span> Check the normality of an array</a></li>
+<li><a href="#create-a-nested-directory"><span class="toc-section-number">3.1.2</span> Create a nested directory</a></li>
+<li><a href="#explanation-on-if-__name__-__main__"><span class="toc-section-number">3.1.3</span> Explanation on <code>if __name__ == "__main__"</code></a></li>
+<li><a href="#test-a-variable-is-none"><span class="toc-section-number">3.1.4</span> Test a Variable is <code>None</code></a></li>
+<li><a href="#output-complex-number-in-certain-format"><span class="toc-section-number">3.1.5</span> Output Complex Number in Certain Format</a></li>
+<li><a href="#check-python-version"><span class="toc-section-number">3.1.6</span> Check Python version</a></li>
+<li><a href="#how-do-i-manually-throwraise-an-exception-in-python"><span class="toc-section-number">3.1.7</span> How do I manually throw/raise an exception in Python?</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#packages"><span class="toc-section-number">4</span> Packages</a>
+<ul>
+<li><a href="#os"><span class="toc-section-number">4.1</span> <code>os</code></a>
+<ul>
+<li><a href="#iterate-over-files-in-a-directory"><span class="toc-section-number">4.1.1</span> Iterate over files in a directory</a></li>
+<li><a href="#get-the-full-path-to-the-directory-a-python-file-is-contained-in"><span class="toc-section-number">4.1.2</span> Get the full path to the directory a Python file is contained in</a></li>
+<li><a href="#excluding-directories-in-os.walk"><span class="toc-section-number">4.1.3</span> Excluding directories in <code>os.walk</code></a></li>
+<li><a href="#extract-file-name-from-path"><span class="toc-section-number">4.1.4</span> Extract file name from path</a></li>
+</ul></li>
+<li><a href="#subprocess"><span class="toc-section-number">4.2</span> <code>subprocess</code></a>
+<ul>
+<li><a href="#calling-the-source-command-from-subprocess.popen"><span class="toc-section-number">4.2.1</span> Calling the <code>source</code> command from subprocess.Popen</a></li>
+</ul></li>
+<li><a href="#colorama"><span class="toc-section-number">4.3</span> <code>colorama</code></a>
+<ul>
+<li><a href="#print-colored-output-with-python-3"><span class="toc-section-number">4.3.1</span> Print colored output with Python 3</a></li>
+</ul></li>
+<li><a href="#pip"><span class="toc-section-number">4.4</span> <code>pip</code></a>
+<ul>
+<li><a href="#uninstall-all-packages"><span class="toc-section-number">4.4.1</span> Uninstall all packages</a></li>
+<li><a href="#uninstall-the-dependencies-of-a-package"><span class="toc-section-number">4.4.2</span> Uninstall the dependencies of a package</a></li>
+</ul></li>
+<li><a href="#pyinstaller"><span class="toc-section-number">4.5</span> <code>pyinstaller</code></a>
+<ul>
+<li><a href="#cannot-run-on-windows-10"><span class="toc-section-number">4.5.1</span> Cannot run on Windows 10</a></li>
+<li><a href="#pyinstaller-3.5-not-working-with-python3.8"><span class="toc-section-number">4.5.2</span> <code>pyinstaller 3.5</code> Not Working with <code>python3.8</code></a></li>
+</ul></li>
+<li><a href="#argparse"><span class="toc-section-number">4.6</span> <code>argparse</code></a>
+<ul>
+<li><a href="#example-1"><span class="toc-section-number">4.6.1</span> Example 1</a></li>
+<li><a href="#example-2"><span class="toc-section-number">4.6.2</span> Example 2</a></li>
+</ul></li>
+<li><a href="#time-related-modules"><span class="toc-section-number">4.7</span> <code>time</code> Related Modules</a>
+<ul>
+<li><a href="#measure-time-elapsed-in-python"><span class="toc-section-number">4.7.1</span> Measure Time Elapsed in Python</a></li>
+<li><a href="#get-time-from-string"><span class="toc-section-number">4.7.2</span> Get Time from String</a></li>
+<li><a href="#time-delay"><span class="toc-section-number">4.7.3</span> Time Delay</a></li>
+</ul></li>
+<li><a href="#mpmath"><span class="toc-section-number">4.8</span> <code>mpmath</code></a>
+<ul>
+<li><a href="#example-of-calculation"><span class="toc-section-number">4.8.1</span> Example of Calculation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#misc"><span class="toc-section-number">5</span> Misc</a>
+<ul>
+<li><a href="#system"><span class="toc-section-number">5.1</span> System</a>
+<ul>
+<li><a href="#shebang"><span class="toc-section-number">5.1.1</span> Shebang</a></li>
+</ul></li>
+<li><a href="#mixed-usage-with-other-software"><span class="toc-section-number">5.2</span> Mixed Usage with Other Software</a>
+<ul>
+<li><a href="#compile-python-with-sqlite3-support"><span class="toc-section-number">5.2.1</span> Compile Python with <code>sqlite3</code> Support</a></li>
+<li><a href="#ipython-notebook-font"><span class="toc-section-number">5.2.2</span> iPython Notebook Font</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="string-and-list-query"><span class="header-section-number">1.1</span> String and List: Query</h2>
+<h3 data-number="1.1.1" id="length"><span class="header-section-number">1.1.1</span> Length</h3>
+<p>Get the length of string or list</p>
+<pre><code>len(StringArray)</code></pre>
+<h3 data-number="1.1.2" id="check-if-a-list-is-empty"><span class="header-section-number">1.1.2</span> Check if a list is empty</h3>
+<pre><code>if not list</code></pre>
+<h3 data-number="1.1.3" id="index-a-list-with-another-list-like-this"><span class="header-section-number">1.1.3</span> Index a list with another list like this</h3>
+<pre><code>L = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;]
+Idx = [0, 3, 7]
+T = L[ Idx ]
+&gt;&gt;&gt; T = [L[i] for i in Idx]
+0.1.1.4 Single line function by using list
+&gt;&gt;&gt; squares = []
+&gt;&gt;&gt; for x in range(10):
+...     squares.append(x**2)
+...
+&gt;&gt;&gt; squares
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+<p>the above codes can be implemented in this single line.</p>
+<pre><code>squares = [x**2 for x in range(10)]</code></pre>
+<h3 data-number="1.1.4" id="count-number-of-true-in-list"><span class="header-section-number">1.1.4</span> Count number of True in list</h3>
+<pre><code>&gt;&gt;&gt; sum([True, True, False, False, False, True])
+3</code></pre>
+<h2 data-number="1.2" id="string-and-list-modify"><span class="header-section-number">1.2</span> String and List: Modify</h2>
+<h3 data-number="1.2.1" id="remove-element-by-index-in-a-list"><span class="header-section-number">1.2.1</span> Remove element by index in a list</h3>
+<pre><code>&gt;&gt;&gt; a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; del a[-1]
+&gt;&gt;&gt; a
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+&gt;&gt;&gt; del a[2:4]
+&gt;&gt;&gt; a
+[0, 1, 4, 5, 6, 7, 8, 9]</code></pre>
+<h3 data-number="1.2.2" id="sort-string-by-the-number-inside"><span class="header-section-number">1.2.2</span> Sort string by the number inside</h3>
+<pre><code>In [1]: import re
+In [2]: l = [&#39;asdas2&#39;, &#39;asdas1&#39;, &#39;asds3ssd&#39;]
+In [3]: sorted(l, key=lambda x: int(re.sub(&#39;\D&#39;, &#39;&#39;, x)))
+Out[3]: [&#39;asdas1&#39;, &#39;asdas2&#39;, &#39;asds3ssd&#39;]</code></pre>
+<p>where <code>re.sub('\D', '', x)</code> replaces everything but the digits.</p>
+<h3 data-number="1.2.3" id="remove-specific-substrings-from-a-set-of-strings"><span class="header-section-number">1.2.3</span> Remove specific substrings from a set of strings</h3>
+<pre><code>&gt;&gt;&gt; x = &#39;Pear.good&#39;
+&gt;&gt;&gt; y = x.replace(&#39;.good&#39;,&#39;&#39;)
+&gt;&gt;&gt; y
+&#39;Pear&#39;
+&gt;&gt;&gt; x
+&#39;Pear.good&#39;</code></pre>
+<h3 data-number="1.2.4" id="modify-items-in-string-by-slicing-and-combination"><span class="header-section-number">1.2.4</span> Modify items in string by slicing and combination</h3>
+<pre><code>&gt;&gt;&gt; a=&#39;0034&#39;
+&gt;&gt;&gt; a[1]=&#39;1&#39; Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; TypeError: &#39;str&#39; object does not support item assignment
+&gt;&gt;&gt; a=a[:1]+&#39;1&#39;+a[2:]
+&gt;&gt;&gt; print a 0134
+&gt;&gt;&gt; a=a[:2]+&#39;2&#39;+a[2:]
+&gt;&gt;&gt; print a 01234</code></pre>
+<h3 data-number="1.2.5" id="remove-all-special-characters-punctuation-and-spaces-from-a-string"><span class="header-section-number">1.2.5</span> Remove all special characters, punctuation and spaces from a string</h3>
+<pre><code>&gt;&gt;&gt; string = &quot;Special $#! characters spaces 888323&quot;
+&gt;&gt;&gt; &#39;&#39;.join(e for e in string if e.isalnum())
+&#39;Specialcharactersspaces888323&#39;</code></pre>
+<h3 data-number="1.2.6" id="replace-white-with-other-character"><span class="header-section-number">1.2.6</span> Replace white with other character</h3>
+<pre><code>mystring.replace(&quot; &quot;, &quot;_&quot;)</code></pre>
+<h3 data-number="1.2.7" id="get-the-lower-case-of-string"><span class="header-section-number">1.2.7</span> Get the lower-case of string</h3>
+<pre><code>s = &quot;Kilometer&quot;
+print(s.lower())</code></pre>
+<h3 data-number="1.2.8" id="trim-white-spaces-in-string"><span class="header-section-number">1.2.8</span> Trim white spaces in string:</h3>
+<pre><code>string.strip()</code></pre>
+<p>Whitespace on the right side:</p>
+<pre><code>string.rstrip()</code></pre>
+<p>Whitespace on the left side:</p>
+<pre><code>string.lstrip()</code></pre>
+<h2 data-number="1.3" id="string-and-list-conversion"><span class="header-section-number">1.3</span> String and List: Conversion</h2>
+<h3 data-number="1.3.1" id="convert-float-type-to-string"><span class="header-section-number">1.3.1</span> Convert float type to string</h3>
+<pre><code>&#39;%.2f&#39; % 1.234 # output: &#39;1.23&#39;
+&#39;%.2f&#39; % 5.0 # output: &#39;5.00&#39;</code></pre>
+<h3 data-number="1.3.2" id="convert-string-to-list"><span class="header-section-number">1.3.2</span> Convert string to list</h3>
+<pre><code>states = &quot;Alaska Alabama Arkansas American Samoa Arizona California Colorado&quot;
+print states.split()
+&gt;&gt;&gt; &#39;ab c\n\nde fg\rkl\r\n&#39;.splitlines()
+[&#39;ab c&#39;, &#39;&#39;, &#39;de fg&#39;, &#39;kl&#39;]</code></pre>
+<h3 data-number="1.3.3" id="convert-list-to-string"><span class="header-section-number">1.3.3</span> Convert list to string:</h3>
+<pre><code>list = [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+str = &#39;&#39;.join(list)</code></pre>
+<h3 data-number="1.3.4" id="check-a-string-represents-an-int"><span class="header-section-number">1.3.4</span> Check a string represents an int</h3>
+<pre><code>def RepresentsInt(s):
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
+&gt;&gt;&gt; print RepresentsInt(&quot;+123&quot;)
+True
+&gt;&gt;&gt; print RepresentsInt(&quot;10.0&quot;)
+False</code></pre>
+<p>Or use regular expression.</p>
+<h2 data-number="1.4" id="string-and-list-search"><span class="header-section-number">1.4</span> String and List: Search</h2>
+<h3 data-number="1.4.1" id="search-str1-in-str2"><span class="header-section-number">1.4.1</span> Search str1 in str2</h3>
+<pre><code>str.index(str, beg=0 end=len(string))
+str.rindex(str, beg=0 end=len(string)) # return highest index
+str.find(str, beg=0 end=len(string)) # like index
+str.rfind(str, beg=0 end=len(string)) # like rindex</code></pre>
+<h3 data-number="1.4.2" id="check-exact-word-in-strings"><span class="header-section-number">1.4.2</span> Check exact word in strings</h3>
+<pre><code>import re
+s = &#39;98787This is correct&#39;
+for words in [&#39;This is correct&#39;, &#39;This&#39;, &#39;is&#39;, &#39;correct&#39;]:
+    if re.search(r&#39;\b&#39; + words + r&#39;\b&#39;, s):
+        print(&#39;{0} found&#39;.format(words))</code></pre>
+<h3 data-number="1.4.3" id="extract-number-from-strings"><span class="header-section-number">1.4.3</span> Extract number from strings</h3>
+<pre><code>import re
+re.findall(r&#39;\d+&#39;, &#39;hello 42 I\&#39;m a 32 string 30&#39;)
+[&#39;42&#39;, &#39;32&#39;, &#39;30&#39;]
+0.1.4.4 Check if some string exists in a list:
+some_list = [&#39;abc-123&#39;, &#39;def-456&#39;, &#39;ghi-789&#39;, &#39;abc-456&#39;]
+if any(&quot;abc&quot; in s for s in some_list):
+    # whatever</code></pre>
+<h3 data-number="1.4.4" id="find-the-first-iterm-matched"><span class="header-section-number">1.4.4</span> Find the first iterm matched</h3>
+<pre><code>[i for i in xrange(100000) if i == 1000][0]</code></pre>
+<h3 data-number="1.4.5" id="get-all-the-terms-matched"><span class="header-section-number">1.4.5</span> Get all the terms matched:</h3>
+<pre><code>matching = [s for s in some_list if &quot;abc&quot; in s]</code></pre>
+<h3 data-number="1.4.6" id="get-the-index-of-all-items-that-contain-specific-string"><span class="header-section-number">1.4.6</span> Get the index of all items that contain specific string</h3>
+<pre><code>indices = [i for i, s in enumerate(mylist) if &#39;aa&#39; in s]</code></pre>
+<h2 data-number="1.5" id="dict"><span class="header-section-number">1.5</span> <code>dict</code></h2>
+<h3 data-number="1.5.1" id="basics-1"><span class="header-section-number">1.5.1</span> Basics</h3>
+<pre><code>mydict.keys()
+mydict.values()</code></pre>
+<h3 data-number="1.5.2" id="listdictionary.keys-raises-error-in-pdb"><span class="header-section-number">1.5.2</span> list(dictionary.keys()) raises error in pdb</h3>
+<p>The problem is that <code>list</code> is a pdb debugger command.</p>
+<pre><code>!list(error[&#39;extras&#39;].keys())</code></pre>
+<blockquote>
+<p>Commands that the debugger doesn’t recognize are assumed to be Python statements and are executed in the context of the program being debugged. Python statements can also be prefixed with an exclamation point (!).</p>
+</blockquote>
+<h3 data-number="1.5.3" id="convert-to-other-types"><span class="header-section-number">1.5.3</span> Convert to Other Types</h3>
+<pre><code>list(mydict.keys())</code></pre>
+<h2 data-number="1.6" id="range"><span class="header-section-number">1.6</span> <code>range</code></h2>
+<p>Rather than being a function, range is actually an immutable sequence type</p>
+<h3 data-number="1.6.1" id="convert-range-to-list"><span class="header-section-number">1.6.1</span> convert range to list</h3>
+<pre><code>my_list=list(range(1,1001))</code></pre>
+<h2 data-number="1.7" id="tuple"><span class="header-section-number">1.7</span> <code>tuple</code></h2>
+<p>A tuple is a sequence of immutable Python objects.</p>
+<ol type="1">
+<li><p>Tuples are sequences, just like lists</p></li>
+<li><p>Tuples cannot be changed unlike lists</p></li>
+<li><p>Tuples use parentheses, whereas lists use square brackets</p></li>
+<li><p><code>zip</code> can combine 2 array to tuple list.</p>
+<p>X = np.linspace(0.0, 1.0, 5) Y = X**2 zip(X, Y) [(0.0, 0.0), (0.25, 0.0625), (0.5, 0.25), (0.75, 0.5625), (1.0, 1.0)] type(zip(X, Y)): list</p></li>
+</ol>
+<h2 data-number="1.8" id="bytes"><span class="header-section-number">1.8</span> <code>bytes</code></h2>
+<p>In Python3, <code>bytes</code> is an data type. To convert <code>bytes</code> into <code>str</code>, use the following commands.</p>
+<pre><code>b = b&quot;example&quot;
+s = &quot;example&quot;
+bytes(s, encoding = &quot;utf8&quot;)
+str(b, encoding = &quot;utf-8&quot;)
+b.decode(&quot;utf-8&quot;)</code></pre>
+<h2 data-number="1.9" id="io"><span class="header-section-number">1.9</span> IO</h2>
+<p>Prompt the user for input</p>
+<ol type="1">
+<li><code>raw_input</code> in Python 2.X</li>
+<li><code>input</code> in Python 3</li>
+</ol>
+<h3 data-number="1.9.1" id="read-text-file"><span class="header-section-number">1.9.1</span> Read Text File</h3>
+<pre><code>f = open(&quot;test.txt&quot;,&quot;r&quot;)
+content = f.readlines()</code></pre>
+<h3 data-number="1.9.2" id="read-a-specific-line"><span class="header-section-number">1.9.2</span> Read a specific line</h3>
+<pre><code>with open(&#39;xxx.txt&#39;) as f:
+    for i, line in enumerate(f):
+        if i == 6:
+            break
+    else:
+        print(&#39;Not 7 lines in file&#39;)
+        line = None</code></pre>
+<p>Note that <code>enumerate</code> is zero-based.</p>
+<h3 data-number="1.9.3" id="write-text-file"><span class="header-section-number">1.9.3</span> Write Text File</h3>
+<ol type="1">
+<li><code>writelines</code> expects a list of strings, while write expects a single string. # <code>line1 + "\n" + line2</code> merges those strings together into a single string before passing it to write. Note that if you have many lines, you may want to use <code>"\n".join(list_of_lines)</code>.</li>
+</ol>
+<h3 data-number="1.9.4" id="booleans-formatted-in-strings"><span class="header-section-number">1.9.4</span> Booleans Formatted in Strings</h3>
+<pre><code>&gt;&gt;&gt; print(&quot;%r, %r&quot;%(True, False) )
+True, False</code></pre>
+<h3 data-number="1.9.5" id="print-without-newline"><span class="header-section-number">1.9.5</span> Print without Newline</h3>
+<pre><code>print(&#39;.&#39;, end=&#39;&#39;, flush=True)</code></pre>
+<h3 data-number="1.9.6" id="print-to-file"><span class="header-section-number">1.9.6</span> Print to file</h3>
+<pre><code>with open(&quot;output.txt&quot;, &quot;a&quot;) as f:
+    print(&quot;Hello StackOverflow!&quot;, file=f)
+    print(&quot;I have a question.&quot;, file=f)</code></pre>
+<h2 data-number="1.10" id="function"><span class="header-section-number">1.10</span> Function</h2>
+<h3 data-number="1.10.1" id="default-parameter"><span class="header-section-number">1.10.1</span> Default Parameter</h3>
+<pre><code>&gt;&gt;&gt; def function(data=[]):
+...     data.append(1)
+...     return data
+...
+&gt;&gt;&gt; function()
+[1]</code></pre>
+<p>Forms like <code>data=[1, 2]</code> is not acceptable for function.</p>
+<h2 data-number="1.11" id="control-statement"><span class="header-section-number">1.11</span> Control Statement</h2>
+<h3 data-number="1.11.1" id="if-else"><span class="header-section-number">1.11.1</span> <code>if-else</code></h3>
+<pre><code>&gt;&gt;&gt; if x &lt; 0:
+...     x = 0
+...     print &#39;Negative changed to zero&#39;
+... elif x == 0:
+...     print &#39;Zero&#39;
+... elif x == 1:
+...     print &#39;Single&#39;
+... else:
+...     print &#39;More&#39;</code></pre>
+<h3 data-number="1.11.2" id="while-loop"><span class="header-section-number">1.11.2</span> <code>while</code> Loop</h3>
+<pre><code>count = 0
+while (count &lt; 9):
+   print &#39;The count is:&#39;, count
+   count = count + 1
+print &quot;Good bye!&quot;</code></pre>
+<h1 data-number="2" id="numpy-and-scipy"><span class="header-section-number">2</span> Numpy and Scipy</h1>
+<h2 data-number="2.1" id="basics-2"><span class="header-section-number">2.1</span> Basics</h2>
+<h3 data-number="2.1.1" id="nd-array-to-1d"><span class="header-section-number">2.1.1</span> ND array to 1D</h3>
+<p>Use <code>np.ravel</code> (for a 1D view) or <code>np.ndarray.flatten</code> (for a 1D copy) or <code>np.ndarray.flat</code> (for an 1D iterator).</p>
+<pre><code>In [12]: a = np.array([[1,2,3], [4,5,6]])
+In [13]: b = a.ravel()
+In [14]: b
+Out[14]: array([1, 2, 3, 4, 5, 6])
+
+In [15]: c = a.flatten()
+
+In [20]: d = a.flat
+In [21]: d
+Out[21]: &lt;numpy.flatiter object at 0x8ec2068&gt;
+In [22]: list(d)
+Out[22]: [1, 2, 3, 4, 5, 6]</code></pre>
+<h2 data-number="2.2" id="advanced"><span class="header-section-number">2.2</span> Advanced</h2>
+<h3 data-number="2.2.1" id="normality-test"><span class="header-section-number">2.2.1</span> Normality test</h3>
+<pre><code>import numpy as np
+from scipy import stats
+
+mat = np.loadtxt(&quot;gdb.txt&quot;, delimiter=&#39;,&#39;)
+arr = mat.ravel()
+print(np.mean(arr))
+print(np.std(arr))
+
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+plt.style.use(&#39;sjc&#39;)
+fig=plt.figure()
+ax=fig.gca()
+
+ax.hist(arr, bins=50, density=True)
+plt.savefig(&#39;normal.png&#39;)</code></pre>
+<h1 data-number="3" id="advanced-1"><span class="header-section-number">3</span> Advanced</h1>
+<h2 data-number="3.1" id="tips"><span class="header-section-number">3.1</span> Tips</h2>
+<h3 data-number="3.1.1" id="check-the-normality-of-an-array"><span class="header-section-number">3.1.1</span> Check the normality of an array</h3>
+<p>Ways: 1) check its mean and std. 2) hist plot. 3) QQ plot.</p>
+<pre><code></code></pre>
+<p>Reference: <a href="https://medium.com/@rrfd/testing-for-normality-applications-with-python-6bf06ed646a9">QQ plot</a></p>
+<h3 data-number="3.1.2" id="create-a-nested-directory"><span class="header-section-number">3.1.2</span> Create a nested directory</h3>
+<p>On Python ≥ 3.5, use <code>pathlib.Path.mkdir</code>:</p>
+<pre><code>from pathlib import Path
+Path(&quot;/my/directory&quot;).mkdir(parents=True, exist_ok=True)</code></pre>
+<h3 data-number="3.1.3" id="explanation-on-if-__name__-__main__"><span class="header-section-number">3.1.3</span> Explanation on <code>if __name__ == "__main__"</code></h3>
+<p>When the Python interpreter reads a source file, it executes all of the code found in it. Before executing the code, it will define a few special variables. For example, if the python interpreter is running that module (the source file) as the main program, it sets the special <code>__name__</code> variable to have a value <code>"__main__"</code>. If this file is being imported from another module, <code>__name__</code> will be set to the module’s name.</p>
+<h3 data-number="3.1.4" id="test-a-variable-is-none"><span class="header-section-number">3.1.4</span> Test a Variable is <code>None</code></h3>
+<pre><code>if variable is None:</code></pre>
+<h3 data-number="3.1.5" id="output-complex-number-in-certain-format"><span class="header-section-number">3.1.5</span> Output Complex Number in Certain Format</h3>
+<p>Split the complex number to be <code>x.real</code> and <code>x.imag</code>, then format them separately and combine them in the way <code>x.real+x.imag*1i</code>.</p>
+<h3 data-number="3.1.6" id="check-python-version"><span class="header-section-number">3.1.6</span> Check Python version</h3>
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; print (sys.version)
+2.5.2 (r252:60911, Jul 31 2008, 17:28:52) 
+[GCC 4.2.3 (Ubuntu 4.2.3-2ubuntu7)]
+&gt;&gt;&gt; sys.version_info
+(2, 5, 2, &#39;final&#39;, 0)
+assert sys.version_info &gt;= (2,5)</code></pre>
+<h3 data-number="3.1.7" id="how-do-i-manually-throwraise-an-exception-in-python"><span class="header-section-number">3.1.7</span> How do I manually throw/raise an exception in Python?</h3>
+<p>Check this <a href="https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python">link</a>.</p>
+<h1 data-number="4" id="packages"><span class="header-section-number">4</span> Packages</h1>
+<h2 data-number="4.1" id="os"><span class="header-section-number">4.1</span> <code>os</code></h2>
+<h3 data-number="4.1.1" id="iterate-over-files-in-a-directory"><span class="header-section-number">4.1.1</span> Iterate over files in a directory</h3>
+<pre><code>import os
+
+for filename in os.listdir(directory):
+    if filename.endswith(&quot;.asm&quot;) or filename.endswith(&quot;.py&quot;): 
+         # print(os.path.join(directory, filename))
+        continue
+    else:
+        continue</code></pre>
+<h3 data-number="4.1.2" id="get-the-full-path-to-the-directory-a-python-file-is-contained-in"><span class="header-section-number">4.1.2</span> Get the full path to the directory a Python file is contained in</h3>
+<pre><code>import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))</code></pre>
+<h3 data-number="4.1.3" id="excluding-directories-in-os.walk"><span class="header-section-number">4.1.3</span> Excluding directories in <code>os.walk</code></h3>
+<p>Modifying <code>dirs</code> in-place will prune the (subsequent) files and directories visited by <code>os.walk</code>:</p>
+<pre><code># exclude = set([&#39;New folder&#39;, &#39;Windows&#39;, &#39;Desktop&#39;])
+for root, dirs, files in os.walk(top, topdown=True):
+    dirs[:] = [d for d in dirs if d not in exclude]</code></pre>
+<h3 data-number="4.1.4" id="extract-file-name-from-path"><span class="header-section-number">4.1.4</span> Extract file name from path</h3>
+<pre><code>import os
+print(os.path.basename(your_path))</code></pre>
+<h2 data-number="4.2" id="subprocess"><span class="header-section-number">4.2</span> <code>subprocess</code></h2>
+<h3 data-number="4.2.1" id="calling-the-source-command-from-subprocess.popen"><span class="header-section-number">4.2.1</span> Calling the <code>source</code> command from subprocess.Popen</h3>
+<pre><code>&gt;&gt;&gt; foo = subprocess.Popen(&quot;source the_script.sh&quot;, shell = True)
+&gt;&gt;&gt; /bin/sh: source: not found</code></pre>
+<p><code>source</code> is not an executable command, it’s a shell builtin.</p>
+<h2 data-number="4.3" id="colorama"><span class="header-section-number">4.3</span> <code>colorama</code></h2>
+<h3 data-number="4.3.1" id="print-colored-output-with-python-3"><span class="header-section-number">4.3.1</span> Print colored output with Python 3</h3>
+<pre><code>import colorama
+from colorama import Fore, Style
+print(Fore.BLUE + &quot;Hello World&quot;)</code></pre>
+<p>And call this to reset the color settings:</p>
+<pre><code>print(Style.RESET_ALL)</code></pre>
+<h2 data-number="4.4" id="pip"><span class="header-section-number">4.4</span> <code>pip</code></h2>
+<h3 data-number="4.4.1" id="uninstall-all-packages"><span class="header-section-number">4.4.1</span> Uninstall all packages</h3>
+<p>Dump out all the packages into the file <code>packages.txt</code>. Then uninstall them.</p>
+<pre><code>pip freeze &gt; packages.txt
+pip uninstall -r packages.txt</code></pre>
+<h3 data-number="4.4.2" id="uninstall-the-dependencies-of-a-package"><span class="header-section-number">4.4.2</span> Uninstall the dependencies of a package</h3>
+<p>Use a package <code>pip-autoremove</code></p>
+<pre><code>pip-autoremove some-package</code></pre>
+<h2 data-number="4.5" id="pyinstaller"><span class="header-section-number">4.5</span> <code>pyinstaller</code></h2>
+<h3 data-number="4.5.1" id="cannot-run-on-windows-10"><span class="header-section-number">4.5.1</span> Cannot run on Windows 10</h3>
+<p>Error message</p>
+<pre><code>ModuleNotFoundError: No module named &#39;pkg_resources.py2_warn&#39;</code></pre>
+<p>Modify the following file</p>
+<pre><code>C:\Users\***\AppData\Local\Programs\Python\Python37\Lib\site-packages\pkg_resources\init.py</code></pre>
+<p>comment <code>import('pkg_resources.py2_warn')</code></p>
+<h3 data-number="4.5.2" id="pyinstaller-3.5-not-working-with-python3.8"><span class="header-section-number">4.5.2</span> <code>pyinstaller 3.5</code> Not Working with <code>python3.8</code></h3>
+<p>Install the development version.</p>
+<pre><code>pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz</code></pre>
+<h2 data-number="4.6" id="argparse"><span class="header-section-number">4.6</span> <code>argparse</code></h2>
+<h3 data-number="4.6.1" id="example-1"><span class="header-section-number">4.6.1</span> Example 1</h3>
+<pre><code>parser = argparse.ArgumentParser(description = &quot;Convert markdown to Html.&quot;)parser.add_argument(&quot;file&quot;, help = &quot;Default convert style.&quot;)parser.add_argument(&quot;-t&quot;, &quot;--toc&quot;, action = &quot;store_true&quot;,help = &quot;Add Table of Content.&quot;)args = parser.parse_args()if args.toc:SystemCmdList.append(&quot;--toc&quot;)</code></pre>
+<h3 data-number="4.6.2" id="example-2"><span class="header-section-number">4.6.2</span> Example 2</h3>
+<pre><code>import argparseparser = argparse.ArgumentParser(description=&#39;Process some integers.&#39;)parser.add_argument(&#39;op&#39;, choices = [&#39;checkin&#39;, &#39;askhelp&#39;],help=&#39;Operation to do&#39;)parser.add_argument(&#39;--doi&#39;, nargs=1, type=str, default = &#39;&#39;,help=&#39;DOI of the paper for the help&#39;)parser.add_argument(&#39;--helpcredit&#39;, type=int, nargs=1, default = 5,metavar=&#39;N&#39;, help=&#39;Credit score for the help&#39;)args = parser.parse_args()my_muchong = MuChong(MUCHONG_USERNAME, MUCHONG_PASSWORD)#  my_muchong.login()if ( args.op == &#39;checkin&#39; ):my_muchong.check_in()elif ( args.op == &#39;askhelp&#39; ):my_muchong.askForHelp(args.doi[0],helpcredit=args.helpcredit)</code></pre>
+<h2 data-number="4.7" id="time-related-modules"><span class="header-section-number">4.7</span> <code>time</code> Related Modules</h2>
+<h3 data-number="4.7.1" id="measure-time-elapsed-in-python"><span class="header-section-number">4.7.1</span> Measure Time Elapsed in Python</h3>
+<pre><code>import time
+start = time.time()
+print(&quot;hello&quot;)
+end = time.time()
+print(end - start)</code></pre>
+<h3 data-number="4.7.2" id="get-time-from-string"><span class="header-section-number">4.7.2</span> Get Time from String</h3>
+<pre><code>from datetime import datetime
+datetime_object = datetime.strptime(&#39;Jun 1 2005  1:33PM&#39;, &#39;%b %d %Y %I:%M%p&#39;)</code></pre>
+<h3 data-number="4.7.3" id="time-delay"><span class="header-section-number">4.7.3</span> Time Delay</h3>
+<pre><code>import time
+time.sleep(5) # delays for 5 seconds</code></pre>
+<h2 data-number="4.8" id="mpmath"><span class="header-section-number">4.8</span> <code>mpmath</code></h2>
+<p>A package for arbitrary precision. There are other ways of using data type with more precision than <code>double</code>. <code>numpy.longdouble</code> is one way. <code>Decimal</code> is another way. But they are not powerful when I need to calculate a list of coefficients accurately in some numerical schemes.</p>
+<p>A comparison between <code>mpmath</code> and <code>numpy.longdouble</code> is as follows,</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpmath <span class="im">import</span> mp, mpf, matrix</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>mp.dps <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>val <span class="op">=</span> np.longdouble( np.sqrt(<span class="fl">1.0</span><span class="op">/</span><span class="fl">7.0</span>) )</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Type of val is&quot;</span>,<span class="bu">type</span>(val))</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.finfo(val).precision</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>prt_str <span class="op">=</span> <span class="st">&quot;np.sqrt(1/7): &quot;</span><span class="op">+</span><span class="st">&quot;%.&quot;</span><span class="op">+</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">%</span>(p)<span class="op">+</span><span class="st">&quot;f&quot;</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prt_str<span class="op">%</span>(val))</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;True value  : 0.3779644730092272272145165362341800608157513118689214&quot;</span>)</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;mpmath (1/7)**(1/2):&quot;</span>, ( mpf(<span class="dv">1</span>)<span class="op">/</span>mpf(<span class="dv">7</span>) )<span class="op">**</span>( mpf(<span class="dv">1</span>)<span class="op">/</span>mpf(<span class="dv">2</span>) ) )</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;True value         : 0.3779644730092272272145165362341800608157513118689214&quot;</span>)</span></code></pre></div>
+<p>The output is as follows,</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Type</span> of val is <span class="op">&lt;</span>class <span class="st">&#39;numpy.float128&#39;</span><span class="op">&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="ex">np.sqrt</span><span class="er">(</span><span class="ex">1/7</span><span class="kw">)</span><span class="bu">:</span> 0.377964473009227198</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="ex">True</span> value  : 0.3779644730092272272145165362341800608157513118689214</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mpmath</span> <span class="er">(</span><span class="ex">1/7</span><span class="kw">)</span><span class="ex">**</span><span class="er">(</span><span class="ex">1/2</span><span class="kw">)</span><span class="bu">:</span> 0.37796447300922722721451653623418</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="ex">True</span> value         : 0.3779644730092272272145165362341800608157513118689214</span></code></pre></div>
+<p>The true value is from Wolfram Alpha.</p>
+<h3 data-number="4.8.1" id="example-of-calculation"><span class="header-section-number">4.8.1</span> Example of Calculation</h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpmath <span class="im">import</span> mp, mpf, matrix</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>mp.dps <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> mpf(<span class="st">&#39;0.43586652150845899941601945&#39;</span>)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>gamma <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">+</span> <span class="dv">6</span><span class="op">*</span>gamma <span class="op">-</span> <span class="dv">9</span><span class="op">*</span>gamma<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>gamma<span class="op">**</span><span class="dv">3</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>b2 <span class="op">=</span> (<span class="op">-</span><span class="dv">3</span><span class="op">*</span>alpha<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> (<span class="dv">4</span><span class="op">*</span>beta)</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>c2 <span class="op">=</span> (<span class="dv">2</span><span class="op">-</span><span class="dv">9</span><span class="op">*</span>gamma<span class="op">+</span><span class="dv">6</span><span class="op">*</span>gamma<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> (<span class="dv">3</span><span class="op">*</span>alpha)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> matrix(<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">=</span> gamma</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">=</span> gamma</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">2</span>] <span class="op">=</span> gamma</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span>,<span class="dv">0</span>] <span class="op">=</span> c2 <span class="op">-</span> gamma</span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> b2 <span class="op">-</span> gamma</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">=</span> b2</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;A is &quot;</span>)</span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> A[<span class="dv">2</span>,:]</span>
+<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;B is &quot;</span>)</span>
+<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(B)</span>
+<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> matrix(<span class="dv">3</span>,<span class="dv">1</span>) </span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>C[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">=</span> gamma</span>
+<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>C[<span class="dv">1</span>,<span class="dv">0</span>] <span class="op">=</span> c2</span>
+<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>C[<span class="dv">2</span>,<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;C is &quot;</span>)</span>
+<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(C)</span></code></pre></div>
+<p>The output is as follows,</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> is</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>      0.43586652150845899941601945                                  0.0                           0.0]</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="er">[0.28206673924577050029199027679033</span>         <span class="er">0.43586652150845899941601945</span>                           <span class="ex">0.0]</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> 1.2084966491760100703364776750294  -0.64436317068446906975249712502944  0.43586652150845899941601945]</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="er">B</span> <span class="er">is</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[1.2084966491760100703364776750294</span>  <span class="at">-0.64436317068446906975249712502944</span>  0.43586652150845899941601945]</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="ex">C</span> is</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>      0.43586652150845899941601945]</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>[0.71793326075422949970800972679033]</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>[                               1.0]</span></code></pre></div>
+<h1 data-number="5" id="misc"><span class="header-section-number">5</span> Misc</h1>
+<h2 data-number="5.1" id="system"><span class="header-section-number">5.1</span> System</h2>
+<h3 data-number="5.1.1" id="shebang"><span class="header-section-number">5.1.1</span> Shebang</h3>
+<pre><code>#!/usr/bin/env python3</code></pre>
+<h2 data-number="5.2" id="mixed-usage-with-other-software"><span class="header-section-number">5.2</span> Mixed Usage with Other Software</h2>
+<h3 data-number="5.2.1" id="compile-python-with-sqlite3-support"><span class="header-section-number">5.2.1</span> Compile Python with <code>sqlite3</code> Support</h3>
+<ol type="1">
+<li><p>Download sqlite3 source</p></li>
+<li><p>Download Python source</p></li>
+<li><p>Edit the <code>setup.py</code> file to add the sqlite3 include directory to it. Something like this,</p>
+<p>sqlite_inc_paths = [ ‘/usr/include’, ‘/usr/include/sqlite’, ‘/usr/include/sqlite3’, ‘/usr/local/include’, ‘/usr/local/include/sqlite’, ‘/usr/local/include/sqlite3’, ‘/<ABS_PATH_TO_SQLITE3>/include’ ]</p></li>
+<li><p><code>configure</code>, <code>make</code>, <code>make install</code>.</p></li>
+<li><p>Make sure there is no warning messages related to sqlite3.</p></li>
+</ol>
+<h3 data-number="5.2.2" id="ipython-notebook-font"><span class="header-section-number">5.2.2</span> iPython Notebook Font</h3>
+<p>For Jupyter notebook <code>version &gt;= 4.1</code>, modify the custom css file, which is located at <code>~/.jupyter/custom/custom.css</code>. Do something like the following.</p>
+<pre><code>@import url(&#39;https://fonts.googleapis.com/css?family=Source+Code+Pro&#39;);.CodeMirror pre {font-family: &#39;Source Code Pro&#39;, monospace;;font-size: 16pt;font-weight: 600;line-height: normal;}</code></pre>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2021-01-25 with pandoc
+</footer>
+</body>
+</html>

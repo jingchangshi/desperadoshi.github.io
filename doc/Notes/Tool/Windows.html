@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2021-08-22" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Windows</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Windows</h1>
+<h3 class="date">2021-08-22</h3>
+<div id="TOC">
+<ul>
+<li><a href="#cmd"><span class="toc-section-number">1</span> CMD</a>
+<ul>
+<li><a href="#basics"><span class="toc-section-number">1.1</span> Basics</a>
+<ul>
+<li><a href="#extract-filename-and-extension-of-input-file-parameter"><span class="toc-section-number">1.1.1</span> Extract filename and extension of input file parameter</a></li>
+<li><a href="#open-a-file-with-the-default-application-in-wsl"><span class="toc-section-number">1.1.2</span> Open a file with the default application in WSL</a></li>
+<li><a href="#use-start-with-space-in-the-path"><span class="toc-section-number">1.1.3</span> Use <code>start</code> with space in the path</a></li>
+</ul></li>
+<li><a href="#tips"><span class="toc-section-number">1.2</span> Tips</a>
+<ul>
+<li><a href="#run-two-commands-in-one-line"><span class="toc-section-number">1.2.1</span> Run two commands in one line</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#powershell"><span class="toc-section-number">2</span> Powershell</a>
+<ul>
+<li><a href="#basics-1"><span class="toc-section-number">2.1</span> Basics</a>
+<ul>
+<li><a href="#read-line-by-line"><span class="toc-section-number">2.1.1</span> Read line by line</a></li>
+<li><a href="#environment-variable"><span class="toc-section-number">2.1.2</span> Environment variable</a></li>
+<li><a href="#pipeline"><span class="toc-section-number">2.1.3</span> Pipeline</a></li>
+<li><a href="#concatenating-a-variable-and-a-string-literal-without-a-space"><span class="toc-section-number">2.1.4</span> Concatenating a variable and a string literal without a space</a></li>
+<li><a href="#extract-filename-and-extension-from-path"><span class="toc-section-number">2.1.5</span> Extract filename and extension from path</a></li>
+<li><a href="#meaning-of-_"><span class="toc-section-number">2.1.6</span> Meaning of <code>$_</code></a></li>
+<li><a href="#current-directory-of-the-script-executed"><span class="toc-section-number">2.1.7</span> Current directory of the script executed</a></li>
+<li><a href="#combine-a-path-with-a-child-path"><span class="toc-section-number">2.1.8</span> Combine a path with a child path</a></li>
+<li><a href="#comment-out-a-line"><span class="toc-section-number">2.1.9</span> Comment out a line</a></li>
+<li><a href="#run-multiple-commands-on-a-single-line"><span class="toc-section-number">2.1.10</span> Run multiple commands on a single line</a></li>
+<li><a href="#equivalent-command-of-which"><span class="toc-section-number">2.1.11</span> Equivalent command of <code>which</code></a></li>
+<li><a href="#create-the-symbolic-link"><span class="toc-section-number">2.1.12</span> Create the symbolic link</a></li>
+<li><a href="#create-a-directory-if-it-does-not-exist"><span class="toc-section-number">2.1.13</span> Create a directory if it does not exist</a></li>
+<li><a href="#capture-the-output-of-a-command-and-assign-it-to-a-variable"><span class="toc-section-number">2.1.14</span> Capture the output of a command and assign it to a variable</a></li>
+<li><a href="#show-the-command-history"><span class="toc-section-number">2.1.15</span> Show the command history</a></li>
+</ul></li>
+<li><a href="#tips-1"><span class="toc-section-number">2.2</span> Tips</a>
+<ul>
+<li><a href="#profile-location"><span class="toc-section-number">2.2.1</span> Profile location</a></li>
+<li><a href="#set-http-proxy"><span class="toc-section-number">2.2.2</span> Set HTTP proxy</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#network"><span class="toc-section-number">3</span> Network</a>
+<ul>
+<li><a href="#basics-2"><span class="toc-section-number">3.1</span> Basics</a>
+<ul>
+<li><a href="#refresh-the-dns-cache"><span class="toc-section-number">3.1.1</span> Refresh the DNS cache</a></li>
+</ul></li>
+<li><a href="#proxy"><span class="toc-section-number">3.2</span> Proxy</a>
+<ul>
+<li><a href="#cmd-set-proxy"><span class="toc-section-number">3.2.1</span> CMD Set Proxy</a></li>
+<li><a href="#use-proxifier-to-set-shadowsocks-as-the-global-proxy"><span class="toc-section-number">3.2.2</span> Use <code>Proxifier</code> to set <code>shadowsocks</code> as the global proxy</a></li>
+<li><a href="#conda-connection-issue"><span class="toc-section-number">3.2.3</span> <code>conda</code> connection issue</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#system"><span class="toc-section-number">4</span> System</a>
+<ul>
+<li><a href="#wsl2"><span class="toc-section-number">4.1</span> WSL2</a>
+<ul>
+<li><a href="#x11-forwarding"><span class="toc-section-number">4.1.1</span> X11 forwarding</a></li>
+<li><a href="#use-the-proxy-of-the-host-in-wsl2"><span class="toc-section-number">4.1.2</span> Use the proxy of the host in WSL2</a></li>
+<li><a href="#no-network-in-wsl2"><span class="toc-section-number">4.1.3</span> No network in WSL2</a></li>
+<li><a href="#reduce-disk-size"><span class="toc-section-number">4.1.4</span> Reduce disk size</a></li>
+</ul></li>
+<li><a href="#system-setting"><span class="toc-section-number">4.2</span> System setting</a>
+<ul>
+<li><a href="#rename-the-user-folder-in-windows-10"><span class="toc-section-number">4.2.1</span> Rename the user folder in Windows 10</a></li>
+<li><a href="#how-to-remove-programs-from-the-open-with-context-menu-in-windows"><span class="toc-section-number">4.2.2</span> How to Remove Programs from the “Open With” Context Menu in Windows</a></li>
+<li><a href="#enable-group-policy-editor-gpedit.msc-in-windows-10-home-edition"><span class="toc-section-number">4.2.3</span> Enable Group Policy Editor (Gpedit.Msc) In Windows 10 Home Edition</a></li>
+<li><a href="#disable-indexing-removable-drives"><span class="toc-section-number">4.2.4</span> Disable indexing removable drives</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#others"><span class="toc-section-number">5</span> Others</a>
+<ul>
+<li><a href="#ssh"><span class="toc-section-number">5.1</span> SSH</a>
+<ul>
+<li><a href="#windows-ssh-permissions-for-private-key-are-too-open"><span class="toc-section-number">5.1.1</span> Windows SSH: Permissions for ‘private-key’ are too open</a></li>
+</ul></li>
+<li><a href="#pdf"><span class="toc-section-number">5.2</span> PDF</a>
+<ul>
+<li><a href="#convert-caj-to-pdf"><span class="toc-section-number">5.2.1</span> Convert CAJ to PDF</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="cmd"><span class="header-section-number">1</span> CMD</h1>
+<h2 data-number="1.1" id="basics"><span class="header-section-number">1.1</span> Basics</h2>
+<h3 data-number="1.1.1" id="extract-filename-and-extension-of-input-file-parameter"><span class="header-section-number">1.1.1</span> Extract filename and extension of input file parameter</h3>
+<pre><code>set _filename=%~n1
+set _extension=%~x1</code></pre>
+<ul>
+<li><code>%~n1</code> - Expand <code>%1</code> to a file Name without file extension.</li>
+<li><code>%~x1</code> - Expand <code>%1</code> to a file eXtension only.</li>
+</ul>
+<p><a href="https://superuser.com/questions/1131904/how-to-extract-extension-of-input-file-parameter-using-windows-batch-script">Reference</a></p>
+<h3 data-number="1.1.2" id="open-a-file-with-the-default-application-in-wsl"><span class="header-section-number">1.1.2</span> Open a file with the default application in WSL</h3>
+<pre><code>cmd.exe /C start &lt;file&gt;</code></pre>
+<p>Note: you need to replace <code>/mnt/c</code> with <code>C:</code>.</p>
+<h3 data-number="1.1.3" id="use-start-with-space-in-the-path"><span class="header-section-number">1.1.3</span> Use <code>start</code> with space in the path</h3>
+<p>Use an additional quotes.</p>
+<pre><code>start &quot;&quot; &quot;Y:\foo bar\baz&quot;</code></pre>
+<h2 data-number="1.2" id="tips"><span class="header-section-number">1.2</span> Tips</h2>
+<h3 data-number="1.2.1" id="run-two-commands-in-one-line"><span class="header-section-number">1.2.1</span> Run two commands in one line</h3>
+<pre><code>dir &amp; echo foo</code></pre>
+<p>If you want the second command to execute only if the first exited successfully:</p>
+<pre><code>dir &amp;&amp; echo foo</code></pre>
+<h1 data-number="2" id="powershell"><span class="header-section-number">2</span> Powershell</h1>
+<h2 data-number="2.1" id="basics-1"><span class="header-section-number">2.1</span> Basics</h2>
+<h3 data-number="2.1.1" id="read-line-by-line"><span class="header-section-number">2.1.1</span> Read line by line</h3>
+<pre><code>foreach($line in Get-Content .\file.txt) {
+    if($line -match $regex){
+        # Work here
+    }
+}</code></pre>
+<h3 data-number="2.1.2" id="environment-variable"><span class="header-section-number">2.1.2</span> Environment variable</h3>
+<p>The environment variable is provided by <code>Env:</code>. To list all the environment variables, do the following</p>
+<pre><code>Set-Location Env:
+Get-ChildItem</code></pre>
+<h3 data-number="2.1.3" id="pipeline"><span class="header-section-number">2.1.3</span> Pipeline</h3>
+<p>Use the symbol <code>|</code>.</p>
+<p>For example, convert the line ending in all the markdown files in a folder to the UNIX format.</p>
+<pre><code>Get-ChildItem -Path .\ -Filter *.md -Recurse -File -Name | ForEach-Object { dos2unix $_ }</code></pre>
+<h3 data-number="2.1.4" id="concatenating-a-variable-and-a-string-literal-without-a-space"><span class="header-section-number">2.1.4</span> Concatenating a variable and a string literal without a space</h3>
+<pre><code>$MyVariable = &quot;Some text&quot;
+Write-Host &quot;${MyVariable}NOSPACES&quot;</code></pre>
+<h3 data-number="2.1.5" id="extract-filename-and-extension-from-path"><span class="header-section-number">2.1.5</span> Extract filename and extension from path</h3>
+<pre><code>$PSCommandPath
+(Get-Item $PSCommandPath ).Extension
+(Get-Item $PSCommandPath ).Basename
+(Get-Item $PSCommandPath ).Name
+(Get-Item $PSCommandPath ).DirectoryName
+(Get-Item $PSCommandPath ).FullName
+$ConfigINI = (Get-Item $PSCommandPath ).DirectoryName+&quot;\&quot;+(Get-Item $PSCommandPath ).BaseName+&quot;.ini&quot;</code></pre>
+<h3 data-number="2.1.6" id="meaning-of-_"><span class="header-section-number">2.1.6</span> Meaning of <code>$_</code></h3>
+<p>This is the variable for the current value in the pipe line, which is called <code>$PSItem</code> in Powershell 3 and newer.</p>
+<h3 data-number="2.1.7" id="current-directory-of-the-script-executed"><span class="header-section-number">2.1.7</span> Current directory of the script executed</h3>
+<pre><code>$PSScriptRoot</code></pre>
+<h3 data-number="2.1.8" id="combine-a-path-with-a-child-path"><span class="header-section-number">2.1.8</span> Combine a path with a child path</h3>
+<pre><code>Join-Path -Path &quot;path&quot; -ChildPath &quot;childpath&quot;</code></pre>
+<h3 data-number="2.1.9" id="comment-out-a-line"><span class="header-section-number">2.1.9</span> Comment out a line</h3>
+<p>Use <code>#</code></p>
+<h3 data-number="2.1.10" id="run-multiple-commands-on-a-single-line"><span class="header-section-number">2.1.10</span> Run multiple commands on a single line</h3>
+<p>Use a semicolon to chain commands in PowerShell:</p>
+<pre><code>ipconfig /release; ipconfig /renew</code></pre>
+<h3 data-number="2.1.11" id="equivalent-command-of-which"><span class="header-section-number">2.1.11</span> Equivalent command of <code>which</code></h3>
+<pre><code>Get-Command</code></pre>
+<h3 data-number="2.1.12" id="create-the-symbolic-link"><span class="header-section-number">2.1.12</span> Create the symbolic link</h3>
+<pre><code>New-Item -ItemType SymbolicLink -Path &quot;Link&quot; -Target &quot;Target&quot;</code></pre>
+<p>In addition, you can call the <code>mklink</code> provided by <code>cmd</code>, from PowerShell to make symbolic links:</p>
+<pre><code>cmd /c mklink c:\path\to\symlink c:\target\file</code></pre>
+<p>You must pass <code>/d</code> to <code>mklink</code> if the target is a directory.</p>
+<pre><code>cmd /c mklink /d c:\path\to\symlink c:\target\directory</code></pre>
+<h3 data-number="2.1.13" id="create-a-directory-if-it-does-not-exist"><span class="header-section-number">2.1.13</span> Create a directory if it does not exist</h3>
+<p>Try the <code>-Force</code> parameter:</p>
+<pre><code>New-Item -ItemType Directory -Force -Path C:\Path\That\May\Or\May\Not\Exist</code></pre>
+<h3 data-number="2.1.14" id="capture-the-output-of-a-command-and-assign-it-to-a-variable"><span class="header-section-number">2.1.14</span> Capture the output of a command and assign it to a variable</h3>
+<pre><code>$OutputVariable = (Shell command)</code></pre>
+<h3 data-number="2.1.15" id="show-the-command-history"><span class="header-section-number">2.1.15</span> Show the command history</h3>
+<p>Get the location of the history file by the following command</p>
+<pre><code>(Get-PSReadlineOption).HistorySavePath</code></pre>
+<p>Then open the path in a text editor to see the full history.</p>
+<p><code>Get-History</code> shows only the history in the current session.</p>
+<h2 data-number="2.2" id="tips-1"><span class="header-section-number">2.2</span> Tips</h2>
+<h3 data-number="2.2.1" id="profile-location"><span class="header-section-number">2.2.1</span> Profile location</h3>
+<p>Use the following command to check the current values of <code>$PROFILE</code>.</p>
+<pre><code>PS C:\Users\J.Shi&gt; $PROFILE | Get-Member -Type NoteProperty
+
+
+   TypeName: System.String
+
+Name                   MemberType   Definition
+----                   ----------   ----------
+AllUsersAllHosts       NoteProperty string AllUsersAllHosts=C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1
+AllUsersCurrentHost    NoteProperty string AllUsersCurrentHost=C:\Windows\System32\WindowsPowerShell\v1.0\Microsoft.PowerShell_profile.ps1
+CurrentUserAllHosts    NoteProperty string CurrentUserAllHosts=C:\Users\J.Shi\Documents\WindowsPowerShell\profile.ps1
+CurrentUserCurrentHost NoteProperty string CurrentUserCurrentHost=C:\Users\J.Shi\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1</code></pre>
+<p>For reference, check <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-6#the-profile-files">The $PROFILE variable</a>.</p>
+<h3 data-number="2.2.2" id="set-http-proxy"><span class="header-section-number">2.2.2</span> Set HTTP proxy</h3>
+<p>For reference, check <a href="https://async.sh/2018/07/30/quick-setup-http-proxy-using-powershell-profile/">使用PowerShell Profile快速设置 HTTP 代理</a>.</p>
+<p>This script has already saved to the PowerShell profile.</p>
+<h1 data-number="3" id="network"><span class="header-section-number">3</span> Network</h1>
+<h2 data-number="3.1" id="basics-2"><span class="header-section-number">3.1</span> Basics</h2>
+<h3 data-number="3.1.1" id="refresh-the-dns-cache"><span class="header-section-number">3.1.1</span> Refresh the DNS cache</h3>
+<pre><code>ipconfig /flushdns</code></pre>
+<h2 data-number="3.2" id="proxy"><span class="header-section-number">3.2</span> Proxy</h2>
+<h3 data-number="3.2.1" id="cmd-set-proxy"><span class="header-section-number">3.2.1</span> CMD Set Proxy</h3>
+<pre><code>set HTTP_PROXY=http://127.0.0.1:1080</code></pre>
+<p>IP and port should be adjusted to the real situation. Check <code>IE -&gt; Internet Options -&gt; Connections -&gt; LAN settings</code>. For Shadowsocks, it is normally <code>http://127.0.0.1:1080</code>.</p>
+<p>For Powershell, the configuration seems to be so complex.</p>
+<h3 data-number="3.2.2" id="use-proxifier-to-set-shadowsocks-as-the-global-proxy"><span class="header-section-number">3.2.2</span> Use <code>Proxifier</code> to set <code>shadowsocks</code> as the global proxy</h3>
+<p><a href="https://doubibackup.com/y1cauqqx-2.html">使用Proxifier把shadowsocks代理转为真·全局(类VPN)</a></p>
+<h3 data-number="3.2.3" id="conda-connection-issue"><span class="header-section-number">3.2.3</span> <code>conda</code> connection issue</h3>
+<p>The connection issue is as follows,</p>
+<pre><code>(base) C:\Users\avnis&gt;conda update conda
+Collecting package metadata (current_repodata.json): failed
+
+CondaHTTPError: HTTP 000 CONNECTION FAILED for url https://repo.anaconda.com/pkgs/main/win-64/current_repodata.json
+Elapsed: -</code></pre>
+<p>Copy the following files</p>
+<pre><code>libcrypto-1_1-x64.*
+libssl-1_1-x64.*</code></pre>
+<p>from <code>D:\Anaconda3\Library\bin</code> to <code>D:\Anaconda3\DLLs</code>.</p>
+<h1 data-number="4" id="system"><span class="header-section-number">4</span> System</h1>
+<h2 data-number="4.1" id="wsl2"><span class="header-section-number">4.1</span> WSL2</h2>
+<h3 data-number="4.1.1" id="x11-forwarding"><span class="header-section-number">4.1.1</span> X11 forwarding</h3>
+<pre><code>export DISPLAY=$(awk &#39;/nameserver / {print $2; exit}&#39; /etc/resolv.conf 2&gt;/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=1</code></pre>
+<p>Reference: <a href="https://stackoverflow.com/questions/61110603/how-to-set-up-working-x11-forwarding-on-wsl2">How to set up working X11 forwarding on WSL2</a></p>
+<h3 data-number="4.1.2" id="use-the-proxy-of-the-host-in-wsl2"><span class="header-section-number">4.1.2</span> Use the proxy of the host in WSL2</h3>
+<p>First obtain the host IP: <code>awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2&gt;/dev/null</code> Then set up the environment variables:</p>
+<pre><code>export http_proxy=&#39;http://&lt;Windows IP&gt;:&lt;Port&gt;&#39;
+export https_proxy=&#39;http://&lt;Windows IP&gt;:&lt;Port&gt;&#39;</code></pre>
+<h3 data-number="4.1.3" id="no-network-in-wsl2"><span class="header-section-number">4.1.3</span> No network in WSL2</h3>
+<p>cmd as admin:</p>
+<pre><code>wsl --shutdown
+netsh winsock reset
+netsh int ip reset all
+netsh winhttp reset proxy
+ipconfig /flushdns</code></pre>
+<p>Windows Search &gt; Network Reset</p>
+<p>Restart Windows</p>
+<h3 data-number="4.1.4" id="reduce-disk-size"><span class="header-section-number">4.1.4</span> Reduce disk size</h3>
+<p>The size of the virtual hard drive keeps on increasing automatically and if you delete a file from the linux file system, the space occupied by the VHD is still the same. We need a way to manually free up this space from Windows 10.</p>
+<pre><code>wsl --shutdown</code></pre>
+<h2 data-number="4.2" id="system-setting"><span class="header-section-number">4.2</span> System setting</h2>
+<h3 data-number="4.2.1" id="rename-the-user-folder-in-windows-10"><span class="header-section-number">4.2.1</span> Rename the user folder in Windows 10</h3>
+<p>For reference: <a href="https://superuser.com/questions/890812/how-to-rename-the-user-folder-in-windows-10">How to rename the User folder in Windows 10?</a></p>
+<p>Basically, simply rename the user folder and edit the registry.</p>
+<h3 data-number="4.2.2" id="how-to-remove-programs-from-the-open-with-context-menu-in-windows"><span class="header-section-number">4.2.2</span> How to Remove Programs from the “Open With” Context Menu in Windows</h3>
+<p>Edit the registry. Check <a href="https://www.howtogeek.com/howto/18119/remove-programs-from-open-with-menu-in-explorer/">this link</a>.</p>
+<h3 data-number="4.2.3" id="enable-group-policy-editor-gpedit.msc-in-windows-10-home-edition"><span class="header-section-number">4.2.3</span> Enable Group Policy Editor (Gpedit.Msc) In Windows 10 Home Edition</h3>
+<p>The Group Policy Editor is not available to any Windows Home users, be it Windows XP, Windows 7, Windows 8.1 or Windows 10.</p>
+<p>This is a serious drawback as we need the group policies even for managing settings of the local computer. The local group policy is better than changing the settings through Windows Registry which is much riskier. Most group policy settings can revert easily, while Registry editing can have adverse effects on the system.</p>
+<p>Use <a href="gpedit-enabler.bat">this simple PowerShell script</a> to install the disabled Group Policy feature in the Windows 10 Home edition. Although a restart is not required, if the policies are not working, you should restart the computer once.</p>
+<p>Open the Run dialog by pressing Windows key + R. Type <code>gpedit.msc</code> and press the Enter key or OK button. This should open gpedit in Windows 10 Home.</p>
+<p>Reference: <a href="https://www.itechtics.com/enable-gpedit-windows-10-home/">How To Enable Group Policy Editor (Gpedit.Msc) In Windows 10 Home Edition</a></p>
+<h3 data-number="4.2.4" id="disable-indexing-removable-drives"><span class="header-section-number">4.2.4</span> Disable indexing removable drives</h3>
+<p>In the Local Group Policy Editor, navigate to the location <code>Computer Configuration\Administrative Templates\Windows Components\Search</code>. Edit <code>Do not allow locations on removable drives to be added to libraries</code> to enable it.</p>
+<p><img src="https://www.tenforums.com/attachments/tutorials/154095d1505832171-disable-adding-removable-drives-index-libraries-windows-10-a-disableremovabledriveindexing_gpedit-2.png" /></p>
+<p>Reference: <a href="https://www.tenforums.com/tutorials/93784-disable-adding-removable-drives-index-libraries-windows-10-a.html">Enable or Disable Adding Locations on Removable Drives to Index and Libraries in Windows 10</a></p>
+<h1 data-number="5" id="others"><span class="header-section-number">5</span> Others</h1>
+<h2 data-number="5.1" id="ssh"><span class="header-section-number">5.1</span> SSH</h2>
+<h3 data-number="5.1.1" id="windows-ssh-permissions-for-private-key-are-too-open"><span class="header-section-number">5.1.1</span> Windows SSH: Permissions for ‘private-key’ are too open</h3>
+<p>For reference, check <a href="https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open">Windows SSH: Permissions for ‘private-key’ are too open</a>.</p>
+<p>You locate the file in Windows Explorer, right-click on it then select “Properties”. Navigate to the “Security” tab and click “Advanced”.</p>
+<p>Change the owner to you, disable inheritance and delete all permissions. Then grant yourself “Full control” and save the permissions. Now SSH won’t complain about file permission too open anymore.</p>
+<p>It should end up looking like this:</p>
+<p><img src="https://i.stack.imgur.com/coCbX.gif" /></p>
+<h2 data-number="5.2" id="pdf"><span class="header-section-number">5.2</span> PDF</h2>
+<h3 data-number="5.2.1" id="convert-caj-to-pdf"><span class="header-section-number">5.2.1</span> Convert CAJ to PDF</h3>
+<p>Directly go to the original webpage of this CAJ. Copy the CAJ link and replace <code>cajdown</code> with <code>pdfdown</code> to download a PDF version.</p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2021-08-22 with pandoc
+</footer>
+</body>
+</html>

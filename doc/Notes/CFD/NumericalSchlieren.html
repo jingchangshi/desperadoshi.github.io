@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2020-09-05" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
+<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
+<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+<title>Numerical Schlieren</title>
+
+<style>
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  width: 90%;
+  padding-left: 5%;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+p {
+  padding-right: 5%;
+}
+
+video {
+  display: block;
+  margin: 0 auto;
+}
+
+.column video {
+  width: -webkit-fill-available;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure {
+  max-width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+figcaption {
+  max-width: 100%;
+  float: left;
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+
+table {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+table caption {
+  font-size: 1.2rem;
+  font-family: 'Abel', sans-serif;
+}
+th {
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+td {
+  font-size: 1.4rem;
+}
+/* Alternating background colors */
+tr:nth-child(even) {
+  background: #A6A6A6
+  }
+tr:nth-child(odd) {
+  background: #FFF
+}
+
+code {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  font-family: 'Fira Code', monospace;
+
+}
+
+pre>code {
+  border-left: 3px solid #ffd772;
+  page-break-inside: avoid;
+  max-width: 100%;
+  overflow: auto;
+  padding: 0.5em 1em;
+  display: block;
+  word-wrap: break-word;
+  width: 90%;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  font-family: 'EB Garamond';
+  display: inline;
+}
+
+dl {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+dt {
+  float: left;
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  padding: .25em;
+  clear: left;
+}
+dd {
+  float: left;
+  width: 60%;
+  padding: .25em 0;
+}
+dt:after {
+  content: ":";
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.column13 {
+  float: left;
+  width: 33%;
+}
+
+.column14 {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.customHr {
+  width: 20%;
+  font-size: 1px;
+  color: rgba(0, 0, 0, 0);
+  line-height: 1px;
+  background-color: grey;
+  margin-left: 75%;
+  margin-right: 5%;
+}
+
+footer {
+  font-size: 1.0rem;
+  text-align: right;
+  margin-right: 5%;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Numerical Schlieren</h1>
+<h3 class="date">2020-09-05</h3>
+<div id="TOC">
+<ul>
+<li><a href="#note-on-numerical-schlieren"><span class="toc-section-number">1</span> Note on Numerical Schlieren</a></li>
+<li><a href="#reference"><span class="toc-section-number">2</span> Reference</a></li>
+<li><a href="#numerical-schlieren-macro-for-tecplot"><span class="toc-section-number">3</span> Numerical Schlieren Macro for Tecplot</a></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="note-on-numerical-schlieren"><span class="header-section-number">1</span> Note on Numerical Schlieren</h1>
+<p>The flow images resulting from experiment are usually schlieren pictures giving patterns integrated along the spanwise direction. To compare our numerical flow fields with experimental ones, we usually calculate an averaged density gradient field as</p>
+<p><span class="math display">\[
+\bar{\nabla \rho} (x, y) = \frac{1}{L_{z}} \int | \nabla \rho (x, y, z) | dz
+\]</span></p>
+<p>Then it is visualized using the “numerical schlieren” technique put forward by [1] (as a half-tone grey-scale picture with a special nonlinear scale).</p>
+<p>In the particular case of visualization of the flow field in the problem of RR/blast wave interaction the pictures given in my short note were not integrated along transverse coordinate. These are just <span class="math inline">\(\nabla \rho (x, y, z = 0)\)</span>. I think the integrated numerical schlieren are somewhat smeared probably because of low resolution used in my preliminary computations.</p>
+<p>So, the procedure is as follows. First, we compute the density gradient in plane <span class="math inline">\(z=const\)</span>:</p>
+<p><span class="math display">\[
+| \nabla \rho (x, y) | = \sqrt{(\frac{\partial \rho}{\partial x})^{2} + (\frac{\partial \rho}{\partial y})^{2}}
+\]</span></p>
+<p>We may then average it along <span class="math inline">\(z\)</span> axis if we want.</p>
+<p>Next, we determine a special non-linear scale for the above (see [1]). I use the following function.</p>
+<p><span class="math display">\[
+\begin{aligned} Sch(x, y) &amp;= exp( - c_{k} S(x, y) ) \\ S(x, y) &amp;= \frac{|\nabla \rho (x, y)| - |\nabla \rho (x, y)|_{0}}{|\nabla \rho (x, y)|_{1} - |\nabla \rho (x, y)|_{0}} \\ \end{aligned}
+\]</span></p>
+<p>Here <span class="math inline">\(|\nabla \rho (x, y)|_{0} = c_{0} |\nabla \rho (x, y)|_{max_{x, y}}, |\nabla \rho (x, y)|_{1} = c_{1} |\nabla \rho (x, y)|_{max_{x,z}}\)</span> and the constants are chosen as <span class="math inline">\(c_{0} = -0.001, c_{1} = 0.05, c_{k} = 5\)</span>.</p>
+<p>This function is then plotted in greyscale.</p>
+<h1 data-number="2" id="reference"><span class="header-section-number">2</span> Reference</h1>
+<p>[1] Quirk JJ (1994) A contribution to the great Riemann solver debate. Int J Number Methods in Fluids 18: 555-574.</p>
+<h1 data-number="3" id="numerical-schlieren-macro-for-tecplot"><span class="header-section-number">3</span> Numerical Schlieren Macro for Tecplot</h1>
+<ol type="1">
+<li>Used in <code>Tecplot</code> to plot the numerical schlieren.</li>
+<li>Based on “Note on Numerical Schlieren”</li>
+<li>It includes
+<ol type="1">
+<li><code>NumericalSchlieren-1.mcr</code> calculates <span class="math inline">\(\nabla \rho * \nabla \rho\)</span></li>
+<li><code>NumericalSchlieren-2.mcr</code> calculates the numerical schlieren</li>
+<li><code>{Constant}</code> should be adjusted as needed</li>
+<li>In the formula of <code>{Sch}</code>, <code>5</code> should be adjusted to other values as needed.</li>
+</ol></li>
+<li>Check <a href="https://github.com/desperadoshi/Numerical_Schlieren_Macro_for_Tecplot">GitHub link</a></li>
+</ol>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2020-09-05 with pandoc
+</footer>
+</body>
+</html>

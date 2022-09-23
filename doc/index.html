@@ -1,0 +1,144 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
+<script src="lunr_index.js"></script>
+<script src="lunrclient.js"></script>
+<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Fira Code';
+  }
+  .link_text {
+    font-weight: bold;
+  }
+  input {
+    display: inline-block;
+    padding: 0 1em 0 1em;
+    margin: 0 0.1em 0 0.5em;
+    border-width: 0 0.15em 0 0.15em;
+    border-style: solid;
+    border-color:  #CCCCCC;
+    box-sizing: border-box;
+    text-decoration:none;
+    /* font-family:'Segoe UI','Roboto',sans-serif; */
+    font-size: 0.8em;
+    color:#000000;
+    background-color:#CCCCCC;
+    text-align:center;
+    position:relative;
+  }
+  input:hover{
+    border-color:#7a7a7a;
+  }
+  input:active{
+    background-color:#999999;
+  }
+  .row {
+    display: flex;
+  }
+  .column {
+    flex: 50%;
+  }
+  input.search-input {
+    font-size: 1.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+  }
+  </style>
+<script>
+  function toggleSection(i) {
+    var sec = document.getElementById("section-".concat(i));
+    if (sec.style.display == "none") {
+      sec.style.display = "block";
+    } else {
+      sec.style.display = "none";
+    }
+    var butt = document.getElementById(i);
+    var plus_sym = "➕";
+    var minus_sym = "➖";
+    if (butt.value == plus_sym) {
+      butt.value = minus_sym;
+    } else {
+      butt.value = plus_sym;
+    }
+  }
+</script>
+</head>
+<body>
+<div class="row">
+  <div class="column">
+    <h1>Notes</h1>
+<ul>
+<h2><input type="button" id="1" value="➕" onclick="toggleSection(this.id)"></button>CFD</h2>
+<div id="section-1" style="display: none">
+<li><a href="Notes\CFD\BLUSGS_Implementation_BDF_Series_Schemes.html" target="_blank"><span class="link_text">BLUSGS_Implementation_BDF_Series_Schemes.html</span></a></li><br>
+<li><a href="Notes\CFD\Compressible Flow.html" target="_blank"><span class="link_text">Compressible Flow.html</span></a></li><br>
+<li><a href="Notes\CFD\Compressible NS Equation.html" target="_blank"><span class="link_text">Compressible NS Equation.html</span></a></li><br>
+<li><a href="Notes\CFD\DNS_Database.html" target="_blank"><span class="link_text">DNS_Database.html</span></a></li><br>
+<li><a href="Notes\CFD\Flow Instability.html" target="_blank"><span class="link_text">Flow Instability.html</span></a></li><br>
+<li><a href="Notes\CFD\Gmsh.html" target="_blank"><span class="link_text">Gmsh.html</span></a></li><br>
+<li><a href="Notes\CFD\Gnuplot.html" target="_blank"><span class="link_text">Gnuplot.html</span></a></li><br>
+<li><a href="Notes\CFD\NondimensionalizeFluidDynamicVariables.html" target="_blank"><span class="link_text">NondimensionalizeFluidDynamicVariables.html</span></a></li><br>
+<li><a href="Notes\CFD\NumericalSchlieren.html" target="_blank"><span class="link_text">NumericalSchlieren.html</span></a></li><br>
+<li><a href="Notes\CFD\Reynolds Stress in Coding.html" target="_blank"><span class="link_text">Reynolds Stress in Coding.html</span></a></li><br>
+<li><a href="Notes\CFD\ShockRelations.html" target="_blank"><span class="link_text">ShockRelations.html</span></a></li><br>
+<li><a href="Notes\CFD\Tecplot.html" target="_blank"><span class="link_text">Tecplot.html</span></a></li><br>
+</div>
+</ul>
+<ul>
+<h2><input type="button" id="2" value="➕" onclick="toggleSection(this.id)"></button>Programming</h2>
+<div id="section-2" style="display: none">
+<li><a href="Notes\Programming\CMake.html" target="_blank"><span class="link_text">CMake.html</span></a></li><br>
+<li><a href="Notes\Programming\Collection.html" target="_blank"><span class="link_text">Collection.html</span></a></li><br>
+<li><a href="Notes\Programming\Fortran.html" target="_blank"><span class="link_text">Fortran.html</span></a></li><br>
+<li><a href="Notes\Programming\GDB.html" target="_blank"><span class="link_text">GDB.html</span></a></li><br>
+<li><a href="Notes\Programming\GNUCompiler.html" target="_blank"><span class="link_text">GNUCompiler.html</span></a></li><br>
+<li><a href="Notes\Programming\HDF5.html" target="_blank"><span class="link_text">HDF5.html</span></a></li><br>
+<li><a href="Notes\Programming\HPC.html" target="_blank"><span class="link_text">HPC.html</span></a></li><br>
+<li><a href="Notes\Programming\IntelCompiler.html" target="_blank"><span class="link_text">IntelCompiler.html</span></a></li><br>
+<li><a href="Notes\Programming\javascript.html" target="_blank"><span class="link_text">javascript.html</span></a></li><br>
+<li><a href="Notes\Programming\MATLAB.html" target="_blank"><span class="link_text">MATLAB.html</span></a></li><br>
+<li><a href="Notes\Programming\Matplotlib.html" target="_blank"><span class="link_text">Matplotlib.html</span></a></li><br>
+<li><a href="Notes\Programming\MPI.html" target="_blank"><span class="link_text">MPI.html</span></a></li><br>
+<li><a href="Notes\Programming\pyCGNS.html" target="_blank"><span class="link_text">pyCGNS.html</span></a></li><br>
+<li><a href="Notes\Programming\Python.html" target="_blank"><span class="link_text">Python.html</span></a></li><br>
+<li><a href="Notes\Programming\Shell.html" target="_blank"><span class="link_text">Shell.html</span></a></li><br>
+</div>
+</ul>
+<ul>
+<h2><input type="button" id="3" value="➕" onclick="toggleSection(this.id)"></button>Tool</h2>
+<div id="section-3" style="display: none">
+<li><a href="Notes\Tool\Docker.html" target="_blank"><span class="link_text">Docker.html</span></a></li><br>
+<li><a href="Notes\Tool\Git.html" target="_blank"><span class="link_text">Git.html</span></a></li><br>
+<li><a href="Notes\Tool\Gnuplot.html" target="_blank"><span class="link_text">Gnuplot.html</span></a></li><br>
+<li><a href="Notes\Tool\ipe.html" target="_blank"><span class="link_text">ipe.html</span></a></li><br>
+<li><a href="Notes\Tool\LaTeX.html" target="_blank"><span class="link_text">LaTeX.html</span></a></li><br>
+<li><a href="Notes\Tool\Linux.html" target="_blank"><span class="link_text">Linux.html</span></a></li><br>
+<li><a href="Notes\Tool\Pandoc.html" target="_blank"><span class="link_text">Pandoc.html</span></a></li><br>
+<li><a href="Notes\Tool\ParaView.html" target="_blank"><span class="link_text">ParaView.html</span></a></li><br>
+<li><a href="Notes\Tool\Tmux.html" target="_blank"><span class="link_text">Tmux.html</span></a></li><br>
+<li><a href="Notes\Tool\Vim.html" target="_blank"><span class="link_text">Vim.html</span></a></li><br>
+<li><a href="Notes\Tool\VirtualBox.html" target="_blank"><span class="link_text">VirtualBox.html</span></a></li><br>
+<li><a href="Notes\Tool\Windows.html" target="_blank"><span class="link_text">Windows.html</span></a></li><br>
+</div>
+</ul>
+  </div>
+  <div class="column">
+    <br>
+    <form id="lunrSearchForm" name="lunrSearchForm">
+      <input class="search-input" name="q" placeholder="Enter search term" type="text">
+      <input class="search-input" type="submit" value="Search">
+    </form>
+    <div class="loading" id="loading-div">
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
+    <p>Search results will be written below:</p>
+    <div class="resultCount" id="resultCount"></div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+</body>
+</html>
+
