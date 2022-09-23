@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on 石京昶的博客</title>
-    <link>https://shijingchang.cn/posts/</link>
+    <link>https://shijingchang.cn/blog/posts/</link>
     <description>Recent content in Posts on 石京昶的博客</description>
     <image>
-      <url>https://shijingchang.cn/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://shijingchang.cn/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 13 Jan 2022 16:45:57 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jan 2022 16:45:57 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>西北工业大学博士/硕士论文LaTeX模板-Windows精简版</title>
-      <link>https://shijingchang.cn/posts/npu_thesis_latex_template/</link>
+      <link>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</link>
       <pubDate>Thu, 13 Jan 2022 16:45:57 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/posts/npu_thesis_latex_template/</guid>
+      <guid>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</guid>
       <description>说明 西北工业大学博士/硕士论文LaTeX模板，针对Windows平台集成TinyTeX引擎套装、中文字体、编译本模板所需宏包、SumatraPDF阅读器（支持热更新），总共232MB，无需安装几个GB的完整TeXLive，方便小白使用。
 下载 从Github或Gitee下载。
 参考 LaTeX模板基于Yet-Another-LaTeX-Template-for-NPU-Thesis并添加修改而成。</description>
@@ -23,10 +23,10 @@
     
     <item>
       <title>校园网内小集群自动重连WiFi并自动发送新IP到指定邮箱</title>
-      <link>https://shijingchang.cn/posts/auto_reconnect_wifi_send_ip/</link>
+      <link>https://shijingchang.cn/blog/posts/auto_reconnect_wifi_send_ip/</link>
       <pubDate>Thu, 13 Jan 2022 16:22:32 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/posts/auto_reconnect_wifi_send_ip/</guid>
+      <guid>https://shijingchang.cn/blog/posts/auto_reconnect_wifi_send_ip/</guid>
       <description>问题描述 我瓜西北工业大学长安校区内开通了WiFi全覆盖，其中NWPU-FREE无需账号登录，可以用于实验区中小计算集群联网。 用户可以在宿舍、学院楼ssh登录小计算集群。 当然，也可以从校外使用VPN进入校内网络，进而连接这些小集群。 但是存在一个非常不方便的问题： 校园网采用DHCP方式分配IP。 在一个不确定的时间间隔后，小集群的WiFi连接会断开（此时WiFi保持了“虚假”的连接），IP有时候也会变。
 解决方案 一种方式是向学校的信息中心申请分配静态IP，保证连接后IP不变。但很有可能WiFi还会出现假连接真断开的情况。
 另一种方式是写一个shell脚本，自动检测WiFi是否真的连接，如果已经断开，则自动重连并发送新IP到指定邮箱。 具体如下。
@@ -37,10 +37,10 @@
     
     <item>
       <title>调整Intel MPI 2018中的参数提升通信性能</title>
-      <link>https://shijingchang.cn/posts/adjust_intel_mpi_parameters_to_improve_performance/</link>
+      <link>https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/</link>
       <pubDate>Fri, 01 Oct 2021 15:29:51 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/posts/adjust_intel_mpi_parameters_to_improve_performance/</guid>
+      <guid>https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/</guid>
       <description>概览 前些天在超算上跑我的程序，结果遇到了一些MPI相关问题，这里记录我解决（某种程度上）这个问题的过程。
 背景 去年12月-今年5月，我使用B地超算，跑我自己写的纯MPI并行程序，使用mpi/Intel/20.4.3，1024核以下没有出现过启动不了的情况。 当时1024核常常无法启动MPI_Init，管理员当时承认确实有问题但无法解决。 后续我一直在用mpi/intel/18.0.2。
 8月我再次开始使用该超算，mpi/intel/18.0.2跑我的纯MPI并行程序。 但是出现了512核也时常MPI collective IO卡死的问题。 月初无法解决此问题，于是尝试该地超算其它分区以及J地的超算。
@@ -57,10 +57,10 @@ I_MPI_FABRICS=shm:dapl I_MPI_DAPL_UD=on I_MPI_FALLBACK=off 启动1024核任务�
     
     <item>
       <title>解决小集群中某节点比其它节点慢的问题（续）</title>
-      <link>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</link>
+      <link>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</link>
       <pubDate>Thu, 01 Jul 2021 22:37:20 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</guid>
+      <guid>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</guid>
       <description>来源 在上篇文章中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍， 临时的解决方案是强制清除page cache：echo 1 &amp;gt; /proc/sys/vm/drop_caches. 但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。
 解决 某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图
 图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。 这导致了整体性能下降。
@@ -71,10 +71,10 @@ Zone_reclaim_mode allows someone to set more or less aggressive approaches to re
     
     <item>
       <title>解决小集群中某节点比其它节点慢的问题</title>
-      <link>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</link>
+      <link>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</link>
       <pubDate>Fri, 18 Jun 2021 10:02:20 +0800</pubDate>
       
-      <guid>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</guid>
+      <guid>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</guid>
       <description>来源 群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。
 测试 我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图
 node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。

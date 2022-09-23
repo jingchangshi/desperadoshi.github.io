@@ -2,29 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://shijingchang.cn/posts/</loc>
+    <loc>https://shijingchang.cn/blog/posts/</loc>
     <lastmod>2022-01-13T16:45:57+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/</loc>
+    <loc>https://shijingchang.cn/blog/</loc>
     <lastmod>2022-01-13T16:45:57+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/posts/npu_thesis_latex_template/</loc>
+    <loc>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</loc>
     <lastmod>2022-01-13T16:45:57+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/posts/auto_reconnect_wifi_send_ip/</loc>
+    <loc>https://shijingchang.cn/blog/posts/auto_reconnect_wifi_send_ip/</loc>
     <lastmod>2022-01-13T16:22:32+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/posts/adjust_intel_mpi_parameters_to_improve_performance/</loc>
+    <loc>https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/</loc>
     <lastmod>2021-10-01T15:29:51+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</loc>
+    <loc>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</loc>
     <lastmod>2021-07-01T22:37:20+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</loc>
+    <loc>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/</loc>
     <lastmod>2021-06-18T10:02:20+08:00</lastmod>
   </url><url>
-    <loc>https://shijingchang.cn/categories/</loc>
+    <loc>https://shijingchang.cn/blog/categories/</loc>
   </url><url>
-    <loc>https://shijingchang.cn/tags/</loc>
+    <loc>https://shijingchang.cn/blog/tags/</loc>
   </url>
 </urlset>
