@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'FZFWZhuZGDLMCJW';
+  src: url('../fonts/FZFWZhuZGDLMCJW.woff') format('woff'); /* Safari, Android, iOS */
+}
+
 .header-title {
-  font-family: 'Liu Jian Mao Cao', cursive;
+  font-family: 'FZFWZhuZGDLMCJW', serif;
 }
 
 h1 {
@@ -11,11 +16,23 @@ body {
 }
 
 .post-author {
-  font-family: 'Liu Jian Mao Cao', cursive;
+  font-family: 'FZFWZhuZGDLMCJW', serif;
+}
+
+.posts-date {
+  font-family: 'Fira Code', monospace;
 }
 
 .post-date {
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Fira Code', monospace;
+}
+
+.site-date-catalog {
+  font-family: 'Fira Code', monospace;
+}
+
+.header-items {
+  font-family: 'Fira Code', monospace;
 }
 
 code {

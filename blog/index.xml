@@ -5,10 +5,227 @@
     <description>Recent content on 石京昶的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Jun 2021 10:02:20 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jan 2022 16:45:57 +0800</lastBuildDate>
     
         <atom:link href="https://shijingchang.cn/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>西北工业大学博士/硕士论文LaTeX模板-Windows精简版</title>
+      <link>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</link>
+      <pubDate>Thu, 13 Jan 2022 16:45:57 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</guid><description>&lt;h1 id=&#34;说明&#34;&gt;说明&lt;/h1&gt;
+&lt;p&gt;西北工业大学博士/硕士论文LaTeX模板，针对Windows平台集成TinyTeX引擎套装、中文字体、编译本模板所需宏包、SumatraPDF阅读器（支持热更新），总共232MB，无需安装几个GB的完整TeXLive，方便小白使用。&lt;/p&gt;
+&lt;h1 id=&#34;下载&#34;&gt;下载&lt;/h1&gt;
+&lt;p&gt;从&lt;a href=&#34;https://github.com/jingchangshi/NPU_PhD_Thesis_LaTeXTemplate&#34;&gt;Github&lt;/a&gt;或&lt;a href=&#34;https://gitee.com/shijingchang/npu_phd_thesis_latextemplate&#34;&gt;Gitee&lt;/a&gt;下载。&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;LaTeX模板基于&lt;a href=&#34;https://github.com/NWPUMetaphysicsOffice/Yet-Another-LaTeX-Template-for-NPU-Thesis&#34;&gt;Yet-Another-LaTeX-Template-for-NPU-Thesis&lt;/a&gt;并添加修改而成。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>校园网内小集群自动重连WiFi并自动发送新IP到指定邮箱</title>
+      <link>https://shijingchang.cn/blog/posts/auto_reconnect_wifi_send_ip/</link>
+      <pubDate>Thu, 13 Jan 2022 16:22:32 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/auto_reconnect_wifi_send_ip/</guid><description>&lt;h1 id=&#34;问题描述&#34;&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;我瓜西北工业大学长安校区内开通了WiFi全覆盖，其中&lt;code&gt;NWPU-FREE&lt;/code&gt;无需账号登录，可以用于实验区中小计算集群联网。
+用户可以在宿舍、学院楼ssh登录小计算集群。
+当然，也可以从校外使用VPN进入校内网络，进而连接这些小集群。
+但是存在一个非常不方便的问题：
+校园网采用DHCP方式分配IP。
+在一个不确定的时间间隔后，小集群的WiFi连接会断开（此时WiFi保持了“虚假”的连接），IP有时候也会变。&lt;/p&gt;
+&lt;h1 id=&#34;解决方案&#34;&gt;解决方案&lt;/h1&gt;
+&lt;p&gt;一种方式是向学校的信息中心申请分配静态IP，保证连接后IP不变。但很有可能WiFi还会出现假连接真断开的情况。&lt;/p&gt;
+&lt;p&gt;另一种方式是写一个shell脚本，自动检测WiFi是否真的连接，如果已经断开，则自动重连并发送新IP到指定邮箱。
+具体如下。&lt;/p&gt;
+&lt;p&gt;首先设定&lt;code&gt;crontab&lt;/code&gt;，每隔1小时执行脚本，检测WiFi并自动重连。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1 * * * * /usr/bin/bash /path/to/auto_connect_wifi.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;auto_connect_wifi.sh&lt;/code&gt;的内容如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+# Gateway/DHCP server
+dhcp_server=10.27.0.1
+wifi_name=&amp;quot;NWPU-FREE&amp;quot;
+nic_name=&amp;quot;wlp2s0u2&amp;quot;
+test_website=&amp;quot;baidu.com&amp;quot;
+#
+ping_ret=$(ping -c 5 ${dhcp_server} | tail -n 2 | sed -n &#39;1p&#39; | awk &#39;{print $4}&#39;)
+if [ &amp;quot;$ping_ret&amp;quot; == &amp;quot;&amp;quot; ]; then
+  nmcli d wifi connect ${wifi_name} ifname ${nic_name}
+  sleep 10
+  ping -c 5 ${test_website}
+  bash /path/to/send_ip.sh
+elif [ &amp;quot;$ping_ret&amp;quot; == &amp;quot;0&amp;quot; ]; then
+  # ping fails
+  echo &amp;quot;$(date): WiFi disconnected!&amp;quot;
+  nmcli d wifi connect ${wifi_name} ifname ${nic_name}
+  sleep 10
+  ping -c 5 ${test_website}
+  bash /path/to/send_ip.sh
+fi
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;send_ip.sh&lt;/code&gt;使用了&lt;a href=&#34;https://www.mailgun.com/&#34;&gt;Mailgun&lt;/a&gt;的Email API服务自动发送新IP到指定邮箱，脚本内容如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ip_str=$(hostname -I | awk &#39;{print $1}&#39;)
+ip_f1_name=&amp;quot;old_ip.txt&amp;quot;
+ip_f2_name=&amp;quot;current_ip.txt&amp;quot;
+old_ip=$(cat ${ip_f2_name})
+if [ &amp;quot;${old_ip}&amp;quot; != &amp;quot;${ip_str}&amp;quot; ]; then
+  my_domain_name=YOUR_MAILGUN_DOMAIN_NAME
+  receiver_mail=&amp;quot;SECOND_EMAIL_ADDRESS&amp;quot;
+  curl -s --user &#39;api:YOUR_API_KEY&#39; \
+    https://api.mailgun.net/v3/${my_domain_name}/messages \
+    -F from=&amp;quot;Cluster notification&amp;lt;mailgun@${my_domain_name}&amp;gt;&amp;quot; \
+    -F to=${receiver_mail} \
+    -F to=&amp;quot;FIRST_EMAIL_ADDRESS&amp;quot; \
+    -F subject=&#39;The cluster IP is changed!&#39; \
+    -F text=&amp;quot;The new IP is ${ip_str}&amp;quot;
+  cat ${ip_f2_name} &amp;gt;&amp;gt; ${ip_f1_name}
+  echo &amp;quot;${ip_str}&amp;quot; &amp;gt; ${ip_f2_name}
+fi
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>调整Intel MPI 2018中的参数提升通信性能</title>
+      <link>https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/</link>
+      <pubDate>Fri, 01 Oct 2021 15:29:51 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/</guid><description>&lt;h1 id=&#34;概览&#34;&gt;概览&lt;/h1&gt;
+&lt;p&gt;前些天在超算上跑我的程序，结果遇到了一些MPI相关问题，这里记录我解决（某种程度上）这个问题的过程。&lt;/p&gt;
+&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;去年12月-今年5月，我使用B地超算，跑我自己写的纯MPI并行程序，使用&lt;code&gt;mpi/Intel/20.4.3&lt;/code&gt;，1024核以下没有出现过启动不了的情况。
+当时1024核常常无法启动&lt;code&gt;MPI_Init&lt;/code&gt;，管理员当时承认确实有问题但无法解决。
+后续我一直在用&lt;code&gt;mpi/intel/18.0.2&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;8月我再次开始使用该超算，&lt;code&gt;mpi/intel/18.0.2&lt;/code&gt;跑我的纯MPI并行程序。
+但是出现了512核也时常&lt;code&gt;MPI collective IO&lt;/code&gt;卡死的问题。
+月初无法解决此问题，于是尝试该地超算其它分区以及J地的超算。&lt;/p&gt;
+&lt;h1 id=&#34;解决&#34;&gt;解决&lt;/h1&gt;
+&lt;p&gt;J地超算上提交几次1000+核任务均无法启动&lt;code&gt;MPI_Init&lt;/code&gt;，遂放弃。&lt;/p&gt;
+&lt;p&gt;B地超算上新分区节点任务繁忙，1000+核的任务等待时间较长，所以我没有太多测试。
+但几次测试时常出现运行时MPI卡死。
+经过阅读MPI相关资料，发现在Intel MPI 18版本下添加环境变量&lt;code&gt;I_MPI_DAPL_UD=on&lt;/code&gt;启动UD模式通信可有效规避此问题。
+回到B地原分区下，添加此环境变量后同样使得MPI卡死的问题几乎消失。
+Intel官方文档解释：UD模式有效减少了MPI通信&lt;code&gt;send/recv&lt;/code&gt;所需的缓冲区，显著降低了MPI占用的内存。
+所以之前遇到的1000核任务运行时MPI卡死的现象应该是与内存相关。&lt;/p&gt;
+&lt;p&gt;鉴于三个分区的表现没有本质差别，我又回到了B地原分区尝试解决MPI问题。
+该分区采用&lt;code&gt;mpi/intel/18.0.2&lt;/code&gt;，设定以下环境变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;I_MPI_FABRICS=shm:dapl
+I_MPI_DAPL_UD=on
+I_MPI_FALLBACK=off
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;启动1024核任务，&lt;code&gt;MPI init&lt;/code&gt;启动问题几乎消失了，&lt;code&gt;MPI IO&lt;/code&gt;卡死问题几乎消失了。
+但我的程序性能出现了巨大差异。
+有时候1024核任务开始的500步迭代速度还可以，但随后变慢为1/3速度。有时候则一开始迭代速度就是预期的1/3慢。&lt;/p&gt;
+&lt;p&gt;我首先尝试理解内存的事情。
+我首先给我的纯MPI程序添加了&lt;code&gt;OpenMP directives&lt;/code&gt;，使其可以MPI/OpenMP混合并行。
+然后测试了相同问题规模和相同输入参数下的内存占用，1024核任务。
+纯MPI并行，调用了16个节点，每个节点64个MPI processes。
+程序内部通过查看&lt;code&gt;/proc/self/statm&lt;/code&gt;获知1024核总内存占用量为&lt;code&gt;1.81E6 MB&lt;/code&gt;；
+MPI/OpenMP混合并行，调用16个节点，每个节点32个MPI processes，每个MPI process开2个threads，程序内部查看&lt;code&gt;/proc/self/statm&lt;/code&gt;获知1024核总内存占用量为&lt;code&gt;1.05E6 MB&lt;/code&gt;。
+可以看到MPI并行本身的确占用了海量内存，几乎总内存占用量的一半都是MPI本身占用的。（这个事实，专业人员应该是了解的；我是逐渐认识到的，尝试解决问题。）&lt;/p&gt;
+&lt;p&gt;另外我检查了我的程序是否存在内存泄漏。
+MPI模式的&lt;code&gt;valgrind&lt;/code&gt;显示在调用的MPI calls中存在memory lost，鉴于Intel MPI的广泛使用，我认为这是false positive。valgrind没有找到我程序中的内存泄漏。&lt;/p&gt;
+&lt;p&gt;接下来，我尝试使用Intel自带的Intel Tracer And Collector来查看MPI性能。
+但是按照Intel官方给的步骤加载ITAC，无法启动MPI。
+所以为了理解我程序的MPI函数调用情况，我给我的程序手动添加了记录MPI调用时间的代码，每个进程记录自己的时间，不做额外的MPI call。
+于是我分别提交了两次1024核纯MPI并行任务，得到了以下两图。
+上图是前500步内程序运行较快时，单次迭代内1024核各自调用关键函数时的时间；下图则是程序慢3倍时，单次迭代内1024核各自调用关键函数时的时间。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/mpi_18_default_normal_running.png&#34; alt=&#34;Intel MPI 2018默认参数下正常运行时1024进程各自的时间表&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/mpi_18_default_slow_running.png&#34; alt=&#34;Intel MPI 2018默认参数下极慢运行时1024进程各自的时间表&#34;&gt;&lt;/p&gt;
+&lt;p&gt;上图中程序运行前500步内较快，但存在1024核负载不均衡、MPI通信部分节点延迟，但并不严重。
+橘色线到绿色线是程序核心的MPI调用，也就是&lt;code&gt;MPI_Isend/Irecv&lt;/code&gt;。
+右端的粉红线到灰色线同样调用了&lt;code&gt;MPI_Isend/Irecv&lt;/code&gt;。
+下图中显然1024核中某些节点的MPI通信延迟非常高，而且均发生在调用&lt;code&gt;MPI_Isend/Irecv&lt;/code&gt;的过程，也就是橘色线到绿色线、粉红线到灰色线。
+所以1024核程序运行慢3倍的原因是某些节点MPI通信有问题，响应慢。&lt;/p&gt;
+&lt;p&gt;于是我测试了Intel自带的&lt;code&gt;IMB-MPI1 Exchange&lt;/code&gt;。这个MPI Benchmark模式Exchange测试的是&lt;code&gt;MPI_Isend/recv&lt;/code&gt;。
+多次测试显示&lt;code&gt;MPI_Isend/recv&lt;/code&gt;从128核，也就是2个节点，就出现性能极其严重的下降。
+我理解64核1个节点采用shared memory模式，带宽就是会很高，但IB网络下节点间通信带宽不应该过分差。下见表格。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/BSCC-A2_IntelMPI2018_DefaultParameters.png&#34; alt=&#34;Intel MPI 2018默认参数&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/BSCC-A2_IntelMPI2021_DefaultParameters.png&#34; alt=&#34;Intel MPI 2021默认参数&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/BSCC-A2_IntelMPI2018_ImprovedParameters.png&#34; alt=&#34;Intel MPI 2018调优参数&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我测试了三种：&lt;code&gt;mpi/intel/18.0.2&lt;/code&gt;（默认参数），&lt;code&gt;mpi/intel/20.4.3&lt;/code&gt;（默认参数），&lt;code&gt;mpi/intel/18.0.2&lt;/code&gt;（调整参数）。
+从上面3个表格中可以看到&lt;code&gt;Intel MPI 20.4.3&lt;/code&gt;版本（多次尝试后成功启动的一次）性能合乎IB网络预期，可以达到&lt;code&gt;4Gb/s&lt;/code&gt;。
+&lt;code&gt;Intel MPI 18.0.2&lt;/code&gt;默认参数下2节点的带宽就掉到了不到&lt;code&gt;600Mb/s&lt;/code&gt;。
+而通过增大&lt;code&gt;I_MPI_EAGER_THRESHOLD, I_MPI_DAPL_UD_DIRECT_COPY_THRESHOLD&lt;/code&gt;，多节点带宽可以&lt;code&gt;2Gb/s~3Gb/s&lt;/code&gt;，但没达到&lt;code&gt;Intel MPI 20.4.3&lt;/code&gt;默认参数下的&lt;code&gt;4Gb/s&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;I_MPI_EAGER_THRESHOLD&lt;/code&gt;是MPI在message size较小时采用eager模式，message size较大时采用rendezvous模式。
+两个模式的区别在于rendezvous模式中Sender要等Receiver返回消息说它准备好接收数据时才会发送。
+Receiver准备好接收数据也就意味着Receiver给接收的buffer分配好了内存。
+&lt;code&gt;I_MPI_DAPL_UD_DIRECT_COPY_THRESHOLD&lt;/code&gt;也是类似的操作。Intel官方解释是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Set this environment variable to control the DAPL UD direct-copy protocol threshold. Data transfer algorithms for the DAPL-capable network fabrics are selected based on the following scheme:
+
+- Messages shorter than or equal to &amp;lt;nbytes&amp;gt; are sent using the eager protocol through the internal pre-registered buffers. This approach is faster for short messages.
+- Messages larger than &amp;lt;nbytes&amp;gt; are sent using the direct-copy protocol. It does not use any buffering but involves registration of memory on sender and receiver sides. This approach is faster for large messages.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我没有继续测试到底是以上三个参数中哪一个起到了关键作用，但我倾向于&lt;code&gt;I_MPI_DAPL_UD_DIRECT_COPY_THRESHOLD&lt;/code&gt;。
+不管是哪个参数，均涉及了&lt;code&gt;pre-registered buffers&lt;/code&gt;。
+并且，提高阈值使这个&lt;code&gt;pre-registered buffers&lt;/code&gt;减少可以提高通信带宽。&lt;/p&gt;
+&lt;p&gt;所以我针对多节点MPI通讯性能差的问题，提出一个想法是：B地超算该分区的节点在内存、page cache设定上可能存在问题，MPI send/recv数据过程中使用buffer要向kernel申请内存，而kernel为了给出内存，需要反复回收page cache等，同时NUMA架构下，分配的内存与CPU没有就近相连，导致的性能巨大损失。
+但这只是个不成熟的猜想，我并非科班出身。对这个猜想的验证，也留待以后工作中注意。&lt;/p&gt;
+&lt;p&gt;我在我们课题组几百核的小集群验证了：Linux系统在内存回收、page cache上的设定不合理导致的某计算流体力学商业软件的2倍性能损失。
+见&lt;a href=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/&#34;&gt;解决小集群中某节点比其它节点慢的问题&lt;/a&gt;和&lt;a href=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/&#34;&gt;解决小集群中某节点比其它节点慢的问题（续）&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;采用Intel MPI 2018的调优参数运行我的纯MPI程序，1024核运行，各进程时间戳如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/adjust_intel_mpi_parameters_to_improve_performance/mpi_18_improved.png&#34; alt=&#34;Intel MPI 2018调优参数下运行时1024进程各自的时间表&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到单个迭代步共&lt;code&gt;0.3s&lt;/code&gt;，某些节点仍然出现将近&lt;code&gt;0.1s&lt;/code&gt;的通信延迟，同时MPI load imbalance比之前Intel MPI 2018默认参数下减轻了很多。
+这个将近&lt;code&gt;0.1s&lt;/code&gt;的通信延迟呈现了某种规律，也许可以进一步调优。
+但这个问题留待以后解决，现在的任务是尽快解决当前的课题。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>解决小集群中某节点比其它节点慢的问题（续）</title>
+      <link>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</link>
+      <pubDate>Thu, 01 Jul 2021 22:37:20 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/</guid><description>&lt;h1 id=&#34;来源&#34;&gt;来源&lt;/h1&gt;
+&lt;p&gt;在&lt;a href=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/index.html&#34;&gt;上篇文章&lt;/a&gt;中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍，
+临时的解决方案是强制清除&lt;code&gt;page cache&lt;/code&gt;：&lt;code&gt;echo 1 &amp;gt; /proc/sys/vm/drop_caches&lt;/code&gt;.
+但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。&lt;/p&gt;
+&lt;h1 id=&#34;解决&#34;&gt;解决&lt;/h1&gt;
+&lt;p&gt;某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/NUMA_memory_layout_slow_performance.png&#34; alt=&#34;CFD 软件性能慢的时候 NUMA 内存分布&#34; title=&#34;CFD 软件性能慢的时候 NUMA 内存分布&#34;&gt;&lt;/p&gt;
+&lt;p&gt;图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。
+这导致了整体性能下降。&lt;/p&gt;
+&lt;p&gt;为何系统会让 CPU 0 上的进程同时使用 CPU 0 和 CPU 1 上的内存？而 CPU 1 上的进程只使用 CPU 1 上的内存。
+这个问题并不会发生在 page cache 被清空后立刻提交的 40 核计算任务上，只有 page cache 足够大，导致 free 不够的时候。
+所以这是一个系统回收内存的策略设定问题。&lt;/p&gt;
+&lt;p&gt;Linux 系统回收 NUMA 架构下内存的设定被一个重要参数左右，这就是 &lt;code&gt;zone_reclaim_mode&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Zone_reclaim_mode allows someone to set more or less aggressive approaches to reclaim memory when a zone runs out of memory. If it is set to zero then no zone reclaim occurs. Allocations will be satisfied from other zones / nodes in the system.&lt;/p&gt;
+&lt;p&gt;1	= Zone reclaim on&lt;/p&gt;
+&lt;p&gt;2	= Zone reclaim writes dirty pages out&lt;/p&gt;
+&lt;p&gt;4	= Zone reclaim swaps pages&lt;/p&gt;
+&lt;p&gt;zone_reclaim_mode is disabled by default.  For file servers or workloads that benefit from having their data cached, zone_reclaim_mode should be left disabled as the caching effect is likely to be more important than data locality.&lt;/p&gt;
+&lt;p&gt;zone_reclaim may be enabled if it&amp;rsquo;s known that the workload is partitioned such that each partition fits within a NUMA node and that accessing remote memory would cause a measurable performance reduction.  The page allocator will then reclaim easily reusable pages (those page cache pages that are currently not used) before allocating off node pages.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所以我修改值为&lt;code&gt;1&lt;/code&gt;启用本地回收策略。
+&lt;code&gt;0&lt;/code&gt;适用于文件服务器，不适合 CFD 场景。
+修改之后，测试了两次，应该解决了问题。
+&lt;code&gt;node6&lt;/code&gt; 上本来跑着一个 40 核的 CFD 任务，但是性能明显慢。
+&lt;code&gt;numastat -c solver-mpi&lt;/code&gt; 查看 NUMA 内存分布如预期的不合理。
+于是停掉该任务，&lt;code&gt;echo 1 &amp;gt; /proc/sys/vm/zone_reclaim_mode&lt;/code&gt;，但是不清空 page cache。
+再次提交该 CFD 任务，性能合乎预期。&lt;/p&gt;
+&lt;p&gt;永久设定本地回收策略的方式是&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修改&lt;code&gt;/etc/sysctl.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;添加&lt;code&gt;vm.zone_reclaim_mode=0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;重载配置&lt;code&gt;sysctl -p&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;Performance_analysis_and_tuning_NUMA_huge_page.pdf&#34;&gt;Redhat: Performance analysis and tuning - Part 1&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;其它影响 NUMA 的系统设定参数: &lt;code&gt;min_free_kbytes, swappiness&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.gbase8a.com/home.php?mod=space&amp;amp;uid=52&amp;amp;do=blog&amp;amp;id=17&#34;&gt;数据库服务器一定要关闭NUMA参数&lt;/a&gt; 认为数据库也要使用值为&lt;code&gt;0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mysql.taobao.org/monthly/2020/09/01/&#34;&gt;数据库内核月报 － 2020 / 09&lt;/a&gt; page cache 对数据库性能的影响及调优过程。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://spongecaptain.cool/SimpleClearFileIO/1.%20page%20cache.html&#34;&gt;Linux 的 Page Cache&lt;/a&gt; 解释了 page cache。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其它 Linux 系统性能调优工具：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sar -f /var/log/sa/sa01 -r&lt;/code&gt; 显示&lt;code&gt;sa01&lt;/code&gt;文件记录当天的内存使用情况&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;free -h&lt;/code&gt; 显示当前内存使用情况，&lt;code&gt;-h&lt;/code&gt;表示人类易读格式&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>解决小集群中某节点比其它节点慢的问题</title>

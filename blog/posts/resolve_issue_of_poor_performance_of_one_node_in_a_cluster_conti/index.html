@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="石京昶" />
-  <meta property="og:url" content="https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/" />
-  <link rel="canonical" href="https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/" /><link rel="alternate" type="application/atom+xml" href="https://shijingchang.cn/blogindex.xml" title="石京昶的博客">
+  <meta property="og:url" content="https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/" />
+  <link rel="canonical" href="https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti/" /><link rel="alternate" type="application/atom+xml" href="https://shijingchang.cn/blogindex.xml" title="石京昶的博客">
 
   <script type="application/ld+json">
   {
@@ -19,9 +19,9 @@
            "@id": "https:\/\/shijingchang.cn\/blog"
       },
       "articleSection" : "posts",
-      "name" : "解决小集群中某节点比其它节点慢的问题",
-      "headline" : "解决小集群中某节点比其它节点慢的问题",
-      "description" : "来源 群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。\n测试 我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图\nnode7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。\n但是单核跑 NFR 在 node7 和 node4 上没有性能差异。\n解决 Linux 上性能分析参考 Brendan D. Gregg 大神的网站。 了解到使用 perf 给出性能统计报告，也就是上面的图。perf 使用参考 Brendan D. Gregg 大神的网页。 perf 可以直接统计 MPI 并行程序的性能。\n首先使用perf stat -d mpirun -n 40 prog input.file发现 node7 上 NFR 的 page-faults 是 node4 上的 3 倍。",
+      "name" : "解决小集群中某节点比其它节点慢的问题（续）",
+      "headline" : "解决小集群中某节点比其它节点慢的问题（续）",
+      "description" : "来源 在上篇文章中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍， 临时的解决方案是强制清除page cache：echo 1 \u0026gt; \/proc\/sys\/vm\/drop_caches. 但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。\n解决 某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图\n图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。 这导致了整体性能下降。\n为何系统会让 CPU 0 上的进程同时使用 CPU 0 和 CPU 1 上的内存？而 CPU 1 上的进程只使用 CPU 1 上的内存。 这个问题并不会发生在 page cache 被清空后立刻提交的 40 核计算任务上，只有 page cache 足够大，导致 free 不够的时候。 所以这是一个系统回收内存的策略设定问题。\nLinux 系统回收 NUMA 架构下内存的设定被一个重要参数左右，这就是 zone_reclaim_mode。\n Zone_reclaim_mode allows someone to set more or less aggressive approaches to reclaim memory when a zone runs out of memory.",
       "inLanguage" : "en-US",
       "author" : "石京昶",
       "creator" : "石京昶",
@@ -29,27 +29,27 @@
       "accountablePerson" : "石京昶",
       "copyrightHolder" : "石京昶",
       "copyrightYear" : "2021",
-      "datePublished": "2021-06-18 10:02:20 \u002b0800 CST",
-      "dateModified" : "2021-06-18 10:02:20 \u002b0800 CST",
-      "url" : "https:\/\/shijingchang.cn\/blog\/posts\/resolve_issue_of_poor_performance_of_one_node_in_a_cluster\/",
+      "datePublished": "2021-07-01 22:37:20 \u002b0800 CST",
+      "dateModified" : "2021-07-01 22:37:20 \u002b0800 CST",
+      "url" : "https:\/\/shijingchang.cn\/blog\/posts\/resolve_issue_of_poor_performance_of_one_node_in_a_cluster_conti\/",
       "keywords" : [  ]
   }
 </script>
-<title>解决小集群中某节点比其它节点慢的问题</title>
-  <meta property="og:title" content="解决小集群中某节点比其它节点慢的问题" />
+<title>解决小集群中某节点比其它节点慢的问题（续）</title>
+  <meta property="og:title" content="解决小集群中某节点比其它节点慢的问题（续）" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="来源 群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。
-测试 我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图
-node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。
-但是单核跑 NFR 在 node7 和 node4 上没有性能差异。
-解决 Linux 上性能分析参考 Brendan D. Gregg 大神的网站。 了解到使用 perf 给出性能统计报告，也就是上面的图。perf 使用参考 Brendan D. Gregg 大神的网页。 perf 可以直接统计 MPI 并行程序的性能。
-首先使用perf stat -d mpirun -n 40 prog input.file发现 node7 上 NFR 的 page-faults 是 node4 上的 3 倍。" />
-  <meta name="description" content="来源 群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。
-测试 我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图
-node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。
-但是单核跑 NFR 在 node7 和 node4 上没有性能差异。
-解决 Linux 上性能分析参考 Brendan D. Gregg 大神的网站。 了解到使用 perf 给出性能统计报告，也就是上面的图。perf 使用参考 Brendan D. Gregg 大神的网页。 perf 可以直接统计 MPI 并行程序的性能。
-首先使用perf stat -d mpirun -n 40 prog input.file发现 node7 上 NFR 的 page-faults 是 node4 上的 3 倍。" />
+  <meta property="og:description" content="来源 在上篇文章中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍， 临时的解决方案是强制清除page cache：echo 1 &amp;gt; /proc/sys/vm/drop_caches. 但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。
+解决 某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图
+图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。 这导致了整体性能下降。
+为何系统会让 CPU 0 上的进程同时使用 CPU 0 和 CPU 1 上的内存？而 CPU 1 上的进程只使用 CPU 1 上的内存。 这个问题并不会发生在 page cache 被清空后立刻提交的 40 核计算任务上，只有 page cache 足够大，导致 free 不够的时候。 所以这是一个系统回收内存的策略设定问题。
+Linux 系统回收 NUMA 架构下内存的设定被一个重要参数左右，这就是 zone_reclaim_mode。
+ Zone_reclaim_mode allows someone to set more or less aggressive approaches to reclaim memory when a zone runs out of memory." />
+  <meta name="description" content="来源 在上篇文章中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍， 临时的解决方案是强制清除page cache：echo 1 &amp;gt; /proc/sys/vm/drop_caches. 但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。
+解决 某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图
+图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。 这导致了整体性能下降。
+为何系统会让 CPU 0 上的进程同时使用 CPU 0 和 CPU 1 上的内存？而 CPU 1 上的进程只使用 CPU 1 上的内存。 这个问题并不会发生在 page cache 被清空后立刻提交的 40 核计算任务上，只有 page cache 足够大，导致 free 不够的时候。 所以这是一个系统回收内存的策略设定问题。
+Linux 系统回收 NUMA 架构下内存的设定被一个重要参数左右，这就是 zone_reclaim_mode。
+ Zone_reclaim_mode allows someone to set more or less aggressive approaches to reclaim memory when a zone runs out of memory." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -111,13 +111,13 @@ node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 no
 
         </div>
         <header class="post-header">
-          <h1 class="post-title">解决小集群中某节点比其它节点慢的问题</h1>
+          <h1 class="post-title">解决小集群中某节点比其它节点慢的问题（续）</h1>
           
           <div class="row post-desc">
             <div class="col-xs-6">
               
-              <time class="post-date" datetime="2021-06-18 10:02:20 CST">
-                18 Jun 2021
+              <time class="post-date" datetime="2021-07-01 22:37:20 CST">
+                01 Jul 2021
               </time>
               
             </div>
@@ -135,80 +135,55 @@ node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。 所以 no
         <div class="post-content markdown-body">
           
           <h1 id="来源">来源</h1>
-<p>群里 H 老师报告 node7 上跑某著名 CFD 商业软件比其它节点慢一倍以上，问我有没有类似经历。</p>
-<h1 id="测试">测试</h1>
-<p>我来测试一下我的 NFR 程序。结果发现确实 node7 上比其它节点慢，如下图</p>
-<p><img src="node7_poor_performance.png" alt="node7 节点上 NFR 比其它节点慢 24%" title="node7 节点上 NFR 比其它节点慢 24%"></p>
-<p>node7 上 NFR 跑完需要 76 秒， node4 上跑完需要 61.5 秒。
-所以 node7 慢的表现是某著名 CFD 商业软件慢一倍以上，我的 NFR 慢 24%。</p>
-<p>但是单核跑 NFR 在 node7 和 node4 上没有性能差异。</p>
+<p>在<a href="https://shijingchang.cn/blog/posts/resolve_issue_of_poor_performance_of_one_node_in_a_cluster/index.html">上篇文章</a>中，之前 NUMA 配置不当导致小集群上计算节点跑某 CFD 商业软件比预期慢一倍，
+临时的解决方案是强制清除<code>page cache</code>：<code>echo 1 &gt; /proc/sys/vm/drop_caches</code>.
+但希望修改系统设定，使得 NUMA 设定适用于 CFD 场景。</p>
 <h1 id="解决">解决</h1>
-<p>Linux 上性能分析参考 <a href="http://www.brendangregg.com/">Brendan D. Gregg 大神的网站</a>。
-了解到使用 perf 给出性能统计报告，也就是上面的图。perf 使用参考 <a href="http://www.brendangregg.com/perf.html#CPUstatistics">Brendan D. Gregg 大神的网页</a>。
-perf 可以直接统计 MPI 并行程序的性能。</p>
-<p>首先使用<code>perf stat -d mpirun -n 40 prog input.file</code>发现 node7 上 NFR 的 page-faults 是 node4 上的 3 倍。</p>
-<p>先了解 page-faults 是什么。
-参考<a href="https://developer.aliyun.com/article/55820">page fault带来的性能问题</a>。
-几个要点</p>
-<ul>
-<li>Linux下，进程并不是直接访问物理内存，而是通过内存管理单元(MMU)来访问内存资源。</li>
-<li>虚拟的内存地址和物理的内存地址之间保持一种映射关系，这种关系由 MMU 进行管理。</li>
-<li>需要访问的内存不在虚拟地址空间，也不在物理内存中，需要从慢速设备载入，称为 major page fault</li>
-<li>需要访问的内存不在虚拟地址空间，但是在物理内存中，只需要MMU建立物理内存和虚拟地址空间的映射关系即可，minor page fault</li>
-<li>进程需要访问的内存地址不在它的虚拟地址空间范围内，属于越界访问，内核会报segment fault错误</li>
-</ul>
-<p><img src="MMU.png" alt="MMU" title="MMU"></p>
-<p>所以进一步来看下到底是 major 还是 minor 类型。</p>
-<p>指定 perf 的具体分析类型：<code>perf stat -d -e major-faults,minor-faults,mem-loads,mem-stores mpirun -n 40 prog input.file</code>，
-得到最上面对比图中 minor-faults 在 node7 上是 node4 的 3 倍。
-所以 node7 上串行运行 NFR 没有性能差异，并行 40 核运行出现 3 倍的 minor-faults。
-这个可能与现代 CPU-Memory 架构有关，即 NUMA 架构。</p>
-<p>参考<a href="http://cenalulu.github.io/linux/numa/">NUMA架构的CPU &ndash; 你真的用好了么？</a>。要点如下</p>
-<ul>
-<li>之前所有CPU Core都是通过共享一个北桥来读取内存，随着核数如何的发展，北桥在响应时间上的性能瓶颈越来越明显</li>
-<li>NUMA 中，虽然内存直接与 CPU 紧邻，但是由于内存被平均分配在了各个裸晶 (die) <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>上。只有当 CPU 访问自身直接相连的内存对应的物理地址时，才会有较短的响应时间（后称 Local access ）。而如果需要访问其他 CPU 紧密相连的内存数据时，就需要通过 inter-connect 通道访问，响应时间就相比之前变慢了（后称 Remote access ）。所以 NUMA（Non-Uniform Memory Access）就此得名。</li>
-<li>Linux 识别到 NUMA 架构后，默认的内存分配方案就是：优先尝试在请求线程当前所处的 CPU 的本地内存上分配空间。如果本地内存不足，优先淘汰本地内存中无用的 page（Inactive，Unmapped）</li>
-<li>此文主要讨论 NUMA 中 CPU 对远端内存访问慢的特点导致 MySQL 性能变差。</li>
-</ul>
-<p><img src="http://cenalulu.github.io/images/linux/numa/numa.png" alt="NUMA" title="NUMA"></p>
-<p>从此文中得到启发，进一步检查 node7 上 NUMA 状态。node7 上居然没有<code>numa_miss</code>，如下</p>
-<pre><code>$ numastat
-                           node0           node1
-numa_hit               697457403       665306702
-numa_miss                      2       378900577
-numa_foreign           378900577               2
-interleave_hit            315713          420961
-local_node             697270591       666054700
-other_node                186814       378152579
-</code></pre><p>而 node4 上就有 <code>numa_miss</code></p>
-<pre><code>$ numastat
-                           node0           node1
-numa_hit             36121273007      7797037099
-numa_miss                7027051      1552203057
-numa_foreign          1552203057         7027051
-interleave_hit            266562          281401
-local_node           36120608738      7797778236
-other_node               7691320      1551461920
-</code></pre><p>进一步检查 NUMA 设定： <code>numactl --hardware</code></p>
-<p><img src="NUMA_hardware.png" alt="NUMA hardware info" title="NUMA hardware info"></p>
-<p>可以看到 node7 上 NUMA 的 free 很少，只有 <code>435MB</code>，正常的 node4 有 60GB。
-可以推测是 node7 上极少的 free NUMA 导致了 3 倍的 minor page faults。
-NUMA free 少应该是被缓存占了，相关术语是 page cache。
-所以应该清理 page cache。
-上面文章中给出的一个解决 NUMA 问题的方案是</p>
-<pre><code>echo 3 &gt; /proc/sys/vm/drop_caches
-</code></pre><p>在 node7 上使用 root 执行上述命令后，node7 性能恢复正常。</p>
-<p><img src="node7_node4_same_performance.png" alt="node7 节点上 NFR 性能正常" title="node7 节点上 NFR 性能正常"></p>
-<p>如果想令系统自动清理缓存，参考<a href="https://developer.aliyun.com/article/91184">Linux下清理内存和Cache方法 /proc/sys/vm/drop_caches</a>，不过我并没有测试。
-留待以后尝试。</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
+<p>某 CFD 商业软件跑满计算节点 40 核并且跑得慢的时候其使用 NUMA 架构内存情况如下图</p>
+<p><img src="NUMA_memory_layout_slow_performance.png" alt="CFD 软件性能慢的时候 NUMA 内存分布" title="CFD 软件性能慢的时候 NUMA 内存分布"></p>
+<p>图中可以看到在 CPU 0 上的进程占用的内存有一半放在了 CPU 1 对应的内存上。
+这导致了整体性能下降。</p>
+<p>为何系统会让 CPU 0 上的进程同时使用 CPU 0 和 CPU 1 上的内存？而 CPU 1 上的进程只使用 CPU 1 上的内存。
+这个问题并不会发生在 page cache 被清空后立刻提交的 40 核计算任务上，只有 page cache 足够大，导致 free 不够的时候。
+所以这是一个系统回收内存的策略设定问题。</p>
+<p>Linux 系统回收 NUMA 架构下内存的设定被一个重要参数左右，这就是 <code>zone_reclaim_mode</code>。</p>
+<blockquote>
+<p>Zone_reclaim_mode allows someone to set more or less aggressive approaches to reclaim memory when a zone runs out of memory. If it is set to zero then no zone reclaim occurs. Allocations will be satisfied from other zones / nodes in the system.</p>
+<p>1	= Zone reclaim on</p>
+<p>2	= Zone reclaim writes dirty pages out</p>
+<p>4	= Zone reclaim swaps pages</p>
+<p>zone_reclaim_mode is disabled by default.  For file servers or workloads that benefit from having their data cached, zone_reclaim_mode should be left disabled as the caching effect is likely to be more important than data locality.</p>
+<p>zone_reclaim may be enabled if it&rsquo;s known that the workload is partitioned such that each partition fits within a NUMA node and that accessing remote memory would cause a measurable performance reduction.  The page allocator will then reclaim easily reusable pages (those page cache pages that are currently not used) before allocating off node pages.</p>
+</blockquote>
+<p>所以我修改值为<code>1</code>启用本地回收策略。
+<code>0</code>适用于文件服务器，不适合 CFD 场景。
+修改之后，测试了两次，应该解决了问题。
+<code>node6</code> 上本来跑着一个 40 核的 CFD 任务，但是性能明显慢。
+<code>numastat -c solver-mpi</code> 查看 NUMA 内存分布如预期的不合理。
+于是停掉该任务，<code>echo 1 &gt; /proc/sys/vm/zone_reclaim_mode</code>，但是不清空 page cache。
+再次提交该 CFD 任务，性能合乎预期。</p>
+<p>永久设定本地回收策略的方式是</p>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>A die, in the context of integrated circuits, is a small block of semiconducting material on which a given functional circuit is fabricated.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+<li>修改<code>/etc/sysctl.conf</code></li>
+<li>添加<code>vm.zone_reclaim_mode=0</code></li>
+<li>重载配置<code>sysctl -p</code></li>
 </ol>
-</section>
+<p>参考：</p>
+<ul>
+<li><a href="Performance_analysis_and_tuning_NUMA_huge_page.pdf">Redhat: Performance analysis and tuning - Part 1</a>
+<ul>
+<li>其它影响 NUMA 的系统设定参数: <code>min_free_kbytes, swappiness</code></li>
+</ul>
+</li>
+<li><a href="http://www.gbase8a.com/home.php?mod=space&amp;uid=52&amp;do=blog&amp;id=17">数据库服务器一定要关闭NUMA参数</a> 认为数据库也要使用值为<code>0</code>。</li>
+<li><a href="http://mysql.taobao.org/monthly/2020/09/01/">数据库内核月报 － 2020 / 09</a> page cache 对数据库性能的影响及调优过程。</li>
+<li><a href="https://spongecaptain.cool/SimpleClearFileIO/1.%20page%20cache.html">Linux 的 Page Cache</a> 解释了 page cache。</li>
+</ul>
+<p>其它 Linux 系统性能调优工具：</p>
+<ul>
+<li><code>sar -f /var/log/sa/sa01 -r</code> 显示<code>sa01</code>文件记录当天的内存使用情况</li>
+<li><code>free -h</code> 显示当前内存使用情况，<code>-h</code>表示人类易读格式</li>
+</ul>
 
         </div>
 
