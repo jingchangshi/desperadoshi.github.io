@@ -9,7 +9,16 @@
       <link>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 13 Jan 2022 16:45:57 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Oct 2022 20:43:00 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notion分享</title>
+      <link>https://shijingchang.cn/blog/posts/notion_shares/</link>
+      <pubDate>Fri, 07 Oct 2022 20:43:00 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/notion_shares/</guid>
+      <description>列表 CFD Reviews CFD领域大神的Review</description>
+    </item>
+    
     <item>
       <title>西北工业大学博士/硕士论文LaTeX模板-Windows精简版</title>
       <link>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</link>
