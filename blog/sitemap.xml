@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://shijingchang.cn/blog/posts/notion_shares/</loc>
-    <lastmod>2022-10-07T20:43:00+08:00</lastmod>
-  </url><url>
     <loc>https://shijingchang.cn/blog/posts/</loc>
-    <lastmod>2022-10-07T20:43:00+08:00</lastmod>
+    <lastmod>2022-10-16T22:56:00+08:00</lastmod>
+  </url><url>
+    <loc>https://shijingchang.cn/blog/posts/notes_manager/</loc>
+    <lastmod>2022-10-16T22:56:00+08:00</lastmod>
   </url><url>
     <loc>https://shijingchang.cn/blog/</loc>
+    <lastmod>2022-10-16T22:56:00+08:00</lastmod>
+  </url><url>
+    <loc>https://shijingchang.cn/blog/posts/notion_shares/</loc>
     <lastmod>2022-10-07T20:43:00+08:00</lastmod>
   </url><url>
     <loc>https://shijingchang.cn/blog/posts/npu_thesis_latex_template/</loc>

@@ -9,7 +9,16 @@
       <link>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 07 Oct 2022 20:43:00 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Oct 2022 22:56:00 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>个人笔记/日志管理软件</title>
+      <link>https://shijingchang.cn/blog/posts/notes_manager/</link>
+      <pubDate>Sun, 16 Oct 2022 22:56:00 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/notes_manager/</guid>
+      <description>概述 用C#写了个个人笔记/日志管理软件，基本思路是个人笔记、工作日志用Markdown格式写， 然后用pandoc生成html，渲染格式用自己</description>
+    </item>
+    
     <item>
       <title>Notion分享</title>
       <link>https://shijingchang.cn/blog/posts/notion_shares/</link>
