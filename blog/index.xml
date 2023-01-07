@@ -9,7 +9,16 @@
       <link>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Oct 2022 22:56:00 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Jan 2023 15:21:31 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用伴随优化求解泊松方程反问题</title>
+      <link>https://shijingchang.cn/blog/posts/field_inversion_with_discrete_adjoint/</link>
+      <pubDate>Sat, 07 Jan 2023 15:21:31 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/field_inversion_with_discrete_adjoint/</guid>
+      <description>PDE反问题描述 地球电势$u$由Poisson方程控制 $$ \nabla \cdot (\beta \nabla u) = q $$ 地壳中的电导率$\beta$常常是不知道的，所以实测几个点的电势$u</description>
+    </item>
+    
     <item>
       <title>个人笔记/日志管理软件</title>
       <link>https://shijingchang.cn/blog/posts/notes_manager/</link>
