@@ -7,4 +7,10 @@
   font-family: 'FZFWZhuZGDLMCJW', serif;
 }
 
+.post-content figure>figcaption {
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+}
+
 

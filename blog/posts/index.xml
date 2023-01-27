@@ -9,7 +9,16 @@
       <link>https://shijingchang.cn/blog/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 07 Jan 2023 15:21:31 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Jan 2023 16:32:30 +0800</lastBuildDate><atom:link href="https://shijingchang.cn/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>对比OpenFOAM与SU2的收敛性</title>
+      <link>https://shijingchang.cn/blog/posts/compare_convergence_openfoam_su2/</link>
+      <pubDate>Fri, 27 Jan 2023 16:32:30 +0800</pubDate>
+      
+      <guid>https://shijingchang.cn/blog/posts/compare_convergence_openfoam_su2/</guid>
+      <description>概述 我是CFD里可压流程序开发出身，一直研究超音速湍流、激波相关问题，博士阶段对不可压流算法接触较少。 工作之后才开始学习了解不可压流算法、程</description>
+    </item>
+    
     <item>
       <title>使用伴随优化求解泊松方程反问题</title>
       <link>https://shijingchang.cn/blog/posts/field_inversion_with_discrete_adjoint/</link>
