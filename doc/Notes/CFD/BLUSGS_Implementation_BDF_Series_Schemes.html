@@ -5,259 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2020-09-10" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>BLUSGS Implementation of BDF Series Schemes</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; } /* Alert */
-code span.an { color: #008000; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #0000ff; } /* ControlFlow */
-code span.ch { color: #008080; } /* Char */
-code span.cn { } /* Constant */
-code span.co { color: #008000; } /* Comment */
-code span.cv { color: #008000; } /* CommentVar */
-code span.do { color: #008000; } /* Documentation */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.im { } /* Import */
-code span.in { color: #008000; } /* Information */
-code span.kw { color: #0000ff; } /* Keyword */
-code span.op { } /* Operator */
-code span.ot { color: #ff4000; } /* Other */
-code span.pp { color: #ff4000; } /* Preprocessor */
-code span.sc { color: #008080; } /* SpecialChar */
-code span.ss { color: #008080; } /* SpecialString */
-code span.st { color: #008080; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #008080; } /* VerbatimString */
-code span.wa { color: #008000; font-weight: bold; } /* Warning */
-</style>
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -266,20 +19,37 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <h3 class="date">2020-09-10</h3>
 <div id="TOC">
 <ul>
-<li><a href="#blusgs-implementations-of-bdf1-and-bdf2"><span class="toc-section-number">1</span> BLUSGS implementations of BDF1 and BDF2</a>
+<li><a href="#blusgs-implementations-of-bdf1-and-bdf2"
+id="toc-blusgs-implementations-of-bdf1-and-bdf2"><span
+class="toc-section-number">1</span> BLUSGS implementations of BDF1 and
+BDF2</a>
 <ul>
-<li><a href="#blusgs-implementation-of-bdf1"><span class="toc-section-number">1.1</span> BLUSGS implementation of BDF1</a></li>
-<li><a href="#blusgs-implementation-of-bdf2"><span class="toc-section-number">1.2</span> BLUSGS implementation of BDF2</a></li>
+<li><a href="#blusgs-implementation-of-bdf1"
+id="toc-blusgs-implementation-of-bdf1"><span
+class="toc-section-number">1.1</span> BLUSGS implementation of
+BDF1</a></li>
+<li><a href="#blusgs-implementation-of-bdf2"
+id="toc-blusgs-implementation-of-bdf2"><span
+class="toc-section-number">1.2</span> BLUSGS implementation of
+BDF2</a></li>
 </ul></li>
-<li><a href="#blusgs-implementation-of-bdf2opt"><span class="toc-section-number">2</span> BLUSGS Implementation of BDF2OPT</a></li>
-<li><a href="#blusgs-implementation-of-sdirk"><span class="toc-section-number">3</span> BLUSGS Implementation of SDIRK</a>
+<li><a href="#blusgs-implementation-of-bdf2opt"
+id="toc-blusgs-implementation-of-bdf2opt"><span
+class="toc-section-number">2</span> BLUSGS Implementation of
+BDF2OPT</a></li>
+<li><a href="#blusgs-implementation-of-sdirk"
+id="toc-blusgs-implementation-of-sdirk"><span
+class="toc-section-number">3</span> BLUSGS Implementation of SDIRK</a>
 <ul>
-<li><a href="#sdirk-theory"><span class="toc-section-number">3.1</span> SDIRK Theory</a></li>
+<li><a href="#sdirk-theory" id="toc-sdirk-theory"><span
+class="toc-section-number">3.1</span> SDIRK Theory</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="blusgs-implementations-of-bdf1-and-bdf2"><span class="header-section-number">1</span> BLUSGS implementations of BDF1 and BDF2</h1>
+<h1 data-number="1" id="blusgs-implementations-of-bdf1-and-bdf2"><span
+class="header-section-number">1</span> BLUSGS implementations of BDF1
+and BDF2</h1>
 <p>对于微分方程</p>
 <p><span class="math display">\[
 \frac{\partial Q}{\partial t} = R(Q)
@@ -288,164 +58,254 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <p><span class="math display">\[
 \begin{aligned}
 Q^{n+1} - Q^{n} &amp;= \Delta t R^{n+1} \\
-Q^{n+1} - \frac{4}{3} Q^{n} + \frac{1}{3} Q^{n-1} &amp;= \frac{2}{3} \Delta t R^{n+1} \\
+Q^{n+1} - \frac{4}{3} Q^{n} + \frac{1}{3} Q^{n-1} &amp;= \frac{2}{3}
+\Delta t R^{n+1} \\
 \end{aligned}
 \]</span></p>
-<h2 data-number="1.1" id="blusgs-implementation-of-bdf1"><span class="header-section-number">1.1</span> BLUSGS implementation of BDF1</h2>
-<p>BLUSGS算法描述见：Sun, Y.; Wang, Z. &amp; Liu, Y. Efficient Implicit Non-linear LU-SGS Approach for Compressible Flow Computation Using High-order Spectral Difference Method, <em>Comm. Comput. Phys.,</em> <strong>2009</strong><em>, 5</em>, 760-778</p>
+<h2 data-number="1.1" id="blusgs-implementation-of-bdf1"><span
+class="header-section-number">1.1</span> BLUSGS implementation of
+BDF1</h2>
+<p>BLUSGS算法描述见：Sun, Y.; Wang, Z. &amp; Liu, Y. Efficient Implicit
+Non-linear LU-SGS Approach for Compressible Flow Computation Using
+High-order Spectral Difference Method, <em>Comm. Comput. Phys.,</em>
+<strong>2009</strong><em>, 5</em>, 760-778</p>
 <ul>
 <li><p>BDF1的原始形式</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{ Q^{n+1} - Q^{n} }{\Delta t} &amp;= R^{n+1} \\
-\frac{ Q^{n+1} - Q^{n} }{\Delta t} - \left ( R^{n+1} - R^{n} \right ) &amp;= R^{n} \\
+\frac{ Q^{n+1} - Q^{n} }{\Delta t} - \left ( R^{n+1} - R^{n} \right )
+&amp;= R^{n} \\
 \end{aligned}
 \]</span></p></li>
 <li><p>线化<span class="math inline">\(R^{n+1}-R^{n}\)</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
+R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c +
+\sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
 \end{aligned}
 \]</span></p></li>
 <li><p>将线化<span class="math inline">\(R\)</span>代入原始形式</p>
 <p><span class="math display">\[
 \begin{aligned}
 \Delta Q^{n+1} &amp;= Q^{n+1} - Q^{n} \\
-\frac{ \Delta Q^{n+1} }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb} &amp;= R^n_c \\
-\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{n+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb} &amp;= R^n_c \\
+\frac{ \Delta Q^{n+1} }{\Delta t} - \frac{\partial R_c}{\partial Q_c}
+\Delta Q^{n+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{n+1}_{nb} &amp;= R^n_c \\
+\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{n+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{n+1}_{nb} &amp;= R^n_c \\
 \end{aligned}
 \]</span></p></li>
 <li><p>Gauss-Seidel加速</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb} &amp;= R^n_c \\
+\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{k+1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{k}_{nb} &amp;= R^n_c \\
 \Delta Q^{k+1}_c &amp;= Q^{k+1} - Q^{n} \\
 \end{aligned}
 \]</span></p></li>
 <li><p>再次线化<span class="math inline">\(R^{k}-R^{n}\)</span></p>
 <p><span class="math display">\[
-R^{k} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
+R^{k} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c + \sum
+\frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
 \]</span></p></li>
 <li><p>将线化<span class="math inline">\(R\)</span>代入，整理</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c &amp;= R^k_c - \frac{\partial R_{c}}{\partial Q_{c}} \Delta Q^{k}_{c} \\
- &amp;= R^k_c + \left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k}_{c} - \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
-\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \left ( \Delta Q^{k+1}_c - \Delta Q^{k}_{c} \right ) &amp;= R^k_c - \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
-\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
+\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{k+1}_c &amp;= R^k_c - \frac{\partial R_{c}}{\partial Q_{c}}
+\Delta Q^{k}_{c} \\
+&amp;= R^k_c + \left ( \frac{ I }{\Delta t} - \frac{\partial
+R_c}{\partial Q_c} \right ) \Delta Q^{k}_{c} - \frac{ I }{\Delta t}
+\Delta Q^{k}_{c} \\
+\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right
+) \left ( \Delta Q^{k+1}_c - \Delta Q^{k}_{c} \right ) &amp;= R^k_c -
+\frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
+\left ( \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right
+) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{ I }{\Delta t} \Delta
+Q^{k}_{c} \\
 \tilde{\Delta} Q^{k+1}_c &amp;= Q^{k+1}_c - Q^{k}_c \\
 \end{aligned}
 \]</span></p></li>
 </ul>
 <p>最后两个方程是最终的BDF1的BLUSGS实现。</p>
-<h2 data-number="1.2" id="blusgs-implementation-of-bdf2"><span class="header-section-number">1.2</span> BLUSGS implementation of BDF2</h2>
+<h2 data-number="1.2" id="blusgs-implementation-of-bdf2"><span
+class="header-section-number">1.2</span> BLUSGS implementation of
+BDF2</h2>
 <p>BDF2的实现与BDF1类似。</p>
 <ul>
 <li><p>BDF2的原始形式</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{ Q^{n+1} - \frac{4}{3} Q^{n} + \frac{1}{3} Q^{n-1} }{ \frac{2}{3} \Delta t } &amp;= R^{n+1} \\
-\frac{3}{2} \left ( \frac{ \Delta Q^{n+1} }{ \Delta t } - \frac{1}{3} \frac{ \Delta Q^{n} }{ \Delta t } \right ) - \left ( R^{n+1} - R^{n} \right ) &amp;= R^{n} \\
+\frac{ Q^{n+1} - \frac{4}{3} Q^{n} + \frac{1}{3} Q^{n-1} }{ \frac{2}{3}
+\Delta t } &amp;= R^{n+1} \\
+\frac{3}{2} \left ( \frac{ \Delta Q^{n+1} }{ \Delta t } - \frac{1}{3}
+\frac{ \Delta Q^{n} }{ \Delta t } \right ) - \left ( R^{n+1} - R^{n}
+\right ) &amp;= R^{n} \\
 \Delta Q^{n+1} &amp;= Q^{n+1} - Q^{n} \\
 \end{aligned}
 \]</span></p></li>
 <li><p>线化<span class="math inline">\(R^{n+1}-R^{n}\)</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
+R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c +
+\sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
 \end{aligned}
 \]</span></p></li>
 <li><p>将线化<span class="math inline">\(R\)</span>代入原始形式</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{n+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb} &amp;= R^n_c \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \Delta Q^{n+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta
+Q^{n}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{n+1}_{nb} &amp;= R^n_c \\
 \end{aligned}
 \]</span></p></li>
 <li><p>Gauss-Seidel加速</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb} &amp;= R^n_c \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \Delta Q^{k+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta
+Q^{n}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
+&amp;= R^n_c \\
 \Delta Q^{k+1}_c &amp;= Q^{k+1} - Q^{n} \\
 \end{aligned}
 \]</span></p></li>
 <li><p>再次线化<span class="math inline">\(R^{k}-R^{n}\)</span></p>
 <p><span class="math display">\[
-R^{k} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
+R^{k} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c + \sum
+\frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
 \]</span></p></li>
 <li><p>将线化<span class="math inline">\(R\)</span>代入，整理</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c &amp;= R^k_c - \frac{\partial R_{c}}{\partial Q_{c}} \Delta Q^{k}_{c} \\
- &amp;= R^k_c + \left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k}_{c} - \frac{3}{2} \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \left ( \Delta Q^{k+1}_c - \Delta Q^{k}_{c} \right ) - \frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c &amp;= R^k_c - \frac{3}{2} \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{3}{2} \frac{ I }{\Delta t} \Delta Q^{k}_{c} + \frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c \\
-\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{1}{2 \Delta t} \left ( 3 I Q^{k}_{c} - 4 I Q^{n}_c + I Q^{n-1}_c \right ) \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \Delta Q^{k+1}_c - \frac{1}{2} \frac{ I }{\Delta t} \Delta
+Q^{n}_c &amp;= R^k_c - \frac{\partial R_{c}}{\partial Q_{c}} \Delta
+Q^{k}_{c} \\
+&amp;= R^k_c + \left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial
+R_c}{\partial Q_c} \right ) \Delta Q^{k}_{c} - \frac{3}{2} \frac{ I
+}{\Delta t} \Delta Q^{k}_{c} \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \left ( \Delta Q^{k+1}_c - \Delta Q^{k}_{c} \right ) -
+\frac{1}{2} \frac{ I }{\Delta t} \Delta Q^{n}_c &amp;= R^k_c -
+\frac{3}{2} \frac{ I }{\Delta t} \Delta Q^{k}_{c} \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{3}{2} \frac{
+I }{\Delta t} \Delta Q^{k}_{c} + \frac{1}{2} \frac{ I }{\Delta t} \Delta
+Q^{n}_c \\
+\left ( \frac{3}{2} \frac{ I }{\Delta t} - \frac{\partial R_c}{\partial
+Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{1}{2 \Delta
+t} \left ( 3 I Q^{k}_{c} - 4 I Q^{n}_c + I Q^{n-1}_c \right ) \\
 \tilde{\Delta} Q^{k+1}_c &amp;= Q^{k+1}_c - Q^{k}_c \\
 \end{aligned}
 \]</span></p></li>
 </ul>
 <p>最后两个方程是最终的BDF2的BLUSGS实现。</p>
-<h1 data-number="2" id="blusgs-implementation-of-bdf2opt"><span class="header-section-number">2</span> BLUSGS Implementation of BDF2OPT</h1>
-<p>The BDF2OPT schemes are referred to <span class="math inline">\(BDF2OPT(\beta)\)</span> which is defined in the following paper,</p>
+<h1 data-number="2" id="blusgs-implementation-of-bdf2opt"><span
+class="header-section-number">2</span> BLUSGS Implementation of
+BDF2OPT</h1>
+<p>The BDF2OPT schemes are referred to <span
+class="math inline">\(BDF2OPT(\beta)\)</span> which is defined in the
+following paper,</p>
 <blockquote>
-<p>Vatsa, V., Carpenter, M., &amp; Lockard, D. (2010). Re-evaluation of an optimized second-order backward difference (BDF2OPT) scheme for unsteady flow applications. In 48th AIAA Aerospace Sciences Meeting Including the New Horizons Forum and Aerospace Exposition (p. 122).</p>
+<p>Vatsa, V., Carpenter, M., &amp; Lockard, D. (2010). Re-evaluation of
+an optimized second-order backward difference (BDF2OPT) scheme for
+unsteady flow applications. In 48th AIAA Aerospace Sciences Meeting
+Including the New Horizons Forum and Aerospace Exposition (p. 122).</p>
 </blockquote>
-<p>Basically, BDF2OPT is a combination of BDF2 and BDF3 or higher-order BDF schemes, i.e.</p>
+<p>Basically, BDF2OPT is a combination of BDF2 and BDF3 or higher-order
+BDF schemes, i.e.</p>
 <p><span class="math display">\[
 \text{BDF2OPT} = \beta \text{BDF3} + (1-\beta) \text{BDF2}
 \]</span></p>
-<p>To ensure it to be A-stable, <span class="math inline">\(\beta \leq 0.5\)</span>. The paper recommends <span class="math inline">\(\beta=0.48\)</span>. In REF, BDF2OPT takes <span class="math inline">\(\beta=0.55\)</span> and <span class="math inline">\([A,B,C] = [10/6, 5/6, 1/6]\)</span>.</p>
+<p>To ensure it to be A-stable, <span class="math inline">\(\beta \leq
+0.5\)</span>. The paper recommends <span
+class="math inline">\(\beta=0.48\)</span>. In REF, BDF2OPT takes <span
+class="math inline">\(\beta=0.55\)</span> and <span
+class="math inline">\([A,B,C] = [10/6, 5/6, 1/6]\)</span>.</p>
 <p>Its BLUSGS implementation is the following procedure.</p>
 <p>First, rewrite the combination to be as follows,</p>
 <p><span class="math display">\[
-\frac{\Delta Q^{n+1} - \frac{1}{3} \Delta Q^{n} - \frac{10}{33} \beta \Delta Q^{n} + \frac{6}{33} \beta \Delta Q^{n-1}}{ \left ( \frac{2}{3} - \frac{4}{33} \beta \right ) \Delta t } - \left ( R^{n+1} - R^{n} \right ) = R^{n}
+\frac{\Delta Q^{n+1} - \frac{1}{3} \Delta Q^{n} - \frac{10}{33} \beta
+\Delta Q^{n} + \frac{6}{33} \beta \Delta Q^{n-1}}{ \left ( \frac{2}{3} -
+\frac{4}{33} \beta \right ) \Delta t } - \left ( R^{n+1} - R^{n} \right
+) = R^{n}
 \]</span></p>
-<p>where <span class="math inline">\(\Delta Q^{n+1} = Q^{n+1} - Q^{n}\)</span>.</p>
-<p>Split the equation in terms of <span class="math inline">\(\Delta Q\)</span> as follows,</p>
+<p>where <span class="math inline">\(\Delta Q^{n+1} = Q^{n+1} -
+Q^{n}\)</span>.</p>
+<p>Split the equation in terms of <span class="math inline">\(\Delta
+Q\)</span> as follows,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{A}{\Delta t} \Delta Q^{n+1} - \frac{B}{\Delta t} \Delta Q^{n} &amp;+ \frac{C}{\Delta t} \Delta Q^{n-1} - \left ( R^{n+1} - R^{n} \right ) = R^{n} \\
+\frac{A}{\Delta t} \Delta Q^{n+1} - \frac{B}{\Delta t} \Delta Q^{n}
+&amp;+ \frac{C}{\Delta t} \Delta Q^{n-1} - \left ( R^{n+1} - R^{n}
+\right ) = R^{n} \\
 A &amp;= \frac{1}{\frac{2}{3} - \frac{4}{33} \beta} \\
-B &amp;= \frac{\frac{1}{3} + \frac{10}{33} \beta}{\frac{2}{3} - \frac{4}{33} \beta} \\
+B &amp;= \frac{\frac{1}{3} + \frac{10}{33} \beta}{\frac{2}{3} -
+\frac{4}{33} \beta} \\
 C &amp;= \frac{\frac{6}{33} \beta}{\frac{2}{3} - \frac{4}{33} \beta} \\
 \end{aligned}
 \]</span></p>
-<p>Substitute the linearized <span class="math inline">\(R\)</span> which is</p>
+<p>Substitute the linearized <span class="math inline">\(R\)</span>
+which is</p>
 <p><span class="math display">\[
-R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
+R^{n+1} - R^{n} = \frac{\partial R_c}{\partial Q_c} \Delta Q^{n+1}_c +
+\sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb}
 \]</span></p>
 <p>to obtain</p>
 <p><span class="math display">\[
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{n+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta t} \Delta Q^{n-1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{n+1}_{nb} = R^{n}_c
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{n+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta
+t} \Delta Q^{n-1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{n+1}_{nb} = R^{n}_c
 \]</span></p>
 <p>Employ Gauss-Seidel acceleration to obtain</p>
 <p><span class="math display">\[
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta t} \Delta Q^{n-1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb} = R^{n}_c
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{k+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta
+t} \Delta Q^{n-1}_c - \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta
+Q^{k}_{nb} = R^{n}_c
 \]</span></p>
-<p>where <span class="math inline">\(\Delta Q^{k+1} = Q^{k+1} - Q^{n}\)</span>.</p>
-<p>Substitute the linearized <span class="math inline">\(R^{k}_c - R^{n}_c\)</span>,</p>
+<p>where <span class="math inline">\(\Delta Q^{k+1} = Q^{k+1} -
+Q^{n}\)</span>.</p>
+<p>Substitute the linearized <span class="math inline">\(R^{k}_c -
+R^{n}_c\)</span>,</p>
 <p><span class="math display">\[
-R^{k}_c - R^{n}_c = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c + \sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
+R^{k}_c - R^{n}_c = \frac{\partial R_c}{\partial Q_c} \Delta Q^{k}_c +
+\sum \frac{\partial R_{c}}{\partial Q_{nb}} \Delta Q^{k}_{nb}
 \]</span></p>
 <p>to obtain</p>
 <p><span class="math display">\[
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \Delta Q^{k+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta t} \Delta Q^{n-1}_c = R^k_c - \frac{\partial R_{c}}{\partial Q_{c}} \Delta Q^{k}_{c}
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \Delta Q^{k+1}_c - \frac{B}{\Delta t} \Delta Q^{n}_c + \frac{C}{\Delta
+t} \Delta Q^{n-1}_c = R^k_c - \frac{\partial R_{c}}{\partial Q_{c}}
+\Delta Q^{k}_{c}
 \]</span></p>
 <p>Manipulate the equation to be as follows,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta Q^{k}_c + \frac{B}{\Delta t} \Delta Q^{n}_c - \frac{C}{\Delta t} \Delta Q^{n-1}_c \\
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta
+Q^{k}_c + \frac{B}{\Delta t} \Delta Q^{n}_c - \frac{C}{\Delta t} \Delta
+Q^{n-1}_c \\
 A &amp;= \frac{1}{\frac{2}{3} - \frac{4}{33} \beta} \\
-B &amp;= \frac{\frac{1}{3} + \frac{10}{33} \beta}{\frac{2}{3} - \frac{4}{33} \beta} \\
+B &amp;= \frac{\frac{1}{3} + \frac{10}{33} \beta}{\frac{2}{3} -
+\frac{4}{33} \beta} \\
 C &amp;= \frac{\frac{6}{33} \beta}{\frac{2}{3} - \frac{4}{33} \beta} \\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\tilde{\Delta} Q^{k+1} = Q^{k+1} - Q^{k}\)</span>.</p>
+<p>where <span class="math inline">\(\tilde{\Delta} Q^{k+1} = Q^{k+1} -
+Q^{k}\)</span>.</p>
 <p>Now we have the BLUSGS implementation of the BDF2OPT.</p>
 <p>Following this notation, BDF2 has the following form</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta Q^{k}_c + \frac{B}{\Delta t} \Delta Q^{n}_c \\
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta
+Q^{k}_c + \frac{B}{\Delta t} \Delta Q^{n}_c \\
 A &amp;= 1.5 \\
 B &amp;= 0.5 \\
 \end{aligned}
@@ -453,27 +313,41 @@ B &amp;= 0.5 \\
 <p>BDF1 has the following form</p>
 <p><span class="math display">\[
 \begin{aligned}
-\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right ) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta Q^{k}_c \\
+\left ( \frac{A}{\Delta t} I - \frac{\partial R_c}{\partial Q_c} \right
+) \tilde{\Delta} Q^{k+1}_c &amp;= R^k_c - \frac{A}{\Delta t} \Delta
+Q^{k}_c \\
 A &amp;= 1 \\
 \end{aligned}
 \]</span></p>
-<h1 data-number="3" id="blusgs-implementation-of-sdirk"><span class="header-section-number">3</span> BLUSGS Implementation of SDIRK</h1>
-<h2 data-number="3.1" id="sdirk-theory"><span class="header-section-number">3.1</span> SDIRK Theory</h2>
-<p>Refer to Holst’s JCP paper, Kennedy’s review, and Persson’s paper.</p>
+<h1 data-number="3" id="blusgs-implementation-of-sdirk"><span
+class="header-section-number">3</span> BLUSGS Implementation of
+SDIRK</h1>
+<h2 data-number="3.1" id="sdirk-theory"><span
+class="header-section-number">3.1</span> SDIRK Theory</h2>
+<p>Refer to Holst’s JCP paper, Kennedy’s review, and Persson’s
+paper.</p>
 <blockquote>
-<p>Christopher A. Kennedy, and Mark H. Carpenter. Diagonally implicit Runge-Kutta methods for ordinary differential equations. A review. NASA/TM-2016-219173(2016).</p>
+<p>Christopher A. Kennedy, and Mark H. Carpenter. Diagonally implicit
+Runge-Kutta methods for ordinary differential equations. A review.
+NASA/TM-2016-219173(2016).</p>
 </blockquote>
 <blockquote>
-<p>K.R. Holst et al., On the effect of temporal error in high-order simulations of unsteady flows, J. Comput. Phys. (2019), 108989, DOI: https://doi.org/10.1016/j.jcp.2019.108989.</p>
+<p>K.R. Holst et al., On the effect of temporal error in high-order
+simulations of unsteady flows, J. Comput. Phys. (2019), 108989, DOI:
+https://doi.org/10.1016/j.jcp.2019.108989.</p>
 </blockquote>
 <blockquote>
-<p>Persson Per-Olof, High-order LES simulations using implicit-explicit Runge-Kutta schemes, 49th AIAA Aerospace Sciences Meeting Including the New Horizons Forum and Aerospace Exposition(2011), DOI: https://doi.org/10.2514/6.2011-684.</p>
+<p>Persson Per-Olof, High-order LES simulations using implicit-explicit
+Runge-Kutta schemes, 49th AIAA Aerospace Sciences Meeting Including the
+New Horizons Forum and Aerospace Exposition(2011), DOI:
+https://doi.org/10.2514/6.2011-684.</p>
 </blockquote>
 <p>RK methods has a unified formula as follows,</p>
 <p><span class="math display">\[
 \begin{aligned}
 y_{n+1} &amp;= y_{n}+h \sum_{i=1}^{s} b_{i} k_{i}, \\
-k_{i} &amp;= f \left( t_{n}+c_{i} h, y_{n}+h \sum_{j=1}^{s} a_{i j} k_{j} \right), \quad i=1, \ldots, s \\
+k_{i} &amp;= f \left( t_{n}+c_{i} h, y_{n}+h \sum_{j=1}^{s} a_{i j}
+k_{j} \right), \quad i=1, \ldots, s \\
 \end{aligned}
 \]</span></p>
 <p>The coefficients are stored in the Butcher tableau.</p>
@@ -490,21 +364,34 @@ c_{s} &amp; a_{s 1} &amp; a_{s 2} &amp; \ldots &amp; a_{s s} \\
 &amp; \mathbf{b^{T}} \\
 \end{array}
 \]</span></p>
-<p>where <span class="math inline">\(A\)</span> is the RK matrix, <span class="math inline">\(b\)</span> is the weights vector and <span class="math inline">\(c\)</span> is the nodes vector.</p>
-<p>RK methods may be either explicit (ERK) or implicit (IRK), and a particular method can be categorized using the RK matrix. If the matrix is only lower triangular, with the main diagonal zero, the method is explicit. If any value along the main diagonal or above it is non-zero, the method is implicit. Explicit schemes will not be discussed here because they are not A-stable.</p>
+<p>where <span class="math inline">\(A\)</span> is the RK matrix, <span
+class="math inline">\(b\)</span> is the weights vector and <span
+class="math inline">\(c\)</span> is the nodes vector.</p>
+<p>RK methods may be either explicit (ERK) or implicit (IRK), and a
+particular method can be categorized using the RK matrix. If the matrix
+is only lower triangular, with the main diagonal zero, the method is
+explicit. If any value along the main diagonal or above it is non-zero,
+the method is implicit. Explicit schemes will not be discussed here
+because they are not A-stable.</p>
 <p>There are several categories within the family of IRK methods.</p>
 <dl>
 <dt>Diagonally implicit RK (DIRK)</dt>
-<dd>All coefficients above the main diagonal in the RK matrix are zero, but one or more of the main diagonal coefficients are non-zero.
+<dd>
+All coefficients above the main diagonal in the RK matrix are zero, but
+one or more of the main diagonal coefficients are non-zero.
 </dd>
 <dt>Singly diagonally implicit RK (SDIRK)</dt>
-<dd>All coefficients along the main diagonal are the same value.
+<dd>
+All coefficients along the main diagonal are the same value.
 </dd>
 <dt>Fully implicit RK (FIRK)</dt>
-<dd>All coefficients within the RK matrix are non-zero.
+<dd>
+All coefficients within the RK matrix are non-zero.
 </dd>
 </dl>
-<p>SDIRK33 is taken from Persson’s paper. The first <code>3</code> in the name is 3rd order and the second <code>3</code> in the name is 3 stages. The Butcher tabuleau is as follows,</p>
+<p>SDIRK33 is taken from Persson’s paper. The first <code>3</code> in
+the name is 3rd order and the second <code>3</code> in the name is 3
+stages. The Butcher tabuleau is as follows,</p>
 <p><span class="math display">\[
 \begin{array}{c|c}
 \mathbf{c} &amp; \mathbf{A} \\
@@ -537,8 +424,11 @@ c_{2} &amp;= \frac{2-9 \gamma+6 \gamma^{2}}{3 \alpha} \\
 \beta &amp;= \left(-1+6 \gamma-9 \gamma^{2}+3 \gamma^{3}\right) \\
 \end{aligned}
 \]</span></p>
-<p><span class="math inline">\(\gamma = 0.43586652150845899941601945\)</span> gives the L-stable scheme. Here is a Python script to show the calculation as follows,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpmath <span class="im">import</span> mp, mpf, matrix</span>
+<p><span class="math inline">\(\gamma =
+0.43586652150845899941601945\)</span> gives the L-stable scheme. Here is
+a Python script to show the calculation as follows,</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpmath <span class="im">import</span> mp, mpf, matrix</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mp.dps <span class="op">=</span> <span class="dv">32</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> mpf(<span class="st">&#39;0.43586652150845899941601945&#39;</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>gamma <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>gamma<span class="op">**</span><span class="dv">2</span></span>
@@ -564,7 +454,8 @@ c_{2} &amp;= \frac{2-9 \gamma+6 \gamma^{2}}{3 \alpha} \\
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;C is &quot;</span>)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(C)</span></code></pre></div>
 <p>The high precision version of the Butcher tableau is as follows,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> is</span>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> is</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>      0.43586652150845899941601945                                  0.0                           0.0]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="er">[0.28206673924577050029199027679033</span>         <span class="er">0.43586652150845899941601945</span>                           <span class="ex">0.0]</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> 1.2084966491760100703364776750294  -0.64436317068446906975249712502944  0.43586652150845899941601945]</span>
@@ -574,11 +465,13 @@ c_{2} &amp;= \frac{2-9 \gamma+6 \gamma^{2}}{3 \alpha} \\
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>      0.43586652150845899941601945]</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>[0.71793326075422949970800972679033]</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>[                               1.0]</span></code></pre></div>
-<p>Now we have the formula. How could we solve it? At the first stage of the SDIRK33, the formula is actually as follows,</p>
+<p>Now we have the formula. How could we solve it? At the first stage of
+the SDIRK33, the formula is actually as follows,</p>
 <p><span class="math display">\[
 k_{1} = f \left( t_{n}+c_{1} h, y_{n} + h a_{11} k_{1} \right)
 \]</span></p>
-<p>This is a nonlinear equation. We could manipulate it to adapt to the LUSGS solver.</p>
+<p>This is a nonlinear equation. We could manipulate it to adapt to the
+LUSGS solver.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{ y_{n1} - y_{n} }{ h a_{11} } &amp; = k_{1} \\
@@ -587,24 +480,32 @@ y_{n1} &amp;= y_{n} + h a_{11} k_{1} \\
 t_{n1} &amp;= t_{n}+c_{1} h \\
 \end{aligned}
 \]</span></p>
-<p>This is very similar to BDF1. Probably this is why the stage order is two.</p>
-<p>Similarly, at the stage no. 2, the formula is manipulated to adapt to the LUSGS solver as follows,</p>
+<p>This is very similar to BDF1. Probably this is why the stage order is
+two.</p>
+<p>Similarly, at the stage no. 2, the formula is manipulated to adapt to
+the LUSGS solver as follows,</p>
 <p><span class="math display">\[
 \begin{aligned}
-k_{2} &amp;= f \left( t_{n}+c_{2} h, y_{n} + h a_{21} k_{1} + h a_{22} k_{2} \right) \\
-\frac{ y_{n2} - \left ( y_{n} + h a_{21} k_{1} \right ) }{ h a_{22} } &amp;= k_{2} \\
+k_{2} &amp;= f \left( t_{n}+c_{2} h, y_{n} + h a_{21} k_{1} + h a_{22}
+k_{2} \right) \\
+\frac{ y_{n2} - \left ( y_{n} + h a_{21} k_{1} \right ) }{ h a_{22} }
+&amp;= k_{2} \\
 k_{2} &amp;= f \left( t_{n2}, y_{n2} \right) \\
 y_{n2} &amp;= y_{n} + h a_{21} k_{1} + h a_{22} k_{2} \\
 t_{n2} &amp;= t_{n}+c_{2} h \\
 \end{aligned}
 \]</span></p>
-<p>And at the stage no. 3, the formula is manipulated to adapt to the LUSGS solver as follows,</p>
+<p>And at the stage no. 3, the formula is manipulated to adapt to the
+LUSGS solver as follows,</p>
 <p><span class="math display">\[
 \begin{aligned}
-k_{3} &amp;= f \left( t_{n}+c_{3} h, y_{n} + h a_{31} k_{1} + h a_{32} k_{2} + h a_{33} k_{3} \right) \\
-\frac{ y_{n3} - \left ( y_{n} + h a_{31} k_{1} + h a_{32} k_{2} \right ) }{ h a_{33} } &amp;= k_{3} \\
+k_{3} &amp;= f \left( t_{n}+c_{3} h, y_{n} + h a_{31} k_{1} + h a_{32}
+k_{2} + h a_{33} k_{3} \right) \\
+\frac{ y_{n3} - \left ( y_{n} + h a_{31} k_{1} + h a_{32} k_{2} \right )
+}{ h a_{33} } &amp;= k_{3} \\
 k_{3} &amp;= f \left( t_{n3}, y_{n3} \right) \\
-y_{n3} &amp;= y_{n} + h a_{31} k_{1} + h a_{32} k_{2} + h a_{33} k_{3} \\
+y_{n3} &amp;= y_{n} + h a_{31} k_{1} + h a_{32} k_{2} + h a_{33} k_{3}
+\\
 t_{n3} &amp;= t_{n}+c_{3} h \\
 \end{aligned}
 \]</span></p>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2017-09-14" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Wave propagation</h1>
+<h3 class="date">2017-09-14</h3>
+<div id="TOC">
+<ul>
+<li><a href="#wave-propagation" id="toc-wave-propagation"><span
+class="toc-section-number">1</span> Wave propagation</a>
+<ul>
+<li><a href="#phase-velocity" id="toc-phase-velocity"><span
+class="toc-section-number">1.1</span> Phase velocity</a></li>
+<li><a href="#group-velocity" id="toc-group-velocity"><span
+class="toc-section-number">1.2</span> Group velocity</a></li>
+<li><a href="#incoming-and-outgoing-wave"
+id="toc-incoming-and-outgoing-wave"><span
+class="toc-section-number">1.3</span> Incoming and outgoing
+wave</a></li>
+</ul></li>
+<li><a href="#oscillation" id="toc-oscillation"><span
+class="toc-section-number">2</span> Oscillation</a>
+<ul>
+<li><a href="#simple-harmonic-oscillator"
+id="toc-simple-harmonic-oscillator"><span
+class="toc-section-number">2.1</span> Simple harmonic
+oscillator</a></li>
+<li><a href="#coupled-oscillator" id="toc-coupled-oscillator"><span
+class="toc-section-number">2.2</span> Coupled oscillator</a></li>
+<li><a href="#continuous-systems---waves"
+id="toc-continuous-systems---waves"><span
+class="toc-section-number">2.3</span> Continuous systems -
+waves</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="wave-propagation"><span
+class="header-section-number">1</span> Wave propagation</h1>
+<h2 data-number="1.1" id="phase-velocity"><span
+class="header-section-number">1.1</span> Phase velocity</h2>
+<p>The phase velocity <span class="math inline">\(v_{p}\)</span> is the
+speed at which a point of constant phase of the wave will travel for a
+discrete frequency and is given as</p>
+<pre><code>    \begin{align}
+    v_{p} &amp;= \frac{x}{t} \\
+    &amp;= \frac{\lambda}{T} \\
+    &amp;= \frac{\omega}{k} \\
+    \end{align}</code></pre>
+<p><span class="math inline">\(\lambda\)</span> is the wave length and T
+is the period. <span class="math inline">\(\omega\)</span> is the
+angular frequency, <span class="math inline">\(k\)</span> is the
+wavenumber. Formally, the phase is defined as follows</p>
+<pre><code>    \begin{equation}
+    \Phi = k x - \omega t
+    \end{equation}</code></pre>
+<p>Then the phase velocity is given as follows</p>
+<pre><code>    \begin{align}
+    v_{p} &amp;= \frac{dx}{dt} \\
+    &amp;= \frac{d \Phi}{dt} / \frac{d \Phi}{dx} \\
+    &amp;= \omega / k
+    \end{align}</code></pre>
+<p>And the angular frequency is related to the wavenumber through the
+dispersion relationship.</p>
+<pre><code>    \begin{equation}
+    \omega = \Omega(k)
+    \end{equation}</code></pre>
+<ul>
+<li>A special case: <span class="math inline">\(\Omega(k) = c
+k\)</span>, with <span class="math inline">\(c\)</span> a constant. This
+kind of wave is called non-dispersive, since all frequencies travel at
+the same phase speed <span class="math inline">\(c\)</span>.</li>
+<li>In other cases, we have dispersive waves.</li>
+<li>The dispersion relationship depends on the medium and the type of
+waves, like sound waves or water waves.</li>
+</ul>
+<h2 data-number="1.2" id="group-velocity"><span
+class="header-section-number">1.2</span> Group velocity</h2>
+<p>The group velocity is the speed at which a wave packet from a narrow
+range of frequencies will travel and is determined from the gradient of
+the dispersion relation</p>
+<pre><code>    \begin{equation}
+    v_{g} = \frac{\partial \omega}{\partial k}
+    \end{equation}</code></pre>
+<p>The group velocity is often thought of as the velocity at which
+energy or information is conveyed along a wave.</p>
+<h2 data-number="1.3" id="incoming-and-outgoing-wave"><span
+class="header-section-number">1.3</span> Incoming and outgoing wave</h2>
+<p>In quantum theory, there is a concept of incoming and outgoing wave.
+They distinguish with each by <span
+class="math inline">\(e^{ikr}\)</span> and <span
+class="math inline">\(e^{-ikr}\)</span>. It seems that if <span
+class="math inline">\(r\)</span> increases then <span
+class="math inline">\(e^{ikr}\)</span> increases while <span
+class="math inline">\(e^{-ikr}\)</span> decreases with respect to
+positive <span class="math inline">\(k\)</span>. However, in flow
+instability theory, things seem to be opposite.</p>
+<h1 data-number="2" id="oscillation"><span
+class="header-section-number">2</span> Oscillation</h1>
+<p>Oscillation is the repetitive variation, typically in time, of some
+measure about a central value, often a point of equilibrium, or between
+two or more different states.</p>
+<h2 data-number="2.1" id="simple-harmonic-oscillator"><span
+class="header-section-number">2.1</span> Simple harmonic oscillator</h2>
+<p>It’s the system where the restoring force on a body is directly
+proportional to its displacement. And in this system, the regular motion
+is referred as simple harmonic motion.</p>
+<h2 data-number="2.2" id="coupled-oscillator"><span
+class="header-section-number">2.2</span> Coupled oscillator</h2>
+<p>The simple harmonic oscillator has a single degree of freedom.
+Coupled oscillator has more degrees of freedom and deeper interpretation
+is given by resolving the motion into normal modes.</p>
+<h2 data-number="2.3" id="continuous-systems---waves"><span
+class="header-section-number">2.3</span> Continuous systems - waves</h2>
+<p>Waves can be regarded as systems with an infinite number of degrees
+of freedom and normal modes.</p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2017-09-14 with pandoc
+</footer>
+</body>
+</html>

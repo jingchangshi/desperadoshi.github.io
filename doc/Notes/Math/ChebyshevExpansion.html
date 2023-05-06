@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2015-06-26" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Chebyshev expansion</h1>
+<h3 class="date">2015-06-26</h3>
+<div id="TOC">
+<ul>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
+<ul>
+<li><a href="#the-deduction-of-chebyshev-polynomials"
+id="toc-the-deduction-of-chebyshev-polynomials"><span
+class="toc-section-number">1.1</span> The deduction of Chebyshev
+polynomials</a></li>
+<li><a href="#iteration-formula-for-both-kinds"
+id="toc-iteration-formula-for-both-kinds"><span
+class="toc-section-number">1.2</span> Iteration formula for both
+kinds</a></li>
+<li><a href="#review-fourier-series"
+id="toc-review-fourier-series"><span
+class="toc-section-number">1.3</span> Review Fourier series</a>
+<ul>
+<li><a href="#the-properties-of-sine-and-cosine-functions"
+id="toc-the-properties-of-sine-and-cosine-functions"><span
+class="toc-section-number">1.3.1</span> The properties of sine and
+cosine functions</a></li>
+<li><a href="#fourier-sine-series" id="toc-fourier-sine-series"><span
+class="toc-section-number">1.3.2</span> Fourier sine series</a></li>
+<li><a href="#fourier-cosine-series"
+id="toc-fourier-cosine-series"><span
+class="toc-section-number">1.3.3</span> Fourier cosine series</a></li>
+</ul></li>
+<li><a href="#the-orthogonality-of-chebyshev-polynomials"
+id="toc-the-orthogonality-of-chebyshev-polynomials"><span
+class="toc-section-number">1.4</span> The orthogonality of Chebyshev
+polynomials</a>
+<ul>
+<li><a href="#integral" id="toc-integral"><span
+class="toc-section-number">1.4.1</span> Integral</a></li>
+<li><a href="#discrete" id="toc-discrete"><span
+class="toc-section-number">1.4.2</span> Discrete</a></li>
+<li><a
+href="#construction-of-the-chebyshev-expansion-of-arbitrary-function"
+id="toc-construction-of-the-chebyshev-expansion-of-arbitrary-function"><span
+class="toc-section-number">1.4.3</span> Construction of the Chebyshev
+expansion of arbitrary function</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="the-deduction-of-chebyshev-polynomials"><span
+class="header-section-number">1.1</span> The deduction of Chebyshev
+polynomials</h2>
+<p>Solve the differential equation</p>
+<p><span class="math display">\[
+\begin{equation}
+( 1 - x^2 ) y^{\prime \prime} - x y^{\prime} + n^{2} y = 0
+\end{equation}
+\]</span></p>
+<p>Let <span class="math inline">\(x = cos t\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dx}{dt} &amp;= -sint \\
+y^{\prime} &amp;= \frac{dy}{dx} = \frac{dt}{dx} \frac{dy}{dt} = -
+\frac{1}{sint} \frac{dy}{dt} \\
+y^{\prime \prime} &amp;= \frac{d^{2}y}{dx^{2}} = \frac{d}{dx}
+(\frac{dy}{dx}) = \frac{dt}{dx} \frac{d}{dt} (-\frac{1}{sint}
+\frac{dy}{dt}) \\
+&amp;= - \frac{1}{sin^{2}t} \frac{d^{2}y}{dt^{2}} -
+\frac{cost}{sin^{3}t} \frac{dy}{dt}
+\end{align}
+\]</span></p>
+<p>Employ these differential in the deduction of the original equation.
+Then the modified equation is acquired.</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{d^{2}y}{dt^{2}} + n^{2} y = 0
+\end{equation}
+\]</span></p>
+<p>Then use the method of characteristic equation to solve this
+differential equation, the solution is</p>
+<p><span class="math display">\[
+\begin{align}
+y(t) &amp;= C_{1} e^{int} + C_{2} e^{-int} \\
+&amp;= ( C_{1} + C_{2} ) cosnt + ( i C_{1} - i C_{2} )sinnt \\
+&amp;= C cosnt
+\end{align}
+\]</span></p>
+<p>First kind of Chebyshev polynomial is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+T_{n}(x) &amp;= cos(n arccosx), &amp; x \in [1, -1] \\
+T_{n}(t) &amp;= cosnt, &amp; t \in [0, \pi]
+\end{align}
+\]</span></p>
+<p>Similarly, the second kind of chebyshev polynomial is deduced in the
+same way, but for a slightly different equation:</p>
+<p><span class="math display">\[
+\begin{equation}
+( 1 - x^2 ) y^{\prime \prime} - 3 x y^{\prime} + (n+2) n y = 0
+\end{equation}
+\]</span></p>
+<p>By a process which I still cannot understand, the solution is as
+follows</p>
+<p><span class="math display">\[
+\begin{equation}
+y(t) = \frac{sin((n+1)t)}{sint}
+\end{equation}
+\]</span></p>
+<p>Then the second kind of chebyshev polynomial is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+U_{n}(x) &amp;= \frac{sin((n+1)arccosx)}{sin(arccosx)} \\
+U_{n}(t) &amp;= \frac{sin((n+1)t)}{sint}
+\end{align}
+\]</span></p>
+<h2 data-number="1.2" id="iteration-formula-for-both-kinds"><span
+class="header-section-number">1.2</span> Iteration formula for both
+kinds</h2>
+<p>Apparently, one of the iteration formulas for first kind is as
+follows</p>
+<p><span class="math display">\[
+\begin{align}
+cos(n-1)t + cos(n+1)t = 2 cosnt cost \\
+T_{n-1} + T_{n+1} = 2 T_{n} T_{1} \\
+\end{align}
+\]</span></p>
+<p>Similarly, one of the iteration formulas for second kind is as
+follows</p>
+<p><span class="math display">\[
+\begin{align}
+U_{n-1} + U_{n+1} = 2 U_{n} U_{1}
+\end{align}
+\]</span></p>
+<h2 data-number="1.3" id="review-fourier-series"><span
+class="header-section-number">1.3</span> Review Fourier series</h2>
+<h3 data-number="1.3.1"
+id="the-properties-of-sine-and-cosine-functions"><span
+class="header-section-number">1.3.1</span> The properties of sine and
+cosine functions</h3>
+<p><span class="math display">\[
+\begin{align}
+cos(\alpha + \beta) &amp;= cos(\alpha) cos(\beta) - sin(\alpha)
+sin(\beta) \\
+sin(\alpha - \beta) &amp;= sin(\alpha) cos(\beta) - cos(\alpha)
+sin(\beta) \\
+\int_{-1}^{1} cos(m \pi x) cos(n \pi x) dx &amp;= 0, m \neq n \\
+\int_{-1}^{1} sin(m \pi x) sin(n \pi x) dx &amp;= 0, m \neq n \\
+\int_{-1}^{1} cos(m \pi x) cos(n \pi x) dx &amp;= 1, m = n \geq 1 \\
+\int_{-1}^{1} sin(m \pi x) sin(n \pi x) dx &amp;= 1, m = n \geq 1 \\
+\int_{-1}^{1} cos(m \pi x) cos(n \pi x) dx &amp;= 2, m = n = 0 \\
+\int_{-1}^{1} sin(m \pi x) sin(n \pi x) dx &amp;= 0, m = n = 0 \\
+\int_{-1}^{1} sin(m \pi x) cos(n \pi x) dx &amp;= 0, \\
+\end{align}
+\]</span></p>
+<h3 data-number="1.3.2" id="fourier-sine-series"><span
+class="header-section-number">1.3.2</span> Fourier sine series</h3>
+<p>It’s well known that Taylor series is as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+f(x) = \sum_{n=1}^{\infty} \frac{f^{(n)}(x_{0})}{n!} (x-x_{0})^{n}
+\end{equation}
+\]</span></p>
+<p>It requires the existence of <span
+class="math inline">\(f^{(n)}(x_{0})\)</span>, which is hardly
+satisfied.</p>
+<p>So, introduce another series without powers, called Fourier series as
+follows</p>
+<p><span class="math display">\[
+\begin{equation}
+f(x) = \sum_{n=1}^{\infty} B_{n} sin(\frac{n \pi x}{L})
+\end{equation}
+\]</span></p>
+<p>Assume this series is converged, then how should <span
+class="math inline">\(B_{n}\)</span> be found? Add assumption of <span
+class="math inline">\(f(x)\)</span> is odd function. Use the
+orthogonality as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\int_{-L}^{L} f(x) sin(\frac{m \pi x}{L}) dx &amp;= \int_{-L}^{L}
+\sum_{n=1}^{\infty} B_{n} sin(\frac{n \pi x}{L}) \cdot sin(\frac{m \pi
+x}{L}) dx \\
+&amp;= B_{m} L \\
+\end{align}
+\]</span></p>
+<p>Then, the coefficients are obtained as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+B_{m} = \frac{1}{L} \int_{-L}^{L} f(x) sin(\frac{m \pi x}{L}) dx, m \geq
+0
+\end{equation}
+\]</span></p>
+<h3 data-number="1.3.3" id="fourier-cosine-series"><span
+class="header-section-number">1.3.3</span> Fourier cosine series</h3>
+<p>Similarly, the Fourier cosine series can be expressed as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+f(x) = \sum_{n=1}^{\infty} A_{n} cos(\frac{n \pi x}{L})
+\end{equation}
+\]</span></p>
+<p>Assume this series is converged, then how should <span
+class="math inline">\(A_{n}\)</span> be found? Add assumption of <span
+class="math inline">\(f(x)\)</span> is even function. Use the
+orthogonality as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\int_{-L}^{L} f(x) cos(\frac{m \pi x}{L}) dx &amp;= \int_{-L}^{L}
+\sum_{n=1}^{\infty} A_{n} cos(\frac{n \pi x}{L}) \cdot cos(\frac{m \pi
+x}{L}) dx \\
+&amp;= A_{m} L \\
+\end{align}
+\]</span></p>
+<p>Then, the coefficients are obtained as follows</p>
+<p><span class="math display">\[
+\begin{align}
+A_{m} &amp;= \frac{1}{L} \int_{-L}^{L} f(x) cos(\frac{m \pi x}{L}) dx, m
+\geq 1 \\
+&amp;= \frac{1}{2L} \int_{-L}^{L} f(x) cos(\frac{m \pi x}{L}) dx, m = 0
+\\
+\end{align}
+\]</span></p>
+<h2 data-number="1.4"
+id="the-orthogonality-of-chebyshev-polynomials"><span
+class="header-section-number">1.4</span> The orthogonality of Chebyshev
+polynomials</h2>
+<h3 data-number="1.4.1" id="integral"><span
+class="header-section-number">1.4.1</span> Integral</h3>
+<p>We have the following property.</p>
+<p><span class="math display">\[
+\begin{align}
+\int_{0}^{\pi} cos(m t) cos(n t) dt &amp;= 0, &amp; m \neq n \\
+&amp;= \pi / 2, &amp; m = n \neq 0 \\
+&amp;= \pi, &amp; m = n = 0 \\
+\end{align}
+\]</span></p>
+<p>Then, <span class="math inline">\(x = cost\)</span>, so <span
+class="math inline">\(dx / dt = -sint\)</span>, i.e. <span
+class="math inline">\(dt = -1/sint \times dx\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+\int_{0}^{\pi} cos(m t) cos(n t) dt &amp;= \int_{1}^{-1} T_{m}(x)
+T_{n}(x) \frac{-1}{sint} dx \\   
+&amp;= \int_{-1}^{1} \frac{T_{m}(x) T_{n}(x)}{\sqrt{1-x^{2}}} dx \\
+&amp;= 0, &amp; m \neq n \\
+&amp;= \pi / 2, &amp; m = n \neq 0 \\
+&amp;= \pi, &amp; m = n = 0 \\
+\end{align}
+\]</span></p>
+<h3 data-number="1.4.2" id="discrete"><span
+class="header-section-number">1.4.2</span> Discrete</h3>
+<p>Given a value of <span class="math inline">\(N\)</span>, the
+function, <span class="math inline">\(T_{N}(x)\)</span> is determined.
+Then the set of zeros for function <span
+class="math inline">\(T_{N}(x)\)</span> is determined. So is the case of
+extrema.</p>
+<p><span class="math display">\[
+\begin{align}
+x_{k} &amp;= cos(\frac{\pi (k - 1/2)}{N}), &amp; k = 1, 2, ..., N \\
+\tilde{x_{k}} &amp;= cos(\frac{\pi k}{N}), &amp; k = 0, 1, ..., N
+\end{align}
+\]</span></p>
+<p>The discrete orthogonality of Chebyshev polynomial is described as
+follows.</p>
+<ul>
+<li><p>If <span class="math inline">\(x_{k} (k = 1, 2, ..., N)\)</span>
+are the <span class="math inline">\(N\)</span> zeros of <span
+class="math inline">\(T_{N}(x)\)</span>, and if <span
+class="math inline">\(i, j &lt; N\)</span>, then</p>
+<p><span class="math display">\[
+  \begin{align}
+  \sum_{k=1}^{N} T_{i}(x_{k}) T_{j}(x_{k}) &amp;= \alpha_{i} \delta_{ij}
+\\
+  \alpha_{i} &amp;= \frac{N}{2}, i \neq 0 \\
+  &amp;= N, i = 0
+  \end{align}
+  \]</span></p></li>
+<li><p>If <span class="math inline">\(\tilde{x_{k}} (k = 0, 1, ...,
+N)\)</span> are the <span class="math inline">\(N+1\)</span> extremas of
+<span class="math inline">\(T_{N}(x)\)</span>, and if <span
+class="math inline">\(i, j &lt; N\)</span>, then</p>
+<p><span class="math display">\[
+  \begin{align}
+  \sum_{k=0}^{N} {\prime \prime} T_{i}(\tilde{x_{k}})
+T_{j}(\tilde{x_{k}}) &amp;= \beta_{i} \delta_{ij} \\
+  \beta_{i} &amp;= \frac{N}{2}, i \neq 0, N \\
+  &amp;= N, i = 0, N
+  \end{align}
+  \]</span></p>
+<p>The proof of the discrete orthogonality relationship can be referred
+in this <a
+href="../../documents/study/01-Chebyshev%20polynomials%20and%20Chebyshev%20series.pdf">document</a>.</p></li>
+</ul>
+<h3 data-number="1.4.3"
+id="construction-of-the-chebyshev-expansion-of-arbitrary-function"><span
+class="header-section-number">1.4.3</span> Construction of the Chebyshev
+expansion of arbitrary function</h3>
+<p>By the way in the Fourier series, employ the discrete orthogonality
+relationship in the determination of Chebyshev expansion coefficients
+and we can construct the Chebyshev expansion of arbitrary function.</p>
+<p>An arbitrary function <span class="math inline">\(f(x)\)</span> can
+be approximated in the interval <span class="math inline">\([-1,
+1]\)</span> by either one of the two formulae</p>
+<p><span class="math display">\[
+\begin{align}
+f(x) &amp;= \sum_{j=0}^{N-1} {\prime} a_{j} T_{j}(x) \\
+a_{j} &amp;= \frac{2}{N} \sum_{k=1}^{N} f(x_{k}) T_{j}(x_{k}), j = 0,
+..., N-1 \\
+f(x) &amp;= \sum_{j=0}^{N} {\prime \prime} b_{j} T_{j}(x) \\
+a_{j} &amp;= \frac{2}{N} \sum_{k=0}^{N} {\prime \prime} f(\tilde{x_{k}})
+T_{j}(\tilde{x_{k}}), j = 0, ..., N
+\end{align}
+\]</span></p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2015-06-26 with pandoc
+</footer>
+</body>
+</html>

@@ -5,259 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-07-17" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>MPI</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; } /* Alert */
-code span.an { color: #008000; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #0000ff; } /* ControlFlow */
-code span.ch { color: #008080; } /* Char */
-code span.cn { } /* Constant */
-code span.co { color: #008000; } /* Comment */
-code span.cv { color: #008000; } /* CommentVar */
-code span.do { color: #008000; } /* Documentation */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.im { } /* Import */
-code span.in { color: #008000; } /* Information */
-code span.kw { color: #0000ff; } /* Keyword */
-code span.op { } /* Operator */
-code span.ot { color: #ff4000; } /* Other */
-code span.pp { color: #ff4000; } /* Preprocessor */
-code span.sc { color: #008080; } /* SpecialChar */
-code span.ss { color: #008080; } /* SpecialString */
-code span.st { color: #008080; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #008080; } /* VerbatimString */
-code span.wa { color: #008000; font-weight: bold; } /* Warning */
-</style>
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -266,50 +19,97 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <h3 class="date">2021-07-17</h3>
 <div id="TOC">
 <ul>
-<li><a href="#io"><span class="toc-section-number">1</span> I/O</a>
+<li><a href="#io" id="toc-io"><span class="toc-section-number">1</span>
+I/O</a>
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1.1</span> Basics</a></li>
-<li><a href="#file-view"><span class="toc-section-number">1.2</span> File View</a></li>
-<li><a href="#example"><span class="toc-section-number">1.3</span> Example</a></li>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1.1</span> Basics</a></li>
+<li><a href="#file-view" id="toc-file-view"><span
+class="toc-section-number">1.2</span> File View</a></li>
+<li><a href="#example" id="toc-example"><span
+class="toc-section-number">1.3</span> Example</a></li>
 </ul></li>
-<li><a href="#derived-datatype"><span class="toc-section-number">2</span> Derived Datatype</a>
+<li><a href="#derived-datatype" id="toc-derived-datatype"><span
+class="toc-section-number">2</span> Derived Datatype</a>
 <ul>
-<li><a href="#indexed-datatype"><span class="toc-section-number">2.1</span> Indexed Datatype</a></li>
+<li><a href="#indexed-datatype" id="toc-indexed-datatype"><span
+class="toc-section-number">2.1</span> Indexed Datatype</a></li>
 </ul></li>
-<li><a href="#tips"><span class="toc-section-number">3</span> Tips</a>
+<li><a href="#tips" id="toc-tips"><span
+class="toc-section-number">3</span> Tips</a>
 <ul>
-<li><a href="#run-on-multi-nodes"><span class="toc-section-number">3.1</span> Run On Multi Nodes</a></li>
-<li><a href="#openmpi-hangs-when"><span class="toc-section-number">3.2</span> OpenMPI hangs when</a></li>
-<li><a href="#openmpi-pass-environment-variable-to-remote-nodes"><span class="toc-section-number">3.3</span> OpenMPI pass environment variable to remote nodes</a></li>
+<li><a href="#run-on-multi-nodes" id="toc-run-on-multi-nodes"><span
+class="toc-section-number">3.1</span> Run On Multi Nodes</a></li>
+<li><a href="#openmpi-hangs-when" id="toc-openmpi-hangs-when"><span
+class="toc-section-number">3.2</span> OpenMPI hangs when</a></li>
+<li><a href="#openmpi-pass-environment-variable-to-remote-nodes"
+id="toc-openmpi-pass-environment-variable-to-remote-nodes"><span
+class="toc-section-number">3.3</span> OpenMPI pass environment variable
+to remote nodes</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="io"><span class="header-section-number">1</span> I/O</h1>
-<h2 data-number="1.1" id="basics"><span class="header-section-number">1.1</span> Basics</h2>
-<p>The basic things are trivial, including <code>mpi_file_open, mpi_file_close</code>. Normally, when the file is opened, we write data into the file using <code>mpi_file_write</code> or <code>mpi_file_write_at</code>. (<code>mpi_file_write_all</code> or <code>mpi_file_write_at_all</code> are the collective version.)</p>
-<p>Then if we want to write data again, we need to reconfigure the file pointer or the explicit offset. For the explicit offset, we calculate it by counting the number of data elements already written. For the file pointer, we could also explicitly calculate it by counting or use the procedures <code>mpi_file_get_position</code> and <code>mpi_file_get_byte_offset</code> combined with explicitly calculating the starting location of the next write operation.</p>
-<p><code>mpi_file_get_position</code> gets the current position of the individual file pointer in units of etype. The result is <code>offset</code>. Then we provide <code>offset</code> to <code>mpi_file_get_byte_offset</code> to convert a view relative <code>offset</code> (in units of etype) into a displacement in bytes from the beginning of the file. The result is <code>disp</code>.</p>
-<p>Next we could use <code>mpi_file_set_view</code> to change the file view of the process. Then we could use <code>mpi_file_write_all</code> for the parallel writing operation. Though <code>mpi_file_write_all</code> is a blocking function. Note, currently I am not able to figure out how to use <code>mpi_file_write_at</code> when the previous write is done by <code>mpi_file_set_view</code> and <code>mpi_file_write</code>.</p>
-<h2 data-number="1.2" id="file-view"><span class="header-section-number">1.2</span> File View</h2>
-<p>A file view is a triplet of arguments (<code>displacement, etype, filetype</code>) that is passed to <code>MPI_File_set_view</code>.</p>
+<h1 data-number="1" id="io"><span class="header-section-number">1</span>
+I/O</h1>
+<h2 data-number="1.1" id="basics"><span
+class="header-section-number">1.1</span> Basics</h2>
+<p>The basic things are trivial, including
+<code>mpi_file_open, mpi_file_close</code>. Normally, when the file is
+opened, we write data into the file using <code>mpi_file_write</code> or
+<code>mpi_file_write_at</code>. (<code>mpi_file_write_all</code> or
+<code>mpi_file_write_at_all</code> are the collective version.)</p>
+<p>Then if we want to write data again, we need to reconfigure the file
+pointer or the explicit offset. For the explicit offset, we calculate it
+by counting the number of data elements already written. For the file
+pointer, we could also explicitly calculate it by counting or use the
+procedures <code>mpi_file_get_position</code> and
+<code>mpi_file_get_byte_offset</code> combined with explicitly
+calculating the starting location of the next write operation.</p>
+<p><code>mpi_file_get_position</code> gets the current position of the
+individual file pointer in units of etype. The result is
+<code>offset</code>. Then we provide <code>offset</code> to
+<code>mpi_file_get_byte_offset</code> to convert a view relative
+<code>offset</code> (in units of etype) into a displacement in bytes
+from the beginning of the file. The result is <code>disp</code>.</p>
+<p>Next we could use <code>mpi_file_set_view</code> to change the file
+view of the process. Then we could use <code>mpi_file_write_all</code>
+for the parallel writing operation. Though
+<code>mpi_file_write_all</code> is a blocking function. Note, currently
+I am not able to figure out how to use <code>mpi_file_write_at</code>
+when the previous write is done by <code>mpi_file_set_view</code> and
+<code>mpi_file_write</code>.</p>
+<h2 data-number="1.2" id="file-view"><span
+class="header-section-number">1.2</span> File View</h2>
+<p>A file view is a triplet of arguments
+(<code>displacement, etype, filetype</code>) that is passed to
+<code>MPI_File_set_view</code>.</p>
 <ul>
-<li><code>displacement</code> = number of bytes to be skipped from the start of the file</li>
-<li><code>etype</code> = unit of data access (can be any basic or derived datatype)</li>
+<li><code>displacement</code> = number of bytes to be skipped from the
+start of the file</li>
+<li><code>etype</code> = unit of data access (can be any basic or
+derived datatype)</li>
 <li><code>filetype</code> = specifies layout of etypes within file</li>
 </ul>
 <figure>
-<img src="MPI_fileview.jpg" alt="MPI fileview" /><figcaption aria-hidden="true">MPI fileview</figcaption>
+<img src="MPI_fileview.jpg" alt="MPI fileview" />
+<figcaption aria-hidden="true">MPI fileview</figcaption>
 </figure>
-<p>The file view sets the starting location to write by specifying <code>displacement</code>. The <code>displacement</code> is measured from the head of the file.</p>
+<p>The file view sets the starting location to write by specifying
+<code>displacement</code>. The <code>displacement</code> is measured
+from the head of the file.</p>
 <p>References</p>
 <ul>
-<li><a href="https://cvw.cac.cornell.edu/ParallelIO/fileviews">Parallel I/O: File Views</a></li>
-<li><a href="MPI_parallel-io-mpi-io.pdf">MPI_parallel-io-mpi-io.pdf</a></li>
+<li><a href="https://cvw.cac.cornell.edu/ParallelIO/fileviews">Parallel
+I/O: File Views</a></li>
+<li><a
+href="MPI_parallel-io-mpi-io.pdf">MPI_parallel-io-mpi-io.pdf</a></li>
 <li><a href="MPI-IO_2017.pdf">MPI-IO_2017.pdf</a></li>
 </ul>
-<h2 data-number="1.3" id="example"><span class="header-section-number">1.3</span> Example</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> io</span>
+<h2 data-number="1.3" id="example"><span
+class="header-section-number">1.3</span> Example</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> io</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">continue</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">!</span></span>
@@ -364,34 +164,80 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end subroutine</span> writeBinFile</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">!</span></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="kw">end program</span></span></code></pre></div>
-<p>To write to a file multiple times, we should notice that the starting location of the write operation must be set again after a write opeartion. As the above example shows, 2 simple plans for writing twice. 1) 2 times of (<code>MPI_FILE_SET_VIEW</code> + <code>MPI_FILE_WRITE_ALL</code>) 2) 2 times of (<code>MPI_FILE_WRITE_AT_ALL</code>). In both plans, <code>displacement</code> is measured from the head of the file for both write opeartions. Another hybrid plan is (<code>MPI_FILE_WRITE_AT_ALL</code>) + (<code>MPI_FILE_SET_VIEW</code> + <code>MPI_FILE_WRITE_ALL</code>) using the absolute <code>displacement</code> measured from the head of the file for both write opeartions. The last hybrid plan is (<code>MPI_FILE_SET_VIEW</code> + <code>MPI_FILE_WRITE_ALL</code>) + (<code>MPI_FILE_WRITE_AT_ALL</code>). But it seems like the file view messes up the displacement for <code>MPI_FILE_WRITE_AT_ALL</code>. I am not able to figure out how to correctly implement this hybrid plan.</p>
-<p>After one write operation, the explicit setting <code>displacement</code> could be replaced by the procedures as follows,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>disp <span class="kw">=</span> nrank <span class="kw">*</span> BYTESIZE <span class="kw">+</span> myrank <span class="kw">*</span> BYTESIZE</span>
+<p>To write to a file multiple times, we should notice that the starting
+location of the write operation must be set again after a write
+opeartion. As the above example shows, 2 simple plans for writing twice.
+1) 2 times of (<code>MPI_FILE_SET_VIEW</code> +
+<code>MPI_FILE_WRITE_ALL</code>) 2) 2 times of
+(<code>MPI_FILE_WRITE_AT_ALL</code>). In both plans,
+<code>displacement</code> is measured from the head of the file for both
+write opeartions. Another hybrid plan is
+(<code>MPI_FILE_WRITE_AT_ALL</code>) + (<code>MPI_FILE_SET_VIEW</code> +
+<code>MPI_FILE_WRITE_ALL</code>) using the absolute
+<code>displacement</code> measured from the head of the file for both
+write opeartions. The last hybrid plan is
+(<code>MPI_FILE_SET_VIEW</code> + <code>MPI_FILE_WRITE_ALL</code>) +
+(<code>MPI_FILE_WRITE_AT_ALL</code>). But it seems like the file view
+messes up the displacement for <code>MPI_FILE_WRITE_AT_ALL</code>. I am
+not able to figure out how to correctly implement this hybrid plan.</p>
+<p>After one write operation, the explicit setting
+<code>displacement</code> could be replaced by the procedures as
+follows,</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode fortran"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>disp <span class="kw">=</span> nrank <span class="kw">*</span> BYTESIZE <span class="kw">+</span> myrank <span class="kw">*</span> BYTESIZE</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">! the following lines give the same disp as the above line</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">call MPI_FILE_GET_POSITION(thefile,offset,ierr)</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">call MPI_FILE_GET_BYTE_OFFSET(thefile,offset,disp,ierr)</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>disp <span class="kw">=</span> disp <span class="kw">+</span> (nrank<span class="kw">-</span><span class="dv">1</span>)<span class="kw">*</span>BYTESIZE</span></code></pre></div>
-<p>Since one write operation takes <code>BYTESIZE</code>, it needs to move the file pointer forward by <code>(nrank-1)*BYTESIZE</code>.</p>
-<h1 data-number="2" id="derived-datatype"><span class="header-section-number">2</span> Derived Datatype</h1>
-<h2 data-number="2.1" id="indexed-datatype"><span class="header-section-number">2.1</span> Indexed Datatype</h2>
-<p>The indexed datatype basically includes block offset and block length. It includes multiple sections of an array to make up of a new element of the newly created datatype.</p>
+<p>Since one write operation takes <code>BYTESIZE</code>, it needs to
+move the file pointer forward by <code>(nrank-1)*BYTESIZE</code>.</p>
+<h1 data-number="2" id="derived-datatype"><span
+class="header-section-number">2</span> Derived Datatype</h1>
+<h2 data-number="2.1" id="indexed-datatype"><span
+class="header-section-number">2.1</span> Indexed Datatype</h2>
+<p>The indexed datatype basically includes block offset and block
+length. It includes multiple sections of an array to make up of a new
+element of the newly created datatype.</p>
 <figure>
-<img src="MPI_illustration_of_mpi_type_indexed.jpg" alt="Indexed datatype includes block length and block offset" /><figcaption aria-hidden="true">Indexed datatype includes block length and block offset</figcaption>
+<img src="MPI_illustration_of_mpi_type_indexed.jpg"
+alt="Indexed datatype includes block length and block offset" />
+<figcaption aria-hidden="true">Indexed datatype includes block length
+and block offset</figcaption>
 </figure>
-<p>For reference, check P14 in the following attached <a href="MPI_DataTypes.pdf">MPI DataTypes PDF</a>.</p>
-<h1 data-number="3" id="tips"><span class="header-section-number">3</span> Tips</h1>
-<h2 data-number="3.1" id="run-on-multi-nodes"><span class="header-section-number">3.1</span> Run On Multi Nodes</h2>
-<p>In Taicang cluster (太仓集群), we have to use the following commands to run on multi nodes,</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mpirun</span> <span class="at">-n</span> 4 <span class="at">-hosts</span> node2,node3 <span class="at">-perhost</span> 2 <span class="at">-env</span> I_MPI_FABRICS tcp ./test</span></code></pre></div>
-<h2 data-number="3.2" id="openmpi-hangs-when"><span class="header-section-number">3.2</span> OpenMPI hangs when</h2>
-<p>When the cluster has virtual NIC in addition to the real NIC, OpenMPI hangs with the default parameter. The reason is that OpenMPI uses tcp to connect to the wrong NIC, i.e. <code>virbr0</code>. The Taicang cluster has the real NIC <code>enp97s0f1</code> and <code>virbr0</code>. The correct command of running OpenMPI across multiple nodes is</p>
+<p>For reference, check P14 in the following attached <a
+href="MPI_DataTypes.pdf">MPI DataTypes PDF</a>.</p>
+<h1 data-number="3" id="tips"><span
+class="header-section-number">3</span> Tips</h1>
+<h2 data-number="3.1" id="run-on-multi-nodes"><span
+class="header-section-number">3.1</span> Run On Multi Nodes</h2>
+<p>In Taicang cluster (太仓集群), we have to use the following commands
+to run on multi nodes,</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mpirun</span> <span class="at">-n</span> 4 <span class="at">-hosts</span> node2,node3 <span class="at">-perhost</span> 2 <span class="at">-env</span> I_MPI_FABRICS tcp ./test</span></code></pre></div>
+<h2 data-number="3.2" id="openmpi-hangs-when"><span
+class="header-section-number">3.2</span> OpenMPI hangs when</h2>
+<p>When the cluster has virtual NIC in addition to the real NIC, OpenMPI
+hangs with the default parameter. The reason is that OpenMPI uses tcp to
+connect to the wrong NIC, i.e. <code>virbr0</code>. The Taicang cluster
+has the real NIC <code>enp97s0f1</code> and <code>virbr0</code>. The
+correct command of running OpenMPI across multiple nodes is</p>
 <pre><code>mpirun -x LD_LIBRARY_PATH -n 2 -hostfile machine --mca btl_tcp_if_include enp97s0f1 ~/NFS_Project/NFS/relwithdebinfo_gnu/bin/nfs_opt_g nfs.json</code></pre>
 <p>The content of the machine file for running 2 procs is</p>
 <pre><code>node3 slots=1
 node4 slots=1</code></pre>
-<p>Reference: <a href="https://www.open-mpi.org/faq/?category=tcp#tcp-selection">7. How do I tell Open MPI which IP interfaces / networks to use?</a></p>
-<h2 data-number="3.3" id="openmpi-pass-environment-variable-to-remote-nodes"><span class="header-section-number">3.3</span> OpenMPI pass environment variable to remote nodes</h2>
-<p>Running NFR code on the remote nodes requires the complete set up of environment variables. NFR compiled by OpenMPI-4 and gfortran-10.2 requires the loading of <code>libgfortran.so.5</code>. Incomplete set up of the environment variables results in <code>error while loading shared libraries: libgfortran.so.5</code>. The correct command is</p>
+<p>Reference: <a
+href="https://www.open-mpi.org/faq/?category=tcp#tcp-selection">7. How
+do I tell Open MPI which IP interfaces / networks to use?</a></p>
+<h2 data-number="3.3"
+id="openmpi-pass-environment-variable-to-remote-nodes"><span
+class="header-section-number">3.3</span> OpenMPI pass environment
+variable to remote nodes</h2>
+<p>Running NFR code on the remote nodes requires the complete set up of
+environment variables. NFR compiled by OpenMPI-4 and gfortran-10.2
+requires the loading of <code>libgfortran.so.5</code>. Incomplete set up
+of the environment variables results in
+<code>error while loading shared libraries: libgfortran.so.5</code>. The
+correct command is</p>
 <pre><code>mpirun -x LD_LIBRARY_PATH -n 2 -hostfile machine --mca btl_tcp_if_include enp97s0f1 ~/NFS_Project/NFS/relwithdebinfo_gnu/bin/nfs_opt_g nfs.json</code></pre>
 </div>
 <div class="customHr">.</div>

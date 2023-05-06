@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2015-09-26" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Notes on Book “Intro to perturbation theory”</h1>
+<h3 class="date">2015-09-26</h3>
+<div id="TOC">
+<ul>
+<li><a href="#introduction" id="toc-introduction"><span
+class="toc-section-number">1</span> 1 Introduction</a>
+<ul>
+<li><a href="#section" id="toc-section"><span
+class="toc-section-number">1.1</span> 1.1</a></li>
+<li><a href="#expansions" id="toc-expansions"><span
+class="toc-section-number">1.2</span> 1.2 Expansions</a></li>
+<li><a href="#gauge-functions" id="toc-gauge-functions"><span
+class="toc-section-number">1.3</span> 1.3 Gauge functions</a></li>
+<li><a href="#order-symbols" id="toc-order-symbols"><span
+class="toc-section-number">1.4</span> 1.4 Order symbols</a></li>
+<li><a href="#asymptotic-series" id="toc-asymptotic-series"><span
+class="toc-section-number">1.5</span> 1.5 Asymptotic series</a></li>
+<li><a href="#asymptotic-expansions-and-sequences"
+id="toc-asymptotic-expansions-and-sequences"><span
+class="toc-section-number">1.6</span> 1.6 Asymptotic Expansions and
+Sequences</a></li>
+<li><a href="#convergent-versus-asymptotic-series"
+id="toc-convergent-versus-asymptotic-series"><span
+class="toc-section-number">1.7</span> 1.7 Convergent Versus Asymptotic
+Series</a></li>
+<li><a href="#elementary-operations-on-asymptotic-expansions"
+id="toc-elementary-operations-on-asymptotic-expansions"><span
+class="toc-section-number">1.8</span> 1.8 Elementary Operations on
+Asymptotic Expansions</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="introduction"><span
+class="header-section-number">1</span> 1 Introduction</h1>
+<h2 data-number="1.1" id="section"><span
+class="header-section-number">1.1</span> 1.1</h2>
+<p>Mathematical modeling requires dimensional analysis.</p>
+<h2 data-number="1.2" id="expansions"><span
+class="header-section-number">1.2</span> 1.2 Expansions</h2>
+<p>Expand in power series of a parameter or a variable, as binomial
+expansions or Taylor series.</p>
+<ol type="1">
+<li><p>Binomial theorem</p>
+<p><span class="math display">\[
+\begin{align}
+(a+b)^{n} = \sum^{n}_{m=0} \frac{n!}{m! (n-m)!} a^{n-m} b^{m}
+\end{align}
+\]</span></p>
+<p>valid for any positive or negative number <span
+class="math inline">\(n\)</span> provided that <span
+class="math inline">\(|b/a| &lt; 1\)</span>.</p></li>
+<li><p>Taylor expansions</p>
+<p><span class="math display">\[
+\begin{align}
+f(x) = \sum^{\infty}_{n=0} \frac{f^{(n)}(x_{0})}{n!} (x - x_{0})^{n}
+\end{align}
+\]</span></p>
+<p>Frequently used series</p>
+<p><span class="math display">\[
+\begin{align}
+sinx &amp;=  \\
+cosx &amp;=  \\
+e^{x} &amp;=  \\
+ln(1+x) &amp;=  \\
+\end{align}
+\]</span></p></li>
+</ol>
+<h2 data-number="1.3" id="gauge-functions"><span
+class="header-section-number">1.3</span> 1.3 Gauge functions</h2>
+<p>Interested in <span class="math inline">\(f(\varepsilon), \varepsilon
+\rightarrow 0\)</span>. Suppose parameters are normalized so that <span
+class="math inline">\(\varepsilon \geq 0\)</span>. For classification,
+divide by the rate at which it tends to <span
+class="math inline">\(0\)</span> or infinity. Compare with known
+functions. These comparison functions are called gauge functions. The
+simplest and most useful are the powers of <span
+class="math inline">\(\varepsilon\)</span> and inverse powers of <span
+class="math inline">\(\varepsilon\)</span>. <span
+class="math inline">\(e^{-1/\varepsilon}\)</span> tends to <span
+class="math inline">\(0\)</span> faster than any power of <span
+class="math inline">\(\varepsilon\)</span>. Therefore the power of <span
+class="math inline">\(\varepsilon\)</span> are not complete and must be
+supplemented by <span class="math inline">\(e^{-1/\varepsilon}\)</span>.
+Similarly, supplements include <span
+class="math inline">\(ln(1/\varepsilon)\)</span> etc.</p>
+<h2 data-number="1.4" id="order-symbols"><span
+class="header-section-number">1.4</span> 1.4 Order symbols</h2>
+<p><span class="math inline">\(sin \epsilon\)</span> tends to 0 at the
+same rate that <span class="math inline">\(\epsilon\)</span> tends to
+<span class="math inline">\(0\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+sin \epsilon = O(\epsilon) \quad as \quad \epsilon \rightarrow 0
+\end{align}
+\]</span></p>
+<p>In general, we put</p>
+<p><span class="math display">\[
+\begin{align}
+f(\epsilon) = O \big ( g(\epsilon) \big ) \quad as \quad \epsilon
+\rightarrow 0
+\end{align}
+\]</span></p>
+<p>if</p>
+<p><span class="math display">\[
+\begin{align}
+lim_{\epsilon \rightarrow 0} \frac{f(\epsilon)}{g(\epsilon)} = A, \quad
+0 &lt; |A| &lt; \infty
+\end{align}
+\]</span></p>
+<h2 data-number="1.5" id="asymptotic-series"><span
+class="header-section-number">1.5</span> 1.5 Asymptotic series</h2>
+<p>Find the value of the integral</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) = \int^{\infty}_{0} \frac{\omega e^{-x}}{\omega + x} dx
+\end{align}
+\]</span></p>
+<p>Use Laplace’s method.</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\omega}{\omega+x} = \frac{1}{1+\omega^{-1}x} = 1 -
+\frac{x}{\omega} + \frac{x^{2}}{\omega^{2}} - \frac{x^{3}}{\omega^{3}} +
+... = \sum^{\infty}_{n=0} \frac{(-1)^{n} x^{n}}{\omega^{n}}
+\end{align}
+\]</span></p>
+<p>which converges for <span class="math inline">\(x &lt;
+\omega\)</span>.</p>
+<p>Substitute the series into the original integral</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) = \sum^{\infty}_{n=0} \Big [ \frac{(-1)^{n}}{\omega^{n}}
+\int^{\infty}_{0} x^{n} e^{-x} dx \Big ]
+\end{align}
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+\begin{align}
+\int^{\infty}_{0} x^{n} e^{-x} dx = n!
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is integer, so</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) = \sum^{\infty}_{n=0} \frac{(-1)^{n} n!}{\omega^{n}}
+\end{align}
+\]</span></p>
+<p>which diverges for all values of <span
+class="math inline">\(\omega\)</span>.</p>
+<p>To give a convergent series of such form, we truncate the series</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\omega}{\omega+x} = \sum^{N}_{n=0} \frac{(-1)^{n}
+x^{n}}{\omega^{n}}
+\end{align}
+\]</span></p>
+<p>which is a geometric series whose sum is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{1 - (-x/\omega)^{N+1}}{1+x/\omega}
+\end{align}
+\]</span></p>
+<p>Hence, we separate the series to 2 parts</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\omega}{\omega + x} &amp;= \sum^{N}_{n=0} \frac{(-1)^{n}
+x^{n}}{\omega^{n}} + \hat{R}_{N}(x, \omega) \\
+\hat{R}_{N}(x, \omega) &amp;= \frac{\omega}{\omega + x} - \sum^{N}_{n=0}
+\frac{(-1)^{n} x^{n}}{\omega^{n}} =
+\frac{(-x)^{N+1}}{\omega^{N}(\omega+x)} \\
+\end{align}
+\]</span></p>
+<p>In this form</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) &amp;= \sum^{N}_{n=0} \frac{(-1)^{n} n!}{\omega^{n}} +
+R_{N}(\omega) \\
+R_{N}(\omega) &amp;= \frac{(-1)^{N+1}}{\omega^{N}} \int^{\infty}_{0}
+\frac{x^{N+1} e^{-x}}{\omega+x} dx \\
+\end{align}
+\]</span></p>
+<p>which is valid for <span class="math inline">\(R_{N}(\omega)
+\rightarrow 0\)</span>.</p>
+<p>One way to match is fixing <span
+class="math inline">\(\omega\)</span> as <span class="math inline">\(N
+\rightarrow \infty\)</span>. However, <span
+class="math inline">\(R_{N}(\omega) \rightarrow \infty as N \rightarrow
+\infty\)</span>.</p>
+<p>Another way is fixing <span class="math inline">\(N as \omega
+\rightarrow \infty\)</span>. We note</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{1}{\omega+x} &amp;&lt; \frac{1}{x} \\
+|R_{N}(\omega)| &amp;&lt; \frac{1}{\omega^{N}} \int^{\infty}_{0} x^{N}
+e^{-x} dx = \frac{N!}{\omega^{N}} \\
+\end{align}
+\]</span></p>
+<p>Then <span class="math inline">\(R_{N}(\omega) \rightarrow 0 as
+\omega \rightarrow \infty\)</span> for <span
+class="math inline">\(N\)</span> fixed. That’s where the series
+converges.</p>
+<p>In general, as asymptotic series is</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) \sim \sum^{\infty}_{n=0} \frac{a_{n}}{\omega^{n}} \quad as
+\quad \omega \rightarrow \infty
+\end{align}
+\]</span></p>
+<p>if and only if</p>
+<p><span class="math display">\[
+\begin{align}
+f(\omega) ~ \sum^{N}_{n=0} \frac{a_{n}}{\omega^{n}} +
+O(\frac{1}{\omega^{N}}) \quad as \quad \omega \rightarrow \infty
+\end{align}
+\]</span></p>
+<p>There is always an optimum value of <span
+class="math inline">\(N\)</span> for a given <span
+class="math inline">\(\omega\)</span>.</p>
+<h2 data-number="1.6" id="asymptotic-expansions-and-sequences"><span
+class="header-section-number">1.6</span> 1.6 Asymptotic Expansions and
+Sequences</h2>
+<p>Since we can not use powers of <span
+class="math inline">\(\epsilon\)</span> alone to determine an asymptotic
+representation of a given function, we use a general sequence of
+functions <span class="math inline">\(\delta_{n}(\epsilon)\)</span> as
+long as (??? I think they should not be in the same order or the series
+will be divergent.)</p>
+<p><span class="math display">\[
+\begin{align}
+\delta_{n}(\epsilon) = O \big ( \delta_{n-1}(\epsilon) \big ) \quad
+\epsilon \quad \rightarrow 0
+\end{align}
+\]</span></p>
+<p>Such a sequence is called an asymptotic sequence.</p>
+<p>In terms of asymptotic sequences, define asymptotic expansions as
+follows</p>
+<p><span class="math display">\[
+\begin{align}
+f(\epsilon) \sim \sum^{\infty}_{n=0} a_{n} \delta_{n}(\epsilon) \quad as
+\quad \epsilon \rightarrow 0
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(a_{n}\)</span> are independent of
+<span class="math inline">\(\epsilon\)</span>, and <span
+class="math inline">\(\delta(\epsilon)\)</span> is an asymptotic
+sequence.</p>
+<p>Next step is to determine the coefficients.</p>
+<p>Although a given function can be represented by infinite number of
+asymptotic series, given an asymptotic sequence, the coefficients are
+unique and can be determined as follows.</p>
+<p><span class="math display">\[
+\begin{align}
+a_{n} = lim_{\epsilon \rightarrow 0} \frac{f(\epsilon) -
+\sum^{n-1}_{m=0} a_{m} \delta_{m} (\epsilon)}{\delta_{n}(\epsilon)}
+\end{align}
+\]</span></p>
+<p>because</p>
+<p><span class="math display">\[
+\begin{align}
+lim_{\epsilon \rightarrow 0}
+\frac{\delta_{n}(\epsilon)}{\delta_{m}(\epsilon)} \quad for \quad n &gt;
+m
+\end{align}
+\]</span></p>
+<h2 data-number="1.7" id="convergent-versus-asymptotic-series"><span
+class="header-section-number">1.7</span> 1.7 Convergent Versus
+Asymptotic Series</h2>
+<p>I can not put the differences clearly currently. However, the main
+idea seems to be that convergent series result in inaccurate value when
+dependent variable varies much while asymptotic series lead to much more
+accurate result with much less terms, because the error committed by
+truncating the series is the order of the first neglected term.</p>
+<h2 data-number="1.8"
+id="elementary-operations-on-asymptotic-expansions"><span
+class="header-section-number">1.8</span> 1.8 Elementary Operations on
+Asymptotic Expansions</h2>
+<p>The general procedure to employ asymptotic expansions is to assume
+expansions substitute them into the equations and then perform
+elementary operations to get solutions. However, some operations may
+lead to singularies and nonuniformities.</p>
+<p>Nonuniformity means that the error by truncating series is not the
+order of the first neglected term. We always check whether the obtained
+expressions are uniform or not.</p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2015-09-26 with pandoc
+</footer>
+</body>
+</html>

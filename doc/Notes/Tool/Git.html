@@ -5,199 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-08-22" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>Git</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -206,107 +19,199 @@ footer {
 <h3 class="date">2021-08-22</h3>
 <div id="TOC">
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#git-checkout"><span class="toc-section-number">1.1</span> <code>git checkout</code></a>
+<li><a href="#git-checkout" id="toc-git-checkout"><span
+class="toc-section-number">1.1</span> <code>git checkout</code></a>
 <ul>
-<li><a href="#revert-changes-made-to-your-working-copy"><span class="toc-section-number">1.1.1</span> Revert changes made to your working copy</a></li>
+<li><a href="#revert-changes-made-to-your-working-copy"
+id="toc-revert-changes-made-to-your-working-copy"><span
+class="toc-section-number">1.1.1</span> Revert changes made to your
+working copy</a></li>
 </ul></li>
-<li><a href="#git-reset"><span class="toc-section-number">1.2</span> <code>git reset</code></a>
+<li><a href="#git-reset" id="toc-git-reset"><span
+class="toc-section-number">1.2</span> <code>git reset</code></a>
 <ul>
-<li><a href="#revert-changes-made-to-the-index"><span class="toc-section-number">1.2.1</span> Revert changes made to the index</a></li>
+<li><a href="#revert-changes-made-to-the-index"
+id="toc-revert-changes-made-to-the-index"><span
+class="toc-section-number">1.2.1</span> Revert changes made to the
+index</a></li>
 </ul></li>
-<li><a href="#git-revert"><span class="toc-section-number">1.3</span> <code>git revert</code></a>
+<li><a href="#git-revert" id="toc-git-revert"><span
+class="toc-section-number">1.3</span> <code>git revert</code></a>
 <ul>
-<li><a href="#revert-a-change-that-you-have-committed"><span class="toc-section-number">1.3.1</span> Revert a change that you have committed</a></li>
+<li><a href="#revert-a-change-that-you-have-committed"
+id="toc-revert-a-change-that-you-have-committed"><span
+class="toc-section-number">1.3.1</span> Revert a change that you have
+committed</a></li>
 </ul></li>
-<li><a href="#git-clean"><span class="toc-section-number">1.4</span> <code>git clean</code></a>
+<li><a href="#git-clean" id="toc-git-clean"><span
+class="toc-section-number">1.4</span> <code>git clean</code></a>
 <ul>
-<li><a href="#remove-untracked-files"><span class="toc-section-number">1.4.1</span> Remove untracked files</a></li>
-<li><a href="#remove-untracked-directories"><span class="toc-section-number">1.4.2</span> Remove untracked directories</a></li>
+<li><a href="#remove-untracked-files"
+id="toc-remove-untracked-files"><span
+class="toc-section-number">1.4.1</span> Remove untracked files</a></li>
+<li><a href="#remove-untracked-directories"
+id="toc-remove-untracked-directories"><span
+class="toc-section-number">1.4.2</span> Remove untracked
+directories</a></li>
 </ul></li>
-<li><a href="#git-diff"><span class="toc-section-number">1.5</span> <code>git diff</code></a>
+<li><a href="#git-diff" id="toc-git-diff"><span
+class="toc-section-number">1.5</span> <code>git diff</code></a>
 <ul>
-<li><a href="#view-the-staged-changes"><span class="toc-section-number">1.5.1</span> View the staged changes</a></li>
-<li><a href="#check-changes-between-2-commits"><span class="toc-section-number">1.5.2</span> Check changes between 2 commits</a></li>
+<li><a href="#view-the-staged-changes"
+id="toc-view-the-staged-changes"><span
+class="toc-section-number">1.5.1</span> View the staged changes</a></li>
+<li><a href="#check-changes-between-2-commits"
+id="toc-check-changes-between-2-commits"><span
+class="toc-section-number">1.5.2</span> Check changes between 2
+commits</a></li>
 </ul></li>
-<li><a href="#git-stash"><span class="toc-section-number">1.6</span> <code>git stash</code></a>
+<li><a href="#git-stash" id="toc-git-stash"><span
+class="toc-section-number">1.6</span> <code>git stash</code></a>
 <ul>
-<li><a href="#stash-a-specific-file"><span class="toc-section-number">1.6.1</span> Stash a specific file</a></li>
+<li><a href="#stash-a-specific-file"
+id="toc-stash-a-specific-file"><span
+class="toc-section-number">1.6.1</span> Stash a specific file</a></li>
 </ul></li>
-<li><a href="#git-remote"><span class="toc-section-number">1.7</span> <code>git remote</code></a>
+<li><a href="#git-remote" id="toc-git-remote"><span
+class="toc-section-number">1.7</span> <code>git remote</code></a>
 <ul>
-<li><a href="#delete-a-remove-branch"><span class="toc-section-number">1.7.1</span> Delete a remove branch</a></li>
+<li><a href="#delete-a-remove-branch"
+id="toc-delete-a-remove-branch"><span
+class="toc-section-number">1.7.1</span> Delete a remove branch</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<li><a href="#advanced" id="toc-advanced"><span
+class="toc-section-number">2</span> Advanced</a>
 <ul>
-<li><a href="#configuration"><span class="toc-section-number">2.1</span> Configuration</a>
+<li><a href="#configuration" id="toc-configuration"><span
+class="toc-section-number">2.1</span> Configuration</a>
 <ul>
-<li><a href="#line-endings-in-windows"><span class="toc-section-number">2.1.1</span> Line endings in Windows</a></li>
+<li><a href="#line-endings-in-windows"
+id="toc-line-endings-in-windows"><span
+class="toc-section-number">2.1.1</span> Line endings in Windows</a></li>
 </ul></li>
-<li><a href="#git-merge"><span class="toc-section-number">2.2</span> <code>git merge</code></a>
+<li><a href="#git-merge" id="toc-git-merge"><span
+class="toc-section-number">2.2</span> <code>git merge</code></a>
 <ul>
-<li><a href="#fatal-refusing-to-merge-unrelated-histories"><span class="toc-section-number">2.2.1</span> <code>fatal: refusing to merge unrelated histories</code></a></li>
-<li><a href="#merge-changes-using-vimdiff"><span class="toc-section-number">2.2.2</span> Merge changes using vimdiff</a></li>
+<li><a href="#fatal-refusing-to-merge-unrelated-histories"
+id="toc-fatal-refusing-to-merge-unrelated-histories"><span
+class="toc-section-number">2.2.1</span>
+<code>fatal: refusing to merge unrelated histories</code></a></li>
+<li><a href="#merge-changes-using-vimdiff"
+id="toc-merge-changes-using-vimdiff"><span
+class="toc-section-number">2.2.2</span> Merge changes using
+vimdiff</a></li>
 </ul></li>
-<li><a href="#hooks"><span class="toc-section-number">2.3</span> hooks</a>
+<li><a href="#hooks" id="toc-hooks"><span
+class="toc-section-number">2.3</span> hooks</a>
 <ul>
-<li><a href="#overview"><span class="toc-section-number">2.3.1</span> Overview</a></li>
-<li><a href="#an-example-of-pre-commit"><span class="toc-section-number">2.3.2</span> An example of <code>pre-commit</code></a></li>
+<li><a href="#overview" id="toc-overview"><span
+class="toc-section-number">2.3.1</span> Overview</a></li>
+<li><a href="#an-example-of-pre-commit"
+id="toc-an-example-of-pre-commit"><span
+class="toc-section-number">2.3.2</span> An example of
+<code>pre-commit</code></a></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
-<h2 data-number="1.1" id="git-checkout"><span class="header-section-number">1.1</span> <code>git checkout</code></h2>
-<h3 data-number="1.1.1" id="revert-changes-made-to-your-working-copy"><span class="header-section-number">1.1.1</span> Revert changes made to your working copy</h3>
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="git-checkout"><span
+class="header-section-number">1.1</span> <code>git checkout</code></h2>
+<h3 data-number="1.1.1"
+id="revert-changes-made-to-your-working-copy"><span
+class="header-section-number">1.1.1</span> Revert changes made to your
+working copy</h3>
 <pre><code>git checkout .</code></pre>
-<h2 data-number="1.2" id="git-reset"><span class="header-section-number">1.2</span> <code>git reset</code></h2>
-<h3 data-number="1.2.1" id="revert-changes-made-to-the-index"><span class="header-section-number">1.2.1</span> Revert changes made to the index</h3>
+<h2 data-number="1.2" id="git-reset"><span
+class="header-section-number">1.2</span> <code>git reset</code></h2>
+<h3 data-number="1.2.1" id="revert-changes-made-to-the-index"><span
+class="header-section-number">1.2.1</span> Revert changes made to the
+index</h3>
 <p>Revert the changes to be committed.</p>
 <pre><code>git reset</code></pre>
-<h2 data-number="1.3" id="git-revert"><span class="header-section-number">1.3</span> <code>git revert</code></h2>
-<h3 data-number="1.3.1" id="revert-a-change-that-you-have-committed"><span class="header-section-number">1.3.1</span> Revert a change that you have committed</h3>
+<h2 data-number="1.3" id="git-revert"><span
+class="header-section-number">1.3</span> <code>git revert</code></h2>
+<h3 data-number="1.3.1"
+id="revert-a-change-that-you-have-committed"><span
+class="header-section-number">1.3.1</span> Revert a change that you have
+committed</h3>
 <pre><code>git revert &lt;commit 1&gt; &lt;commit 2&gt;</code></pre>
-<h2 data-number="1.4" id="git-clean"><span class="header-section-number">1.4</span> <code>git clean</code></h2>
-<h3 data-number="1.4.1" id="remove-untracked-files"><span class="header-section-number">1.4.1</span> Remove untracked files</h3>
+<h2 data-number="1.4" id="git-clean"><span
+class="header-section-number">1.4</span> <code>git clean</code></h2>
+<h3 data-number="1.4.1" id="remove-untracked-files"><span
+class="header-section-number">1.4.1</span> Remove untracked files</h3>
 <pre><code>git clean -f</code></pre>
-<h3 data-number="1.4.2" id="remove-untracked-directories"><span class="header-section-number">1.4.2</span> Remove untracked directories</h3>
+<h3 data-number="1.4.2" id="remove-untracked-directories"><span
+class="header-section-number">1.4.2</span> Remove untracked
+directories</h3>
 <pre><code>git clean -fd</code></pre>
-<h2 data-number="1.5" id="git-diff"><span class="header-section-number">1.5</span> <code>git diff</code></h2>
-<h3 data-number="1.5.1" id="view-the-staged-changes"><span class="header-section-number">1.5.1</span> View the staged changes</h3>
+<h2 data-number="1.5" id="git-diff"><span
+class="header-section-number">1.5</span> <code>git diff</code></h2>
+<h3 data-number="1.5.1" id="view-the-staged-changes"><span
+class="header-section-number">1.5.1</span> View the staged changes</h3>
 <pre><code>git diff --staged
 git difftool --cached # cached is a synonym for staged</code></pre>
-<h3 data-number="1.5.2" id="check-changes-between-2-commits"><span class="header-section-number">1.5.2</span> Check changes between 2 commits</h3>
+<h3 data-number="1.5.2" id="check-changes-between-2-commits"><span
+class="header-section-number">1.5.2</span> Check changes between 2
+commits</h3>
 <pre><code>git diff commit-id-1 commit-id-2</code></pre>
-<h2 data-number="1.6" id="git-stash"><span class="header-section-number">1.6</span> <code>git stash</code></h2>
-<h3 data-number="1.6.1" id="stash-a-specific-file"><span class="header-section-number">1.6.1</span> Stash a specific file</h3>
+<h2 data-number="1.6" id="git-stash"><span
+class="header-section-number">1.6</span> <code>git stash</code></h2>
+<h3 data-number="1.6.1" id="stash-a-specific-file"><span
+class="header-section-number">1.6.1</span> Stash a specific file</h3>
 <pre><code>git stash push -m welcome_cart app/views/cart/welcome.thtml</code></pre>
-<h2 data-number="1.7" id="git-remote"><span class="header-section-number">1.7</span> <code>git remote</code></h2>
-<h3 data-number="1.7.1" id="delete-a-remove-branch"><span class="header-section-number">1.7.1</span> Delete a remove branch</h3>
+<h2 data-number="1.7" id="git-remote"><span
+class="header-section-number">1.7</span> <code>git remote</code></h2>
+<h3 data-number="1.7.1" id="delete-a-remove-branch"><span
+class="header-section-number">1.7.1</span> Delete a remove branch</h3>
 <pre><code>git push -d &lt;remote_name&gt; &lt;branch_name&gt;
 git branch -d &lt;branch_name&gt;</code></pre>
-<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
-<h2 data-number="2.1" id="configuration"><span class="header-section-number">2.1</span> Configuration</h2>
-<h3 data-number="2.1.1" id="line-endings-in-windows"><span class="header-section-number">2.1.1</span> Line endings in Windows</h3>
-<p><code>CR LF</code> is in Windows, <code>LF</code> is in Unix and <code>CR</code> is in Mac.</p>
-<p><code>git config --global core.autocrlf false</code> to disable the conversion to <code>CR LF</code> in the Windows system.</p>
-<h2 data-number="2.2" id="git-merge"><span class="header-section-number">2.2</span> <code>git merge</code></h2>
-<h3 data-number="2.2.1" id="fatal-refusing-to-merge-unrelated-histories"><span class="header-section-number">2.2.1</span> <code>fatal: refusing to merge unrelated histories</code></h3>
-<p>The “fatal: refusing to merge unrelated histories” Git error occurs when two unrelated projects are merged (i.e., projects that are not aware of each other’s existence and have mismatching commit histories).</p>
-<p>A situation of this is: You have created a new repository, added a few commits to it, and now you are trying to pull from a remote repository that already has some commits of its own. Git will also throw the error in this case, since it has no idea how the two projects are related.</p>
-<p>The error is resolved by toggling the <code>allow-unrelated-histories</code> switch.</p>
+<h1 data-number="2" id="advanced"><span
+class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="configuration"><span
+class="header-section-number">2.1</span> Configuration</h2>
+<h3 data-number="2.1.1" id="line-endings-in-windows"><span
+class="header-section-number">2.1.1</span> Line endings in Windows</h3>
+<p><code>CR LF</code> is in Windows, <code>LF</code> is in Unix and
+<code>CR</code> is in Mac.</p>
+<p><code>git config --global core.autocrlf false</code> to disable the
+conversion to <code>CR LF</code> in the Windows system.</p>
+<h2 data-number="2.2" id="git-merge"><span
+class="header-section-number">2.2</span> <code>git merge</code></h2>
+<h3 data-number="2.2.1"
+id="fatal-refusing-to-merge-unrelated-histories"><span
+class="header-section-number">2.2.1</span>
+<code>fatal: refusing to merge unrelated histories</code></h3>
+<p>The “fatal: refusing to merge unrelated histories” Git error occurs
+when two unrelated projects are merged (i.e., projects that are not
+aware of each other’s existence and have mismatching commit
+histories).</p>
+<p>A situation of this is: You have created a new repository, added a
+few commits to it, and now you are trying to pull from a remote
+repository that already has some commits of its own. Git will also throw
+the error in this case, since it has no idea how the two projects are
+related.</p>
+<p>The error is resolved by toggling the
+<code>allow-unrelated-histories</code> switch.</p>
 <pre><code>git pull origin master --allow-unrelated-histories</code></pre>
-<h3 data-number="2.2.2" id="merge-changes-using-vimdiff"><span class="header-section-number">2.2.2</span> Merge changes using vimdiff</h3>
+<h3 data-number="2.2.2" id="merge-changes-using-vimdiff"><span
+class="header-section-number">2.2.2</span> Merge changes using
+vimdiff</h3>
 <pre><code>git config --global diff.tool vimdiff
 git config --global difftool.prompt false</code></pre>
 <p>Typing <code>git difftool</code> yields the expected behavior.</p>
 <p>You can use the following basic commands to merge:</p>
 <ul>
-<li><code>do</code> - Get changes from other window into the current window.</li>
-<li><code>dp</code> - Put the changes from current window into the other window.</li>
+<li><code>do</code> - Get changes from other window into the current
+window.</li>
+<li><code>dp</code> - Put the changes from current window into the other
+window.</li>
 <li><code>]c</code> - Jump to the next change.</li>
 <li><code>[c</code> - Jump to the previous change.</li>
 <li><code>zo</code> - Open folded lines.</li>
@@ -315,12 +220,23 @@ git config --global difftool.prompt false</code></pre>
 <li><code>zm</code> - Fold both files completely.</li>
 <li><code>Ctrl-w-w</code> - change window.</li>
 </ul>
-<p>If more than 2 buffers in the merge, use <code>:ls</code> to show the buffer number. Then use <code>2do</code> to put the changes from the no. 2 buffer to this buffer.</p>
-<h2 data-number="2.3" id="hooks"><span class="header-section-number">2.3</span> hooks</h2>
-<h3 data-number="2.3.1" id="overview"><span class="header-section-number">2.3.1</span> Overview</h3>
-<p>Refer to <a href="https://www.atlassian.com/git/tutorials/git-hooks">Git Hooks | Atlassian Git Tutorial</a>.</p>
-<h3 data-number="2.3.2" id="an-example-of-pre-commit"><span class="header-section-number">2.3.2</span> An example of <code>pre-commit</code></h3>
-<p>The following example formats <code>*.f90</code> in the changes to be commited. If the formatter raises warnings, set <code>exit 1</code> which results in failed git commit. Then turn to resolve the warnings of formatting and try the commit again.</p>
+<p>If more than 2 buffers in the merge, use <code>:ls</code> to show the
+buffer number. Then use <code>2do</code> to put the changes from the no.
+2 buffer to this buffer.</p>
+<h2 data-number="2.3" id="hooks"><span
+class="header-section-number">2.3</span> hooks</h2>
+<h3 data-number="2.3.1" id="overview"><span
+class="header-section-number">2.3.1</span> Overview</h3>
+<p>Refer to <a
+href="https://www.atlassian.com/git/tutorials/git-hooks">Git Hooks |
+Atlassian Git Tutorial</a>.</p>
+<h3 data-number="2.3.2" id="an-example-of-pre-commit"><span
+class="header-section-number">2.3.2</span> An example of
+<code>pre-commit</code></h3>
+<p>The following example formats <code>*.f90</code> in the changes to be
+commited. If the formatter raises warnings, set <code>exit 1</code>
+which results in failed git commit. Then turn to resolve the warnings of
+formatting and try the commit again.</p>
 <pre><code>#!/bin/bash
 # Regexp for grep to only choose some file extensions for formatting
 # exts=&quot;\.\(f90\|ext2\)$&quot;

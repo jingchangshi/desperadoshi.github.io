@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2015-04-01" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Vector and tensor</h1>
+<h3 class="date">2015-04-01</h3>
+<div id="TOC">
+<ul>
+<li><a href="#tensor" id="toc-tensor"><span
+class="toc-section-number">1</span> Tensor</a>
+<ul>
+<li><a href="#change-of-basis" id="toc-change-of-basis"><span
+class="toc-section-number">1.1</span> Change of basis</a></li>
+<li><a href="#cartesian-tensors" id="toc-cartesian-tensors"><span
+class="toc-section-number">1.2</span> Cartesian tensors</a></li>
+<li><a href="#order-and-0-order-tensor"
+id="toc-order-and-0-order-tensor"><span
+class="toc-section-number">1.3</span> 1-order and 0-order tensor</a>
+<ul>
+<li><a href="#order-tensor-forms-0-order-tensor."
+id="toc-order-tensor-forms-0-order-tensor."><span
+class="toc-section-number">1.3.1</span> 1-order tensor forms 0-order
+tensor.</a></li>
+<li><a href="#order-tensor-forms-1-order-tensor."
+id="toc-order-tensor-forms-1-order-tensor."><span
+class="toc-section-number">1.3.2</span> 0-order tensor forms 1-order
+tensor.</a></li>
+</ul></li>
+<li><a href="#order-tensor" id="toc-order-tensor"><span
+class="toc-section-number">1.4</span> 2-order tensor</a>
+<ul>
+<li><a href="#order-tensor-form-2-order-tensor"
+id="toc-order-tensor-form-2-order-tensor"><span
+class="toc-section-number">1.4.1</span> 1-order tensor form 2-order
+tensor</a></li>
+</ul></li>
+<li><a href="#tensor-operations" id="toc-tensor-operations"><span
+class="toc-section-number">1.5</span> Tensor operations</a></li>
+<li><a href="#frequently-used-operations"
+id="toc-frequently-used-operations"><span
+class="toc-section-number">1.6</span> Frequently used
+operations</a></li>
+<li><a href="#miscellaneous" id="toc-miscellaneous"><span
+class="toc-section-number">1.7</span> Miscellaneous</a></li>
+</ul></li>
+<li><a href="#vector-integral" id="toc-vector-integral"><span
+class="toc-section-number">2</span> Vector Integral</a>
+<ul>
+<li><a href="#linepath-integral" id="toc-linepath-integral"><span
+class="toc-section-number">2.1</span> Line/Path integral</a></li>
+<li><a href="#theorem" id="toc-theorem"><span
+class="toc-section-number">2.2</span> Theorem</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="tensor"><span
+class="header-section-number">1</span> Tensor</h1>
+<ul>
+<li>Resources[fn:1]</li>
+<li>Key idea: physical results must indeed be independent of the choice
+of coordinate system</li>
+</ul>
+<h2 data-number="1.1" id="change-of-basis"><span
+class="header-section-number">1.1</span> Change of basis</h2>
+<ul>
+<li>vector <span class="math inline">\(\vec{x} = x_{i}
+\vec{e_{i}}\)</span></li>
+<li>new basis <span class="math inline">\(\vec{e^{\prime}_{j}} = S_{ij}
+\vec{e_{i}}\), \(S_{ij}\)</span> is ith component</li>
+<li><span class="math inline">\(\vec{x} = x^{\prime}_{i}
+\vec{e^{\prime}_{i}} = x^{\prime}_{i} S_{ij} \vec{e_{ij}} = x_{j}
+\vec{e_{j}}, S\)</span> is matrix</li>
+<li><span class="math inline">\(x^{\prime}_{i} = (S^{-1})_{ij}
+x_{j}\)</span></li>
+<li>If transformation is rotation of the coordinate axes, then <span
+class="math inline">\(S\)</span> is orthogonal and <span
+class="math inline">\(L L^{T} = L^{T} L = I\)</span></li>
+</ul>
+<h2 data-number="1.2" id="cartesian-tensors"><span
+class="header-section-number">1.2</span> Cartesian tensors</h2>
+<ul>
+<li>define <span class="math inline">\(L\)</span> as the inverse of
+<span class="math inline">\(S\)</span>, then <span
+class="math inline">\(x^{\prime}_{i} = L_{ij} x_{j}\)</span></li>
+<li>Restrict in the type of rigid rotation, so <span
+class="math inline">\(L^{-1} = L^{T}\)</span>, then <span
+class="math inline">\(x_{i} = L_{ji} x^{\prime}_{j}\)</span></li>
+</ul>
+<h2 data-number="1.3" id="order-and-0-order-tensor"><span
+class="header-section-number">1.3</span> 1-order and 0-order tensor</h2>
+<h3 data-number="1.3.1" id="order-tensor-forms-0-order-tensor."><span
+class="header-section-number">1.3.1</span> 1-order tensor forms 0-order
+tensor.</h3>
+<p>Prove: scalar product of 2 1-order tensors is 0-order tensor</p>
+<p><span class="math display">\[
+\begin{align}
+u^{\prime}_{i} v^{\prime}_{i} &amp;= L_{ij} u_{j} L_{ik} v_{k} \\
+&amp;= L_{ij} L_{ik} u_{j} v_{k} \\
+&amp;= \delta_{jk} u_{j} v_{k} \\
+&amp;= u_{j} v_{j} \\
+\end{align}
+\]</span></p>
+<h3 data-number="1.3.2" id="order-tensor-forms-1-order-tensor."><span
+class="header-section-number">1.3.2</span> 0-order tensor forms 1-order
+tensor.</h3>
+<p>Suppose electrostatic potential <span
+class="math inline">\(\phi\)</span>, its component <span
+class="math inline">\(E_{i} = - \frac{\partial \phi}{\partial
+x_{i}}\)</span>.</p>
+<p>Prove <span class="math inline">\(\vec{E}\)</span>is 1-order
+tensor.</p>
+<p><span class="math display">\[
+\begin{align}
+E^{\prime}_{i} &amp;= (-\frac{\partial \phi}{\partial x_{i}})^{\prime}
+\\
+&amp;= - \frac{\partial \phi_{\prime}}{\partial x^{\prime}_{i}} \\
+&amp;= - \frac{\partial \phi}{\partial x^{\prime}_{i}} \\
+&amp;= - \frac{\partial \phi}{\partial x_{j}} \frac{\partial
+x_{j}}{\partial x^{\prime}_{i}} \\
+&amp;= L_{ij} E_{j} \\
+\end{align}
+\]</span></p>
+<h2 data-number="1.4" id="order-tensor"><span
+class="header-section-number">1.4</span> 2-order tensor</h2>
+<p>Definition</p>
+<p><span class="math display">\[
+\begin{equation}
+T^{\prime}_{ij} = L_{ik} L_{jl} T_{kl}
+\end{equation}
+\]</span></p>
+<p>Given the definition, it’s natural to display 2-order tensor in
+matrix form.</p>
+<p>Note: it’s similar to linear operator(???), but it requires both 2
+subscript refer to the same coordinate system.</p>
+<h3 data-number="1.4.1" id="order-tensor-form-2-order-tensor"><span
+class="header-section-number">1.4.1</span> 1-order tensor form 2-order
+tensor</h3>
+<h4 data-number="1.4.1.1" id="the-outer-product-of-2-vectors"><span
+class="header-section-number">1.4.1.1</span> The outer product of 2
+vectors</h4>
+<p>Definition</p>
+<p><span class="math display">\[
+\begin{equation}
+T_{ij} = u_{i} v_{j}
+\end{equation}
+\]</span></p>
+<p>denoted as <span class="math inline">\(\vec{T} = \vec{u} \bigotimes
+\vec{v}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\vec{T} &amp;= u_{i} \vec{e_{i}} \bigotimes u_{j} \vec{e_{j}} \\
+&amp;= u_{i} v_{j} \vec{e_{i}} \bigotimes \vec{e_{j}} \\
+&amp;= T_{ij} \vec{e_{i}} \bigotimes \vec{e_{j}} \\
+\end{align}
+\]</span></p>
+<p>Prove <span class="math inline">\(T_{ij}\)</span> is 2-order
+tensor.</p>
+<p><span class="math display">\[
+\begin{align}
+T_{ij} &amp;= u^{\prime}_{i} v^{\prime}_{j} \\
+&amp;= L_{ik} u_{k} L_{jl} v_{l} \\
+&amp;= L_{ik} L_{jl} u_{k} v_{l} \\
+&amp;= L_{ik} L_{jl} T_{kl} \\
+\end{align}
+\]</span></p>
+<h4 data-number="1.4.1.2" id="the-gradient-of-a-vector"><span
+class="header-section-number">1.4.1.2</span> The gradient of a
+vector</h4>
+<p>Definition</p>
+<p><span class="math display">\[
+\begin{equation}
+T_{ij} = \frac{\partial v_{i}}{\partial x_{j}}
+\end{equation}
+\]</span></p>
+<p>denoted as <span class="math inline">\(\vec{T} = \nabla
+\vec{V}\)</span> (???)</p>
+<p>Prove it’s a 2-order tensor</p>
+<p><span class="math display">\[
+\begin{align}
+T^{\prime}_{ij} &amp;= \frac{\partial v^{\prime}_{i}}{\partial
+x^{\prime}_{j}} \\
+&amp;= \frac{\partial (L_{ik} v_{k})}{\partial x_{l}} \frac{\partial
+x_{l}}{\partial x^{\prime}_{j}} \\
+&amp;= L_{ik} \frac{\partial v_{k}}{\partial x_{l}} L_{jl}(???) \\
+&amp;= L_{ik} L_{jl} T_{kl} \\
+\end{align}
+\]</span></p>
+<h2 data-number="1.5" id="tensor-operations"><span
+class="header-section-number">1.5</span> Tensor operations</h2>
+<ol type="1">
+<li><p>Addition</p>
+<p><span class="math display">\[
+\begin{align}
+S_{ij} = b_{ij} + c_{ij}
+\end{align}
+\]</span></p></li>
+<li><p>Contraction</p>
+<p><span class="math display">\[
+\begin{align}
+W_{k} \equiv d_{iik}
+\end{align}
+\]</span></p>
+<p>means contracting <span class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span>. N-order tensor becomes N-2 order
+tensor. <span class="math inline">\(W_{k}\)</span> is 1-order
+tensor.</p></li>
+<li><p>Tensor products</p>
+<p><span class="math display">\[
+\begin{align}
+d_{ijk} = u_{i} b_{jk}
+\end{align}
+\]</span></p></li>
+<li><p>Inner products</p>
+<p><span class="math display">\[
+\begin{align}
+d_{ilm} = b_{ij} c_{jlm}
+\end{align}
+\]</span></p>
+<p>N-order and M-order tensors lead to N+M-2 order tensor.
+(???)</p></li>
+<li><p>Division</p>
+<p>No such tensor operation.</p></li>
+<li><p>Gradients</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla &amp; \equiv \vec{e}_{i} \frac{\partial}{\partial x_{i}} \\
+h_{kij} &amp;= \nabla \vec{b} = \frac{\partial b_{ij}}{\partial x_{k}}
+\\
+\end{align}
+\]</span></p>
+<p>It’s similar to tensor product of <span class="math inline">\(\nabla,
+\vec{b}\)</span>.</p></li>
+<li><p>Divergence</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla \cdot \vec{b} = \vec{e}_{j} \frac{\partial b_{ij}}{\partial
+x_{i}}
+\end{align}
+\]</span></p>
+<p>Take inner product of <span class="math inline">\(\nabla,
+\vec{b}\)</span>. (???)</p></li>
+<li><p>Laplacian</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla^{2} = \nabla \cdot \nabla = \frac{\partial^{2}}{\partial x_{i}
+\partial x_{i}}
+\end{align}
+\]</span></p></li>
+<li><p>Taylor series</p>
+<p>Let <span class="math inline">\(\vec{b}(\vec{x})\)</span> is a smooth
+second-order tensor field, then the value of <span
+class="math inline">\(\vec{b}\)</span> at position <span
+class="math inline">\(\vec{y} + \vec{r}\)</span> can be obtained as</p>
+<p><span class="math display">\[
+\begin{align}
+b_{ij}(\vec{y} + \vec{r}) = b_{ij}(\vec{y}) + \big ( \frac{\partial
+b_{ij}}{\partial x_{k}} \big )_{y} r_{k} + \frac{1}{2!} \big (
+\frac{\partial^{2} b_{ij}}{\partial x_{k} \partial x_{l}} \big )_{y}
+r_{k} r_{l} + \ldots
+\end{align}
+\]</span></p></li>
+<li><p>Gauss’s theorem</p>
+<p>Let <span class="math inline">\(\mathcal{A}\)</span> be a piecewise
+smooth closed orientable surface that encloses a volume <span
+class="math inline">\(\mathcal{V}\)</span>, and let <span
+class="math inline">\(\vec{n}\)</span> denote the outward-pointing unit
+normal on <span class="math inline">\(\mathcal{A}\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{align}
+\iiint_{\mathcal{V}} \frac{\partial b_{ij}}{\partial x_{k}} dV =
+\iint_{\mathcal{A}} b_{ij} n_{k} dA
+\end{align}
+\]</span></p></li>
+<li><p>Vector cross product</p>
+<p>The alternating symbol defined by</p>
+<p><span class="math display">\[
+\begin{align}
+\varepsilon_{ijk} &amp;= 1, \quad (i,j,k) \quad cyclic; \\
+&amp;= -1, \quad (i,j,k) \quad anticyclic; \\
+&amp;= 0, \quad otherwise \\
+\end{align}
+\]</span></p>
+<p>Cyclice orderings are 123, 231, and 312; anticyclic orderings are
+321, 132, and 213, otherwise two or more of the suffixes are the
+same.</p>
+<p><span class="math display">\[
+\begin{align}
+\vec{r} &amp;= \vec{u} \times \vec{v} = det
+\begin{vmatrix}
+\vec{e}_{1} &amp; \vec{e}_{2} &amp; \vec{e}_{3} \\
+u_{1} &amp; u_{2} &amp; u_{3} \\
+v_{1} &amp; v_{2} &amp; v_{3} \\
+\end{vmatrix} \\
+&amp;= \varepsilon_{ijk} \vec{e}_{i} u_{j} v_{k} \\
+\end{align}
+\]</span></p>
+<p>Cross product and curl are not 1-order tensor, they are
+pseudovectors, And the direction of them is determined by the right
+handed rule.</p></li>
+</ol>
+<h2 data-number="1.6" id="frequently-used-operations"><span
+class="header-section-number">1.6</span> Frequently used operations</h2>
+<ol type="1">
+<li></li>
+</ol>
+<h2 data-number="1.7" id="miscellaneous"><span
+class="header-section-number">1.7</span> Miscellaneous</h2>
+<ol type="1">
+<li>In 3D, the pseudovector (or axial vector) <span
+class="math inline">\(\vec{p}\)</span> is associated with the cross
+product of 2 vectors: <span class="math inline">\(\vec{p} = \vec{a}
+\times \vec{b}\)</span>.</li>
+</ol>
+<h1 data-number="2" id="vector-integral"><span
+class="header-section-number">2</span> Vector Integral</h1>
+<h2 data-number="2.1" id="linepath-integral"><span
+class="header-section-number">2.1</span> Line/Path integral</h2>
+<p>2 main kinds</p>
+<ul>
+<li><p><span class="math inline">\(\int_{C} \phi d \vec{r}\)</span></p>
+<p>Since Cartesian unit vectors are of constant magnitude and direction,
+hence</p>
+<p><span class="math display">\[
+  \begin{align}
+  \int \phi \vec{i} dx = \vec{i} \int \phi dx
+  \end{align}
+  \]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+  \begin{align}
+  \int_{C} \phi d \vec{r} = \vec{i} \int_{C} \phi(x,y,z) dx + \vec{j}
+\int_{C} \phi(x,y,z) dy + \vec{k} \int_{C} \phi(x,y,z) dz
+  \end{align}
+  \]</span></p></li>
+<li><p><span class="math inline">\(\int_{C} \vec{a} \cdot d
+\vec{r}\)</span></p>
+<p><span class="math display">\[
+  \begin{align}
+  \int_{C} \vec{a} \cdot d \vec{r} &amp;= \int_{C} \Big ( a_{x} \vec{i}
++ a_{y} \vec{j} + a_{z} \vec{k} \Big ) \cdot \Big ( dx \vec{i} + dy
+\vec{j} + dz \vec{k} \Big ) \\
+  &amp;= \int_{C} \Big ( a_{x} dx + a_{y} dy + a_{z} dz \Big ) \\
+  \end{align}
+  \]</span></p></li>
+</ul>
+<h2 data-number="2.2" id="theorem"><span
+class="header-section-number">2.2</span> Theorem</h2>
+<ol type="1">
+<li><p>Helmholtz’s theorem, also known as the fundamental theorem of
+vector calculus, states that vector field in 3D can be resolved into the
+sum of the irrotational(curl-free) vector field and a
+solenoidal(divergence-free) vector field. That’s known as the Helmholtz
+decomposition.</p>
+<p><span class="math display">\[
+\begin{align}
+\vec{F} = \nabla \phi + \nabla \times \vec{psi}
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\nabla \phi\)</span> is irrotational part
+since <span class="math inline">\(\nabla \times \nabla \phi =
+0\)</span>. <span class="math inline">\(\nabla \times \vec{psi}\)</span>
+is solenoidal part since <span class="math inline">\(\nabla \cdot
+(\nabla \times \vec{\psi}) = 0\)</span>.</p></li>
+</ol>
+<p>Footnotes</p>
+<p>[fn:1] Riley K F, Hobson M P, Bence S J. Mathematical methods for
+physics and engineering: a comprehensive guide[M]. Cambridge University
+Press, 2006.</p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2015-04-01 with pandoc
+</footer>
+</body>
+</html>

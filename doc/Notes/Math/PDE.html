@@ -1,0 +1,971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2015-04-26" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Partial Differential Equations</h1>
+<h3 class="date">2015-04-26</h3>
+<div id="TOC">
+<ul>
+<li><a href="#where-pdes-come-from" id="toc-where-pdes-come-from"><span
+class="toc-section-number">1</span> Where PDEs come from?</a>
+<ul>
+<li><a href="#types-of-second-order-equations"
+id="toc-types-of-second-order-equations"><span
+class="toc-section-number">1.1</span> Types of Second-order
+Equations</a>
+<ul>
+<li><a href="#theorem" id="toc-theorem"><span
+class="toc-section-number">1.1.1</span> Theorem</a></li>
+<li><a href="#proof" id="toc-proof"><span
+class="toc-section-number">1.1.2</span> Proof</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#wave-and-diffusions" id="toc-wave-and-diffusions"><span
+class="toc-section-number">2</span> Wave and Diffusions</a>
+<ul>
+<li><a href="#the-wave-equation" id="toc-the-wave-equation"><span
+class="toc-section-number">2.1</span> The Wave Equation</a>
+<ul>
+<li><a href="#proof-1" id="toc-proof-1"><span
+class="toc-section-number">2.1.1</span> Proof</a></li>
+<li><a href="#initial-value-problem"
+id="toc-initial-value-problem"><span
+class="toc-section-number">2.1.2</span> Initial Value Problem</a></li>
+</ul></li>
+<li><a href="#causality-and-energy" id="toc-causality-and-energy"><span
+class="toc-section-number">2.2</span> Causality and Energy</a>
+<ul>
+<li><a href="#causality" id="toc-causality"><span
+class="toc-section-number">2.2.1</span> Causality</a></li>
+<li><a href="#energy" id="toc-energy"><span
+class="toc-section-number">2.2.2</span> Energy</a></li>
+</ul></li>
+<li><a href="#the-diffusion-equation"
+id="toc-the-diffusion-equation"><span
+class="toc-section-number">2.3</span> The Diffusion Equation</a>
+<ul>
+<li><a href="#maximum-principle" id="toc-maximum-principle"><span
+class="toc-section-number">2.3.1</span> Maximum Principle</a></li>
+<li><a href="#uniqueness" id="toc-uniqueness"><span
+class="toc-section-number">2.3.2</span> Uniqueness</a></li>
+<li><a href="#stability" id="toc-stability"><span
+class="toc-section-number">2.3.3</span> Stability</a></li>
+</ul></li>
+<li><a href="#diffusion-on-the-whole-line"
+id="toc-diffusion-on-the-whole-line"><span
+class="toc-section-number">2.4</span> Diffusion on the Whole
+Line</a></li>
+</ul></li>
+<li><a href="#reflections-and-sources"
+id="toc-reflections-and-sources"><span
+class="toc-section-number">3</span> Reflections and Sources</a></li>
+<li><a href="#boundary-problems" id="toc-boundary-problems"><span
+class="toc-section-number">4</span> Boundary Problems</a>
+<ul>
+<li><a href="#separation-of-variables-the-dirichlet-condition"
+id="toc-separation-of-variables-the-dirichlet-condition"><span
+class="toc-section-number">4.1</span> Separation of Variables, The
+Dirichlet Condition</a></li>
+<li><a href="#the-neumann-condition"
+id="toc-the-neumann-condition"><span
+class="toc-section-number">4.2</span> The Neumann Condition</a></li>
+<li><a href="#the-robin-condition" id="toc-the-robin-condition"><span
+class="toc-section-number">4.3</span> The Robin Condition</a></li>
+</ul></li>
+<li><a href="#fourier-series" id="toc-fourier-series"><span
+class="toc-section-number">5</span> Fourier Series</a>
+<ul>
+<li><a href="#the-coefficients" id="toc-the-coefficients"><span
+class="toc-section-number">5.1</span> The Coefficients</a></li>
+<li><a href="#even-odd-periodic-and-complex-functions"
+id="toc-even-odd-periodic-and-complex-functions"><span
+class="toc-section-number">5.2</span> Even, Odd, Periodic, and Complex
+Functions</a></li>
+<li><a href="#orthogonality-and-general-fourier-series"
+id="toc-orthogonality-and-general-fourier-series"><span
+class="toc-section-number">5.3</span> Orthogonality and General Fourier
+Series</a>
+<ul>
+<li><a href="#complex-eigenvalues" id="toc-complex-eigenvalues"><span
+class="toc-section-number">5.3.1</span> Complex Eigenvalues</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#harmonic-functions" id="toc-harmonic-functions"><span
+class="toc-section-number">6</span> Harmonic Functions</a>
+<ul>
+<li><a href="#laplaces-equation" id="toc-laplaces-equation"><span
+class="toc-section-number">6.1</span> Laplace’s Equation</a>
+<ul>
+<li><a href="#maximum-principle-1" id="toc-maximum-principle-1"><span
+class="toc-section-number">6.1.1</span> Maximum Principle</a></li>
+<li><a href="#uniqueness-of-the-dirichlet-problem"
+id="toc-uniqueness-of-the-dirichlet-problem"><span
+class="toc-section-number">6.1.2</span> Uniqueness of the Dirichlet
+Problem</a></li>
+<li><a href="#invariance-in-two-dimensions"
+id="toc-invariance-in-two-dimensions"><span
+class="toc-section-number">6.1.3</span> Invariance in Two
+Dimensions</a></li>
+<li><a href="#invariance-in-three-dimensions"
+id="toc-invariance-in-three-dimensions"><span
+class="toc-section-number">6.1.4</span> Invariance in Three
+Dimensions</a></li>
+</ul></li>
+<li><a href="#rectangles-and-cubes" id="toc-rectangles-and-cubes"><span
+class="toc-section-number">6.2</span> Rectangles and Cubes</a></li>
+<li><a href="#poissons-formula" id="toc-poissons-formula"><span
+class="toc-section-number">6.3</span> Poisson’s Formula</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="where-pdes-come-from"><span
+class="header-section-number">1</span> Where PDEs come from?</h1>
+<h2 data-number="1.1" id="types-of-second-order-equations"><span
+class="header-section-number">1.1</span> Types of Second-order
+Equations</h2>
+<p>Consider PDE</p>
+<p><span class="math display">\[
+a_{11} u_{xx} + 2 a_{12} u_{xy} + a_{22} u_{yy} + a_{1} u_{x} + a_{2}
+u_{y} + a_{0} u = 0
+\]</span></p>
+<h3 data-number="1.1.1" id="theorem"><span
+class="header-section-number">1.1.1</span> Theorem</h3>
+<p>By a linear transformation of the independent variables, the equation
+can be reduced to one of the three forms,</p>
+<ol type="1">
+<li><p>Elliptic case, if <span class="math inline">\(a^{2}_{12} &lt;
+a_{11} a_{22}\)</span>, then</p>
+<p><span class="math display">\[
+u_{xx} + u_{yy} + ... = 0
+\]</span></p></li>
+<li><p>Hyperbolic case, if <span class="math inline">\(a^{2}_{12} &gt;
+a_{11} a_{22}\)</span>, then</p>
+<p><span class="math display">\[
+u_{xx} - u_{yy} + ... = 0
+\]</span></p></li>
+<li><p>Parabolic case, if <span class="math inline">\(a^{2}_{12} =
+a_{11} a_{22}\)</span>, then</p>
+<p><span class="math display">\[
+u_{xx} + ... = 0
+\]</span></p>
+<p>unless <span class="math inline">\(a_{11} = a_{12} = a_{22} =
+0\)</span>.</p></li>
+</ol>
+<h3 data-number="1.1.2" id="proof"><span
+class="header-section-number">1.1.2</span> Proof</h3>
+<p>Suppose that <span class="math inline">\(a_{11} = 1, a_{1} = a_{2} =
+a_{0} = 0\)</span>. The equation is written as</p>
+<p><span class="math display">\[
+(\partial_{x} + a_{12} \partial_{y})^{2} u + (a_{22} - a^{2}_{12})
+\partial^{2}_{y} u = 0
+\]</span></p>
+<p>In the elliptic case, let <span class="math inline">\(b = (a_{22} -
+a^{2}_{12})^{1/2} &gt; 0\)</span>. Introduce new variables <span
+class="math inline">\(\xi, \eta\)</span> by</p>
+<p><span class="math display">\[
+x = \xi, y = a_{12} \xi + b \eta
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\begin{align}
+\partial_{\xi} &amp;= 1 \cdot \partial_{x} + a_{12} \partial_{y} \\
+\partial_{\eta} &amp;= 0 \cdot \partial_{x} + b \partial_{y} \\
+\end{align}
+\]</span></p>
+<p>So, the equation becomes</p>
+<p><span class="math display">\[
+(\partial^{2}_{\xi} + \partial^{2}_{\eta}) u = 0
+\]</span></p>
+<p>The other cases have a similar procedure.</p>
+<p>The case of PDE with n variables will be added.</p>
+<h1 data-number="2" id="wave-and-diffusions"><span
+class="header-section-number">2</span> Wave and Diffusions</h1>
+<h2 data-number="2.1" id="the-wave-equation"><span
+class="header-section-number">2.1</span> The Wave Equation</h2>
+<p><span class="math display">\[
+u_{tt} = c^{2} u_{xx}
+\]</span></p>
+<p>General solution is</p>
+<p><span class="math display">\[
+u(x, t) = f(x+ct) + g(x-ct)
+\]</span></p>
+<h3 data-number="2.1.1" id="proof-1"><span
+class="header-section-number">2.1.1</span> Proof</h3>
+<h4 data-number="2.1.1.1" id="method-i-factorization"><span
+class="header-section-number">2.1.1.1</span> Method I Factorization</h4>
+<p><span class="math display">\[
+\begin{align}
+u_{t} + c u_{x} &amp;= v \\
+v_{t} - c v_{x} &amp;= 0 \\
+\end{align}
+\]</span></p>
+<p>of which the latter has the solution <span class="math inline">\(v(x,
+t) = h(x + c t)\)</span>.</p>
+<p>Then we solve <span class="math inline">\(u_{t} + c u_{x} = h(x + c
+t)\)</span> by directly differentiating <span
+class="math inline">\(u_{t} + c u_{x}\)</span> with respect to <span
+class="math inline">\(\xi = x + c t\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+u_{t} + c u_{x} &amp;= \frac{\partial u}{\partial \xi} \frac{\partial
+\xi}{\partial t} + c \frac{\partial u}{\partial \xi} \frac{\partial
+\xi}{\partial x} \\
+&amp;= u_{\xi} c + c u_{\xi} \\
+&amp;= 2 c u_{\xi} \\
+\end{align}
+\]</span></p>
+<p>Integrate <span class="math inline">\(2 c u_{\xi} = h(\xi)\)</span>
+get</p>
+<p><span class="math display">\[
+\begin{align}
+u(\xi, \eta) &amp;= \frac{1}{2c} \int h(\xi) d \xi + g(\eta) \\
+&amp;= f(\xi) + g(\eta) \\
+\end{align}
+\]</span></p>
+<p>with <span class="math inline">\(f^{\prime}(\xi) = h(\xi) /
+2c\)</span>. Then the solution is <span class="math inline">\(u(x, t) =
+f(x + ct) + g(x - ct)\)</span>.</p>
+<h4 data-number="2.1.1.2" id="method-ii-change-variables"><span
+class="header-section-number">2.1.1.2</span> Method II Change
+Variables</h4>
+<p><span class="math display">\[
+\xi = x + ct, \quad \eta = x - ct
+\]</span></p>
+<p>Substitute and get the form</p>
+<p><span class="math display">\[
+-4 c^{2} u_{\xi \eta} = 0
+\]</span></p>
+<p>Then <span class="math inline">\(u_{\xi \eta} = 0\)</span> since
+<span class="math inline">\(c \neq 0\)</span>, which is written as</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial \eta} = v, \quad \frac{\partial v}{\partial
+\xi} = 0
+\]</span></p>
+<p>of which the latter leads to <span class="math inline">\(v =
+v(\eta)\)</span>. Substitute and get</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial \eta} = v(\eta)
+\]</span></p>
+<p>Integrate and get</p>
+<p><span class="math display">\[
+\begin{align}
+u(\xi, \eta) &amp;= \int v(\eta) d \eta + f(\xi) \\
+&amp;= g(\eta) + f(\xi) \\
+\end{align}
+\]</span></p>
+<h3 data-number="2.1.2" id="initial-value-problem"><span
+class="header-section-number">2.1.2</span> Initial Value Problem</h3>
+<p><span class="math display">\[
+\begin{align}
+u_{tt} &amp;= c^{2} u_{xx} \\
+u(x, 0) &amp;= \phi(x) \\
+u_{t}(x, 0) &amp;= \psi (x) \\
+\end{align}
+\]</span></p>
+<p>Find the solution, which means we use the initial value, <span
+class="math inline">\(\phi, \psi\)</span>, to determine the form of
+<span class="math inline">\(f, g\)</span>.</p>
+<p>First set <span class="math inline">\(t=0\)</span> in the general
+solution</p>
+<p><span class="math display">\[
+\begin{align}
+u(x, 0) &amp;= f(x) + g(x) = \phi(x) \\
+u_{t}(x, 0) &amp;= c f^{\prime}(x) - c g^{\prime}(x) = \psi (x) \\
+\end{align}
+\]</span></p>
+<p>Then solve the above two equations for <span class="math inline">\(f,
+g\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+\phi^{\prime} &amp;= f^{\prime} + g^{\prime} \\
+\frac{1}{c} \psi &amp;= f^{\prime} - g^{\prime} \\
+\Rightarrow &amp; \\
+f^{\prime} &amp;= \frac{1}{2} (\phi^{\prime} + \frac{\psi}{c}) \\
+g^{\prime} &amp;= \frac{1}{2} (\phi^{\prime} - \frac{\psi}{c}) \\
+\end{align}
+\]</span></p>
+<p>Integrate, we get</p>
+<p><span class="math display">\[
+\begin{align}
+f(s) &amp;= \frac{1}{2} \phi(s) + \frac{1}{2c} \int^{s}_{0} \psi(s) dr +
+A \\
+g(s) &amp;= \frac{1}{2} \phi(s) - \frac{1}{2c} \int^{s}_{0} \psi(s) dr +
+B \\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(A + B = 0\)</span>, since <span
+class="math inline">\(\phi = f + g\)</span>. Now, we get the
+solution</p>
+<p><span class="math display">\[
+u(x, t) = \frac{1}{2} \big [ \phi (x + ct) + \phi (x - ct) \big ] +
+\frac{1}{2c} \int^{x+ct}_{x-ct} \psi (s) ds
+\]</span></p>
+<p>which is d’Alembert formula.</p>
+<h2 data-number="2.2" id="causality-and-energy"><span
+class="header-section-number">2.2</span> Causality and Energy</h2>
+<h3 data-number="2.2.1" id="causality"><span
+class="header-section-number">2.2.1</span> Causality</h3>
+<p>The effect of an initial position <span class="math inline">\(\phi
+(x)\)</span> is a pair of waves traveling in either direction at speed
+<span class="math inline">\(c\)</span> and at half the original
+amplitude. The effect of an initial velocity <span
+class="math inline">\(\psi\)</span> is a wave spreading out at speed
+<span class="math inline">\(\leq c\)</span> in both directions. The
+assertion that the speed <span class="math inline">\(\leq c\)</span> is
+called the principle of causality.</p>
+<p>The domain of influence is</p>
+<p>The domain of dependence is</p>
+<h3 data-number="2.2.2" id="energy"><span
+class="header-section-number">2.2.2</span> Energy</h3>
+<p>Imagine an infinite string with constants <span
+class="math inline">\(\rho, T\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{align}
+\rho u_{tt} &amp;= T u_{xx}, \quad -\infty &lt; x &lt; \infty \\
+\phi (x) &amp;= \psi (x) = 0, \quad |x| &gt; R \\
+\end{align}
+\]</span></p>
+<p>Define</p>
+<p><span class="math display">\[
+\begin{align}
+KE &amp;= \frac{1}{2} \rho \int u^{2}_{t} dx \\
+PE &amp;= \frac{1}{2} T \int u^{2}_{x} dx \\
+E &amp;= KE + PE \\
+\end{align}
+\]</span></p>
+<p>First</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{d KE}{d t} &amp;= \rho \int u_{t} u_{tt} dx \\
+&amp;= T \int u_{t} u_{xx} dx \\
+&amp;= T u_{t} u_{x} - T \int u_{t x} u_{x} dx \\
+\end{align}
+\]</span></p>
+<p>The terms <span class="math inline">\(T u_{t} u_{x}\)</span> is
+evaluated at <span class="math inline">\(x = \pm \infty\)</span>, so it
+vanishes.</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{d KE}{d t} &amp;= - T \int u_{t x} u_{x} dx \\
+&amp;= - \frac{d}{d t} \frac{1}{2} T \int u^{2}_{x} dx \\
+&amp;= - \frac{d PE}{d t} \\
+\frac{d E}{d t} &amp;= \frac{d KE}{d t} + \frac{d PE}{d t} = 0 \\
+\end{align}
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+E = \frac{1}{2} \int^{\infty}_{-\infty} (\rho u^{2}_{t} + T u^{2}_{x})
+dx
+\]</span></p>
+<p>is constant independent of <span class="math inline">\(t\)</span>,
+which is the law of conservation of energy.</p>
+<h2 data-number="2.3" id="the-diffusion-equation"><span
+class="header-section-number">2.3</span> The Diffusion Equation</h2>
+<p>1D diffusion equation</p>
+<p><span class="math display">\[
+u_{t} = k u_{xx}
+\]</span></p>
+<h3 data-number="2.3.1" id="maximum-principle"><span
+class="header-section-number">2.3.1</span> Maximum Principle</h3>
+<p>The maximum value of <span class="math inline">\(u(x, t)\)</span>
+which satisfies the diffusion equation in <span class="math inline">\(0
+\leq x \leq l, 0 \leq t \leq T\)</span>, can be attained only on the
+bottom or the lateral sides. Proof is given only for a weaker version
+and thus is omitted.</p>
+<h3 data-number="2.3.2" id="uniqueness"><span
+class="header-section-number">2.3.2</span> Uniqueness</h3>
+<p>The uniqueness of Dirichlet problem for the diffusion equation</p>
+<p><span class="math display">\[
+\begin{align}
+u_{t} - k u_{xx} &amp;= f(x, t), 0 &lt; x &lt; l, t &gt; 0 \\
+u(x, 0) &amp;= \phi (x) \\
+u(0, t) &amp;= g(t) \\
+u(l, t) &amp;= h(t) \\
+\end{align}
+\]</span></p>
+<p>can be proved by the maximum principle.</p>
+<ol type="1">
+<li><p>Proof by maximum principle</p>
+<p>Let <span class="math inline">\(w = u_{1} - u_{2}\)</span> be their
+difference. Then <span class="math inline">\(w_{t} - k w_{xx} = 0, w(x,
+0) = 0, w(0, t) = 0, w(l, t) = 0\)</span>. By the maximum principle,
+<span class="math inline">\(w(x, t) \leq 0\)</span>. By the minimum
+principle, <span class="math inline">\(w(x, t) \geq 0\)</span>.
+Therefore, <span class="math inline">\(w(x, t) = 0\)</span>. So, <span
+class="math inline">\(u_{1} = u_{2}\)</span>, i.e. there is an unique
+solution.</p></li>
+<li><p>Proof by energy method</p>
+<p><span class="math display">\[
+0 = (w_{t} - k w_{xx}) w = (\frac{1}{2} w^{2})_{t} + (- k w_{x} w)_{x} +
+k w^{2}_{x}
+\]</span></p>
+<p>Integrate over the interval <span class="math inline">\(0 &lt; x &lt;
+l\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+0 &amp;= \int^{l}_{0} (\frac{1}{2} w^{2})_{t} dx - \big [ k w_{x} w
+]^{l}_{0} + k \int^{l}_{0} w^{2}_{x} dx \\
+\Rightarrow &amp; \frac{d}{d t} \int^{l}_{0} \frac{1}{2} \big [ w(x, t)
+\big ]^{2} dx = -k \int^{l}_{0} \big [ w_{x} (x, t) \big ]^{2} dx \leq 0
+\\
+\end{align}
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \int^{l}_{0} \big [ w(x, t) \big ]^{2} dx \leq \int^{l}_{0} \big [
+w(x, t) \big ]^{2} dx = 0, t \geq 0 \\
+\Rightarrow &amp; w \equiv 0, \Rightarrow u_{1} = u_{2}, t \geq 0 \\
+\end{align}
+\]</span></p></li>
+</ol>
+<h3 data-number="2.3.3" id="stability"><span
+class="header-section-number">2.3.3</span> Stability</h3>
+<p>The energy method in case <span class="math inline">\(h = g = f =
+0\)</span>, leads to the following form of stability.</p>
+<p><span class="math display">\[
+\int^{l}_{0} \big [ u_{1} (x, t) - u_{2} (x, t) \big ]^{2} dx \leq
+\int^{l}_{0} \big [ \phi_{1} (x) - \phi_{2} (x) \big ]^{2} dx
+\]</span></p>
+<ol type="1">
+<li><p>Proof by maximum principle</p>
+<p><span class="math display">\[
+max_{0 \leq x \leq l} | u_{1} (x, t) - u_{2} (x, t) | \leq max_{0 \leq x
+\leq l} | \phi_{1} (x) - phi_{2} (x) |, t &gt; 0
+\]</span></p></li>
+</ol>
+<h2 data-number="2.4" id="diffusion-on-the-whole-line"><span
+class="header-section-number">2.4</span> Diffusion on the Whole
+Line</h2>
+<p>Solve</p>
+<p><span class="math display">\[
+\begin{align}
+u_{t} &amp;= k u_{xx}, -\infty &lt; x &lt; \infty, 0 &lt; t &lt; \infty
+\\
+u(x, 0) &amp;= \phi (x) \\
+\end{align}
+\]</span></p>
+<p>Our method is to solve it for a particular <span
+class="math inline">\(\phi (x)\)</span> and then the general solution
+from this particular one. There are 5 basic invariance properties of the
+diffusion equation,</p>
+<ul>
+<li>Translation <span class="math inline">\(u(x-y, t)\)</span> of
+solution <span class="math inline">\(u(x, t)\)</span> is another
+solution</li>
+<li>Linear combination of solutions is another solution</li>
+<li>Derivative of solution <span class="math inline">\(u(x, t)\)</span>
+is another solution</li>
+<li>Integral of solution <span class="math inline">\(u(x, t)\)</span> is
+another solution</li>
+<li>Dilated function <span class="math inline">\(u(\sqrt{a} x, a
+t)\)</span> for <span class="math inline">\(a &gt; 0\)</span> is another
+solution <a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></li>
+</ul>
+<p>The particular solution we look for is <span
+class="math inline">\(Q(x, t)\)</span>, which satisfies the special
+initial condition,</p>
+<p><span class="math display">\[
+\begin{align}
+Q(x, 0) &amp;= 1, x &gt; 0 \\
+Q(x, 0) &amp;= 0, x &lt; 0 \\
+\end{align}
+\]</span></p>
+<p>which does not change under dilation.</p>
+<p>Find <span class="math inline">\(Q(x, t)\)</span> in three steps.</p>
+<ol type="1">
+<li><p>Expect <span class="math inline">\(Q\)</span> to be the following
+special form,</p>
+<p><span class="math display">\[
+Q(x, t) = g(p), p = \frac{x}{\sqrt{4 k t}}
+\]</span></p>
+<p>due to dilation.</p></li>
+<li><p>Substitute <span class="math inline">\(Q\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+Q_{t} &amp;= \frac{d g}{d p} \frac{\partial p}{\partial t} = -
+\frac{1}{2 t} \frac{x}{\sqrt{4 k t}} g^{\prime} (p) \\
+Q_{xx} &amp;= \frac{d}{d p} \big ( \frac{d g}{d p} \frac{\partial
+p}{\partial x} \big ) \frac{\partial p}{\partial x} = \frac{1}{4kt}
+g^{\prime \prime} (p) \\
+0 &amp;= Q_{t} - k Q_{xx} = \frac{1}{t} \Big [ - \frac{1}{2} p
+g^{\prime} (p) - \frac{1}{4} g^{\prime \prime} (p) \Big ] \\
+\end{align}
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; g^{\prime \prime} + 2 p g^{\prime} = 0 \\
+\Rightarrow &amp; Q(x, t) = g(p) = C_{1} \int^{p}_{0} e^{-q^{2}} d q +
+C_{2} \\
+\end{align}
+\]</span></p></li>
+<li><p>Apply the special initial condition, we get the specific form of
+<span class="math inline">\(Q\)</span>.</p>
+<p><span class="math display">\[
+Q(x, t) = \frac{1}{\sqrt{\pi}} \int^{x/\sqrt{4kt}}_{0} e^{-p^{2}} dp +
+\frac{1}{2}, t &gt; 0
+\]</span></p></li>
+<li><p>Define <span class="math inline">\(S = \partial Q / \partial
+x\)</span>, which is also a solution. And</p>
+<p><span class="math display">\[
+u(x, t) = \int^{\infty}_{-\infty} S(x-y, t) \phi(y) dy, t &gt; 0
+\]</span></p>
+<p>is also a solution, which in fact is the general solution.</p>
+<p>However, the validity of the initial consition <span
+class="math inline">\(u(x, 0) = \phi(x)\)</span> is left to be
+checked.</p>
+<p><span class="math display">\[
+\begin{align}
+u(x, t) &amp;= \int^{\infty}_{-\infty} \big ( \frac{\partial Q(x,
+t)}{\partial x} (x-y, t) \big ) \phi(y) dy \\
+&amp;= - \int^{\infty}_{-\infty} \frac{\partial }{\partial y} \big [
+Q(x-y, t) \big ] \phi(y) dy \\
+&amp;= \int^{\infty}_{-\infty} Q(x-y, t) \phi^{\prime} (y) dy - \Big [
+Q(x-y, t) \phi(y) \Big ]^{\infty}_{-\infty} \\
+\end{align}
+\]</span></p>
+<p>Assume <span class="math inline">\(\phi(y) = 0\)</span> for <span
+class="math inline">\(|y|\)</span> large. And recall the special initial
+condition. We have</p>
+<p><span class="math display">\[
+\begin{align}
+u(x, 0) &amp;= \int^{\infty}_{-\infty} Q(x-y, t) \phi^{\prime} (y) dy \\
+&amp;= \int^{x}_{-\infty} \phi^{\prime} (y) dy = \big [ \phi \big
+]^{x}_{-\infty} = \phi(x) \\
+\end{align}
+\]</span></p>
+<p>Here, we confirm the general solution is</p>
+<p><span class="math display">\[
+\begin{align}
+u(x, t) &amp;= \int^{\infty}_{-\infty} S(x-y, t) \phi(y) dy, t &gt; 0 \\
+S &amp;= \frac{\partial Q}{\partial x} = \frac{1}{2 \sqrt{\pi k t}}
+e^{-x^{2}/4kt} \\
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(S(x, t)\)</span> is known as the source
+function, Green’s function, fundamental solution, gaussian, or
+propagator of the diffusion, or simply the diffusion kernel.</p>
+<p>The source function is illustrated as</p>
+<p>The area<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a> under its graph is</p>
+<p><span class="math display">\[
+\int^{\infty}_{-\infty} S(x, t) dx = \frac{1}{\sqrt{\pi}}
+\int^{\infty}_{-\infty} e^{-q^{2}} dq = 1
+\]</span></p>
+<p>We can regard the source function as the weighting function. Based on
+it, the value of the solution <span class="math inline">\(u(x,
+t)\)</span> is a kind of weighted average of the initial values around
+the point <span class="math inline">\(x\)</span>.</p></li>
+</ol>
+<p>Additional Note on the derivatives of integrals for which the limit
+of integration is a function of the variable of differentiation.<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a></p>
+<p>Find</p>
+<p><span class="math display">\[
+\frac{d}{dx} \int^{x^{2}}_{1} tan(t^{3}) dt
+\]</span></p>
+<p>To find this derivative, first write the function defined by the
+integral as a composition of two functions <span
+class="math inline">\(h(x), g(x)\)</span>, as follows,</p>
+<p><span class="math display">\[
+h(x) = \int^{x}_{1} tan(t^{3}) dt, g(x) = x^{2}
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+h(g(x)) = \int^{g(x)}_{1} tan(t^{3}) dt = \int^{x^{2}}_{1} tan(t^{3}) dt
+\]</span></p>
+<p>The derivative of a composition of two functions is found using the
+chain rule,</p>
+<p><span class="math display">\[
+\frac{d}{dx} h(g(x)) = h^{\prime}(g(x)) g^{\prime}(x)
+\]</span></p>
+<p>The derivative of <span class="math inline">\(h(x)\)</span> uses the
+fundamental theorem of calculus, while the derivative of <span
+class="math inline">\(g(x)\)</span> is easy,</p>
+<p><span class="math display">\[
+h^{\prime} (x) = \frac{d}{dx} \int^{x}_{1} tan(t^{3}) dt = tan(x^{3}),
+g^{\prime}(x) = 2x
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{d}{dx} \int^{x^{2}}_{1} tan(t^{3}) dt &amp;= \frac{d}{dx} h(g(x))
+\\
+&amp;= h^{\prime} (g(x)) g^{\prime}(x) \\
+&amp;= tan((x^{2})^{3}) \cdot 2x \\
+&amp;= 2x tan(x^{6}) \\
+\end{align}
+\]</span></p>
+<h1 data-number="3" id="reflections-and-sources"><span
+class="header-section-number">3</span> Reflections and Sources</h1>
+<p>Omitted.</p>
+<h1 data-number="4" id="boundary-problems"><span
+class="header-section-number">4</span> Boundary Problems</h1>
+<h2 data-number="4.1"
+id="separation-of-variables-the-dirichlet-condition"><span
+class="header-section-number">4.1</span> Separation of Variables, The
+Dirichlet Condition</h2>
+<p>Consider the homogeneous Dirichlet conditions.</p>
+<p><span class="math display">\[
+\begin{align}
+u_{tt} - c^{2} u_{xx} &amp;= 0, 0 &lt; x &lt; l \\
+u(x, 0) &amp;= \phi(x) \\
+u_{t}(x, 0) &amp;= \psi(x) \\
+u(0, t) &amp;= u(l, t) = 0 \\
+\end{align}
+\]</span></p>
+<p>Our method is to build up the general solution as a linear
+combination of special ones.</p>
+<p>The special one is a separated solution of the form</p>
+<p><span class="math display">\[
+u(x, t) = X(x) T(t)
+\]</span></p>
+<p>Plug the form into the wave equation and divide by <span
+class="math inline">\(-c^{2} X T\)</span>, we get</p>
+<p><span class="math display">\[
+-\frac{T^{\prime \prime}}{c^{2} T} = -\frac{X^{\prime \prime}}{X} =
+\lambda
+\]</span></p>
+<p><span class="math inline">\(\lambda\)</span> must be a positive
+constant, of which the positivity can be proved, since <span
+class="math inline">\(\partial \lambda / \partial x = \partial \lambda /
+\partial t = 0\)</span>.</p>
+<p>Let <span class="math inline">\(\lambda = \beta^{2}\)</span>, where
+<span class="math inline">\(\beta &gt; 0\)</span>. Then we write</p>
+<p><span class="math display">\[
+\begin{align}
+X^{\prime \prime} + \beta X &amp;= 0 \\
+T^{\prime \prime} + c^{2} \beta^{2} T &amp;= 0 \\
+\end{align}
+\]</span></p>
+<p>of which the solution is</p>
+<p><span class="math display">\[
+\begin{align}
+X(x) &amp;= C cos (\beta x) + D sin (\beta x) \\
+T(x) &amp;= A cos (\beta c t) + B sin (\beta c t) \\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(A, B, C, D\)</span> are
+constants.</p>
+<p>Next is to impose the boundary conditions.</p>
+<p><span class="math display">\[
+\begin{align}
+0 &amp;= X(0) = C \\
+0 &amp;= X(l) = D sin (\beta l) \\
+\end{align}
+\]</span></p>
+<p>Obviously, we are not interested in the trivial solution <span
+class="math inline">\(C = D = 0\)</span>. So, <span
+class="math inline">\(\beta l = n \pi\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\begin{align}
+\lambda_{n} &amp;= (\frac{n \pi}{l})^{2} \\
+X_{n}(x) &amp;= sin (\frac{n \pi x}{l}), n = 1, 2, 3, ... \\
+\end{align}
+\]</span></p>
+<p>where the constant before sine function is omitted.</p>
+<p>So, there are infinite number of separated solutions.,</p>
+<p><span class="math display">\[
+u_{n}(x, t) = \big ( A_{n} cos (\frac{n \pi c t}{l}) + B_{n} sin
+(\frac{n \pi c t}{l}) \big ) sin \frac{n \pi x}{l}, n = 1, 2, 3, ...
+\]</span></p>
+<p>of which a linear combination is also a solution.</p>
+<p>The initial conditions require</p>
+<p><span class="math display">\[
+\begin{align}
+\phi(x) &amp;= \sum_{n} A_{n} sin (\frac{n \pi x}{l}) \\
+\psi(x) &amp;= \sum_{n} \frac{n \pi x}{l} B_{n} sin (\frac{n \pi x}{l})
+\\
+\end{align}
+\]</span></p>
+<p>which seems special but practically true for any function if taken as
+infinite series.</p>
+<p>The diffusion problem is similar.</p>
+<p>The numbers <span class="math inline">\(\lambda_{n} = (n \pi /
+l)^{2}\)</span> are called eigenvalues and the functions <span
+class="math inline">\(X_{n}(x) = sin (n \pi x / l)\)</span> are called
+eigenfunctions. The reasons for this terminology is as follows. They
+satisfy the conditions</p>
+<p><span class="math display">\[
+- \frac{d^{2}}{d x^{2}} X = \lambda X, X(0) = X(l) = 0
+\]</span></p>
+<p>Let <span class="math inline">\(A\)</span> denotes the operator <span
+class="math inline">\(- d^{2} / d x^{2}\)</span>, which acts on the
+functions that satisfy the Dirichlet boundary conditions. The
+differential equation has the form <span class="math inline">\(A X =
+\lambda X\)</span>. An eigenfunction is a solution <span
+class="math inline">\(X \neq 0\)</span> of this equation and an
+eigenfunction is a number <span class="math inline">\(\lambda\)</span>
+for which there exists a solution <span class="math inline">\(X \neq
+0\)</span>. Recall the familiar case of <span class="math inline">\(N
+\times N\)</span> matrix <span class="math inline">\(A\)</span>. There
+are at most <span class="math inline">\(N\)</span> eigenvalues. But in
+the case of differential operator, there are an infinite number of
+eigenvalues. Then you might say that we are dealing with infinite
+dimensional linear algebra. In physics and engineering, the
+eigenfunctions are called normal modes, because they are the natural
+shapes of solutions that persist for all time.</p>
+<h2 data-number="4.2" id="the-neumann-condition"><span
+class="header-section-number">4.2</span> The Neumann Condition</h2>
+<p>Under the condition, the problem becomes</p>
+<p><span class="math display">\[
+\begin{align}
+- X^{\prime \prime} &amp;= \lambda X \\
+X^{\prime}(0) &amp;= X^{\prime}(l) = 0 \\
+\end{align}
+\]</span></p>
+<p>By the similar method, the solutions are</p>
+<p><span class="math display">\[
+\begin{align}
+\lambda_{n} &amp;= (\frac{n \pi}{l})^{2}, n = 0, 1, 2, ... \\
+X_{n}(x) &amp;= cos (\frac{n \pi x}{l}) \\
+\end{align}
+\]</span></p>
+<p>Note that <span class="math inline">\(n=0\)</span> is included among
+them.</p>
+<h2 data-number="4.3" id="the-robin-condition"><span
+class="header-section-number">4.3</span> The Robin Condition</h2>
+<p>to be added.</p>
+<h1 data-number="5" id="fourier-series"><span
+class="header-section-number">5</span> Fourier Series</h1>
+<h2 data-number="5.1" id="the-coefficients"><span
+class="header-section-number">5.1</span> The Coefficients</h2>
+<p>Refer to <a href="./015-Notes_on_Fourier_series.html">Link</a>.</p>
+<h2 data-number="5.2" id="even-odd-periodic-and-complex-functions"><span
+class="header-section-number">5.2</span> Even, Odd, Periodic, and
+Complex Functions</h2>
+<p>Refer to <a href="./015-Notes_on_Fourier_series.html">Link</a>.</p>
+<h2 data-number="5.3"
+id="orthogonality-and-general-fourier-series"><span
+class="header-section-number">5.3</span> Orthogonality and General
+Fourier Series</h2>
+<p>Define the inner product of <span class="math inline">\(f(x),
+g(x)\)</span>, two real-valued continuous functions defined on an
+interval <span class="math inline">\(a \leq x \leq b\)</span>, to be the
+integral of their product.</p>
+<p><span class="math display">\[
+(f, g) \equiv \int^{b}_{a} f(x) g(x) dx
+\]</span></p>
+<p>Call <span class="math inline">\(f(x), g(x)\)</span> orthogonal if
+<span class="math inline">\((f, g) = 0\)</span>.</p>
+<p>Note: every eigenfunction is orthogonal to every other eigenfunction,
+in the case of Dirichlet, Neumann, Periodic, Robin condition, which is
+the base on which Fourier series work. Proof is as follows.</p>
+<p><span class="math display">\[
+\begin{align}
+\lambda_{1} X_{1} X_{2} - \lambda_{2} X_{1} X_{2} &amp;= - X^{\prime
+\prime}_{1} X_{2} + X_{1} X^{\prime \prime}_{2} = (- X^{\prime}_{1}
+X_{2} + X_{1} X^{\prime}_{2})^{\prime} \\
+(\lambda_{1} - \lambda_{2}) \int^{b}_{a} X_{1} X_{2} dx &amp;=
+\int^{b}_{a} - X^{\prime \prime}_{1} X_{2} + X_{1} X^{\prime \prime}_{2}
+dx = [- X^{\prime}_{1} X_{2} + X_{1} X^{\prime}_{2}]^{b}_{a} \\
+\end{align}
+\]</span></p>
+<p>of which the second equation is called Green’s second identity. Under
+the four cases, it’s equal to <span class="math inline">\(0\)</span>.
+Thus, it’s orthogonal.</p>
+<p>Let use envision any pair of boundary conditions</p>
+<p><span class="math display">\[
+\begin{align}
+\alpha_{1} X(a) + \beta_{1} X(b) + \gamma_{1} X^{\prime}(a) + \delta_{1}
+X^{\prime}(b) &amp;= 0 \\
+\alpha_{2} X(a) + \beta_{2} X(b) + \gamma_{2} X^{\prime}(a) + \delta_{2}
+X^{\prime}(b) &amp;= 0 \\
+\end{align}
+\]</span></p>
+<p>involving <span class="math inline">\(8\)</span> real constants. Such
+set of boundary conditions is called symmetric if</p>
+<p><span class="math display">\[
+\Big [ f^{\prime}(x) g(x) - f(x) g^{\prime}(x) \Big ]^{x=b}_{x=a} = 0
+\]</span></p>
+<p>All standard boundary conditions are symmetric.</p>
+<p>Theorem 1 is to be added.</p>
+<p>Note: If there are two eigenfunctions, <span
+class="math inline">\(X_{1}(x), X_{2}(x)\)</span> with eigenvalues <span
+class="math inline">\(\lambda_{1} = \lambda_{2}\)</span>, then they
+don’t have to be orthogonal. However, they can be made so by the
+Gram-Schmidt orthogonalization procedure if not.</p>
+<h3 data-number="5.3.1" id="complex-eigenvalues"><span
+class="header-section-number">5.3.1</span> Complex Eigenvalues</h3>
+<p>If functions are complex valued, define the inner product on <span
+class="math inline">\((a, b)\)</span> as</p>
+<p><span class="math display">\[
+(f, g) = \int^{b}_{a} f(x) \bar{g(x)} dx
+\]</span></p>
+<p>where the bar denotes the complex conjugate. If <span
+class="math inline">\((f, g) = 0\)</span>, they are called
+orthogonal.</p>
+<p>The following is to be added.</p>
+<h1 data-number="6" id="harmonic-functions"><span
+class="header-section-number">6</span> Harmonic Functions</h1>
+<h2 data-number="6.1" id="laplaces-equation"><span
+class="header-section-number">6.1</span> Laplace’s Equation</h2>
+<p><span class="math display">\[
+\nabla^{2} u = 0
+\]</span> A solution of the Laplace equation is called a harmonic
+function.</p>
+<p>Poisson’s equation</p>
+<p><span class="math display">\[
+\nabla^{2} u = f
+\]</span></p>
+<p>with <span class="math inline">\(f\)</span> a given function.</p>
+<h3 data-number="6.1.1" id="maximum-principle-1"><span
+class="header-section-number">6.1.1</span> Maximum Principle</h3>
+<p>Let <span class="math inline">\(V\)</span> be a connected bounded
+open set.<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a> Let <span
+class="math inline">\(u\)</span> be a harmonic function in <span
+class="math inline">\(V\)</span> that is continuous on <span
+class="math inline">\(\bar{V} = V \cup \partial V\)</span>. Then the
+maximum and the minimum values of <span class="math inline">\(u\)</span>
+are attained on <span class="math inline">\(\partial V\)</span> and
+nowhere inside. The idea of the maximum principle is as follows. If
+there is a maximum point inside <span class="math inline">\(V\)</span>,
+we’d have <span class="math inline">\(\nabla^{2} u \leq 0\)</span>. At
+most maximum points <span class="math inline">\(\nabla^{2} u &lt;
+0\)</span>, which is a contradiction to Laplace’s equation. However,
+it’s possible <span class="math inline">\(\nabla^{2} u = 0\)</span> at a
+maximum point, and it requires a little more proof, which is omitted
+here.</p>
+<p>The meaning of second order derivative at maximum point is
+illustrated as follows.</p>
+<figure>
+<img src="./Notes_on_PDE/01.png" alt="01" />
+<figcaption aria-hidden="true">01</figcaption>
+</figure>
+<h3 data-number="6.1.2" id="uniqueness-of-the-dirichlet-problem"><span
+class="header-section-number">6.1.2</span> Uniqueness of the Dirichlet
+Problem</h3>
+<p>Suppose two solutions</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla^{2} u = f, &amp; \nabla^{2} v = f, &amp; in V \\
+u = h, &amp; v = h, &amp; on \partial V \\
+\end{align}
+\]</span></p>
+<p>Let <span class="math inline">\(w = u - v\)</span>, then</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla^{2} w = 0, &amp; in V \\
+w = 0, &amp; on \partial V \\
+\end{align}
+\]</span></p>
+<p>By the maximum principle,</p>
+<p><span class="math display">\[
+0 = w(x_{m}) \leq w(x) \leq w(x_{M}) = 0
+\]</span></p>
+<p>Therefore, <span class="math inline">\(w \equiv 0, u \equiv
+v\)</span>.</p>
+<h3 data-number="6.1.3" id="invariance-in-two-dimensions"><span
+class="header-section-number">6.1.3</span> Invariance in Two
+Dimensions</h3>
+<p>Proof is omitted. The operator <span
+class="math inline">\(\nabla^{2}\)</span> is isotropic. Special harmonic
+function that itself is rotationally invariant is <span
+class="math inline">\(u = C_{1} ln (r) + C_{2}\)</span>.</p>
+<h3 data-number="6.1.4" id="invariance-in-three-dimensions"><span
+class="header-section-number">6.1.4</span> Invariance in Three
+Dimensions</h3>
+<p>Proof is omitted. Special harmonic function is <span
+class="math inline">\(u = - C_{1} r^{-1} + C_{2}\)</span>.</p>
+<h2 data-number="6.2" id="rectangles-and-cubes"><span
+class="header-section-number">6.2</span> Rectangles and Cubes</h2>
+<p>Omitted.</p>
+<h2 data-number="6.3" id="poissons-formula"><span
+class="header-section-number">6.3</span> Poisson’s Formula</h2>
+<p>Consider the Dirichlet problem for a circle,</p>
+<p><span class="math display">\[
+\begin{align}
+u_{xx} + u_{yy} &amp;= 0, &amp; x^{2} + y^{2} &lt; a^{2} \\
+u &amp;= h(\theta), &amp; x^{2} + y^{2} = a^{2} \\
+\end{align}
+\]</span></p>
+<p>Our method is to separate variables in polar coordinates<a
+href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a>, <span class="math inline">\(u =
+R(r) \Theta (\theta)\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+0 &amp;= u_{xx} + u_{yy} \\
+&amp;= R^{\prime \prime} \Theta + \frac{1}{r} R^{\prime} \Theta +
+\frac{1}{r^{2}} R \Theta^{\prime \prime} \\
+\end{align}
+\]</span></p>
+<p>Rearrange, we get</p>
+<p><span class="math display">\[
+\begin{align}
+\Theta^{\prime \prime} + \lambda \Theta &amp;= 0 \\
+r^{2} R^{\prime \prime} + r R^{\prime} - \lambda R &amp;= 0 \\
+\end{align}
+\]</span></p>
+<p>which are two ODE, requiring boundary conditions.</p>
+<p>For <span class="math inline">\(\Theta (\theta)\)</span>, naturally,
+we provide periodic BCs,</p>
+<p><span class="math display">\[
+\Theta (\theta + 2 \pi) = \Theta (\theta), -\infty &lt; \theta &lt;
+\infty
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+\begin{align}
+\lambda &amp;= n^{2} \\
+\Theta (\theta) &amp;= A cos(n \theta) + B sin (n \theta), n = 1, 2, 3,
+... \\
+&amp;= C_{0}, n = 0 \\
+\end{align}
+\]</span></p>
+<p>(to be added)</p>
+<p>There,</p>
+<p><span class="math display">\[
+u(r, \theta) = (a^{2} - r^{2}) \int^{2 \pi}_{0} \frac{h(\phi)}{a^{2} - 2
+a r cos (\theta - \phi) + r^{2}} \frac{d \phi}{2 \pi}
+\]</span></p>
+<p>which is known as Poisson’s formula.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><span class="math inline">\(v(x, t) = u(\sqrt{a} x, a
+t), v_{t} = a u_{t} = a k u_{xx} = k (a u_{xx}) = k v_{xx}\)</span><a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(\int e^{-x^{2}} dx =
+\frac{1}{2} \sqrt{\pi} erf(x) + C, \int^{\infty}_{0} e^{-x^{2}} dx =
+\frac{\sqrt{\pi}}{2}\)</span>, <span
+class="math inline">\(erf(x)\)</span> is the error function.<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a
+href="http://www.mathmistakes.info/facts/CalculusFacts/learn/doi/doif.html">Reference
+link</a><a href="#fnref3" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>By an open set, we mean a set that includes none of its
+boundary points.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>The transformation between Cartesian coordinate and
+polar coordinate can be achieved by derivatives of compound function.<a
+href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2015-04-26 with pandoc
+</footer>
+</body>
+</html>

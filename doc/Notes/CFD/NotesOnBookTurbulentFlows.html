@@ -1,0 +1,1653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2016-03-16" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Notes on Book “Turbulent flows”</h1>
+<h3 class="date">2016-03-16</h3>
+<div id="TOC">
+<ul>
+<li><a href="#navier-stokes-equation"
+id="toc-navier-stokes-equation"><span
+class="toc-section-number">1</span> Navier Stokes equation</a>
+<ul>
+<li><a href="#continuity-equation" id="toc-continuity-equation"><span
+class="toc-section-number">1.1</span> Continuity equation</a></li>
+<li><a href="#momentum-equation" id="toc-momentum-equation"><span
+class="toc-section-number">1.2</span> Momentum equation</a></li>
+<li><a href="#energy-equation" id="toc-energy-equation"><span
+class="toc-section-number">1.3</span> Energy equation</a></li>
+<li><a href="#surface-forces-and-constitutive-equation"
+id="toc-surface-forces-and-constitutive-equation"><span
+class="toc-section-number">1.4</span> Surface forces and Constitutive
+equation</a></li>
+</ul></li>
+<li><a href="#the-equation-of-fluid-motion"
+id="toc-the-equation-of-fluid-motion"><span
+class="toc-section-number">2</span> 2 The equation of fluid motion</a>
+<ul>
+<li><a href="#eulerian-and-lagrangian-fields"
+id="toc-eulerian-and-lagrangian-fields"><span
+class="toc-section-number">2.1</span> 2.2 Eulerian and Lagrangian
+fields</a></li>
+<li><a href="#the-continuity-equation"
+id="toc-the-continuity-equation"><span
+class="toc-section-number">2.2</span> 2.3 The continuity
+equation</a></li>
+<li><a href="#the-momentum-equation"
+id="toc-the-momentum-equation"><span
+class="toc-section-number">2.3</span> 2.4 The momentum equation</a></li>
+<li><a href="#the-role-of-pressure" id="toc-the-role-of-pressure"><span
+class="toc-section-number">2.4</span> 2.5 The role of pressure</a></li>
+<li><a href="#conserved-passive-scalars"
+id="toc-conserved-passive-scalars"><span
+class="toc-section-number">2.5</span> 2.6 Conserved passive
+scalars</a></li>
+<li><a href="#the-vorticity-equation"
+id="toc-the-vorticity-equation"><span
+class="toc-section-number">2.6</span> 2.7 The vorticity
+equation</a></li>
+<li><a href="#transformation-properties"
+id="toc-transformation-properties"><span
+class="toc-section-number">2.7</span> 2.9 Transformation
+properties</a></li>
+</ul></li>
+<li><a href="#statistical" id="toc-statistical"><span
+class="toc-section-number">3</span> 3 Statistical</a>
+<ul>
+<li><a href="#the-random-nature-of-turbulence"
+id="toc-the-random-nature-of-turbulence"><span
+class="toc-section-number">3.1</span> 3.1 The random nature of
+turbulence</a></li>
+<li><a href="#characterization-of-random-variables"
+id="toc-characterization-of-random-variables"><span
+class="toc-section-number">3.2</span> 3.2 Characterization of random
+variables</a></li>
+<li><a href="#examples-of-probability-distributions"
+id="toc-examples-of-probability-distributions"><span
+class="toc-section-number">3.3</span> 3.3 Examples of probability
+distributions</a></li>
+<li><a href="#joint-random-variables"
+id="toc-joint-random-variables"><span
+class="toc-section-number">3.4</span> 3.4 Joint random
+variables</a></li>
+<li><a href="#normal-and-joint-normal-distributions"
+id="toc-normal-and-joint-normal-distributions"><span
+class="toc-section-number">3.5</span> 3.5 Normal and joint-normal
+distributions</a></li>
+<li><a href="#random-process" id="toc-random-process"><span
+class="toc-section-number">3.6</span> 3.6 Random process</a></li>
+</ul></li>
+<li><a href="#mean-flow-equations" id="toc-mean-flow-equations"><span
+class="toc-section-number">4</span> 4 Mean Flow Equations</a>
+<ul>
+<li><a href="#reynolds-equations" id="toc-reynolds-equations"><span
+class="toc-section-number">4.1</span> 4.1 Reynolds equations</a></li>
+<li><a href="#reynolds-stresses" id="toc-reynolds-stresses"><span
+class="toc-section-number">4.2</span> 4.2 Reynolds stresses</a>
+<ul>
+<li><a href="#interpretation-as-stresses"
+id="toc-interpretation-as-stresses"><span
+class="toc-section-number">4.2.1</span> Interpretation as
+stresses</a></li>
+<li><a href="#the-closure-problem" id="toc-the-closure-problem"><span
+class="toc-section-number">4.2.2</span> The closure problem</a></li>
+<li><a href="#tensor-properties" id="toc-tensor-properties"><span
+class="toc-section-number">4.2.3</span> Tensor properties</a></li>
+<li><a href="#anisotropy" id="toc-anisotropy"><span
+class="toc-section-number">4.2.4</span> Anisotropy</a></li>
+<li><a href="#irrotational-motion" id="toc-irrotational-motion"><span
+class="toc-section-number">4.2.5</span> Irrotational motion</a></li>
+</ul></li>
+<li><a href="#the-mean-scalar-equation"
+id="toc-the-mean-scalar-equation"><span
+class="toc-section-number">4.3</span> 4.3 The mean scalar
+equation</a></li>
+<li><a href="#gradient-diffusion-and-turbulent-viscosity-hypotheses"
+id="toc-gradient-diffusion-and-turbulent-viscosity-hypotheses"><span
+class="toc-section-number">4.4</span> 4.4 Gradient-diffusion and
+turbulent-viscosity hypotheses</a>
+<ul>
+<li><a href="#gradient-diffusion-hypothesis"
+id="toc-gradient-diffusion-hypothesis"><span
+class="toc-section-number">4.4.1</span> Gradient-diffusion
+hypothesis</a></li>
+<li><a href="#turbulent-viscosity-hypothesis"
+id="toc-turbulent-viscosity-hypothesis"><span
+class="toc-section-number">4.4.2</span> Turbulent-viscosity
+hypothesis</a></li>
+</ul></li>
+<li><a href="#properties" id="toc-properties"><span
+class="toc-section-number">4.5</span> Properties</a></li>
+</ul></li>
+<li><a href="#free-shear-flows" id="toc-free-shear-flows"><span
+class="toc-section-number">5</span> 5 Free Shear Flows</a>
+<ul>
+<li><a href="#the-round-jet-experimental-observations"
+id="toc-the-round-jet-experimental-observations"><span
+class="toc-section-number">5.1</span> 5.1 The round jet: experimental
+observations</a>
+<ul>
+<li><a href="#a-description-of-the-flow"
+id="toc-a-description-of-the-flow"><span
+class="toc-section-number">5.1.1</span> 5.1.1 A description of the
+flow</a></li>
+<li><a href="#the-mean-velocity-field"
+id="toc-the-mean-velocity-field"><span
+class="toc-section-number">5.1.2</span> 5.1.2 The mean velocity
+field</a></li>
+<li><a href="#reynolds-stresses-1" id="toc-reynolds-stresses-1"><span
+class="toc-section-number">5.1.3</span> 5.1.3 Reynolds stresses</a></li>
+</ul></li>
+<li><a href="#the-round-jet-mean-momentum"
+id="toc-the-round-jet-mean-momentum"><span
+class="toc-section-number">5.2</span> 5.2 The round jet: mean
+momentum</a>
+<ul>
+<li><a href="#boundary-layer-equations"
+id="toc-boundary-layer-equations"><span
+class="toc-section-number">5.2.1</span> 5.2.1 Boundary layer
+equations</a></li>
+<li><a href="#flow-rates-of-mass-momentum-and-energy"
+id="toc-flow-rates-of-mass-momentum-and-energy"><span
+class="toc-section-number">5.2.2</span> 5.2.2 Flow rates of mass,
+momentum, and energy</a></li>
+<li><a href="#self-similarity-1" id="toc-self-similarity-1"><span
+class="toc-section-number">5.2.3</span> 5.2.3 Self-similarity</a></li>
+<li><a href="#uniform-turbulent-viscosity"
+id="toc-uniform-turbulent-viscosity"><span
+class="toc-section-number">5.2.4</span> 5.2.4 Uniform turbulent
+viscosity</a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="#appendix-e-spectral-representation-of-stationary-random-process"
+id="toc-appendix-e-spectral-representation-of-stationary-random-process"><span
+class="toc-section-number">6</span> Appendix E Spectral Representation
+of Stationary Random Process</a>
+<ul>
+<li><a href="#e.1-fourier-series" id="toc-e.1-fourier-series"><span
+class="toc-section-number">6.1</span> E.1 Fourier series</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="navier-stokes-equation"><span
+class="header-section-number">1</span> Navier Stokes equation</h1>
+<h2 data-number="1.1" id="continuity-equation"><span
+class="header-section-number">1.1</span> Continuity equation</h2>
+<p>In Lagrange system, the continuity idea is as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{d m}{d t} = 0
+\end{equation}
+\]</span></p>
+<p>In Euler system, the differential form is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \rho}{\partial t} + \nabla \cdot \big ( \rho \vec{u} \big
+) = 0
+\end{align}
+\]</span></p>
+<p>By Reynolds transport equation, the integral form of continuity
+equation in Lagrange system can be transformed to the differential form
+in Eluer system.</p>
+<h2 data-number="1.2" id="momentum-equation"><span
+class="header-section-number">1.2</span> Momentum equation</h2>
+<p>Physical idea, in Lagrange system, is as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{d}{d t} \iiint_{V(t)} \rho \vec{u} dV = \sum F
+\end{equation}
+\]</span></p>
+<p>In Euler system, the differential form is as follows</p>
+<p><span class="math display">\[
+\begin{equation}
+\rho \frac{d u_{i}}{d t} = \rho f_{i} + \frac{\partial
+\sigma_{ji}}{\partial x_{j}}
+\end{equation}
+\]</span></p>
+<h2 data-number="1.3" id="energy-equation"><span
+class="header-section-number">1.3</span> Energy equation</h2>
+<p>Physical idea, in Lagrange system, is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{d}{d t} \iiint \rho (e + 1/2 \vec{u} \cdot \vec{u}) dV = \sum W +
+\sum Q
+\end{align}
+\]</span></p>
+<p>In Euler system, the differential form is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{d e}{d t} + \rho u_{i} \frac{d u_{i}}{d t} = \rho f_{i} u_{i}
++ u_{i} \frac{\partial \sigma_{ji}}{\partial x_{j}} + \sigma_{ji}
+\frac{\partial u_{i}}{\partial x_{j}} + Q - \frac{\partial
+q_{i}}{\partial x_{i}}
+\end{align}
+\]</span></p>
+<p>Combine the momentum equation, we can reduce the momentum part and
+get</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{d e}{d t} = \sigma_{ji} \frac{\partial u_{i}}{\partial x_{j}}
++ Q - \frac{\partial q_{i}}{\partial x_{i}}
+\end{align}
+\]</span></p>
+<h2 data-number="1.4"
+id="surface-forces-and-constitutive-equation"><span
+class="header-section-number">1.4</span> Surface forces and Constitutive
+equation</h2>
+<p>Expand</p>
+<p><span class="math display">\[
+\begin{align}
+\sigma_{ij} = - p \delta_{ij} + \tau_{ij}
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\tau_{ij}\)</span> means a stress in the
+direction of j exerted on a plane perpendicular to the axis of i.</p>
+<p>Constitutive equation is to find the relation between surface forces
+<span class="math inline">\(\sigma_{ij}\)</span> and the symmetric
+tensor <span class="math inline">\(e_{ij}\)</span>.</p>
+<p>Deviatoric stress tensor <span
+class="math inline">\(\tau_{ij}\)</span> relates with the velocity
+gradient <span class="math inline">\(\frac{\partial u_{i}}{\partial
+x_{j}}\)</span>. So the key is the relation between <span
+class="math inline">\(\tau_{ij}\)</span> and <span
+class="math inline">\(e_{ij}\)</span>.</p>
+<p>In tensor analysis, they have the following relation.</p>
+<p><span class="math display">\[
+\begin{align}
+\tau_{ij} = \lambda \delta_{ij} \nabla \cdot \vec{u} + 2 \mu e_{ij}
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\mu\)</span> is the dynamic viscosity,
+<span class="math inline">\(\nu = \mu / \rho\)</span> is the kinematic
+viscosity.</p>
+<h1 data-number="2" id="the-equation-of-fluid-motion"><span
+class="header-section-number">2</span> 2 The equation of fluid
+motion</h1>
+<h2 data-number="2.1" id="eulerian-and-lagrangian-fields"><span
+class="header-section-number">2.1</span> 2.2 Eulerian and Lagrangian
+fields</h2>
+<ol type="1">
+<li><p><span class="math inline">\(\rho(\vec{x}, t), \vec{U}(\vec{x},
+t)\)</span>are Eulerian fields, indexed by position vector<span
+class="math inline">\(\vec{x}\)</span>in an inertial frame.</p></li>
+<li><p>In Lagrangian description, define fluid particle: a point moving
+with the local fluid velocity.</p></li>
+</ol>
+<p><span class="math inline">\(\vec{X}^{+} (t, \vec{Y})\)</span>denotes
+the position at time t of the fluid particle that is located at<span
+class="math inline">\(\vec{Y}\)</span>at the specified fixed reference
+time<span class="math inline">\(t_{0}\)</span>.</p>
+<p>Mathematical definition of<span class="math inline">\(\vec{X}^{+} (t,
+\vec{Y})\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+\vec{X}^{+} (t_{0}, \vec{Y}) &amp;= \vec{Y} \\
+\frac{\partial }{\partial t} \vec{X}^{+} (t, \vec{Y}) &amp;= \vec{U} (
+\vec{X}^{+} (t, \vec{Y}), t) \\
+\end{align}
+\]</span></p>
+<p>Given Euler velocity field<span class="math inline">\(\vec{U}
+(\vec{x}, t)\)</span>, we get<span class="math inline">\(\vec{X}^{+}
+(t_{0}, \vec{Y})\)</span>.</p>
+<ol start="3" type="1">
+<li><p>Lagrangian fields of<span class="math inline">\(\rho,
+U\)</span>are indexed by position<span
+class="math inline">\(\vec{Y}\)</span>at the reference time<span
+class="math inline">\(t_{0}\)</span>. Hence,<span
+class="math inline">\(\vec{Y}\)</span>is called the Lagrangian
+coordinate or the material coordinate.</p></li>
+<li><p>Define the substantial derivative.</p></li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial}{\partial t} \rho^{+} (t, \vec{Y}) &amp;=
+\frac{\partial}{\partial t} \rho ( \vec{X}^{+} (t, \vec{Y}), t ) \\
+&amp;= \Big ( \frac{\partial}{\partial t} \rho (\vec{x}, t) \Big )_{x =
+\vec{X}^{+} (t, \vec{Y})} + \frac{\partial}{\partial t} \vec{X}^{+}_{i}
+(t, \vec{Y}) \Big ( \frac{\partial}{\partial x_{i}} \rho (\vec{x}, t)
+\Big )_{x = \vec{X}^{+} (t, \vec{Y})} \\
+&amp;= \Big ( \frac{\partial}{\partial t} \rho (\vec{x}, t) + U_{i}
+(\vec{x}, t) \frac{\partial}{\partial x_{i}} \rho (\vec{x}, t) \Big )_{x
+= \vec{X}^{+} (t, \vec{Y})} \\
+&amp;= \Big ( \frac{D}{D t} \rho (\vec{x}, t) \Big )_{x = \vec{X}^{+}
+(t, \vec{Y})} \\
+\end{align}
+\]</span></p>
+<p>Exercise 2.2 introduces a question: how is taylor series of vector
+function?</p>
+<h2 data-number="2.2" id="the-continuity-equation"><span
+class="header-section-number">2.2</span> 2.3 The continuity
+equation</h2>
+<p>The continuity equation is omitted.</p>
+<p>A useful interpretation is in terms of the specific volume of
+fluid<span class="math inline">\(\vartheta (x, t) = 1/ \rho (x,
+t)\)</span>. And eq (2.18) gives some physical interpretation.</p>
+<p>Eq (2.11) explains solenoidal or divergence free velocity field.</p>
+<p>The determinant of Jacobian</p>
+<p><span class="math display">\[
+\begin{align}
+J (t, \vec{Y}) \equiv det \Big ( \frac{\partial \vec{X}^{+}_{i} (t,
+\vec{Y})}{\partial \vec{Y}_{j}} \Big )
+\end{align}
+\]</span></p>
+<p>gives the volume ratio between an infinitesimal material volume<span
+class="math inline">\(d V(t)\)</span>at time<span
+class="math inline">\(t\)</span>, and its volume<span
+class="math inline">\(d V(t_{0})\)</span>at time<span
+class="math inline">\(t_{0}\)</span>.</p>
+<h2 data-number="2.3" id="the-momentum-equation"><span
+class="header-section-number">2.3</span> 2.4 The momentum equation</h2>
+<p>Nothing.</p>
+<h2 data-number="2.4" id="the-role-of-pressure"><span
+class="header-section-number">2.4</span> 2.5 The role of pressure</h2>
+<p>In constant density flow, pressure can not be related to density and
+temperature by an equation of state. A different understanding is
+required.<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<h2 data-number="2.5" id="conserved-passive-scalars"><span
+class="header-section-number">2.5</span> 2.6 Conserved passive
+scalars</h2>
+<p>eq (2.54)</p>
+<ul>
+<li><dl>
+<dt>Conserved</dt>
+<dd>
+No source or sink term
+</dd>
+</dl></li>
+<li><dl>
+<dt>Passice</dt>
+<dd>
+No effect on material properties
+</dd>
+</dl></li>
+<li><dl>
+<dt>Boundedness</dt>
+<dd>
+Take local maxima as example.
+</dd>
+</dl></li>
+</ul>
+<h2 data-number="2.6" id="the-vorticity-equation"><span
+class="header-section-number">2.6</span> 2.7 The vorticity equation</h2>
+<p>Take curl of NS (2.35). Then get (2.60). Recall (2.16), the evolution
+of an infinitesimal line element. (2.16) only miss the viscous term. In
+inviscid flow, vorticity behaves like this.<a href="#fn2"
+class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The term <span class="math inline">\(\vec{\omega} \cdot \Delta
+\vec{U}\)</span> is called vortex stretching.</p>
+<p>In 2D, vortex stretching term vanishes, and vorticity evolves as
+conserved scalars.</p>
+<p>eq (2.66), (2.67) are Stokes form of NS.</p>
+<p>Note some terms</p>
+<ul>
+<li>enstrophy: <span class="math inline">\(\omega^{2}\)</span></li>
+<li>entropy: 熵</li>
+<li>isotropic: 各向同性</li>
+</ul>
+<h2 data-number="2.7" id="transformation-properties"><span
+class="header-section-number">2.7</span> 2.9 Transformation
+properties</h2>
+<p>To be added.</p>
+<h1 data-number="3" id="statistical"><span
+class="header-section-number">3</span> 3 Statistical</h1>
+<h2 data-number="3.1" id="the-random-nature-of-turbulence"><span
+class="header-section-number">3.1</span> 3.1 The random nature of
+turbulence</h2>
+<p>The issue is the inconsistency between the random nature of turbulent
+flows and the deterministic nature of classical mechnics embodied in
+NS.</p>
+<ol type="1">
+<li>Unavoidable perturbations</li>
+<li>At high Re, the flow is sensative to perturbations</li>
+</ol>
+<h2 data-number="3.2" id="characterization-of-random-variables"><span
+class="header-section-number">3.2</span> 3.2 Characterization of random
+variables</h2>
+<p>For larminar flow, we use theory to calculate <span
+class="math inline">\(U\)</span> and perform an experiment to measure
+<span class="math inline">\(U\)</span>. Both agree.</p>
+<p>For turbulent flow, we still apply NS, but the aim is different.
+Aimed to predict a particular value of <span
+class="math inline">\(U\)</span> is certain to be wrong. However, theory
+aim at determining the probability.</p>
+<ol type="1">
+<li><p>Sample space. <span class="math inline">\(V\)</span> is the
+sample space variable corresponding to <span
+class="math inline">\(U\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+B \equiv \{ U &lt; V_{b} \}
+\end{align}
+\]</span></p></li>
+<li><p>Probability of the event <span class="math inline">\(B\)</span>
+is written as</p>
+<p><span class="math display">\[
+\begin{align}
+p &amp;= P(B) = P \{ U &lt; V_{b} \} \\
+0 &amp; \leq p \leq 1 \\
+\end{align}
+\]</span></p></li>
+<li><p>The cumulative distribution function (CDF)</p>
+<p><span class="math display">\[
+\begin{align}
+F(V) \equiv P \{ U &lt; V \}
+\end{align}
+\]</span></p>
+<p>Properties of CDF are</p>
+<p><span class="math display">\[
+\begin{align}
+F(-\infty) &amp;= 0, \quad F(\infty) = 1 \\
+F(V_{b}) &amp; \geq F(V_{a}) \quad for \quad V_{b} &gt; V_{a} \\
+F(V_{b}) &amp;- F(V_{a}) = P \{ V_{a} \leq U \leq V_{b} \} \geq 0 \\
+\end{align}
+\]</span></p></li>
+<li><p>The properties density function (PDF)</p>
+<p><span class="math display">\[
+\begin{align}
+f(V) \equiv \frac{d F(V)}{d V}
+\end{align}
+\]</span></p>
+<p>Properties of PDF are</p>
+<p><span class="math display">\[
+\begin{align}
+f(- \infty) &amp;= f(\infty) = 0 \\
+f(V) &amp;\geq 0 \\
+\int^{\infty}_{-\infty} f(V) dV &amp;= 1 \\
+\end{align}
+\]</span></p>
+<p>Statistically identical ref P67.</p></li>
+<li><p>Mean</p>
+<p>Mean is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U \rangle \equiv \int^{\infty}_{-\infty} V f(V) dV
+\end{align}
+\]</span></p>
+<p>Properties are</p>
+<ul>
+<li><span class="math inline">\(\langle \rangle\)</span> behaves as
+linear operator</li>
+<li><span class="math inline">\(\langle \langle U \rangle \rangle =
+\langle U \rangle\)</span></li>
+<li><span class="math inline">\(\langle Q + R \rangle = \langle Q
+\rangle + \langle R \rangle\)</span></li>
+<li><span class="math inline">\(\langle \langle Q \rangle \langle R
+\rangle \rangle = \langle Q \rangle \langle R \rangle\)</span></li>
+<li><span class="math inline">\(\langle \langle Q \rangle R \rangle =
+\langle Q \rangle \langle R \rangle\)</span></li>
+<li><span class="math inline">\(\langle Q - \langle Q \rangle \rangle =
+0\)</span></li>
+<li><span class="math inline">\(\langle (Q - \langle Q \rangle) \langle
+R \rangle \rangle = 0\)</span></li>
+</ul></li>
+<li><p>Variance</p>
+<p>Variance is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+var(U) &amp;\equiv \langle u^{2} \rangle \\
+&amp;= \int^{}_{} \big ( V - \langle U \rangle \big )^{2} f(V) dV \\
+u &amp;\equiv U - \langle V \rangle \\
+\end{align}
+\]</span></p>
+<p>Properties are</p>
+<p><span class="math display">\[
+\begin{align}
+Q &amp;= a + b U \\
+var(Q) &amp;= b^{2} var(U) \\
+var(U) &amp;= \langle U^{2} \rangle - \langle U \rangle^{2} \\
+\end{align}
+\]</span></p>
+<p>Standard deviation is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+sdev(U) \equiv \sqrt{var(U)} = \langle u^{2} \rangle^{1/2}
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(n\)</span>th central moment is defined
+as</p>
+<p><span class="math display">\[
+\begin{align}
+\mu_{n} \equiv \langle u^{n} \rangle
+\end{align}
+\]</span></p></li>
+</ol>
+<h2 data-number="3.3" id="examples-of-probability-distributions"><span
+class="header-section-number">3.3</span> 3.3 Examples of probability
+distributions</h2>
+<p>To be added.</p>
+<h2 data-number="3.4" id="joint-random-variables"><span
+class="header-section-number">3.4</span> 3.4 Joint random variables</h2>
+<p>Joint CDF</p>
+<p><span class="math display">\[
+\begin{align}
+F_{12}(V_{1}, V_{2}) &amp;= P \{ U_{1} &lt; V_{1}, U_{2} &lt; V_{2} \}
+\\
+F_{12}(\infty, V_{2}) &amp;= P \{ U_{1} &lt; \infty, U_{2} &lt; V_{2} \}
+\\
+&amp;= P \{ U_{2} &lt; V_{2} \} = F_{2} (V_{2}) \\
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(F_{2} (V_{2})\)</span> is called the
+marginal CDF.</p>
+<p>Joint PDF</p>
+<p><span class="math display">\[
+\begin{align}
+f_{12}(V_{1}, V_{2}) &amp;\equiv \frac{\partial^{2}}{\partial V_{1}
+\partial V_{2}} F_{12} (V_{1}, V_{2}) \\
+f_{12} (V_{1}, V_{2}) &amp;\geq 0 \\
+\int^{\infty}_{-\infty} f_{12} (V_{1}, V_{2}) d V_{1} &amp;= f_{2}
+(V_{2}) \\
+\int^{\infty}_{-\infty} \int^{\infty}_{-\infty} f_{12} (V_{1}, V_{2})
+dV_{1} dV_{2} &amp;= 1 \\
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(f_{2}(V_{2})\)</span> is the marginal PDF
+of <span class="math inline">\(U_{2}\)</span>.</p>
+<p>If <span class="math inline">\(Q(U_{1}, U_{2})\)</span> is a function
+of the random variables, its mean is defined by</p>
+<p><span class="math display">\[
+\begin{align}
+\langle Q(U_{1}, U_{2}) \rangle \equiv \int^{\infty}_{-\infty}
+\int^{\infty}_{-\infty} Q(V_{1}, V_{2}) f_{12} (V_{1}, V_{2}) dV_{1}
+dV_{2}
+\end{align}
+\]</span></p>
+<p>The covariance of <span class="math inline">\(U_{1}, U_{2}\)</span>
+is</p>
+<p><span class="math display">\[
+\begin{align}
+cov (U_{1}, U_{2}) \equiv \langle u_{1} u_{2} \rangle
+\end{align}
+\]</span></p>
+<p>The correlation coefficient is</p>
+<p><span class="math display">\[
+\begin{align}
+\rho_{12} \equiv \frac{\langle u_{1} u_{2} \rangle}{[\langle U^{2}_{1}
+\rangle \langle u^{2}_{2} \rangle]^{1/2}}
+\end{align}
+\]</span></p>
+<p>Cauchy-Schwartz inequality is</p>
+<p><span class="math display">\[
+\begin{align}
+-1 \leq \rho_{12} \leq 1
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\rho_{12} = 0\)</span> means
+uncorrelated</li>
+<li><span class="math inline">\(\rho_{12} = 1\)</span> means <span
+class="math inline">\(U_{1}, U_{2}\)</span> are perfectly
+correlated</li>
+<li><span class="math inline">\(\rho_{12} = -1\)</span> means <span
+class="math inline">\(U_{1}, U_{2}\)</span> are inversely
+correlated</li>
+</ul>
+<p>Conditional PDF is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+f_{2|1}(V_{2} | V_{1}) &amp;\equiv f_{12} (V_{1}, V_{2}) / f_{1} (V_{1})
+\\
+\int^{\infty}_{-\infty} f_{2|1} (V_{2} | V_{1}) dV_{2} &amp;=
+\int^{\infty}_{-\infty} f_{12} (V_{1}, V_{2}) / f_{1} (V_{1}) dV_{2} \\
+&amp;= \frac{1}{f_{1}(V_{1})} \int^{\infty}_{-\infty} f_{12} (V_{1},
+V_{2}) dV_{2} = 1
+\end{align}
+\]</span></p>
+<p>The conditional mean is defined as (3.97) ref P85.</p>
+<p>The concept of independence is (3.98), (3.99) ref P85.</p>
+<h2 data-number="3.5" id="normal-and-joint-normal-distributions"><span
+class="header-section-number">3.5</span> 3.5 Normal and joint-normal
+distributions</h2>
+<p>Let random variables <span class="math inline">\(\{ U^{(1)}, U^{(2)},
+... \}\)</span> are independent and identically distributed (i.i.d)
+where <span class="math inline">\(U^{(n)}\)</span> denotes <span
+class="math inline">\(U\)</span> on the <span
+class="math inline">\(n\)</span>th repetition.</p>
+<p>The ensemble average is a random variable, defined by</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U \rangle_{N} &amp;\equiv \frac{1}{N} \sum^{N}_{n=1} U^{(n)} \\
+\langle \langle U \rangle_{N} \rangle &amp;= \langle U \rangle \\
+var(\langle U \rangle_{N}) &amp;= \langle (\langle U \rangle_{N} -
+\langle U \rangle)^{2} \rangle \\
+&amp;= \langle \big ( \frac{1}{N} \sum^{N}_{n=1} U^{(n)} - \langle U
+\rangle \big )^{2} \rangle \\
+&amp;= \frac{1}{N^{2}} \langle \Big ( \sum^{N}_{n=1} \big ( U^{(n)} -
+\langle U \rangle \big ) \Big )^{2} \rangle \\
+&amp;= \frac{1}{N^{2}} \sum^{N}_{n=1} \langle \big ( U^{(n)} - \langle U
+\rangle \big )^{2} \rangle, \quad since \quad \langle u^{(n)} u^{(m)}
+\rangle = 0 \\
+&amp;= \frac{1}{N} var(U) \\
+&amp;= \frac{\sigma^{2}_{u}}{N} \\
+\hat{U} &amp;= \frac{\langle U \rangle_{N} - \langle \langle U
+\rangle_{N} \rangle}{\sqrt{var(\langle U \rangle_{N})}} \\
+&amp;= \frac{\langle U \rangle_{N} - \langle U \rangle}{\sigma_{u} /
+N^{1/2}} \\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{U}\)</span> is a standard
+random variable (i.e. <span class="math inline">\(\langle \hat{U}
+\rangle = 0, \langle \hat{U}^{2} \rangle = 1\)</span>).</p>
+<p>The central-limit theorem states, as <span class="math inline">\(N
+\rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+\hat{f}(V) = \frac{1}{\sqrt{2 \pi}} exp(-\frac{1}{2} V^{2})
+\end{align}
+\]</span></p>
+<p>which is a standardized normal distribution.</p>
+<p>Given a general set of <span class="math inline">\(D\)</span> random
+variables <span class="math inline">\(\vec{U} = \{ U_{1}, U_{2}, ...,
+U_{D} \}\)</span>, the mean and fluctuation of the random vector <span
+class="math inline">\(\vec{U}\)</span> are denoted by</p>
+<p><span class="math display">\[
+\begin{align}
+\vec{mu} &amp;= \langle \vec{U} \rangle \\
+\vec{u} &amp;= \vec{U} - \langle \vec{U} \rangle \\
+\end{align}
+\]</span></p>
+<p>The covariance matrix is</p>
+<p><span class="math display">\[
+\begin{align}
+C = \langle \vec{u} \vec{u}^{T} \rangle
+\end{align}
+\]</span></p>
+<p>If <span class="math inline">\(\vec{U} = \{ U_{1}, U_{2}, ..., U_{D}
+\}\)</span> is joint-normally distributed, then its joint PDF is (3.116)
+ref P88.</p>
+<p>Joint normal PDF of the pair <span class="math inline">\(\{ U_{1},
+U_{2} \}\)</span> in terms of <span class="math inline">\(\langle
+u^{2}_{1} \rangle, \langle u^{2}_{2} \rangle, \rho_{12}\)</span> is
+(3.118) ref P88.</p>
+<p>Properties are ref P89.</p>
+<p>Others are to be added.</p>
+<h2 data-number="3.6" id="random-process"><span
+class="header-section-number">3.6</span> 3.6 Random process</h2>
+<p>Consider a random variable, but as a function of time, i.e. <span
+class="math inline">\(U(t)\)</span>. Such a time dependent random
+variable is called a random process.</p>
+<p>Characterize random process by one-time CDF</p>
+<p><span class="math display">\[
+F(V, t) \equiv P \{ U(t) &lt; V \}
+\]</span></p>
+<p>or by one-time PDF</p>
+<p><span class="math display">\[
+f(V; t) \equiv \frac{\partial F(V, t)}{\partial V}
+\]</span></p>
+<p>Statistically stationary ref P92.</p>
+<p>Autovariance is defined as</p>
+<p><span class="math display">\[
+R(s) \equiv \langle u(t) u(t+s) \rangle
+\]</span></p>
+<p>or in normalized form, the autocorrelation function is defined as</p>
+<p><span class="math display">\[
+\rho(s) \equiv \frac{\langle u(t) u(t+s) \rangle}{\langle u^{2}(t)
+\rangle}
+\]</span></p>
+<p>The autocorrelation function is the correlation coefficient between
+time <span class="math inline">\(t\)</span> and <span
+class="math inline">\(t+s\)</span>.</p>
+<p>For process arising in turbulent flows, we expect the correlation to
+diminish as <span class="math inline">\(s\)</span> increases. <span
+class="math inline">\(\rho(s)\)</span> decreases surfficiently rapidly
+that</p>
+<p><span class="math display">\[
+\bar{\tau} \equiv \int^{\infty}_{0} \rho(s) ds
+\]</span></p>
+<p>converges, then <span class="math inline">\(bar{\tau}\)</span> is the
+integral timescale of the process.</p>
+<p>Frequency spectrum is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+E(\omega) &amp;\equiv \frac{1}{\pi} \int^{\infty}_{-\infty} R(s) e^{-i
+\omega s} ds \\
+&amp;= \frac{2}{\pi} \int^{\infty}_{0} R(s) cos(\omega s) ds \\
+\end{align}
+\]</span></p>
+<p>Properties are ref P95.</p>
+<h1 data-number="4" id="mean-flow-equations"><span
+class="header-section-number">4</span> 4 Mean Flow Equations</h1>
+<h2 data-number="4.1" id="reynolds-equations"><span
+class="header-section-number">4.1</span> 4.1 Reynolds equations</h2>
+<ol type="1">
+<li>For a homogenous fluid and an incompressible flow, (how is it in
+compressible flow???) flow velocities are split using Reynolds
+decomposition</li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+U_{i} = \langle U_{i} \rangle + u_{i}
+\end{align}
+\]</span></p>
+<p>The average quantity<span class="math inline">\(\langle U_{i}
+\rangle\)</span>is determined by either time averaging, spatial
+averaging or ensemble averaging.</p>
+<ol start="2" type="1">
+<li>Reynolds averaging of NS equation of incompressible flow</li>
+</ol>
+<p>NS equation is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial U_{i}}{\partial x_{i}} &amp;= 0 \\
+\rho \frac{D U_{i}}{D t} &amp;= - \frac{\partial p}{\partial x_{i}} +
+\mu \big ( \frac{\partial^{2} U_{i}}{\partial x_{j} \partial x_{j}} \big
+) \\
+\end{align}
+\]</span></p>
+<p>Reynolds averaging as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial (\langle U_{i} \rangle + u_{i})}{\partial x_{i}} &amp;= 0
+\\
+\rho \Big [ \frac{\partial (\langle U_{i} \rangle + u_{i})}{\partial t}
++ (\langle U_{j} \rangle + u_{j}) \frac{\partial (\langle U_{i} \rangle
++ u_{i})}{\partial x_{j}} \Big ] &amp;= - \frac{\partial (\langle P
+\rangle + \langle p \rangle)}{\partial x_{i} } + \mu \Big [
+\frac{\partial^{2} (\langle U_{i} \rangle + u_{i})}{\partial x_{j}
+\partial x_{j}} \Big ] \\
+\end{align}
+\]</span></p>
+<p>By the rule of fractional derivative and the continuity equation, we
+have</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial (\langle U_{i} \rangle + u_{i})}{\partial x_{i}} &amp;= 0
+\\
+\rho \Big [ \frac{\partial (\langle U_{i} \rangle + u_{i})}{\partial t}
++ \frac{\partial (\langle U_{j} \rangle + u_{j}) (\langle U_{i} \rangle
++ u_{i})}{\partial x_{j}} \Big ] &amp;= - \frac{\partial (\langle P
+\rangle + \langle p \rangle)}{\partial x_{i} } + \mu \Big [
+\frac{\partial^{2} (\langle U_{i} \rangle + u_{i})}{\partial x_{j}
+\partial x_{j}} \Big ] \\
+\end{align}
+\]</span></p>
+<p>Employ the ensemble rule of averaging</p>
+<p><span class="math display">\[
+\begin{align}
+\langle \langle a \rangle \rangle &amp;= \langle a \rangle \\
+\langle a+b \rangle &amp;= \langle a \rangle + \langle b \rangle \\
+\langle a \langle b \rangle \rangle &amp;= \langle a \rangle \langle b
+\rangle \\
+\end{align}
+\]</span></p>
+<p>we have</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \langle U_{i} \rangle}{\partial x_{i}} &amp;= 0 \\
+\rho \Big ( \frac{\partial \langle U_{i} \rangle}{\partial t} +
+\frac{\partial \langle U_{i} \rangle \langle U_{j} \rangle}{\partial
+x_{j}} + \frac{\partial \langle u_{i} u_{j} \rangle}{\partial x_{j}}
+\Big ) &amp;= - \frac{\partial \langle P \rangle}{\partial x_{i}} + \mu
+\frac{\partial^{2} \langle U_{i} \rangle}{\partial x_{j} \partial x_{j}}
+\\
+\end{align}
+\]</span></p>
+<p>Reduce the continuity part and rearrange</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \Big ( \frac{\partial \langle U_{i} \rangle}{\partial t} + \langle
+U_{j} \rangle \frac{\partial \langle U_{i} \rangle}{\partial x_{j}} \Big
+) = - \frac{\partial \langle p \rangle}{\partial x_{i}} +
+\frac{\partial}{\partial x_{j}} \Big ( \mu \frac{\partial \langle U_{i}
+\rangle}{\partial x_{j}} - \rho \langle u_{i} u_{j} \rangle \Big )
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\frac{\partial \langle U_{i}
+\rangle}{\partial x_{j}}\)</span>is the viscous normal and shear
+stress,<span class="math inline">\(\rho \langle u_{i} u_{j}
+\rangle\)</span>is the Reynolds stress.</p>
+<h2 data-number="4.2" id="reynolds-stresses"><span
+class="header-section-number">4.2</span> 4.2 Reynolds stresses</h2>
+<h3 data-number="4.2.1" id="interpretation-as-stresses"><span
+class="header-section-number">4.2.1</span> Interpretation as
+stresses</h3>
+<p>Utilize continuity equation,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial}{\partial x_{i}} \big ( \frac{\partial \langle U_{i}
+\rangle}{\partial x_{j}} + \frac{\partial \langle U_{j}
+\rangle}{\partial x_{i}} \big ) &amp;= \frac{\partial}{\partial x_{j}}
+\big ( \frac{\partial \langle U_{i} \rangle}{\partial x_{i}} \big ) +
+\frac{\partial^{2} \langle U_{j} \rangle}{\partial x_{i} \partial x_{i}}
+\\
+&amp;= 0 + \frac{\partial^{2} \langle U_{j} \rangle}{\partial x_{i}
+\partial x_{i}} \\
+\end{align}
+\]</span></p>
+<p>Rewrite Reynolds equations</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{\bar{D} \langle U_{j} \rangle}{\bar{D} t} =
+\frac{\partial}{\partial x_{i}} \Big [ \mu \big ( \frac{\partial \langle
+U_{i} \rangle}{\partial x_{j}} + \frac{\partial \langle U_{j}
+\rangle}{\partial x_{i}} \big ) - \langle p \rangle \delta_{ij} - \rho
+\langle u_{i} u_{j} \rangle \Big ]
+\end{align}
+\]</span></p>
+<p>Three stresses: viscous stress, isotropic stress, Reynolds
+stress.</p>
+<p>Reynolds stress stems from the momentum transfer by the fluctuating
+velocity field. Take mean of the rate of gain of momentum within a fixed
+volume, and we can see it.</p>
+<h3 data-number="4.2.2" id="the-closure-problem"><span
+class="header-section-number">4.2.2</span> The closure problem</h3>
+<p>Four equations contain five unknowns:<span
+class="math inline">\(\langle \vec{U} \rangle, \langle p \rangle,
+\langle u_{i} u_{j} \rangle\)</span>.</p>
+<h3 data-number="4.2.3" id="tensor-properties"><span
+class="header-section-number">4.2.3</span> Tensor properties</h3>
+<p>It’s symmetric</p>
+<p><span class="math display">\[
+\begin{align}
+\langle u_{i} u_{j} \rangle = \langle u_{j} u_{i} \rangle
+\end{align}
+\]</span></p>
+<p>Diagonal components are normal stresses, off-diagonal components are
+shear stresses.</p>
+<p>Turbulent kinetic energy is defined as</p>
+<p><span class="math display">\[
+\begin{align}
+k \equiv \frac{1}{2} \langle \vec{u} \cdot \vec{u} \rangle = \frac{1}{2}
+\langle u_{i} u_{i} \rangle
+\end{align}
+\]</span></p>
+<h3 data-number="4.2.4" id="anisotropy"><span
+class="header-section-number">4.2.4</span> Anisotropy</h3>
+<p>Isotropy stress is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{2}{3} k \delta_{ij}
+\end{align}
+\]</span></p>
+<p>Deviatoric anisotropy part is</p>
+<p><span class="math display">\[
+\begin{align}
+a_{ij} \equiv \langle u_{i} u_{j} \rangle - \frac{2}{3} k \delta_{ij}
+\end{align}
+\]</span></p>
+<p>Normalized anisotropy tensor is</p>
+<p><span class="math display">\[
+\begin{align}
+b_{ij} = \frac{a_{ij}}{2 k} = \frac{\langle u_{i} u_{j} \rangle}{\langle
+u_{l} u_{l} \rangle} - \frac{1}{3} \delta_{ij}
+\end{align}
+\]</span></p>
+<p>Then Reynolds stress is</p>
+<p><span class="math display">\[
+\begin{align}
+\langle u_{i} u_{j} \rangle &amp;= \frac{2}{3} k \delta_{ij} + a_{ij} \\
+&amp;= 2 k ( \frac{1}{3} \delta_{ij} + b_{ij} ) \\
+\end{align}
+\]</span></p>
+<p>Only anisotropic part is effective in transporting mementum.</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{\partial \langle u_{i} u_{j} \rangle}{\partial x_{i}} +
+\frac{\partial \langle p \rangle}{\partial x_{j}} = \rho \frac{\partial
+a_{ij}}{\partial x_{i}}  + \frac{\partial}{\partial x_{j}} \big (
+\langle p \rangle + \frac{2}{3} \rho k \big )
+\end{align}
+\]</span></p>
+<p>showing that the isotropic component<span class="math inline">\(2/3
+k\)</span>can be absorbed in a modified mean pressure. (But what is
+momentum transport equation?)</p>
+<h3 data-number="4.2.5" id="irrotational-motion"><span
+class="header-section-number">4.2.5</span> Irrotational motion</h3>
+<p>Vorticity is 0, se we have</p>
+<p><span class="math display">\[
+\begin{align}
+0 = \langle u_{i} \big ( \frac{\partial u_{i}}{\partial u_{j}} +
+\frac{\partial u_{j}}{\partial u_{i}} \big ) \rangle =
+\frac{\partial}{\partial x_{j}} \big ( \frac{1}{2} \langle u_{i} u_{j}
+\rangle \big ) - \frac{\partial}{\partial x_{i}} \langle u_{i} u_{j}
+\rangle
+\end{align}
+\]</span></p>
+<p>from which follows the Corrsin-Kistler equation</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial}{\partial x_{i}} \langle u_{i} u_{j} \rangle =
+\frac{\partial k}{\partial x_{j}}
+\end{align}
+\]</span></p>
+<p>which means Reynolds stress has the same effect as the isotropic
+stress, which can be absorbed in a modified pressure. Hence, Reynolds
+stresses arising from an irrotational field have absolutely no effect on
+the mean velocity field.</p>
+<h2 data-number="4.3" id="the-mean-scalar-equation"><span
+class="header-section-number">4.3</span> 4.3 The mean scalar
+equation</h2>
+<p>Similarly in the procedure to obtain Reynolds equations, the
+consevation equation for<span class="math inline">\(\phi(x,
+t)\)</span>is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \phi}{\partial t} + \nabla \cdot (\vec{V} \phi) &amp;=
+\Gamma \nabla^{2} \phi \\
+\frac{\bar{D} \langle \phi \rangle}{\bar{D} t} &amp;= \nabla \cdot \big
+( \Gamma \nabla \langle \phi \rangle - \langle \vec{u} \phi^{\prime}
+\rangle \big ) \\
+\end{align}
+\]</span></p>
+<h2 data-number="4.4"
+id="gradient-diffusion-and-turbulent-viscosity-hypotheses"><span
+class="header-section-number">4.4</span> 4.4 Gradient-diffusion and
+turbulent-viscosity hypotheses</h2>
+<p>It’s valuable to study the physical model developed in early
+history.</p>
+<h3 data-number="4.4.1" id="gradient-diffusion-hypothesis"><span
+class="header-section-number">4.4.1</span> Gradient-diffusion
+hypothesis</h3>
+<p>The transport of the scalar flux<span class="math inline">\(\langle
+\vec{u} \phi^{\prime} \rangle\)</span>is in the direction of<span
+class="math inline">\(- \nabla \langle \phi \rangle\)</span>. So</p>
+<p><span class="math display">\[
+\begin{align}
+\langle \vec{u} \phi^{\prime} \rangle = - \Gamma_{T} \nabla \langle \phi
+\rangle
+\end{align}
+\]</span></p>
+<p>where<span class="math inline">\(\Gamma_{T}\)</span>is the turbulent
+diffusivity.</p>
+<p>Then the mean scalar conservation equation is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\bar{D} \langle \phi \rangle}{\bar{D} t} &amp;= \nabla \cdot \big
+( \Gamma_{eff} \nabla \langle \phi \rangle \big ) \\
+\Gamma_{eff} &amp;= \Gamma + \Gamma_{T} \\
+\end{align}
+\]</span></p>
+<h3 data-number="4.4.2" id="turbulent-viscosity-hypothesis"><span
+class="header-section-number">4.4.2</span> Turbulent-viscosity
+hypothesis</h3>
+<p>This hypothesis is mathematically analogous to the
+stress-rate-of-strain relation for Newtonian fluid. The deviatoric
+Reynolds stress</p>
+<p><span class="math display">\[
+\begin{align}
+- \rho \langle u_{i} u_{j} \rangle + \frac{2}{3} \rho k \delta_{ij}
+&amp;= \rho \nu_{T} \Big ( \frac{\partial \langle U_{i}
+\rangle}{\partial x_{j}} + \frac{\partial \langle U_{j}
+\rangle}{\partial x_{i}} \Big ) \\
+&amp;= 2 \rho \nu_{T} \bar{S}_{ij} \\
+\end{align}
+\]</span></p>
+<p>where the position scalar coefficient<span
+class="math inline">\(\nu_{T}\)</span>is the turbulent viscosity also
+called eddy viscosity.</p>
+<p>Then the mean momentum equation is</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{\bar{D} \langle U_{j} \rangle}{\bar{D} t} &amp;=
+\frac{\partial}{\partial x_{i}} \Big [ \nu_{eff} \big ( \frac{\partial
+\langle U_{i} \rangle}{\partial x_{j}} + \frac{\partial \langle U_{j}
+\rangle}{\partial x_{i}} \big ) \Big ] - \frac{1}{\rho}
+\frac{\partial}{\partial x_{j}} \big ( \langle p \rangle + \frac{2}{3}
+\rho k \big ) \\
+\nu_{eff} &amp;= \nu + \nu_{T} \\
+\end{align}
+\]</span></p>
+<h2 data-number="4.5" id="properties"><span
+class="header-section-number">4.5</span> Properties</h2>
+<ul>
+<li>The gradient-diffusion hypothesis implies that the scalar flux
+vector is aligned with the mean scalar gradient vector. Even in simple
+turbulent flows this is found not be the case.</li>
+<li>Specification of<span class="math inline">\(\nu_{T}(x, t),
+\Gamma_{T}(x, t)\)</span>solves the closure problem.</li>
+</ul>
+<h1 data-number="5" id="free-shear-flows"><span
+class="header-section-number">5</span> 5 Free Shear Flows</h1>
+<h2 data-number="5.1" id="the-round-jet-experimental-observations"><span
+class="header-section-number">5.1</span> 5.1 The round jet: experimental
+observations</h2>
+<h3 data-number="5.1.1" id="a-description-of-the-flow"><span
+class="header-section-number">5.1.1</span> 5.1.1 A description of the
+flow</h3>
+<p>The flow is statistically stationary and axisymmetric and the flow is
+completely defined by<span class="math inline">\(U_{J}, d, \nu\)</span>.
+So<span class="math inline">\(Re = U_{J} d / \nu\)</span>.</p>
+<h3 data-number="5.1.2" id="the-mean-velocity-field"><span
+class="header-section-number">5.1.2</span> 5.1.2 The mean velocity
+field</h3>
+<h4 data-number="5.1.2.1" id="the-axial-velocity"><span
+class="header-section-number">5.1.2.1</span> The axial velocity</h4>
+<p>The mean axial velocity field is denoted by<span
+class="math inline">\(\langle U(x, r, \theta) \rangle\)</span>. Define
+the mean axial velocity in the centerline</p>
+<p><span class="math display">\[
+\begin{align}
+U_{0}(x) \equiv \langle U(x, 0, 0) \rangle
+\end{align}
+\]</span></p>
+<p>Define the jet’s half width</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U(x, r_{1/2}(x), 0) \rangle = \frac{1}{2} U_{0}(x)
+\end{align}
+\]</span></p>
+<p>The mean velocity profile is self similar.</p>
+<h4 data-number="5.1.2.2" id="self-similarity"><span
+class="header-section-number">5.1.2.2</span> Self similarity</h4>
+<p>First define characteristic scales<span
+class="math inline">\(Q_{0}(x), \delta(x)\)</span>. Then scaled
+variables are defined as</p>
+<p><span class="math display">\[
+\begin{align}
+\xi &amp;\equiv \frac{y}{\delta(x)} \\
+\hat{Q}(\xi) = \tilde{Q}(\xi, x) &amp;\equiv \frac{Q(x, y)}{Q_{0}(x)} \\
+\end{align}
+\]</span></p>
+<p>If the above are valid, then<span class="math inline">\(Q(x,
+y)\)</span>is self similar.</p>
+<h4 data-number="5.1.2.3" id="axial-variation-of-scales"><span
+class="header-section-number">5.1.2.3</span> Axial variation of
+scales</h4>
+<p>Empirical law for<span class="math inline">\(U_{0}(x)\)</span>is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{U_{J}}{U_{0}(x)} = \frac{1}{B} \frac{x - x_{0}}{d}
+\end{align}
+\]</span></p>
+<p>where<span class="math inline">\(B\)</span>is an empirical
+constant.</p>
+<p>Empirical law for<span
+class="math inline">\(r_{1/2}(x)\)</span>is</p>
+<p><span class="math display">\[
+\begin{align}
+r_{1/2}(x) = S (x - x_{0})
+\end{align}
+\]</span></p>
+<p>where<span class="math inline">\(S\)</span>is the spreading rate.</p>
+<p>Both laws are valid in the self similar region but do not hold in the
+developing region close to the nozzle.</p>
+<p>Local Reynolds number</p>
+<p><span class="math display">\[
+\begin{align}
+Re_{0}(x) \equiv \frac{r_{1/2}(x) U_{0}(x)}{\nu}
+\end{align}
+\]</span></p>
+<p>is independent of$x).</p>
+<h4 data-number="5.1.2.4" id="reynolds-number"><span
+class="header-section-number">5.1.2.4</span> Reynolds number</h4>
+<p>It’s a fact that the mean velocity profile and the spreading rate are
+independent of Re.</p>
+<h4 data-number="5.1.2.5" id="summary"><span
+class="header-section-number">5.1.2.5</span> Summary</h4>
+<p>For turbulent jet, we can define</p>
+<p><span class="math display">\[
+\begin{align}
+\xi &amp;= \frac{r}{r_{1/2}(x)} \\
+f(\xi) &amp;= \frac{\langle U(x, r, 0) \rangle}{U_{0}(x)} \\
+\end{align}
+\]</span></p>
+<h4 data-number="5.1.2.6" id="the-lateral-velocity"><span
+class="header-section-number">5.1.2.6</span> The lateral velocity</h4>
+<p>In the self similar region, the mean lateral velcity<span
+class="math inline">\(\langle V \rangle\)</span>can be determined
+from<span class="math inline">\(\langle U \rangle\)</span>via the
+continuity equation. (The deduction is referred to exercise 5.4)</p>
+<p><span class="math inline">\(\langle V \rangle\)</span>is negative at
+the edge of the jet, indicating that the ambient fluid is flowing into
+the jet and being entrained.</p>
+<h3 data-number="5.1.3" id="reynolds-stresses-1"><span
+class="header-section-number">5.1.3</span> 5.1.3 Reynolds stresses</h3>
+<p>In turbulent round jet, the geometry of flow dictates that Reynolds
+stress tensor is</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\langle u^{2} \rangle &amp; \langle uv \rangle &amp; 0 \\
+\langle uv \rangle &amp; \langle v^{2} \rangle &amp; 0 \\
+0 &amp; 0 &amp; \langle w^{2} \rangle
+\end{bmatrix}
+\]</span></p>
+<p>Because of the circumferential symmetry,<span
+class="math inline">\(\langle uw \rangle, \langle vw \rangle\)</span>are
+0.</p>
+<ul>
+<li>the normal stresses are even functions of<span
+class="math inline">\(r\)</span></li>
+<li>the shear stresses are odd functions of<span
+class="math inline">\(r\)</span>[fn:2]</li>
+</ul>
+<p>Properties</p>
+<ul>
+<li>After the development region,<span
+class="math inline">\(u^{\prime}_{0}(x) / U_{0}(x)\)</span>tends
+asymptotically to 0.25, where the r.m.s axial velocity on the
+centerline<span class="math inline">\(u^{\prime}_{0}(x) \equiv \langle
+u^{2} \rangle^{1/2}_{r=0}\)</span>. +<span
+class="math inline">\(u^{\prime}_{0}(x)\)</span>no systematic dependence
+on Re.</li>
+<li>With increasing<span class="math inline">\(r/r_{1/2}\)</span></li>
+<li>Reynolds stresses decay</li>
+<li>the ratio of r.m.s to the local mean increases</li>
+<li>Reynolds stresses exhibit significant anisotropy</li>
+<li>The relative magnitude <img src="./P133_Fig_05_09.png"
+alt="P133_Fig_05_09" /></li>
+<li>There is a positive turbulent viscosity<span
+class="math inline">\(\nu_{T}\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\langle uv \rangle &amp;= - \nu_{T} \frac{\partial \langle U
+\rangle}{\partial r} \\
+\nu_{T}(x, r) &amp;= U_{0}(x) r_{1/2}(x) \hat{v_{T}}(\eta)
+\end{align}
+\]</span></p>
+<p>where<span class="math inline">\(\hat{\nu}_{T}\)</span>is the
+normalized profile. <img src="./P134_Fig_05_10.png"
+alt="P134_Fig_05_10" /></p>
+<ul>
+<li>Since viscosity has dimensions of velocity times length, a local
+lengthscale can be defined. However, it’s a derived quantity and has no
+clear physical significance.</li>
+<li>Integral lengthscales (obtained from the two-point velocity
+correlations) are measurable and characterize the distance over which
+the fluctuating velocity field is correlated. The longitudinal and
+lateral correlations are defined by eq(5.36), (5.37). Essentially, they
+are correlation coefficients. The corresponding integral lengthscales
+are eq (5.38), (5.39). <img src="./P135_Fig_05_12.png"
+alt="P135_Fig_05_12" /></li>
+</ul>
+<h2 data-number="5.2" id="the-round-jet-mean-momentum"><span
+class="header-section-number">5.2</span> 5.2 The round jet: mean
+momentum</h2>
+<h3 data-number="5.2.1" id="boundary-layer-equations"><span
+class="header-section-number">5.2.1</span> 5.2.1 Boundary layer
+equations</h3>
+<p>Features of turbulent round jet also sheared by all free shear
+flows</p>
+<ul>
+<li>A dominant mean-flow direction +<span class="math inline">\(\langle
+V \rangle \approx 0.03 |\langle U \rangle|\)</span> +<span
+class="math inline">\(\frac{d r_{1/2}}{d x} \approx 0.1\)</span></li>
+<li>Axial gradients are small than lateral gradients</li>
+</ul>
+<p>which allow boundary layer equations to be in place of the full
+Reynolds equations.</p>
+<p>Consider following flow</p>
+<ul>
+<li>Statistically 2D, stationary +<span
+class="math inline">\(x\)</span>is the dominant direction of flow</li>
+<li>Gradients of means are predominantly in<span
+class="math inline">\(y\)</span>direction</li>
+<li>Statistics do not vary in<span
+class="math inline">\(z\)</span>direction</li>
+<li>Velocity:<span class="math inline">\(U, V, W\)</span>with<span
+class="math inline">\(\langle W \rangle = 0\)</span></li>
+</ul>
+<p>Such flows are <img src="./P138_Fig_05_14.png"
+alt="P138_Fig_05_14" /></p>
+<p>Define<span class="math inline">\(\delta(x)\)</span>to be the
+characteristic flow width,<span
+class="math inline">\(U_{c}(x)\)</span>to be the characteristic
+convective velocity, and<span class="math inline">\(U_{s}(x)\)</span>to
+be the characteristic velocity difference.</p>
+<p>Equations are eq (5.49)-(5.51).</p>
+<p>Boundary layer approximation neglects the brace terms. Further
+neglect the axial derivatives of Reynolds stresses. Then the lateral
+momentum equation becomes</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{1}{\rho} \frac{\partial \langle p \rangle}{\partial y} +
+\frac{\partial \langle v^{2} \rangle}{\partial y} = 0
+\end{align}
+\]</span></p>
+<p>In the free stream (<span class="math inline">\(y \rightarrow
+\infty\)</span>), the pressure is denoted by<span
+class="math inline">\(p_{0}(x), \langle v^{2} \rangle = 0\)</span>. Then
+integrate to obtain</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\langle p \rangle}{\rho} = \frac{p_{0}}{\rho} - \langle v^{2}
+\rangle
+\end{align}
+\]</span></p>
+<p>Then the axial pressure gradient is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{1}{\rho} \frac{\partial \langle p \rangle}{\partial x} =
+\frac{1}{\rho} \frac{d p_{0}}{d x} - \frac{\partial \langle v^{2}
+\rangle}{\partial x}
+\end{align}
+\]</span></p>
+<p>For flows with quiescent or uniform free streams, the pressure
+gradient<span class="math inline">\(dp_{0}/dx\)</span>is zero. In
+general,<span class="math inline">\(dp_{0}/dx\)</span>is given in terms
+of the free stream velocity by Nernoulli’s equation.</p>
+<p>Reduce the axial momentum equation, we get</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U \rangle \frac{\partial \langle U \rangle}{\partial x} +
+\langle V \rangle \frac{\partial \langle U \rangle}{\partial y} = \nu
+\frac{\partial^{2} \langle U \rangle}{\partial y^{2}} - \frac{1}{\rho}
+\frac{d p_{0}}{d x} - \frac{\partial \langle uv \rangle}{\partial y} -
+\frac{\partial}{\partial x} ( \langle u^{2} \rangle - \langle v^{2}
+\rangle )
+\end{align}
+\]</span></p>
+<ul>
+<li>In turbulent free shear flows,<span class="math inline">\(\nu
+\frac{\partial^{2} \langle U \rangle}{\partial y^{2}}\)</span>is
+negligible;</li>
+<li>Close to the wall in a turbulent boundary layer,<span
+class="math inline">\(\nu \frac{\partial^{2} \langle U \rangle}{\partial
+y^{2}}\)</span>is of leading order.</li>
+</ul>
+<p>The axial stress gradient term<span
+class="math inline">\(\frac{\partial}{\partial x} ( \langle u^{2}
+\rangle - \langle v^{2} \rangle )\)</span>can be neglected. However, it
+can be<span class="math inline">\(10\%\)</span>of the dominant term.</p>
+<p>In summary, the turbulent boundary layer equations are</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \langle U \rangle}{\partial x} + \frac{\partial \langle V
+\rangle}{\partial y} &amp;= 0 \\
+\langle U \rangle \frac{\partial \langle U \rangle}{\partial x} +
+\langle V \rangle \frac{\partial \langle U \rangle}{\partial y} &amp;=
+\nu \frac{\partial^{2} \langle U \rangle}{\partial y^{2}} -
+\frac{\partial \langle uv \rangle}{\partial y} \\
+\end{align}
+\]</span></p>
+<p>except near wall, the viscous term is negligiable.</p>
+<p>The mean pressure distribution is</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\langle p \rangle}{\rho} = \frac{p_{0}}{\rho} - \langle v^{2}
+\rangle
+\end{align}
+\]</span></p>
+<p>For jet, employ the vector operations in sylindrical coordinate
+system, equations are</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \langle U \rangle}{\partial x} + \frac{1}{r}
+\frac{\partial ( r \langle V \rangle ) }{\partial r} &amp;= 0 \\
+\langle U \rangle \frac{\partial \langle U \rangle}{\partial x} +
+\langle V \rangle \frac{\partial \langle U \rangle}{\partial r} &amp;=
+\frac{\nu}{r} \frac{\partial}{\partial r} \Big ( r \frac{\partial
+\langle U \rangle}{\partial r} \Big ) - \frac{1}{r}
+\frac{\partial}{\partial r} \Big ( r \langle uv \rangle \Big ) \\
+\end{align}
+\]</span></p>
+<h3 data-number="5.2.2"
+id="flow-rates-of-mass-momentum-and-energy"><span
+class="header-section-number">5.2.2</span> 5.2.2 Flow rates of mass,
+momentum, and energy</h3>
+<p>For turbulent round jet, neglect the viscous term in axial momentum
+equation, multiply<span class="math inline">\(r\)</span>and reduce the
+part of the continuity equation, we obtain</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial}{\partial x} \Big ( r \langle U^{2} \rangle \Big ) +
+\frac{\partial}{\partial r} \Big ( r \langle U \rangle \langle V \rangle
++ r \langle uv \rangle \Big ) = 0
+\end{align}
+\]</span></p>
+<p>Integrate with respect to r,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{d}{dx} \int^{\infty}_{0} r \langle U^{2} \rangle dr = - \big [ r
+\langle U \rangle \langle V \rangle + r \langle uv \rangle \big
+]^{\infty}_{0} = 0
+\end{align}
+\]</span></p>
+<p>Since for large <span class="math inline">\(r\)</span>, <span
+class="math inline">\(\langle UV \rangle \rightarrow 0\)</span> more
+rapidly than <span class="math inline">\(r^{-1}\)</span> does.</p>
+<p>Define the momentum flow rate of the mean flow</p>
+<p><span class="math display">\[
+\begin{align}
+\dot{M}(x) \equiv \int^{\infty}_{0} 2 \pi r \rho \langle U \rangle^{2}
+dr
+\end{align}
+\]</span></p>
+<p>Obviously<span class="math inline">\(\dot{M}(x)\)</span>is conserved,
+which holds for all jets (issuing into quiescent surroundings or uniform
+streams) and wakes (in uniform streams).</p>
+<p>Apply the mean velocity profile in the self similar round jet</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U(x,r,0) \rangle &amp;= U_{0}(x) \bar{f}(\xi) \\
+\xi &amp;\equiv \frac{r}{r_{1/2}(x)}
+\end{align}
+\]</span></p>
+<p>Then the momentum flow rate<span
+class="math inline">\(\dot{M}(x)\)</span>is rewritten</p>
+<p><span class="math display">\[
+\begin{align}
+\dot{M} &amp;= 2 \pi \rho (r_{1/2} U_{0})^{2} \int^{\infty}_{0} \xi
+(\bar{f}(\xi))^{2} d \xi
+\end{align}
+\]</span></p>
+<p>The integral is a non-dimensional constant, deermined by the shape of
+the profile,<span class="math inline">\(\xi, \bar{f}(\xi)\)</span>.</p>
+<p>The flow rate of mass<span
+class="math inline">\(\dot{m}(x)\)</span>associated with the mean
+velocity profile is linear proportional to$r_{1/2})</p>
+<p><span class="math display">\[
+\begin{align}
+\dot{m}(x) &amp;\equiv \int^{\infty}_{0} 2 \pi r \rho \langle U \rangle
+dr \\
+&amp;= 2 \pi \rho r_{1/2} (r_{1/2} U_{0} ) \int^{\infty}_{0} \xi
+\bar{f}(\xi) d \xi  \\
+\end{align}
+\]</span></p>
+<p>The flow rate of energy<span
+class="math inline">\(\dot{E}(x)\)</span>associated with the mean
+velocity profile is inversely proportional to$r_{1/2})</p>
+<p><span class="math display">\[
+\begin{align}
+\dot{E}(x) &amp;\equiv \int^{\infty}_{0} 2 \pi r \rho \frac{1}{2}
+\langle U \rangle^{3} dr \\
+&amp;= \frac{\pi \rho}{r_{1/2}} (r_{1/2} U_{0} )^{3} \int^{\infty}_{0}
+\xi \bar{f}^{3}(\xi) d \xi  \\
+\end{align}
+\]</span></p>
+<h3 data-number="5.2.3" id="self-similarity-1"><span
+class="header-section-number">5.2.3</span> 5.2.3 Self-similarity</h3>
+<p>For the turbulent round jet, an empirical observation is that the
+profiles of<span class="math inline">\(\langle U \rangle / U_{0}(x),
+\langle u_{i}u_{j} \rangle / U^{2}_{0}(x)\)</span>as functions<span
+class="math inline">\(\xi \equiv r / r_{1/2}(x)\)</span>become
+self-similar (i.e. independent of$x)).</p>
+<p>The self-similar profile of<span class="math inline">\(\langle uv
+\rangle\)</span>is</p>
+<p><span class="math display">\[
+\begin{align}
+\bar{g}(\xi) \equiv \frac{ \langle uv \rangle }{ U^{2}_{0}(x) }
+\end{align}
+\]</span></p>
+<p>Neglect the viscous term in axial momentum equation, the boundary
+layer momentum equation can be written</p>
+<p><span class="math display">\[
+\begin{align}
+\big [ \xi \bar{f}^{2} \big ] \Big \{ \frac{r_{1/2}}{U_{0}}
+\frac{dU_{0}}{dx} \Big \} - \Big [ \bar{f}^{\prime} \int^{\xi}_{0} \xi
+\bar{f} d \xi \Big ] \Big \{ \frac{r_{1/2}}{U_{0}} \frac{dU_{0}}{dx} + 2
+\frac{dr_{1/2}}{dx} \Big \} = - \big [ (\xi \bar{g})^{\prime} \big ]
+\end{align}
+\]</span></p>
+<p>where a prime denotes differentiation with respect to<span
+class="math inline">\(\xi\)</span>. The terms in square brackets ([])
+depend only on<span class="math inline">\(\xi\)</span>, while those in
+braces (<span class="math inline">\(\{\}\)) depend only
+on\)</span>x).</p>
+<p>Steps involved in deriving this equation are given</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U \rangle &amp;= U_{0} \bar{f} \\
+r &amp;= \xi r_{1/2}(x) \\
+\frac{\partial \xi}{\partial x} &amp;= - \frac{r}{r^{2}_{1/2}} \frac{d
+r_{1/2}}{dx} \\
+\frac{r_{1/2}}{U_{0}} \frac{\partial \langle U \rangle}{\partial x}
+&amp;= \frac{r_{1/2}}{U_{0}} \frac{\partial}{\partial x} \big ( U_{0}
+\bar{f} \big ) \\
+&amp;= \frac{r_{1/2}}{U_{0}} \big ( \bar{f} \frac{\partial
+U_{0}}{\partial x} + U_{0} \frac{\partial \bar{f}}{\partial x} \big ) \\
+&amp;= \frac{r_{1/2}}{U_{0}} \big ( \bar{f} \frac{d U_{0}}{d x} + U_{0}
+\frac{\partial \bar{f}}{\partial \xi} \frac{\partial \xi}{\partial x}
+\big ) \\
+&amp;= \bar{f} \big ( \frac{r_{1/2}}{U_{0}} \frac{dU_{0}}{dx} \big ) -
+\xi \bar{f}^{\prime} \frac{d r_{1/2}}{dx} \\
+\frac{r_{1/2}}{U_{0}} \frac{\partial \langle U \rangle}{\partial r}
+&amp;= \frac{r_{1/2}}{U_{0}} \frac{\partial}{\partial r} \big ( U_{0}
+\bar{f} \big ) \\
+&amp;= r_{1/2} \frac{\partial \bar{f}}{\partial \xi} \frac{\partial
+\xi}{\partial r} \\
+&amp;= \bar{f}^{\prime} \\
+\frac{\partial \langle U \rangle}{\partial x} + \frac{1}{r}
+\frac{\partial (r \langle V \rangle)}{\partial r} &amp;= 0 \\
+\Rightarrow \frac{\partial (r \langle V \rangle)}{\partial r} &amp;= - r
+\frac{\partial \langle U \rangle}{\partial x} \\
+\Rightarrow r \langle V \rangle &amp;= - \int^{r}_{0} \hat{r}
+\frac{\partial \langle U \rangle}{\partial x} d \hat{r} \\
+\Rightarrow \frac{\langle V \rangle}{U_{0}} &amp;= - \frac{1}{r U_{0}}
+\int^{r}_{0} \hat{r} \frac{\partial \langle U \rangle}{\partial x} d
+\hat{r} \\
+&amp;= - \frac{1}{r U_{0}} \frac{U_{0}}{r_{1/2}}  \int^{r}_{0} \hat{r}
+\frac{r_{1/2}}{U_{0}} \frac{\partial \langle U \rangle}{\partial x} d
+\hat{r} \\
+&amp;= \xi \bar{f} \frac{d r_{1/2}}{dx} - \big ( \frac{r_{1/2}}{U_{0}}
+\frac{d U_{0}}{dx} + 2 \frac{d r_{1/2}}{dx} \big ) \frac{1}{\xi}
+\int^{\xi}_{0} \bar{f} \hat{\xi} d \hat{\xi} \\
+\langle U \rangle \frac{\partial \langle U \rangle}{\partial x} +
+\langle V \rangle \frac{\partial \langle U \rangle}{\partial r} &amp;= -
+\frac{1}{r} \frac{\partial}{\partial r} \big ( r \langle uv \rangle \big
+) \\
+\langle uv \rangle &amp;= U^{2}_{0} \bar{g} \\
+\frac{r_{1/2}}{U_{0}} \frac{dU_{0}}{dx} &amp;= C \\
+\frac{d r_{1/2}}{d x} &amp;= S \\
+\langle U \rangle \frac{U_{0}}{r_{1/2}} \frac{r_{1/2}}{U_{0}}
+\frac{\partial \langle U \rangle}{\partial x} + U_{0} \frac{\langle V
+\rangle}{U_{0}} \frac{\partial \langle U \rangle}{\partial r} &amp;= -
+\frac{1}{r} U^{2}_{0} \bar{g} - U^{2}_{0} \frac{\partial
+\bar{g}}{\partial \xi} \frac{\partial \xi}{\partial r} \\
+I &amp;= \int^{\xi}_{0} \bar{f} \hat{\xi} d \hat{\xi} \\
+\xi \bar{f}^{2} C - \xi^{2} \bar{f} \bar{f}^{\prime} S &amp; \\
++ \xi^{2} \bar{f} \bar{f}^{\prime} S - (C + 2S) I \bar{f}^{\prime}
+&amp;= - (\xi \bar{g})^{\prime} \\
+\Rightarrow \xi \bar{f}^{2} C - (C + 2S) I \bar{f}^{\prime} &amp;= -
+(\xi \bar{g})^{\prime} \\
+\end{align}
+\]</span></p>
+<p>Due to self similarity, this equation is no<span
+class="math inline">\(x\)</span>dependence. Thus<span
+class="math inline">\(C, S\)</span>are constants.</p>
+<h3 data-number="5.2.4" id="uniform-turbulent-viscosity"><span
+class="header-section-number">5.2.4</span> 5.2.4 Uniform turbulent
+viscosity</h3>
+<p>Specify turbulent viscosity<span class="math inline">\(\nu_{T}(x,
+r)\)</span>to overcome the closure problem in turbulent boundary layer
+equations.</p>
+<p><span class="math display">\[
+\begin{align}
+\langle uv \rangle = - \nu_{T} \frac{\partial \langle U
+\rangle}{\partial r}
+\end{align}
+\]</span></p>
+<p>For the self similar round jet, first,</p>
+<p><span class="math display">\[
+\begin{align}
+\nu_{T}(x, r) = r_{1/2}(x) U_{0}(x) \hat{\nu}_{T}(\eta)
+\end{align}
+\]</span></p>
+<p>Second, over the bulk of the jet<span
+class="math inline">\(\hat{\nu}_{T}(\eta)\)</span>is within<span
+class="math inline">\(15\%\)</span>of the value 0.028. Therefore, it’s
+reasonable to take<span
+class="math inline">\(\hat{\nu}_{T}(\eta)\)</span>to be constant,
+independent of$).</p>
+<p>Then the turbulent boundary layer momentum equation is</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U \rangle \frac{\partial \langle U \rangle}{\partial x} +
+\langle V \rangle \frac{\partial \langle U \rangle}{\partial r} = -
+\frac{\nu_{T}}{r} \frac{\partial}{\partial r} \big ( r \frac{\partial
+\langle U \rangle}{\partial r} \big )
+\end{align}
+\]</span></p>
+<p>at high<span class="math inline">\(Re\)</span>and the viscous term is
+neglected.</p>
+<p>Now, we want to find the solution.</p>
+<p>In terms of the similarity profile<span class="math inline">\(f(\eta)
+= \langle U \rangle / U_{0}\)</span>with<span class="math inline">\(\eta
+= r / (x - x_{0})\)</span>, the solution is</p>
+<p><span class="math display">\[
+\begin{align}
+f(\eta) = \frac{1}{(1 + a \eta^{2})^{2}}
+\end{align}
+\]</span></p>
+<p>where the coefficient<span class="math inline">\(a\)</span>is given
+in terms of the spreading rate<span
+class="math inline">\(S\)</span>by</p>
+<p><span class="math display">\[
+\begin{align}
+a = \frac{\sqrt{2} - 1}{S^{2}}
+\end{align}
+\]</span></p>
+<p>Sometimes,<span class="math inline">\(\hat{\nu}_{T}\)</span>is
+expressed in terms of turbulent Reynolds number.</p>
+<p><span class="math display">\[
+\begin{align}
+Re_{T} \equiv \frac{U_{0}(x) r_{1/2}(x)}{\nu_{T}} =
+\frac{1}{\hat{\nu}_{T}} \\
+\end{align}
+\]</span></p>
+<h1 data-number="6"
+id="appendix-e-spectral-representation-of-stationary-random-process"><span
+class="header-section-number">6</span> Appendix E Spectral
+Representation of Stationary Random Process</h1>
+<h2 data-number="6.1" id="e.1-fourier-series"><span
+class="header-section-number">6.1</span> E.1 Fourier series</h2>
+<p>Define the process</p>
+<p><span class="math display">\[
+\begin{align}
+U(t + N T) = U(t)
+\end{align}
+\]</span></p>
+<p>for all non-zero integer <span class="math inline">\(N\)</span>.</p>
+<p>The time average of <span class="math inline">\(U(t)\)</span> over
+the period is defined by</p>
+<p><span class="math display">\[
+\begin{align}
+\langle U(t) \rangle_{T} \equiv \frac{1}{T} \int^{T}_{0} U(t) dt
+\end{align}
+\]</span></p>
+<p>The fluctuation in <span class="math inline">\(U(t)\)</span> is
+defined by</p>
+<p><span class="math display">\[
+\begin{align}
+u(t) = U(t) - \langle U(t) \rangle_{T}
+\end{align}
+\]</span></p>
+<p>For each integer <span class="math inline">\(n\)</span>, the
+frequency <span class="math inline">\(\omega_{n}\)</span> is defined
+by</p>
+<p><span class="math display">\[
+\begin{align}
+\omega_{n} &amp;= \frac{2 \pi n}{T} \\
+\omega_{-n} &amp;= - \omega_{n} \\
+\end{align}
+\]</span></p>
+<p>The <span class="math inline">\(n\)</span>th complex Fourier mode
+is</p>
+<p><span class="math display">\[
+\begin{align}
+e^{i \omega_{n} t} &amp;= cos(\omega_{n} t) + i sin(\omega_{n} t) \\
+&amp;= cos(frac{2 \pi n t}{T}) + i sin(\frac{2 \pi n t}{T}) \\
+\langle e^{i \omega_{n} t} \rangle_{T} &amp;= \sigma_{n0} \\
+\langle e^{i \omega_{n} t} e^{-i \omega_{m} t} \rangle_{T} &amp;=
+\sigma_{nm} \\
+\end{align}
+\]</span></p>
+<p>Then the process <span class="math inline">\(u(t)\)</span> can be
+expressed as a Fourier series.</p>
+<p><span class="math display">\[
+\begin{align}
+u(t) &amp;= \sum^{\infty}_{n=-\infty} (a_{n} + i b_{n}) e^{i \omega_{n}
+t} \\
+&amp;= \sum^{\infty}_{n=-\infty} c_{n} e^{i \omega_{n} t} \\
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\({a_{n}, b_{n}}\)</span> are real
+and <span class="math inline">\({c_{n}}\)</span> are complex Fourier
+coefficients.</p>
+<p>This equation is the sepctral representation of <span
+class="math inline">\(u(t)\)</span>, giving <span
+class="math inline">\(u(t)\)</span> as the sum of discrete Fourier modes
+<span class="math inline">\(e^{i \omega_{n} t}\)</span>, weighted with
+Fourier coefficient <span class="math inline">\(c_{n}\)</span>.</p>
+<p><span class="math inline">\(\langle u(t) \rangle_{T} = 0\)</span>
+requires <span class="math inline">\(c_{0} = 0\)</span>. <span
+class="math inline">\(u(t)\)</span> is real, which requires <span
+class="math inline">\(c_{n}\)</span> satisfying conjugate symmetry.
+<span class="math inline">\(c_{n} = c^{*}_{-n}\)</span></p>
+<p>So the Fourier series becomes</p>
+<p><span class="math display">\[
+u(t) = 2 \sum^{\infty}_{n=1} \big [ a_{n} cos(\omega_{n} t) - b_{n}
+sin(\omega_{n} t) \big ]
+\]</span></p>
+<p>which can also be written as</p>
+<p><span class="math display">\[
+\begin{align}
+u(t) = 2 \sum^{\infty}_{n=1} |c_{n}| cos(\omega_{n} t + \theta_{n})
+\end{align}
+\]</span></p>
+<p>where the amplitude of the <span class="math inline">\(n\)</span>th
+Fourier mode is</p>
+<p><span class="math display">\[
+\begin{align}
+|c_{n}| &amp;= (c_{n} c^{*}_{n})^{1/2} \\
+&amp;= (a^{2}_{n} + b^{2}_{n})^{1/2}
+\end{align}
+\]</span></p>
+<p>and the phase is</p>
+<p><span class="math display">\[
+\begin{align}
+\theta_{n} = tan^{-1}(b_{n}/a_{n})
+\end{align}
+\]</span></p>
+<p>Introduce the operator <span
+class="math inline">\(\mathcal{F}_{\omega_{n}}\{\}\)</span> defined
+by</p>
+<p><span class="math display">\[
+\begin{align}
+\mathcal{F}_{\omega_{n}}\{u_{t}\} &amp;\equiv \langle u(t) e^{-i
+\omega_{n} t} \rangle_{T} \\
+&amp;= \langle \sum^{\infty}_{n=-\infty} c_{m} e^{i \omega_{m} t} e^{-i
+\omega_{n} t} \\
+&amp;= \sum^{\infty}_{n=-\infty} c_{m} \delta_{nm} \\
+&amp;= c_{n} \\
+\end{align}
+\]</span></p>
+<p>Expand to the non-periodic case, the spectral representation can be
+written</p>
+<p><span class="math display">\[
+\begin{align}
+u(t) = \int^{\infty}_{-\infty} Z(\omega) e^{i \omega t} dt
+\end{align}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{align}
+Z(\omega) \equiv \sum^{\infty}_{n=-\infty} c_{n} \delta(\omega -
+\omega_{n})
+\end{align}
+\]</span></p>
+<p>with <span class="math inline">\(\omega\)</span> being the continuous
+frequency.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I need to reread this part.<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Helmholtz theorem<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2016-03-16 with pandoc
+</footer>
+</body>
+</html>

@@ -5,259 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-08-22" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>Linux</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; } /* Alert */
-code span.an { color: #008000; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #0000ff; } /* ControlFlow */
-code span.ch { color: #008080; } /* Char */
-code span.cn { } /* Constant */
-code span.co { color: #008000; } /* Comment */
-code span.cv { color: #008000; } /* CommentVar */
-code span.do { color: #008000; } /* Documentation */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.im { } /* Import */
-code span.in { color: #008000; } /* Information */
-code span.kw { color: #0000ff; } /* Keyword */
-code span.op { } /* Operator */
-code span.ot { color: #ff4000; } /* Other */
-code span.pp { color: #ff4000; } /* Preprocessor */
-code span.sc { color: #008080; } /* SpecialChar */
-code span.ss { color: #008080; } /* SpecialString */
-code span.st { color: #008080; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #008080; } /* VerbatimString */
-code span.wa { color: #008000; font-weight: bold; } /* Warning */
-</style>
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -266,153 +19,309 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <h3 class="date">2021-08-22</h3>
 <div id="TOC">
 <ul>
-<li><a href="#system"><span class="toc-section-number">1</span> System</a>
+<li><a href="#system" id="toc-system"><span
+class="toc-section-number">1</span> System</a>
 <ul>
-<li><a href="#terminal"><span class="toc-section-number">1.1</span> Terminal</a>
+<li><a href="#terminal" id="toc-terminal"><span
+class="toc-section-number">1.1</span> Terminal</a>
 <ul>
-<li><a href="#use-watch-command-with-a-piped-chain-of-commands"><span class="toc-section-number">1.1.1</span> Use watch command with a piped chain of commands</a></li>
-<li><a href="#change-the-width-of-the-remote-console"><span class="toc-section-number">1.1.2</span> Change the width of the remote console</a></li>
+<li><a href="#use-watch-command-with-a-piped-chain-of-commands"
+id="toc-use-watch-command-with-a-piped-chain-of-commands"><span
+class="toc-section-number">1.1.1</span> Use watch command with a piped
+chain of commands</a></li>
+<li><a href="#change-the-width-of-the-remote-console"
+id="toc-change-the-width-of-the-remote-console"><span
+class="toc-section-number">1.1.2</span> Change the width of the remote
+console</a></li>
 </ul></li>
-<li><a href="#ssh-and-sftp"><span class="toc-section-number">1.2</span> SSH and SFTP</a>
+<li><a href="#ssh-and-sftp" id="toc-ssh-and-sftp"><span
+class="toc-section-number">1.2</span> SSH and SFTP</a>
 <ul>
-<li><a href="#show-progress"><span class="toc-section-number">1.2.1</span> Show progress</a></li>
-<li><a href="#vnc-connects-to-server"><span class="toc-section-number">1.2.2</span> VNC connects to Server</a></li>
-<li><a href="#run-command-using-ssh"><span class="toc-section-number">1.2.3</span> Run command using SSH</a></li>
-<li><a href="#ssh-allow-only-key"><span class="toc-section-number">1.2.4</span> SSH Allow only Key</a></li>
-<li><a href="#calculate-rsa-key-fingerprint"><span class="toc-section-number">1.2.5</span> Calculate RSA Key Fingerprint</a></li>
-<li><a href="#sftp-batch-mode"><span class="toc-section-number">1.2.6</span> SFTP Batch Mode</a></li>
+<li><a href="#show-progress" id="toc-show-progress"><span
+class="toc-section-number">1.2.1</span> Show progress</a></li>
+<li><a href="#vnc-connects-to-server"
+id="toc-vnc-connects-to-server"><span
+class="toc-section-number">1.2.2</span> VNC connects to Server</a></li>
+<li><a href="#run-command-using-ssh"
+id="toc-run-command-using-ssh"><span
+class="toc-section-number">1.2.3</span> Run command using SSH</a></li>
+<li><a href="#ssh-allow-only-key" id="toc-ssh-allow-only-key"><span
+class="toc-section-number">1.2.4</span> SSH Allow only Key</a></li>
+<li><a href="#calculate-rsa-key-fingerprint"
+id="toc-calculate-rsa-key-fingerprint"><span
+class="toc-section-number">1.2.5</span> Calculate RSA Key
+Fingerprint</a></li>
+<li><a href="#sftp-batch-mode" id="toc-sftp-batch-mode"><span
+class="toc-section-number">1.2.6</span> SFTP Batch Mode</a></li>
 </ul></li>
-<li><a href="#file-and-folder"><span class="toc-section-number">1.3</span> File and Folder</a>
+<li><a href="#file-and-folder" id="toc-file-and-folder"><span
+class="toc-section-number">1.3</span> File and Folder</a>
 <ul>
-<li><a href="#find-files-that-match-one-of-multiple-patterns"><span class="toc-section-number">1.3.1</span> Find files that match one of multiple patterns</a></li>
-<li><a href="#create-multi-part-7z"><span class="toc-section-number">1.3.2</span> Create multi-part 7z</a></li>
-<li><a href="#append-file-in-the-column-wise-way"><span class="toc-section-number">1.3.3</span> Append file in the column-wise way</a></li>
-<li><a href="#list-all-files-but-exclude-directories"><span class="toc-section-number">1.3.4</span> List all files but exclude directories</a></li>
-<li><a href="#list-files-not-matching"><span class="toc-section-number">1.3.5</span> List files not matching</a></li>
-<li><a href="#insert-zero-to-filename"><span class="toc-section-number">1.3.6</span> Insert zero to filename</a></li>
-<li><a href="#transpose-a-file"><span class="toc-section-number">1.3.7</span> Transpose a file</a></li>
-<li><a href="#change-the-permission-of-all-sub-folders-of-a-folder"><span class="toc-section-number">1.3.8</span> Change the permission of all sub-folders of a folder</a></li>
-<li><a href="#directory-must-have-x-permission"><span class="toc-section-number">1.3.9</span> Directory must have <code>x</code> permission</a></li>
-<li><a href="#replace-string-in-a-directory"><span class="toc-section-number">1.3.10</span> Replace String in a Directory</a></li>
-<li><a href="#encoding-problem-in-uncompressed-zip-file"><span class="toc-section-number">1.3.11</span> Encoding Problem in Uncompressed Zip file</a></li>
-<li><a href="#get-only-files-created-after-a-date"><span class="toc-section-number">1.3.12</span> Get only files created after a date</a></li>
+<li><a href="#find-files-that-match-one-of-multiple-patterns"
+id="toc-find-files-that-match-one-of-multiple-patterns"><span
+class="toc-section-number">1.3.1</span> Find files that match one of
+multiple patterns</a></li>
+<li><a href="#create-multi-part-7z" id="toc-create-multi-part-7z"><span
+class="toc-section-number">1.3.2</span> Create multi-part 7z</a></li>
+<li><a href="#append-file-in-the-column-wise-way"
+id="toc-append-file-in-the-column-wise-way"><span
+class="toc-section-number">1.3.3</span> Append file in the column-wise
+way</a></li>
+<li><a href="#list-all-files-but-exclude-directories"
+id="toc-list-all-files-but-exclude-directories"><span
+class="toc-section-number">1.3.4</span> List all files but exclude
+directories</a></li>
+<li><a href="#list-files-not-matching"
+id="toc-list-files-not-matching"><span
+class="toc-section-number">1.3.5</span> List files not matching</a></li>
+<li><a href="#insert-zero-to-filename"
+id="toc-insert-zero-to-filename"><span
+class="toc-section-number">1.3.6</span> Insert zero to filename</a></li>
+<li><a href="#transpose-a-file" id="toc-transpose-a-file"><span
+class="toc-section-number">1.3.7</span> Transpose a file</a></li>
+<li><a href="#change-the-permission-of-all-sub-folders-of-a-folder"
+id="toc-change-the-permission-of-all-sub-folders-of-a-folder"><span
+class="toc-section-number">1.3.8</span> Change the permission of all
+sub-folders of a folder</a></li>
+<li><a href="#directory-must-have-x-permission"
+id="toc-directory-must-have-x-permission"><span
+class="toc-section-number">1.3.9</span> Directory must have
+<code>x</code> permission</a></li>
+<li><a href="#replace-string-in-a-directory"
+id="toc-replace-string-in-a-directory"><span
+class="toc-section-number">1.3.10</span> Replace String in a
+Directory</a></li>
+<li><a href="#encoding-problem-in-uncompressed-zip-file"
+id="toc-encoding-problem-in-uncompressed-zip-file"><span
+class="toc-section-number">1.3.11</span> Encoding Problem in
+Uncompressed Zip file</a></li>
+<li><a href="#get-only-files-created-after-a-date"
+id="toc-get-only-files-created-after-a-date"><span
+class="toc-section-number">1.3.12</span> Get only files created after a
+date</a></li>
 </ul></li>
-<li><a href="#administration"><span class="toc-section-number">1.4</span> Administration</a>
+<li><a href="#administration" id="toc-administration"><span
+class="toc-section-number">1.4</span> Administration</a>
 <ul>
-<li><a href="#memory-information-shown-in-free"><span class="toc-section-number">1.4.1</span> Memory information shown in <code>free</code></a></li>
-<li><a href="#remove-packages-with-dependencies-in-centos"><span class="toc-section-number">1.4.2</span> Remove packages with dependencies in CentOS</a></li>
-<li><a href="#list-files-installed-from-a-rpm"><span class="toc-section-number">1.4.3</span> List files installed from a RPM</a></li>
-<li><a href="#remove-systemd-services"><span class="toc-section-number">1.4.4</span> Remove systemd services</a></li>
-<li><a href="#find-information-for-a-running-process"><span class="toc-section-number">1.4.5</span> Find information for a running process</a></li>
-<li><a href="#get-the-start-time-of-a-process"><span class="toc-section-number">1.4.6</span> Get the start time of a process</a></li>
-<li><a href="#force-stopping-multi-threads-process"><span class="toc-section-number">1.4.7</span> Force Stopping Multi Threads Process</a></li>
-<li><a href="#find-and-kill-zombie-process"><span class="toc-section-number">1.4.8</span> Find and kill zombie process</a></li>
-<li><a href="#increase-the-ps-column-width-for-column-user"><span class="toc-section-number">1.4.9</span> Increase the ps column width for column “user”</a></li>
-<li><a href="#show-cpu-usage"><span class="toc-section-number">1.4.10</span> Show CPU Usage</a></li>
-<li><a href="#show-which-cpu-is-used-by-pid"><span class="toc-section-number">1.4.11</span> Show which CPU is used by PID</a></li>
+<li><a href="#memory-information-shown-in-free"
+id="toc-memory-information-shown-in-free"><span
+class="toc-section-number">1.4.1</span> Memory information shown in
+<code>free</code></a></li>
+<li><a href="#remove-packages-with-dependencies-in-centos"
+id="toc-remove-packages-with-dependencies-in-centos"><span
+class="toc-section-number">1.4.2</span> Remove packages with
+dependencies in CentOS</a></li>
+<li><a href="#list-files-installed-from-a-rpm"
+id="toc-list-files-installed-from-a-rpm"><span
+class="toc-section-number">1.4.3</span> List files installed from a
+RPM</a></li>
+<li><a href="#remove-systemd-services"
+id="toc-remove-systemd-services"><span
+class="toc-section-number">1.4.4</span> Remove systemd services</a></li>
+<li><a href="#find-information-for-a-running-process"
+id="toc-find-information-for-a-running-process"><span
+class="toc-section-number">1.4.5</span> Find information for a running
+process</a></li>
+<li><a href="#get-the-start-time-of-a-process"
+id="toc-get-the-start-time-of-a-process"><span
+class="toc-section-number">1.4.6</span> Get the start time of a
+process</a></li>
+<li><a href="#force-stopping-multi-threads-process"
+id="toc-force-stopping-multi-threads-process"><span
+class="toc-section-number">1.4.7</span> Force Stopping Multi Threads
+Process</a></li>
+<li><a href="#find-and-kill-zombie-process"
+id="toc-find-and-kill-zombie-process"><span
+class="toc-section-number">1.4.8</span> Find and kill zombie
+process</a></li>
+<li><a href="#increase-the-ps-column-width-for-column-user"
+id="toc-increase-the-ps-column-width-for-column-user"><span
+class="toc-section-number">1.4.9</span> Increase the ps column width for
+column “user”</a></li>
+<li><a href="#show-cpu-usage" id="toc-show-cpu-usage"><span
+class="toc-section-number">1.4.10</span> Show CPU Usage</a></li>
+<li><a href="#show-which-cpu-is-used-by-pid"
+id="toc-show-which-cpu-is-used-by-pid"><span
+class="toc-section-number">1.4.11</span> Show which CPU is used by
+PID</a></li>
 </ul></li>
-<li><a href="#network"><span class="toc-section-number">1.5</span> Network</a>
+<li><a href="#network" id="toc-network"><span
+class="toc-section-number">1.5</span> Network</a>
 <ul>
-<li><a href="#find-out-which-process-eats-up-the-bandwidth"><span class="toc-section-number">1.5.1</span> Find out which process eats up the bandwidth</a></li>
+<li><a href="#find-out-which-process-eats-up-the-bandwidth"
+id="toc-find-out-which-process-eats-up-the-bandwidth"><span
+class="toc-section-number">1.5.1</span> Find out which process eats up
+the bandwidth</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#image-video-and-audeio-manipulations"><span class="toc-section-number">2</span> Image, Video and Audeio Manipulations</a>
+<li><a href="#image-video-and-audeio-manipulations"
+id="toc-image-video-and-audeio-manipulations"><span
+class="toc-section-number">2</span> Image, Video and Audeio
+Manipulations</a>
 <ul>
-<li><a href="#video"><span class="toc-section-number">2.1</span> Video</a>
+<li><a href="#video" id="toc-video"><span
+class="toc-section-number">2.1</span> Video</a>
 <ul>
-<li><a href="#merge-two-clips-and-place-them-next-to-each-other"><span class="toc-section-number">2.1.1</span> Merge two clips and place them next to each other</a></li>
-<li><a href="#concatenate-videos"><span class="toc-section-number">2.1.2</span> Concatenate videos</a></li>
+<li><a href="#merge-two-clips-and-place-them-next-to-each-other"
+id="toc-merge-two-clips-and-place-them-next-to-each-other"><span
+class="toc-section-number">2.1.1</span> Merge two clips and place them
+next to each other</a></li>
+<li><a href="#concatenate-videos" id="toc-concatenate-videos"><span
+class="toc-section-number">2.1.2</span> Concatenate videos</a></li>
 </ul></li>
-<li><a href="#conversion"><span class="toc-section-number">2.2</span> Conversion</a>
+<li><a href="#conversion" id="toc-conversion"><span
+class="toc-section-number">2.2</span> Conversion</a>
 <ul>
-<li><a href="#convert-series-of-images-to-video"><span class="toc-section-number">2.2.1</span> Convert series of images to video</a></li>
-<li><a href="#convert-mp4-to-gif"><span class="toc-section-number">2.2.2</span> Convert MP4 to GIF</a></li>
+<li><a href="#convert-series-of-images-to-video"
+id="toc-convert-series-of-images-to-video"><span
+class="toc-section-number">2.2.1</span> Convert series of images to
+video</a></li>
+<li><a href="#convert-mp4-to-gif" id="toc-convert-mp4-to-gif"><span
+class="toc-section-number">2.2.2</span> Convert MP4 to GIF</a></li>
 </ul></li>
-<li><a href="#image"><span class="toc-section-number">2.3</span> Image</a>
+<li><a href="#image" id="toc-image"><span
+class="toc-section-number">2.3</span> Image</a>
 <ul>
-<li><a href="#annotate-image"><span class="toc-section-number">2.3.1</span> Annotate image</a></li>
+<li><a href="#annotate-image" id="toc-annotate-image"><span
+class="toc-section-number">2.3.1</span> Annotate image</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#pdf-manipulations"><span class="toc-section-number">3</span> PDF Manipulations</a>
+<li><a href="#pdf-manipulations" id="toc-pdf-manipulations"><span
+class="toc-section-number">3</span> PDF Manipulations</a>
 <ul>
-<li><a href="#remove-margin-whitespace-in-a-pdf-figure"><span class="toc-section-number">3.0.1</span> Remove Margin Whitespace in a PDF Figure</a></li>
-<li><a href="#get-box-info-of-pdf"><span class="toc-section-number">3.0.2</span> Get Box Info of PDF</a></li>
-<li><a href="#crop-a-pdf-figure"><span class="toc-section-number">3.0.3</span> Crop a PDF Figure</a></li>
-<li><a href="#concatenate-pdf-figures-horizontally"><span class="toc-section-number">3.0.4</span> Concatenate PDF Figures Horizontally</a></li>
+<li><a href="#remove-margin-whitespace-in-a-pdf-figure"
+id="toc-remove-margin-whitespace-in-a-pdf-figure"><span
+class="toc-section-number">3.0.1</span> Remove Margin Whitespace in a
+PDF Figure</a></li>
+<li><a href="#get-box-info-of-pdf" id="toc-get-box-info-of-pdf"><span
+class="toc-section-number">3.0.2</span> Get Box Info of PDF</a></li>
+<li><a href="#crop-a-pdf-figure" id="toc-crop-a-pdf-figure"><span
+class="toc-section-number">3.0.3</span> Crop a PDF Figure</a></li>
+<li><a href="#concatenate-pdf-figures-horizontally"
+id="toc-concatenate-pdf-figures-horizontally"><span
+class="toc-section-number">3.0.4</span> Concatenate PDF Figures
+Horizontally</a></li>
 </ul></li>
-<li><a href="#hpc"><span class="toc-section-number">4</span> HPC</a>
+<li><a href="#hpc" id="toc-hpc"><span
+class="toc-section-number">4</span> HPC</a>
 <ul>
-<li><a href="#slurm"><span class="toc-section-number">4.1</span> slurm</a>
+<li><a href="#slurm" id="toc-slurm"><span
+class="toc-section-number">4.1</span> slurm</a>
 <ul>
-<li><a href="#find-where-the-job-is-submitted"><span class="toc-section-number">4.1.1</span> Find where the job is submitted</a></li>
+<li><a href="#find-where-the-job-is-submitted"
+id="toc-find-where-the-job-is-submitted"><span
+class="toc-section-number">4.1.1</span> Find where the job is
+submitted</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="system"><span class="header-section-number">1</span> System</h1>
-<h2 data-number="1.1" id="terminal"><span class="header-section-number">1.1</span> Terminal</h2>
-<h3 data-number="1.1.1" id="use-watch-command-with-a-piped-chain-of-commands"><span class="header-section-number">1.1.1</span> Use watch command with a piped chain of commands</h3>
+<h1 data-number="1" id="system"><span
+class="header-section-number">1</span> System</h1>
+<h2 data-number="1.1" id="terminal"><span
+class="header-section-number">1.1</span> Terminal</h2>
+<h3 data-number="1.1.1"
+id="use-watch-command-with-a-piped-chain-of-commands"><span
+class="header-section-number">1.1.1</span> Use watch command with a
+piped chain of commands</h3>
 <pre><code>watch &#39;command | othertool | yet-another-tool&#39;</code></pre>
-<h3 data-number="1.1.2" id="change-the-width-of-the-remote-console"><span class="header-section-number">1.1.2</span> Change the width of the remote console</h3>
+<h3 data-number="1.1.2"
+id="change-the-width-of-the-remote-console"><span
+class="header-section-number">1.1.2</span> Change the width of the
+remote console</h3>
 <pre><code>stty rows 50 cols 132</code></pre>
-<p>Reference: <a href="https://unix.stackexchange.com/questions/106644/how-to-change-the-width-of-remote-serial-console">How to change the width of remote serial console? [duplicate]</a></p>
-<p>The above solution may cause messed text in Vim. Maybe a better solution is <a href="https://unix.stackexchange.com/questions/16578/resizable-serial-console-window">resizable serial console window?</a>.</p>
-<h2 data-number="1.2" id="ssh-and-sftp"><span class="header-section-number">1.2</span> SSH and SFTP</h2>
-<h3 data-number="1.2.1" id="show-progress"><span class="header-section-number">1.2.1</span> Show progress</h3>
+<p>Reference: <a
+href="https://unix.stackexchange.com/questions/106644/how-to-change-the-width-of-remote-serial-console">How
+to change the width of remote serial console? [duplicate]</a></p>
+<p>The above solution may cause messed text in Vim. Maybe a better
+solution is <a
+href="https://unix.stackexchange.com/questions/16578/resizable-serial-console-window">resizable
+serial console window?</a>.</p>
+<h2 data-number="1.2" id="ssh-and-sftp"><span
+class="header-section-number">1.2</span> SSH and SFTP</h2>
+<h3 data-number="1.2.1" id="show-progress"><span
+class="header-section-number">1.2.1</span> Show progress</h3>
 <pre><code>progress
    Toggle display of progress meter.</code></pre>
-<h3 data-number="1.2.2" id="vnc-connects-to-server"><span class="header-section-number">1.2.2</span> VNC connects to Server</h3>
+<h3 data-number="1.2.2" id="vnc-connects-to-server"><span
+class="header-section-number">1.2.2</span> VNC connects to Server</h3>
 <ol type="1">
 <li>On Linux server, start the VNC server</li>
 </ol>
 <pre><code>vncserver -fp catalogue:/etc/X11/fontpath.d</code></pre>
-<p><code>-fp catalogue:/etc/X11/fontpath.d</code> is required. No idea of the reason.</p>
+<p><code>-fp catalogue:/etc/X11/fontpath.d</code> is required. No idea
+of the reason.</p>
 <p>It will prompts the password.</p>
 <ol start="2" type="1">
 <li>On Windows, use ssh to forward port</li>
 </ol>
 <pre><code>ssh -p 10001 user_name@host_ip -L 7000:master:5908</code></pre>
-<p><code>master</code> is the host name, <code>5908</code> is the port which the VNC server listens to. <code>7000</code> is the port number on the client side which ssh forwards to <code>5908</code>.</p>
+<p><code>master</code> is the host name, <code>5908</code> is the port
+which the VNC server listens to. <code>7000</code> is the port number on
+the client side which ssh forwards to <code>5908</code>.</p>
 <ol start="2" type="1">
-<li>On Windows, start VNC viewer to connect to localhost. The remote URl is <code>localhost:7000</code>.</li>
+<li>On Windows, start VNC viewer to connect to localhost. The remote URl
+is <code>localhost:7000</code>.</li>
 </ol>
-<h3 data-number="1.2.3" id="run-command-using-ssh"><span class="header-section-number">1.2.3</span> Run command using SSH</h3>
+<h3 data-number="1.2.3" id="run-command-using-ssh"><span
+class="header-section-number">1.2.3</span> Run command using SSH</h3>
 <pre><code>ssh user1@server1 date
 ssh user1@server1 bash my.sh</code></pre>
-<h3 data-number="1.2.4" id="ssh-allow-only-key"><span class="header-section-number">1.2.4</span> SSH Allow only Key</h3>
+<h3 data-number="1.2.4" id="ssh-allow-only-key"><span
+class="header-section-number">1.2.4</span> SSH Allow only Key</h3>
 <ul>
-<li>Edit <code>/etc/ssh/sshd_config</code> to set <code>PasswordAuthentication no</code>.</li>
+<li>Edit <code>/etc/ssh/sshd_config</code> to set
+<code>PasswordAuthentication no</code>.</li>
 <li>Restart <code>systemctl restart sshd.service</code></li>
 </ul>
-<h3 data-number="1.2.5" id="calculate-rsa-key-fingerprint"><span class="header-section-number">1.2.5</span> Calculate RSA Key Fingerprint</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-E</span> md5 <span class="at">-lf</span> ~/.ssh/id_rsa.pub</span></code></pre></div>
-<h3 data-number="1.2.6" id="sftp-batch-mode"><span class="header-section-number">1.2.6</span> SFTP Batch Mode</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-oBatchMode</span><span class="op">=</span>no <span class="at">-b</span> YOUR_COMMAND_FILE_PATH USER@HOST</span></code></pre></div>
-<p>If it requires the password, use <code>sshpass</code> to pass the password.</p>
+<h3 data-number="1.2.5" id="calculate-rsa-key-fingerprint"><span
+class="header-section-number">1.2.5</span> Calculate RSA Key
+Fingerprint</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-E</span> md5 <span class="at">-lf</span> ~/.ssh/id_rsa.pub</span></code></pre></div>
+<h3 data-number="1.2.6" id="sftp-batch-mode"><span
+class="header-section-number">1.2.6</span> SFTP Batch Mode</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sftp</span> <span class="at">-oBatchMode</span><span class="op">=</span>no <span class="at">-b</span> YOUR_COMMAND_FILE_PATH USER@HOST</span></code></pre></div>
+<p>If it requires the password, use <code>sshpass</code> to pass the
+password.</p>
 <pre><code>sshpass -p YOUR_PASSWORD sftp -oBatchMode=no -b YOUR_COMMAND_FILE_PATH USER@HOST</code></pre>
-<h2 data-number="1.3" id="file-and-folder"><span class="header-section-number">1.3</span> File and Folder</h2>
-<h3 data-number="1.3.1" id="find-files-that-match-one-of-multiple-patterns"><span class="header-section-number">1.3.1</span> Find files that match one of multiple patterns</h3>
+<h2 data-number="1.3" id="file-and-folder"><span
+class="header-section-number">1.3</span> File and Folder</h2>
+<h3 data-number="1.3.1"
+id="find-files-that-match-one-of-multiple-patterns"><span
+class="header-section-number">1.3.1</span> Find files that match one of
+multiple patterns</h3>
 <p>Use <code>-o</code>, which means “or”:</p>
 <pre><code>find Documents \( -name &quot;*.py&quot; -o -name &quot;*.html&quot; \)</code></pre>
-<h3 data-number="1.3.2" id="create-multi-part-7z"><span class="header-section-number">1.3.2</span> Create multi-part 7z</h3>
+<h3 data-number="1.3.2" id="create-multi-part-7z"><span
+class="header-section-number">1.3.2</span> Create multi-part 7z</h3>
 <pre><code>7z -v100m a my_zip.7z my_folder/</code></pre>
-<h3 data-number="1.3.3" id="append-file-in-the-column-wise-way"><span class="header-section-number">1.3.3</span> Append file in the column-wise way</h3>
+<h3 data-number="1.3.3" id="append-file-in-the-column-wise-way"><span
+class="header-section-number">1.3.3</span> Append file in the
+column-wise way</h3>
 <pre><code>$ paste f1 f2 | tr -d &#39;\t&#39;
 123456789abcdefghij
 9876543211111111111
 0000000003333333333</code></pre>
-<h3 data-number="1.3.4" id="list-all-files-but-exclude-directories"><span class="header-section-number">1.3.4</span> List all files but exclude directories</h3>
+<h3 data-number="1.3.4"
+id="list-all-files-but-exclude-directories"><span
+class="header-section-number">1.3.4</span> List all files but exclude
+directories</h3>
 <pre><code>find . -type f</code></pre>
-<h3 data-number="1.3.5" id="list-files-not-matching"><span class="header-section-number">1.3.5</span> List files not matching</h3>
+<h3 data-number="1.3.5" id="list-files-not-matching"><span
+class="header-section-number">1.3.5</span> List files not matching</h3>
 <pre><code>ls | grep -v &#39;\.jar$&#39;</code></pre>
-<h3 data-number="1.3.6" id="insert-zero-to-filename"><span class="header-section-number">1.3.6</span> Insert zero to filename</h3>
+<h3 data-number="1.3.6" id="insert-zero-to-filename"><span
+class="header-section-number">1.3.6</span> Insert zero to filename</h3>
 <pre><code>fbase=PressureContour_SliceCore_REF_G1R2P1It
   for f_fullname in ${fbase}[0-9]*; do
   fname=${f_fullname%.*}
   mv &quot;$f_fullname&quot; $(printf &quot;${fbase}%05d.png&quot; &quot;${fname#${fbase}}&quot;)
 done</code></pre>
-<h3 data-number="1.3.7" id="transpose-a-file"><span class="header-section-number">1.3.7</span> Transpose a file</h3>
+<h3 data-number="1.3.7" id="transpose-a-file"><span
+class="header-section-number">1.3.7</span> Transpose a file</h3>
 <p>Run the following file as <code>transpose.sh file_name</code></p>
 <pre><code>awk &#39;
 { 
@@ -430,39 +339,67 @@ END {
         print str
     }
 }&#39; $1</code></pre>
-<h3 data-number="1.3.8" id="change-the-permission-of-all-sub-folders-of-a-folder"><span class="header-section-number">1.3.8</span> Change the permission of all sub-folders of a folder</h3>
+<h3 data-number="1.3.8"
+id="change-the-permission-of-all-sub-folders-of-a-folder"><span
+class="header-section-number">1.3.8</span> Change the permission of all
+sub-folders of a folder</h3>
 <p>To change all the directories to 755 <code>(drwxr-xr-x)</code>:</p>
 <pre><code>find /opt/lampp/htdocs -type d -exec chmod 755 {} \;</code></pre>
 <p>To change all the files to 644 <code>(-rw-r--r--)</code>:</p>
 <pre><code>find /opt/lampp/htdocs -type f -exec chmod 644 {} \;</code></pre>
-<h3 data-number="1.3.9" id="directory-must-have-x-permission"><span class="header-section-number">1.3.9</span> Directory must have <code>x</code> permission</h3>
-<p>To view the files in a directory, the directory must have a <code>x</code> permission.</p>
-<h3 data-number="1.3.10" id="replace-string-in-a-directory"><span class="header-section-number">1.3.10</span> Replace String in a Directory</h3>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rwnil</span> abc <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">f</span><span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/abc/ref/gI&#39;</span> <span class="va">$f</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
-<h3 data-number="1.3.11" id="encoding-problem-in-uncompressed-zip-file"><span class="header-section-number">1.3.11</span> Encoding Problem in Uncompressed Zip file</h3>
+<h3 data-number="1.3.9" id="directory-must-have-x-permission"><span
+class="header-section-number">1.3.9</span> Directory must have
+<code>x</code> permission</h3>
+<p>To view the files in a directory, the directory must have a
+<code>x</code> permission.</p>
+<h3 data-number="1.3.10" id="replace-string-in-a-directory"><span
+class="header-section-number">1.3.10</span> Replace String in a
+Directory</h3>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-rwnil</span> abc <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">f</span><span class="kw">;</span> <span class="cf">do</span> <span class="fu">sed</span> <span class="at">-i</span> <span class="st">&#39;s/abc/ref/gI&#39;</span> <span class="va">$f</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<h3 data-number="1.3.11"
+id="encoding-problem-in-uncompressed-zip-file"><span
+class="header-section-number">1.3.11</span> Encoding Problem in
+Uncompressed Zip file</h3>
 <p>Use <code>unzip -O cp936 file.zip</code></p>
-<h3 data-number="1.3.12" id="get-only-files-created-after-a-date"><span class="header-section-number">1.3.12</span> Get only files created after a date</h3>
-<p>For example, to find all files in the current directory that have been modified since yesterday (24 hours ago) use:</p>
+<h3 data-number="1.3.12" id="get-only-files-created-after-a-date"><span
+class="header-section-number">1.3.12</span> Get only files created after
+a date</h3>
+<p>For example, to find all files in the current directory that have
+been modified since yesterday (24 hours ago) use:</p>
 <pre><code>find . -maxdepth 1 -mtime -1</code></pre>
-<p>Note that to find files modified before 24 hours ago, you have to use <code>-mtime +1</code> instead of <code>-mtime -1</code>.</p>
-<h2 data-number="1.4" id="administration"><span class="header-section-number">1.4</span> Administration</h2>
-<h3 data-number="1.4.1" id="memory-information-shown-in-free"><span class="header-section-number">1.4.1</span> Memory information shown in <code>free</code></h3>
+<p>Note that to find files modified before 24 hours ago, you have to use
+<code>-mtime +1</code> instead of <code>-mtime -1</code>.</p>
+<h2 data-number="1.4" id="administration"><span
+class="header-section-number">1.4</span> Administration</h2>
+<h3 data-number="1.4.1" id="memory-information-shown-in-free"><span
+class="header-section-number">1.4.1</span> Memory information shown in
+<code>free</code></h3>
 <pre><code>❯ free -m
               total        used        free      shared  buff/cache   available
 Mem:         191891       22150        1698        4171      168042      164146
 Swap:             0           0           0</code></pre>
-<p><code>available</code> includes <code>free</code> and a part of <code>buff/cache</code>.</p>
-<p>If <code>free</code> is close to <code>0</code>, do not worry. If the following things happen, you must check what is going on.</p>
+<p><code>available</code> includes <code>free</code> and a part of
+<code>buff/cache</code>.</p>
+<p>If <code>free</code> is close to <code>0</code>, do not worry. If the
+following things happen, you must check what is going on.</p>
 <ul>
 <li><code>available</code> memory is close to zero</li>
 <li><code>swap</code> used increases or fluctuates</li>
-<li><code>dmesg | grep oom-killer</code> shows the OutOfMemory-killer at work</li>
+<li><code>dmesg | grep oom-killer</code> shows the OutOfMemory-killer at
+work</li>
 </ul>
-<h3 data-number="1.4.2" id="remove-packages-with-dependencies-in-centos"><span class="header-section-number">1.4.2</span> Remove packages with dependencies in CentOS</h3>
+<h3 data-number="1.4.2"
+id="remove-packages-with-dependencies-in-centos"><span
+class="header-section-number">1.4.2</span> Remove packages with
+dependencies in CentOS</h3>
 <pre><code>yum autoremove [package_name]</code></pre>
-<h3 data-number="1.4.3" id="list-files-installed-from-a-rpm"><span class="header-section-number">1.4.3</span> List files installed from a RPM</h3>
+<h3 data-number="1.4.3" id="list-files-installed-from-a-rpm"><span
+class="header-section-number">1.4.3</span> List files installed from a
+RPM</h3>
 <pre><code>repoquery --installed -l httpd</code></pre>
-<h3 data-number="1.4.4" id="remove-systemd-services"><span class="header-section-number">1.4.4</span> Remove systemd services</h3>
+<h3 data-number="1.4.4" id="remove-systemd-services"><span
+class="header-section-number">1.4.4</span> Remove systemd services</h3>
 <pre><code>systemctl stop [servicename]
 systemctl disable [servicename]
 rm /etc/systemd/system/[servicename]
@@ -471,29 +408,47 @@ rm /usr/lib/systemd/system/[servicename]
 rm /usr/lib/systemd/system/[servicename] # and symlinks that might be related
 systemctl daemon-reload
 systemctl reset-failed</code></pre>
-<h3 data-number="1.4.5" id="find-information-for-a-running-process"><span class="header-section-number">1.4.5</span> Find information for a running process</h3>
-<p>You can get this information from <code>/proc</code> filesystem, it stores information about running processes.</p>
+<h3 data-number="1.4.5"
+id="find-information-for-a-running-process"><span
+class="header-section-number">1.4.5</span> Find information for a
+running process</h3>
+<p>You can get this information from <code>/proc</code> filesystem, it
+stores information about running processes.</p>
 <pre><code>cat /proc/&lt;pid&gt;/environ
 cd /proc/&lt;pid&gt;/cwd; pwd -P
 cat /proc/&lt;pid&gt;/cmdline</code></pre>
 <p>Another method is</p>
 <pre><code>lsof -p $PID</code></pre>
-<h3 data-number="1.4.6" id="get-the-start-time-of-a-process"><span class="header-section-number">1.4.6</span> Get the start time of a process</h3>
-<p>The parameter of <code>lstart</code> of <code>ps</code> does this job.</p>
+<h3 data-number="1.4.6" id="get-the-start-time-of-a-process"><span
+class="header-section-number">1.4.6</span> Get the start time of a
+process</h3>
+<p>The parameter of <code>lstart</code> of <code>ps</code> does this
+job.</p>
 <pre><code>ps -eo pid,lstart,cmd</code></pre>
-<h3 data-number="1.4.7" id="force-stopping-multi-threads-process"><span class="header-section-number">1.4.7</span> Force Stopping Multi Threads Process</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> nfs_opt <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2}&#39;</span> <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">i</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">kill</span> <span class="at">-9</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
-<h3 data-number="1.4.8" id="find-and-kill-zombie-process"><span class="header-section-number">1.4.8</span> Find and kill zombie process</h3>
+<h3 data-number="1.4.7" id="force-stopping-multi-threads-process"><span
+class="header-section-number">1.4.7</span> Force Stopping Multi Threads
+Process</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> nfs_opt <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2}&#39;</span> <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">i</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">kill</span> <span class="at">-9</span> <span class="va">$i</span><span class="kw">;</span> <span class="cf">done</span></span></code></pre></div>
+<h3 data-number="1.4.8" id="find-and-kill-zombie-process"><span
+class="header-section-number">1.4.8</span> Find and kill zombie
+process</h3>
 <p>The <code>stat</code> of the zombie process is <code>Z</code>.</p>
 <pre><code>ps aux | grep &#39;Z&#39;</code></pre>
 <p>You have to kill the parent process of the zombie process.</p>
 <pre><code>$ pstree -p -s ${zombie_pid}
 init(1)---cnid_metad(1311)---cnid_dbd(5145)
 $ kill 5145 # Usually kill the 1st one</code></pre>
-<h3 data-number="1.4.9" id="increase-the-ps-column-width-for-column-user"><span class="header-section-number">1.4.9</span> Increase the ps column width for column “user”</h3>
-<p>The following specfies the width of the column <code>user</code> to be <code>16</code>. The key is to use the option <code>o</code> or <code>-o</code>.</p>
+<h3 data-number="1.4.9"
+id="increase-the-ps-column-width-for-column-user"><span
+class="header-section-number">1.4.9</span> Increase the ps column width
+for column “user”</h3>
+<p>The following specfies the width of the column <code>user</code> to
+be <code>16</code>. The key is to use the option <code>o</code> or
+<code>-o</code>.</p>
 <pre><code>alias ps_mod=&#39;ps ax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd&#39;</code></pre>
-<h3 data-number="1.4.10" id="show-cpu-usage"><span class="header-section-number">1.4.10</span> Show CPU Usage</h3>
+<h3 data-number="1.4.10" id="show-cpu-usage"><span
+class="header-section-number">1.4.10</span> Show CPU Usage</h3>
 <pre class="shell"><code>RED=&#39;\033[0;31m&#39;
 BLUE=&#39;\033[0;34m&#39;
 NC=&#39;\033[0m&#39; # No Color
@@ -530,55 +485,101 @@ top -b -n 1 -u &quot;$own&quot; | awk -v user=$own -v CPUS=$cpus &#39;NR&gt;7 { 
 
 echo -e &quot;${BLUE}In the 2nd column, 100 means 1 CPU is being used.${NC}&quot;
 echo -e &quot;${RED}If someone is using this node, try other nodes please!${NC}&quot;</code></pre>
-<h3 data-number="1.4.11" id="show-which-cpu-is-used-by-pid"><span class="header-section-number">1.4.11</span> Show which CPU is used by PID</h3>
-<p><code>PSR</code> number shows the processor number the process is assigned to.</p>
+<h3 data-number="1.4.11" id="show-which-cpu-is-used-by-pid"><span
+class="header-section-number">1.4.11</span> Show which CPU is used by
+PID</h3>
+<p><code>PSR</code> number shows the processor number the process is
+assigned to.</p>
 <p>Thus use <code>ps -aF</code> or <code>ps -q 7810 -o psr</code>.</p>
-<h2 data-number="1.5" id="network"><span class="header-section-number">1.5</span> Network</h2>
-<h3 data-number="1.5.1" id="find-out-which-process-eats-up-the-bandwidth"><span class="header-section-number">1.5.1</span> Find out which process eats up the bandwidth</h3>
+<h2 data-number="1.5" id="network"><span
+class="header-section-number">1.5</span> Network</h2>
+<h3 data-number="1.5.1"
+id="find-out-which-process-eats-up-the-bandwidth"><span
+class="header-section-number">1.5.1</span> Find out which process eats
+up the bandwidth</h3>
 <pre><code>sudo nethogs wlan0</code></pre>
-<h1 data-number="2" id="image-video-and-audeio-manipulations"><span class="header-section-number">2</span> Image, Video and Audeio Manipulations</h1>
-<h2 data-number="2.1" id="video"><span class="header-section-number">2.1</span> Video</h2>
-<h3 data-number="2.1.1" id="merge-two-clips-and-place-them-next-to-each-other"><span class="header-section-number">2.1.1</span> Merge two clips and place them next to each other</h3>
+<h1 data-number="2" id="image-video-and-audeio-manipulations"><span
+class="header-section-number">2</span> Image, Video and Audeio
+Manipulations</h1>
+<h2 data-number="2.1" id="video"><span
+class="header-section-number">2.1</span> Video</h2>
+<h3 data-number="2.1.1"
+id="merge-two-clips-and-place-them-next-to-each-other"><span
+class="header-section-number">2.1.1</span> Merge two clips and place
+them next to each other</h3>
 <pre><code>ffmpeg -i left.mp4 -i right.mp4 -filter_complex hstack output.mp4</code></pre>
-<p>To stack more than 2 videos, you can simply specify <code>hstack=inputs=3</code>.</p>
-<h3 data-number="2.1.2" id="concatenate-videos"><span class="header-section-number">2.1.2</span> Concatenate videos</h3>
+<p>To stack more than 2 videos, you can simply specify
+<code>hstack=inputs=3</code>.</p>
+<h3 data-number="2.1.2" id="concatenate-videos"><span
+class="header-section-number">2.1.2</span> Concatenate videos</h3>
 <pre><code>ffmpeg -f concat -safe 0 -i &lt;(for f in ./*.ogv; do echo &quot;file &#39;$PWD/$f&#39;&quot;; done) -c copy output.ogv</code></pre>
-<p>Reference: <a href="https://trac.ffmpeg.org/wiki/Concatenate#demuxer">ffmpeg concat demuxer</a></p>
-<h2 data-number="2.2" id="conversion"><span class="header-section-number">2.2</span> Conversion</h2>
-<h3 data-number="2.2.1" id="convert-series-of-images-to-video"><span class="header-section-number">2.2.1</span> Convert series of images to video</h3>
+<p>Reference: <a
+href="https://trac.ffmpeg.org/wiki/Concatenate#demuxer">ffmpeg concat
+demuxer</a></p>
+<h2 data-number="2.2" id="conversion"><span
+class="header-section-number">2.2</span> Conversion</h2>
+<h3 data-number="2.2.1" id="convert-series-of-images-to-video"><span
+class="header-section-number">2.2.1</span> Convert series of images to
+video</h3>
 <ol type="1">
 <li>Use <code>convert</code></li>
 </ol>
 <pre><code>convert -delay 25 -loop 0 -quality 100 Pressure*.png Pressure.mp4</code></pre>
-<p>Note: The video file by <code>convert</code> can be played by video player but not by Chrome.</p>
+<p>Note: The video file by <code>convert</code> can be played by video
+player but not by Chrome.</p>
 <ol start="2" type="1">
 <li>Use <code>ffmpeg</code></li>
 </ol>
 <p>By pipe</p>
 <pre><code>cat PressureContour_SliceCore_REF_G1R2P1It0*.png | ~/Softwares/ffmpeg/ffmpeg -f image2pipe -framerate 4 -i - -c:v libx264 -pix_fmt yuv420p out.mp4</code></pre>
-<p>Another method is sequential reading. However, it requires that the index of the image should be starting from 1. If not, you need to specify the <code>-start_number 50</code>. But the second index number should be <code>51</code>. That is bad design.</p>
-<p>The above ffmpeg method produce a video file which is played perfectly in Chrome but in apps like PotPlayer it shows wrongs frames at the end of the video file. For example, ffmpeg says this video is <code>9.23s</code>. PotPlayer says this video is <code>10s</code> and shows wrong frames after <code>9.23s</code>.</p>
-<p>Reference: <a href="https://trac.ffmpeg.org/wiki/Slideshow">ffmpeg wiki: Create a video slideshow from images</a></p>
+<p>Another method is sequential reading. However, it requires that the
+index of the image should be starting from 1. If not, you need to
+specify the <code>-start_number 50</code>. But the second index number
+should be <code>51</code>. That is bad design.</p>
+<p>The above ffmpeg method produce a video file which is played
+perfectly in Chrome but in apps like PotPlayer it shows wrongs frames at
+the end of the video file. For example, ffmpeg says this video is
+<code>9.23s</code>. PotPlayer says this video is <code>10s</code> and
+shows wrong frames after <code>9.23s</code>.</p>
+<p>Reference: <a href="https://trac.ffmpeg.org/wiki/Slideshow">ffmpeg
+wiki: Create a video slideshow from images</a></p>
 <p>Another problem is that h264 codec requires even dimensions.</p>
 <pre><code>ffmpeg -r 24 -i frame_%05d.jpg -vcodec libx264 -y -an video.mp4 -vf &quot;pad=ceil(iw/2)*2:ceil(ih/2)*2&quot;</code></pre>
-<p>Reference: <a href="https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2">FFMPEG (libx264) “height not divisible by 2”</a></p>
-<h3 data-number="2.2.2" id="convert-mp4-to-gif"><span class="header-section-number">2.2.2</span> Convert MP4 to GIF</h3>
-<p>Use <code>ffmpeg</code> to convert. Use <code>convert</code> from <code>imagemagick</code> to reduce size.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-i</span> input.mp4 <span class="at">-pix_fmt</span> rgb24 input_raw.gif</span>
+<p>Reference: <a
+href="https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2">FFMPEG
+(libx264) “height not divisible by 2”</a></p>
+<h3 data-number="2.2.2" id="convert-mp4-to-gif"><span
+class="header-section-number">2.2.2</span> Convert MP4 to GIF</h3>
+<p>Use <code>ffmpeg</code> to convert. Use <code>convert</code> from
+<code>imagemagick</code> to reduce size.</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ffmpeg</span> <span class="at">-i</span> input.mp4 <span class="at">-pix_fmt</span> rgb24 input_raw.gif</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">convert</span> <span class="at">-loop</span> 0 <span class="at">-layers</span> Optimize input_raw.gif input.gif</span></code></pre></div>
-<h2 data-number="2.3" id="image"><span class="header-section-number">2.3</span> Image</h2>
-<h3 data-number="2.3.1" id="annotate-image"><span class="header-section-number">2.3.1</span> Annotate image</h3>
-<p>Try using <code>-gravity North</code> (this will move your text to the top of the image) and then adding an offset (<code>-annotate +0+100</code>) to move down your text:</p>
+<h2 data-number="2.3" id="image"><span
+class="header-section-number">2.3</span> Image</h2>
+<h3 data-number="2.3.1" id="annotate-image"><span
+class="header-section-number">2.3.1</span> Annotate image</h3>
+<p>Try using <code>-gravity North</code> (this will move your text to
+the top of the image) and then adding an offset
+(<code>-annotate +0+100</code>) to move down your text:</p>
 <pre><code>convert temp.jpg -gravity North -pointsize 30 -annotate +0+100 &#39;Love you mom&#39; temp1.jpg</code></pre>
-<h1 data-number="3" id="pdf-manipulations"><span class="header-section-number">3</span> PDF Manipulations</h1>
-<h3 data-number="3.0.1" id="remove-margin-whitespace-in-a-pdf-figure"><span class="header-section-number">3.0.1</span> Remove Margin Whitespace in a PDF Figure</h3>
+<h1 data-number="3" id="pdf-manipulations"><span
+class="header-section-number">3</span> PDF Manipulations</h1>
+<h3 data-number="3.0.1"
+id="remove-margin-whitespace-in-a-pdf-figure"><span
+class="header-section-number">3.0.1</span> Remove Margin Whitespace in a
+PDF Figure</h3>
 <p>Use <code>pdfcrop</code></p>
-<h3 data-number="3.0.2" id="get-box-info-of-pdf"><span class="header-section-number">3.0.2</span> Get Box Info of PDF</h3>
+<h3 data-number="3.0.2" id="get-box-info-of-pdf"><span
+class="header-section-number">3.0.2</span> Get Box Info of PDF</h3>
 <p>Use <code>pdfinfo</code></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdfinfo</span> <span class="at">-box</span> input_file.pdf</span></code></pre></div>
-<h3 data-number="3.0.3" id="crop-a-pdf-figure"><span class="header-section-number">3.0.3</span> Crop a PDF Figure</h3>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdfinfo</span> <span class="at">-box</span> input_file.pdf</span></code></pre></div>
+<h3 data-number="3.0.3" id="crop-a-pdf-figure"><span
+class="header-section-number">3.0.3</span> Crop a PDF Figure</h3>
 <p>Use Ghostscript. Shell script is as follows,</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="va">input_fname</span><span class="op">=</span><span class="va">$1</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="va">left</span><span class="op">=</span><span class="va">$2</span></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="va">bottom</span><span class="op">=</span><span class="va">$3</span></span>
@@ -593,12 +594,21 @@ echo -e &quot;${RED}If someone is using this node, try other nodes please!${NC}&
 <span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use pdfinfo -box input_file.pdf to get the box info of this pdf.</span></span>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gs</span> <span class="at">-sDEVICE</span><span class="op">=</span>pdfwrite <span class="at">-sOutputFile</span><span class="op">=</span><span class="va">$output_fname</span> <span class="at">-dBATCH</span> <span class="at">-dNOPAUSE</span> <span class="at">-c</span> <span class="st">&quot;[ /CropBox [ </span><span class="va">$left</span><span class="st"> </span><span class="va">$bottom</span><span class="st"> </span><span class="va">$right</span><span class="st"> </span><span class="va">$top</span><span class="st"> ] /PAGES pdfmark&quot;</span> <span class="at">-f</span> <span class="va">$input_fname</span></span>
 <span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
-<h3 data-number="3.0.4" id="concatenate-pdf-figures-horizontally"><span class="header-section-number">3.0.4</span> Concatenate PDF Figures Horizontally</h3>
-<p>Use <code>pdfjam</code> which is installed by <code>tlmgr</code> in the <a href="about:blank#TexLive">TexLive</a> distro. The usage is as follows,</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdfjam</span> input_location_discontinuous_crop.pdf input_location_merged_crop.pdf <span class="at">--nup</span> 2x1 <span class="at">--outfile</span> input_location.pdf</span></code></pre></div>
-<h1 data-number="4" id="hpc"><span class="header-section-number">4</span> HPC</h1>
-<h2 data-number="4.1" id="slurm"><span class="header-section-number">4.1</span> slurm</h2>
-<h3 data-number="4.1.1" id="find-where-the-job-is-submitted"><span class="header-section-number">4.1.1</span> Find where the job is submitted</h3>
+<h3 data-number="3.0.4" id="concatenate-pdf-figures-horizontally"><span
+class="header-section-number">3.0.4</span> Concatenate PDF Figures
+Horizontally</h3>
+<p>Use <code>pdfjam</code> which is installed by <code>tlmgr</code> in
+the <a href="about:blank#TexLive">TexLive</a> distro. The usage is as
+follows,</p>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pdfjam</span> input_location_discontinuous_crop.pdf input_location_merged_crop.pdf <span class="at">--nup</span> 2x1 <span class="at">--outfile</span> input_location.pdf</span></code></pre></div>
+<h1 data-number="4" id="hpc"><span
+class="header-section-number">4</span> HPC</h1>
+<h2 data-number="4.1" id="slurm"><span
+class="header-section-number">4.1</span> slurm</h2>
+<h3 data-number="4.1.1" id="find-where-the-job-is-submitted"><span
+class="header-section-number">4.1.1</span> Find where the job is
+submitted</h3>
 <pre><code>$ scontrol show job 1665191
     JobId=1665191 Name=tasktest
     ...

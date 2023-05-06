@@ -5,199 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2020-08-23" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>无量纲化流动变量</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -206,43 +19,92 @@ footer {
 <h3 class="date">2020-08-23</h3>
 <div id="TOC">
 <ul>
-<li><a href="#参考"><span class="toc-section-number">1</span> 参考</a></li>
-<li><a href="#解释"><span class="toc-section-number">2</span> 解释</a></li>
+<li><a href="#参考" id="toc-参考"><span
+class="toc-section-number">1</span> 参考</a></li>
+<li><a href="#解释" id="toc-解释"><span
+class="toc-section-number">2</span> 解释</a></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="参考"><span class="header-section-number">1</span> 参考</h1>
+<h1 data-number="1" id="参考"><span
+class="header-section-number">1</span> 参考</h1>
 <ol type="1">
-<li>[DMCFD] Direct Modeling for Computational Fluid Dynamics - Construction and Application of Unified Gas-Kinetic Schemes. Appendix A: Non-dimensionalizing Fluid Dynamic Variables. By Prof. Kun Xu. This is <a href="Xu_2015DMCFD_AppendixANon-dimensionalizingFluidDynamicVariables.pdf">a copy</a>.</li>
-<li>[FoA] Fundamentals of Aerodynamics 6th Edition, by John David Anderson.</li>
+<li>[DMCFD] Direct Modeling for Computational Fluid Dynamics -
+Construction and Application of Unified Gas-Kinetic Schemes. Appendix A:
+Non-dimensionalizing Fluid Dynamic Variables. By Prof. Kun Xu. This is
+<a
+href="Xu_2015DMCFD_AppendixANon-dimensionalizingFluidDynamicVariables.pdf">a
+copy</a>.</li>
+<li>[FoA] Fundamentals of Aerodynamics 6th Edition, by John David
+Anderson.</li>
 </ol>
-<h1 data-number="2" id="解释"><span class="header-section-number">2</span> 解释</h1>
+<h1 data-number="2" id="解释"><span
+class="header-section-number">2</span> 解释</h1>
 <p>首先要明确无量纲化的目的。DMCFD中专门澄清了这一点。</p>
 <blockquote>
-<p>Non-dimensionalization is not to make the physical quantity be dimensionless, but to take an appropriate unit system, where the equations related to the flow problem can be described conveniently.</p>
+<p>Non-dimensionalization is not to make the physical quantity be
+dimensionless, but to take an appropriate unit system, where the
+equations related to the flow problem can be described conveniently.</p>
 </blockquote>
 <p>也就是说，无量纲化的目的是转换单位系统，以更好的描述流动问题。</p>
 <p>还要明确一个事实，以下摘录来自FoA。</p>
 <blockquote>
-<p>In mechanics, all physical variables can be expressed in terms of the dimensions of mass, length, and time.</p>
+<p>In mechanics, all physical variables can be expressed in terms of the
+dimensions of mass, length, and time.</p>
 </blockquote>
 <blockquote>
-<p>Following the Buckingham pi theorem, the fundamental dimensions are 1) m = dimensions of mass 2) l = dimension of length 3) t = dimension of time</p>
+<p>Following the Buckingham pi theorem, the fundamental dimensions are
+1) m = dimensions of mass 2) l = dimension of length 3) t = dimension of
+time</p>
 </blockquote>
 <blockquote>
-<p>For mechanical problems that also involve thermodynamics and heat transfer, the temperature, specific heat, and thermal conductivity of the fiuid, as well as the temperature of the body surface (wall temperature), must be added to the list of physical variables, and the unit of temperature (say, kelvin or degree Rankine) must be added to the list of fundamental dimensions.</p>
+<p>For mechanical problems that also involve thermodynamics and heat
+transfer, the temperature, specific heat, and thermal conductivity of
+the fiuid, as well as the temperature of the body surface (wall
+temperature), must be added to the list of physical variables, and the
+unit of temperature (say, kelvin or degree Rankine) must be added to the
+list of fundamental dimensions.</p>
 </blockquote>
 <p>航空流动问题常常采用：长度、时间、质量作为基准度量单位。涉及热问题，还要包括温度。</p>
-<p>关于自然界为什么只有三个基本量，也许可以从<a href="https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units">2019 redefinition of the SI base units</a>中SI系统图看出原因。</p>
+<p>关于自然界为什么只有三个基本量，也许可以从<a
+href="https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units">2019
+redefinition of the SI base units</a>中SI系统图看出原因。</p>
 <figure>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Unit_relations_in_the_new_SI.svg/300px-Unit_relations_in_the_new_SI.svg.png" alt="The SI system after the 2019 redefinition: Dependence of base unit definitions on physical constants with fixed numerical values and on other base units." /><figcaption aria-hidden="true">The SI system after the 2019 redefinition: Dependence of base unit definitions on physical constants with fixed numerical values and on other base units.</figcaption>
+<img
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Unit_relations_in_the_new_SI.svg/300px-Unit_relations_in_the_new_SI.svg.png"
+alt="The SI system after the 2019 redefinition: Dependence of base unit definitions on physical constants with fixed numerical values and on other base units." />
+<figcaption aria-hidden="true">The SI system after the 2019
+redefinition: Dependence of base unit definitions on physical constants
+with fixed numerical values and on other base units.</figcaption>
 </figure>
 <p>那么，在3个基本量的前提下，考虑两套单位系统，来解释。。。</p>
-<p>第一套单位系统<span class="math inline">\((l_{0},t_{0},m_{0})\)</span>，<span class="math inline">\(l_{0}=1m\)</span>；第二套单位系统<span class="math inline">\((l_{1},t_{1},m_{1})\)</span>，<span class="math inline">\(l_{1}=1mm\)</span>. 在两个单位系统下，一个物理量包括两部分：单位、数值。 一个物体长度10m，则它在第一个单位系统下表示为<span class="math inline">\(x(l_{0})=10\)</span>，而第二个单位系统下表示为<span class="math inline">\(x_{\star}(l_{1})=10000\)</span>。两者表示的是同一个物理量：<span class="math inline">\(x(l_{0}) = x_{\star}(l_{1})\)</span>。</p>
-<p>我们常用的单位系统是<span class="math inline">\((l_{0}=1m,t_{0}=1s,m_{0}=1kg)\)</span>。为了方便研究流动系统，甚至研究多相流系统，我们希望使用另一套单位系统来描述流动变量。 对于三个常用的流动变量：密度、速度、长度。 流动工况会给定<span class="math inline">\(\rho_{\infty}, u_{\infty}, l_{\infty}\)</span>，这是在<span class="math inline">\(0\)</span>号单位系统下的物理量数值。在我们新的<span class="math inline">\(1\)</span>号单位系统下，这三个物理量的符号定义为<span class="math inline">\(\hat{\rho}, \hat{u}, \hat{l}\)</span>。为了定义<span class="math inline">\(1\)</span>号单位系统，给定的限制条件是让<span class="math inline">\(\hat{\rho}=1, \hat{u}=1, \hat{l}=1\)</span>。这是我们通常想要的性质。 那么两个单位系统下的转换关系如下</p>
+<p>第一套单位系统<span
+class="math inline">\((l_{0},t_{0},m_{0})\)</span>，<span
+class="math inline">\(l_{0}=1m\)</span>；第二套单位系统<span
+class="math inline">\((l_{1},t_{1},m_{1})\)</span>，<span
+class="math inline">\(l_{1}=1mm\)</span>.
+在两个单位系统下，一个物理量包括两部分：单位、数值。
+一个物体长度10m，则它在第一个单位系统下表示为<span
+class="math inline">\(x(l_{0})=10\)</span>，而第二个单位系统下表示为<span
+class="math inline">\(x_{\star}(l_{1})=10000\)</span>。两者表示的是同一个物理量：<span
+class="math inline">\(x(l_{0}) = x_{\star}(l_{1})\)</span>。</p>
+<p>我们常用的单位系统是<span
+class="math inline">\((l_{0}=1m,t_{0}=1s,m_{0}=1kg)\)</span>。为了方便研究流动系统，甚至研究多相流系统，我们希望使用另一套单位系统来描述流动变量。
+对于三个常用的流动变量：密度、速度、长度。 流动工况会给定<span
+class="math inline">\(\rho_{\infty}, u_{\infty},
+l_{\infty}\)</span>，这是在<span
+class="math inline">\(0\)</span>号单位系统下的物理量数值。在我们新的<span
+class="math inline">\(1\)</span>号单位系统下，这三个物理量的符号定义为<span
+class="math inline">\(\hat{\rho}, \hat{u},
+\hat{l}\)</span>。为了定义<span
+class="math inline">\(1\)</span>号单位系统，给定的限制条件是让<span
+class="math inline">\(\hat{\rho}=1, \hat{u}=1,
+\hat{l}=1\)</span>。这是我们通常想要的性质。
+那么两个单位系统下的转换关系如下</p>
 <p><span class="math display">\[
 \begin{aligned}
-\rho_{\infty} (\frac{m_{0}}{l^{3}_{0}}) &amp;= \hat{\rho} (\frac{m_{1}}{l^{3}_{1}}) \\
+\rho_{\infty} (\frac{m_{0}}{l^{3}_{0}}) &amp;= \hat{\rho}
+(\frac{m_{1}}{l^{3}_{1}}) \\
 u_{\infty} (\frac{l_{0}}{t_{0}}) &amp;= \hat{u} (\frac{l_{1}}{t_{1}}) \\
 l_{\infty} (l_{0}) &amp;= \hat{l} (l_{1}) \\
 \end{aligned}
@@ -255,10 +117,16 @@ t_{1} &amp;= t_{0} \frac{l_{\infty}}{u_{\infty}} \\
 m_{1} &amp;= m_{0} \rho_{\infty} l^{3}_{\infty} \\
 \end{aligned}
 \]</span></p>
-<p>那么<span class="math inline">\(1\)</span>号单位系统下物理量的数值<span class="math inline">\(\rho_{\star}, u_{\star}, l_{\star}\)</span>就可以基于<span class="math inline">\(0\)</span>号单位系统下的物理量数值<span class="math inline">\(\rho, u, l\)</span>计算如下</p>
+<p>那么<span
+class="math inline">\(1\)</span>号单位系统下物理量的数值<span
+class="math inline">\(\rho_{\star}, u_{\star},
+l_{\star}\)</span>就可以基于<span
+class="math inline">\(0\)</span>号单位系统下的物理量数值<span
+class="math inline">\(\rho, u, l\)</span>计算如下</p>
 <p><span class="math display">\[
 \begin{aligned}
-\rho (\frac{m_{0}}{l^{3}_{0}}) &amp;= \rho_{\star} (\frac{m_{1}}{l^{3}_{1}}) \\
+\rho (\frac{m_{0}}{l^{3}_{0}}) &amp;= \rho_{\star}
+(\frac{m_{1}}{l^{3}_{1}}) \\
 u (\frac{l_{0}}{t_{0}}) &amp;= u_{\star} (\frac{l_{1}}{t_{1}}) \\
 l (l_{0}) &amp;= l_{\star} (l_{1}) \\
 \end{aligned}
@@ -272,25 +140,37 @@ l_{\star} &amp;= l \frac{1}{l_{\infty}} \\
 <p>其他物理量也可以使用类似方式转换。 压强、动力粘度示例如下</p>
 <p><span class="math display">\[
 \begin{aligned}
-p\left(\frac{m_{0}}{l_{0} t_{0}^{2}}\right) &amp;= p_{*}\left(\frac{m_{1}}{l_{1} t_{1}^{2}}\right) \\
-\mu\left(\frac{m_{0}}{l_{0} t_{0}}\right) &amp;= \mu_{*}\left(\frac{m_{1}}{l_{1} t_{1}}\right) \\
+p\left(\frac{m_{0}}{l_{0} t_{0}^{2}}\right) &amp;=
+p_{*}\left(\frac{m_{1}}{l_{1} t_{1}^{2}}\right) \\
+\mu\left(\frac{m_{0}}{l_{0} t_{0}}\right) &amp;=
+\mu_{*}\left(\frac{m_{1}}{l_{1} t_{1}}\right) \\
 \end{aligned}
 \rightarrow
 \begin{aligned}
 p_{*} &amp;= \frac{p}{\rho_{\infty} u_{\infty}^{2}} \\
-\mu_{*} &amp;= \frac{\mu}{\rho_{\infty} l_{\infty} u_{\infty}} = \frac{1}{\text{Re}} \frac{\mu}{\mu_{\infty}} \\
-\text{Re} &amp;= \frac{\rho_{\infty} u_{\infty} l_{\infty}}{\mu_{\infty}} \\
+\mu_{*} &amp;= \frac{\mu}{\rho_{\infty} l_{\infty} u_{\infty}} =
+\frac{1}{\text{Re}} \frac{\mu}{\mu_{\infty}} \\
+\text{Re} &amp;= \frac{\rho_{\infty} u_{\infty}
+l_{\infty}}{\mu_{\infty}} \\
 \end{aligned}
 \]</span></p>
-<p>考虑热问题的情况下，再引入一个独立变量：温度<span class="math inline">\(T_{0}\)</span>。但其实在原本的3个独立变量的单位系统下，可以完整描述物理量，只不过比较麻烦。引入温度是为了方便。 DMCFD中原文如下</p>
+<p>考虑热问题的情况下，再引入一个独立变量：温度<span
+class="math inline">\(T_{0}\)</span>。但其实在原本的3个独立变量的单位系统下，可以完整描述物理量，只不过比较麻烦。引入温度是为了方便。
+DMCFD中原文如下</p>
 <blockquote>
-<p>Theoretically, there are only three independent units for a fluid dynamic system. Under this unit system, the molecular energy, which is a variable in a microscopic scale, can be expressed as a value on the order of 10^{−23} in the units of meter, second, and kilogram. Therefore, for the convenience purpose, a new unit temperature is introduced.</p>
+<p>Theoretically, there are only three independent units for a fluid
+dynamic system. Under this unit system, the molecular energy, which is a
+variable in a microscopic scale, can be expressed as a value on the
+order of 10^{−23} in the units of meter, second, and kilogram.
+Therefore, for the convenience purpose, a new unit temperature is
+introduced.</p>
 </blockquote>
 <p>引入温度的关系式如下</p>
 <p><span class="math display">\[
 \frac{m_{0} l^{2}_{0}}{t^{2}_{0}} = k T_{0}
 \]</span></p>
-<p><span class="math inline">\(k\)</span>是一个引入的常数，即Boltzmann常数。</p>
+<p><span
+class="math inline">\(k\)</span>是一个引入的常数，即Boltzmann常数。</p>
 <p>对温度采用之前相同的套路转换不同单位系统下的物理量数值。</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -303,11 +183,14 @@ T_{1} &amp;= T_{\infty} (T_{0}) \\
 T_{\star} &amp;= T \frac{1}{T_{\infty}} \\
 \end{aligned}
 \]</span></p>
-<p>注意，两个单位系统下的物理量转换也包括所定义常数的数值的转化。根据Boltzmann常数也可以定义气体常数<span class="math inline">\(R\)</span>。气体常数在两个单位系统下的转换如下</p>
+<p>注意，两个单位系统下的物理量转换也包括所定义常数的数值的转化。根据Boltzmann常数也可以定义气体常数<span
+class="math inline">\(R\)</span>。气体常数在两个单位系统下的转换如下</p>
 <p><span class="math display">\[
 \begin{aligned}
-R T_{\infty}\left(\frac{l_{0}^{2}}{t_{0}^{2}}\right) &amp;= R_{\star} T_{\star} \left(\frac{l_{1}^{2}}{t_{1}^{2}}\right) \\
-R_{\star} &amp;= R T_{\infty} \frac{l^{2}_{0}}{t^{2}_{0}} \frac{t^{2}_{1}}{l^{2}_{1}} \\
+R T_{\infty}\left(\frac{l_{0}^{2}}{t_{0}^{2}}\right) &amp;= R_{\star}
+T_{\star} \left(\frac{l_{1}^{2}}{t_{1}^{2}}\right) \\
+R_{\star} &amp;= R T_{\infty} \frac{l^{2}_{0}}{t^{2}_{0}}
+\frac{t^{2}_{1}}{l^{2}_{1}} \\
           &amp;= \frac{R T_{\infty}}{u^{2}_{\infty}} \\
           &amp;= \frac{1}{\gamma M^{2}_{\infty}} \\
 M_{\infty} &amp;= \frac{u_{\infty}}{\sqrt{\gamma R T_{\infty}}} \\
@@ -316,11 +199,15 @@ M_{\infty} &amp;= \frac{u_{\infty}}{\sqrt{\gamma R T_{\infty}}} \\
 <p>热传导系数也可以进行转换，只不过现在可以直接根据以上物理量组合得到。</p>
 <p><span class="math display">\[
 \begin{aligned}
-\kappa &amp;= \frac{\mu C_{p}}{\text{Pr}} = \frac{\mu}{\text{Pr}} \frac{\gamma}{\gamma-1} R \\
-\kappa_{\star} &amp;= \frac{\mu_{\star}}{\text{Pr}} \frac{\gamma}{\gamma-1} R_{\star} = \frac{\mu}{\mu_{\infty}} \frac{1}{(\gamma-1) \text{Pr} \text{Re} M_{\infty}^{2}} \\
+\kappa &amp;= \frac{\mu C_{p}}{\text{Pr}} = \frac{\mu}{\text{Pr}}
+\frac{\gamma}{\gamma-1} R \\
+\kappa_{\star} &amp;= \frac{\mu_{\star}}{\text{Pr}}
+\frac{\gamma}{\gamma-1} R_{\star} = \frac{\mu}{\mu_{\infty}}
+\frac{1}{(\gamma-1) \text{Pr} \text{Re} M_{\infty}^{2}} \\
 \end{aligned}
 \]</span></p>
-<p>注意<span class="math inline">\(\text{Pr}, \gamma\)</span>并没有转换。</p>
+<p>注意<span class="math inline">\(\text{Pr},
+\gamma\)</span>并没有转换。</p>
 </div>
 <div class="customHr">.</div>
 <footer>

@@ -5,199 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-04-23" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>High Performance Computing</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -206,52 +19,135 @@ footer {
 <h3 class="date">2021-04-23</h3>
 <div id="TOC">
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#performance"><span class="toc-section-number">1.1</span> Performance</a>
+<li><a href="#performance" id="toc-performance"><span
+class="toc-section-number">1.1</span> Performance</a>
 <ul>
-<li><a href="#scalability"><span class="toc-section-number">1.1.1</span> Scalability</a></li>
+<li><a href="#scalability" id="toc-scalability"><span
+class="toc-section-number">1.1.1</span> Scalability</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#network"><span class="toc-section-number">2</span> Network</a></li>
+<li><a href="#network" id="toc-network"><span
+class="toc-section-number">2</span> Network</a></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
-<h2 data-number="1.1" id="performance"><span class="header-section-number">1.1</span> Performance</h2>
-<h3 data-number="1.1.1" id="scalability"><span class="header-section-number">1.1.1</span> Scalability</h3>
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="performance"><span
+class="header-section-number">1.1</span> Performance</h2>
+<h3 data-number="1.1.1" id="scalability"><span
+class="header-section-number">1.1.1</span> Scalability</h3>
 <p>In summary,</p>
 <ul>
-<li>Strong scaling concerns the speedup for a fixed problem size with respect to the number of processors, and is governed by Amdahl’s law.</li>
-<li>Weak scaling concerns the speedup for a scaled problem size with respect to the number of processors, and is governed by Gustafson’s law.</li>
+<li>Strong scaling concerns the speedup for a fixed problem size with
+respect to the number of processors, and is governed by Amdahl’s
+law.</li>
+<li>Weak scaling concerns the speedup for a scaled problem size with
+respect to the number of processors, and is governed by Gustafson’s
+law.</li>
 </ul>
-<p>Reference: <a href="https://www.kth.se/blogs/pdc/2018/11/scalability-strong-and-weak-scaling/">Scalability: strong and weak scaling</a></p>
-<h1 data-number="2" id="network"><span class="header-section-number">2</span> Network</h1>
+<p>Reference: <a
+href="https://www.kth.se/blogs/pdc/2018/11/scalability-strong-and-weak-scaling/">Scalability:
+strong and weak scaling</a></p>
+<h1 data-number="2" id="network"><span
+class="header-section-number">2</span> Network</h1>
 <p>In HPC, the network model is MPI-libfabrics-NIC.</p>
-<p><img src="https://ofiwg.github.io/libfabric/images/openfabric-interfaces-overview.png" /></p>
-<p>OpenFabrics Interfaces (OFI) is a framework focused on exporting fabric communication services to applications. Libfabric is a core component of OFI.</p>
+<p><img
+src="https://ofiwg.github.io/libfabric/images/openfabric-interfaces-overview.png" /></p>
+<p>OpenFabrics Interfaces (OFI) is a framework focused on exporting
+fabric communication services to applications. Libfabric is a core
+component of OFI.</p>
 <p>OpenFabrics Enterprise Distribution (OFED).</p>
-<p>Mellanox OFED (MOFED) is Mellanox’s implementation of the OFED libraries and kernel modules.</p>
-<p>InfiniBand refers to two distinct things. The first is a physical link-layer protocol for InfiniBand networks. The second is a higher level programming API called the InfiniBand Verbs API. The InfiniBand Verbs API is an implementation of a remote direct memory access (RDMA) technology.</p>
-<p>Reference: <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-configure_infiniband_and_rdma_networks">CHAPTER 13. CONFIGURE INFINIBAND AND RDMA NETWORKS</a> Libfabric supports a variety of high-performance fabrics and networking hardware. It will run over standard TCP and UDP networks, high performance fabrics such as Omni-Path Architecture, InfiniBand, Cray GNI, Blue Gene Architecture, iWarp RDMA Ethernet, RDMA over Converged Ethernet (RoCE).</p>
-<p>IB is high-performance because of no kernel involvement (hence, user-level) for operations that involve transmission/reception of data, unlike TCP/IP. The kernel is involved only in the creation of resources used for issuing data transmission/reception. Additionally, unlike TCP/IP, the InfiniBand interface permits RDMA operations (remote reads, writes, atomics, etc.).</p>
-<p><code>libibverbs</code> is the software component (Verbs API) of the IB interface. As <code>sockets</code> is to TCP/IP, <code>libibverbs</code> is to IB.</p>
-<p>The hardware component of IB is where different vendors come into play. The IB interface is abstract; hence, multiple vendors can have different implementations of the IB specification.</p>
-<p>Mellanox Technologies has been an active, prominent InfiniBand hardware vendor. In addition to meeting the IB hardware specifications in the NIC design, the vendors have to support the <code>libibverbs</code> API by providing a user-space driver and a kernel-space driver that actually do the work (of setting up resources on the NIC) when a <code>libibverbs</code> function such as <code>ibv_open_device</code> is called. These vendor-specific libraries and kernel modules are a standard part of the OFED. The vendor-specific user-space libraries are called providers in rdma-core. Mellanox OFED (MOFED) is Mellanox’s implementation of the OFED libraries and kernel modules. MOFED contains certain optimizations that are targeted towards Mellanox hardware (the mlx4 and mlx5 providers) but haven’t been incorporated into OFED yet.</p>
-<p>Alongside InfiniBand, several other user-level networking interfaces exist. Typically they are proprietary and vendor-specific. Cray has the uGNI interface, Intel Omni-Path has PSM2, Cisco usNIC, etc. The underlying concepts (message queues, completion queues, registered memory, etc.) between the different interfaces are similar with certain differences in capabilities and semantics. The Open Fabrics Interface (OFI) intends to unify all of the available interfaces by providing an abstract API: <code>libfabric</code>. Each vendor will then support the OFI through its <code>libfabric-provider</code> that will call corresponding functions in its own interface. <code>libfabric</code> is fairly recent API and intends to serve a level of abstraction higher than that of <code>libibverbs</code>.</p>
-<p>Reference: <a href="https://www.rohitzambre.com/blog/tag/What+is+libfabric">For the RDMA novice: libfabric, libibverbs, InfiniBand, OFED, MOFED?</a></p>
-<p><a href="https://www.stackhpc.com/intel-mpi-fabric.html">Fabric control in Intel MPI</a> reports that Intel MPI 2019 has issues with AMD processors. This is confirmed by Intel.</p>
-<p><code>/etc/security/limits.conf</code> and <code>/etc/security/limits.d/20-nproc.conf</code> sets the limit of processes.</p>
-<p><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi">Set up Message Passing Interface for HPC</a> gives some commands for running MPI.</p>
-<p>Unified Communication X (UCX) is a framework of communication APIs for HPC. It is optimized for MPI communication over InfiniBand and works with many MPI implementations such as OpenMPI and MPICH.</p>
-<p>For now, I still cannot understand what UCX is. Check <a href="http://openucx.github.io/ucx/faq.html">UCX FAQ</a></p>
+<p>Mellanox OFED (MOFED) is Mellanox’s implementation of the OFED
+libraries and kernel modules.</p>
+<p>InfiniBand refers to two distinct things. The first is a physical
+link-layer protocol for InfiniBand networks. The second is a higher
+level programming API called the InfiniBand Verbs API. The InfiniBand
+Verbs API is an implementation of a remote direct memory access (RDMA)
+technology.</p>
+<p>Reference: <a
+href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/ch-configure_infiniband_and_rdma_networks">CHAPTER
+13. CONFIGURE INFINIBAND AND RDMA NETWORKS</a> Libfabric supports a
+variety of high-performance fabrics and networking hardware. It will run
+over standard TCP and UDP networks, high performance fabrics such as
+Omni-Path Architecture, InfiniBand, Cray GNI, Blue Gene Architecture,
+iWarp RDMA Ethernet, RDMA over Converged Ethernet (RoCE).</p>
+<p>IB is high-performance because of no kernel involvement (hence,
+user-level) for operations that involve transmission/reception of data,
+unlike TCP/IP. The kernel is involved only in the creation of resources
+used for issuing data transmission/reception. Additionally, unlike
+TCP/IP, the InfiniBand interface permits RDMA operations (remote reads,
+writes, atomics, etc.).</p>
+<p><code>libibverbs</code> is the software component (Verbs API) of the
+IB interface. As <code>sockets</code> is to TCP/IP,
+<code>libibverbs</code> is to IB.</p>
+<p>The hardware component of IB is where different vendors come into
+play. The IB interface is abstract; hence, multiple vendors can have
+different implementations of the IB specification.</p>
+<p>Mellanox Technologies has been an active, prominent InfiniBand
+hardware vendor. In addition to meeting the IB hardware specifications
+in the NIC design, the vendors have to support the
+<code>libibverbs</code> API by providing a user-space driver and a
+kernel-space driver that actually do the work (of setting up resources
+on the NIC) when a <code>libibverbs</code> function such as
+<code>ibv_open_device</code> is called. These vendor-specific libraries
+and kernel modules are a standard part of the OFED. The vendor-specific
+user-space libraries are called providers in rdma-core. Mellanox OFED
+(MOFED) is Mellanox’s implementation of the OFED libraries and kernel
+modules. MOFED contains certain optimizations that are targeted towards
+Mellanox hardware (the mlx4 and mlx5 providers) but haven’t been
+incorporated into OFED yet.</p>
+<p>Alongside InfiniBand, several other user-level networking interfaces
+exist. Typically they are proprietary and vendor-specific. Cray has the
+uGNI interface, Intel Omni-Path has PSM2, Cisco usNIC, etc. The
+underlying concepts (message queues, completion queues, registered
+memory, etc.) between the different interfaces are similar with certain
+differences in capabilities and semantics. The Open Fabrics Interface
+(OFI) intends to unify all of the available interfaces by providing an
+abstract API: <code>libfabric</code>. Each vendor will then support the
+OFI through its <code>libfabric-provider</code> that will call
+corresponding functions in its own interface. <code>libfabric</code> is
+fairly recent API and intends to serve a level of abstraction higher
+than that of <code>libibverbs</code>.</p>
+<p>Reference: <a
+href="https://www.rohitzambre.com/blog/tag/What+is+libfabric">For the
+RDMA novice: libfabric, libibverbs, InfiniBand, OFED, MOFED?</a></p>
+<p><a href="https://www.stackhpc.com/intel-mpi-fabric.html">Fabric
+control in Intel MPI</a> reports that Intel MPI 2019 has issues with AMD
+processors. This is confirmed by Intel.</p>
+<p><code>/etc/security/limits.conf</code> and
+<code>/etc/security/limits.d/20-nproc.conf</code> sets the limit of
+processes.</p>
+<p><a
+href="https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi">Set
+up Message Passing Interface for HPC</a> gives some commands for running
+MPI.</p>
+<p>Unified Communication X (UCX) is a framework of communication APIs
+for HPC. It is optimized for MPI communication over InfiniBand and works
+with many MPI implementations such as OpenMPI and MPICH.</p>
+<p>For now, I still cannot understand what UCX is. Check <a
+href="http://openucx.github.io/ucx/faq.html">UCX FAQ</a></p>
 <p>Some relevant issues on the Intel forum:</p>
 <ul>
-<li><p><a href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/MPI-IRECV-sporadically-hangs-for-Intel-2019-2020-but-not-Intel/m-p/1226324">MPI_IRECV sporadically hangs for Intel 2019/2020 but not Intel 2018</a></p></li>
-<li><p><a href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/Intel-MPI-update-7-on-Mellanox-IB-causes-mpi-processes-to-hang/m-p/1154097">Intel MPI update 7 on Mellanox IB causes mpi processes to hang</a></p></li>
-<li><p><a href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/Intel-MPI-RC-transport-hangs/m-p/1258463">Intel MPI RC transport hangs</a></p></li>
-<li><p><a href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/MPI-myrank-debugging/m-p/1151534">MPI myrank debugging</a> Other Intel articles</p></li>
-<li><p><a href="https://software.intel.com/content/www/us/en/develop/articles/improve-performance-and-stability-with-intel-mpi-library-on-infiniband.html">Improve Performance and Stability with Intel® MPI Library on InfiniBand</a></p></li>
+<li><p><a
+href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/MPI-IRECV-sporadically-hangs-for-Intel-2019-2020-but-not-Intel/m-p/1226324">MPI_IRECV
+sporadically hangs for Intel 2019/2020 but not Intel 2018</a></p></li>
+<li><p><a
+href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/Intel-MPI-update-7-on-Mellanox-IB-causes-mpi-processes-to-hang/m-p/1154097">Intel
+MPI update 7 on Mellanox IB causes mpi processes to hang</a></p></li>
+<li><p><a
+href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/Intel-MPI-RC-transport-hangs/m-p/1258463">Intel
+MPI RC transport hangs</a></p></li>
+<li><p><a
+href="https://community.intel.com/t5/Intel-oneAPI-HPC-Toolkit/MPI-myrank-debugging/m-p/1151534">MPI
+myrank debugging</a> Other Intel articles</p></li>
+<li><p><a
+href="https://software.intel.com/content/www/us/en/develop/articles/improve-performance-and-stability-with-intel-mpi-library-on-infiniband.html">Improve
+Performance and Stability with Intel® MPI Library on
+InfiniBand</a></p></li>
 </ul>
 <p>Check <a href="https://www.open-mpi.org/faq/">OpenMPI FAQ</a></p>
 </div>

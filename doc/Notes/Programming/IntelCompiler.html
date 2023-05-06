@@ -5,199 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-04-28" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>Intel Compiler</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -206,82 +19,142 @@ footer {
 <h3 class="date">2021-04-28</h3>
 <div id="TOC">
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#compilation-and-linking"><span class="toc-section-number">1.1</span> Compilation and linking</a>
+<li><a href="#compilation-and-linking"
+id="toc-compilation-and-linking"><span
+class="toc-section-number">1.1</span> Compilation and linking</a>
 <ul>
-<li><a href="#create-static-library"><span class="toc-section-number">1.1.1</span> Create static library</a></li>
+<li><a href="#create-static-library"
+id="toc-create-static-library"><span
+class="toc-section-number">1.1.1</span> Create static library</a></li>
 </ul></li>
-<li><a href="#syntax"><span class="toc-section-number">1.2</span> Syntax</a>
+<li><a href="#syntax" id="toc-syntax"><span
+class="toc-section-number">1.2</span> Syntax</a>
 <ul>
-<li><a href="#character-arrays-with-varying-component-lengths"><span class="toc-section-number">1.2.1</span> Character arrays with varying component lengths</a></li>
-<li><a href="#array-size0-when-not-allocated"><span class="toc-section-number">1.2.2</span> Array <code>SIZE&gt;0</code> when not allocated</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
-<ul>
-<li><a href="#compiler-configuration"><span class="toc-section-number">2.1</span> Compiler configuration</a>
-<ul>
-<li><a href="#floating-point"><span class="toc-section-number">2.1.1</span> Floating Point</a></li>
-<li><a href="#avx-may-be-better-than-avx2"><span class="toc-section-number">2.1.2</span> <code>AVX</code> may be better than <code>AVX2</code></a></li>
-<li><a href="#optimization-may-give-inaccurate-results"><span class="toc-section-number">2.1.3</span> Optimization may give inaccurate results</a></li>
-<li><a href="#brief-explanation-of-the-optimization-options"><span class="toc-section-number">2.1.4</span> Brief explanation of the optimization options</a></li>
-<li><a href="#m--xhost"><span class="toc-section-number">2.1.5</span> <code>-m, -xHost</code></a></li>
-<li><a href="#recommended-intel-compiler-debugging-options"><span class="toc-section-number">2.1.6</span> Recommended Intel Compiler Debugging Options</a></li>
-</ul></li>
-<li><a href="#installation"><span class="toc-section-number">2.2</span> Installation</a></li>
-<li><a href="#gdb"><span class="toc-section-number">2.3</span> GDB</a>
-<ul>
-<li><a href="#backspace-does-not-work-in-gdb-ia-of-2019-version"><span class="toc-section-number">2.3.1</span> Backspace does not work in <code>gdb-ia</code> of 2019 version</a></li>
-</ul></li>
-<li><a href="#mpi"><span class="toc-section-number">2.4</span> MPI</a>
-<ul>
-<li><a href="#mpi-benchmark-test"><span class="toc-section-number">2.4.1</span> MPI benchmark test</a></li>
+<li><a href="#character-arrays-with-varying-component-lengths"
+id="toc-character-arrays-with-varying-component-lengths"><span
+class="toc-section-number">1.2.1</span> Character arrays with varying
+component lengths</a></li>
+<li><a href="#array-size0-when-not-allocated"
+id="toc-array-size0-when-not-allocated"><span
+class="toc-section-number">1.2.2</span> Array <code>SIZE&gt;0</code>
+when not allocated</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#mkl"><span class="toc-section-number">3</span> MKL</a>
+<li><a href="#advanced" id="toc-advanced"><span
+class="toc-section-number">2</span> Advanced</a>
 <ul>
-<li><a href="#data-fitting"><span class="toc-section-number">3.1</span> Data fitting</a>
+<li><a href="#compiler-configuration"
+id="toc-compiler-configuration"><span
+class="toc-section-number">2.1</span> Compiler configuration</a>
 <ul>
-<li><a href="#cubic-interpolation"><span class="toc-section-number">3.1.1</span> Cubic interpolation</a></li>
+<li><a href="#floating-point" id="toc-floating-point"><span
+class="toc-section-number">2.1.1</span> Floating Point</a></li>
+<li><a href="#avx-may-be-better-than-avx2"
+id="toc-avx-may-be-better-than-avx2"><span
+class="toc-section-number">2.1.2</span> <code>AVX</code> may be better
+than <code>AVX2</code></a></li>
+<li><a href="#optimization-may-give-inaccurate-results"
+id="toc-optimization-may-give-inaccurate-results"><span
+class="toc-section-number">2.1.3</span> Optimization may give inaccurate
+results</a></li>
+<li><a href="#brief-explanation-of-the-optimization-options"
+id="toc-brief-explanation-of-the-optimization-options"><span
+class="toc-section-number">2.1.4</span> Brief explanation of the
+optimization options</a></li>
+<li><a href="#m--xhost" id="toc-m--xhost"><span
+class="toc-section-number">2.1.5</span> <code>-m, -xHost</code></a></li>
+<li><a href="#recommended-intel-compiler-debugging-options"
+id="toc-recommended-intel-compiler-debugging-options"><span
+class="toc-section-number">2.1.6</span> Recommended Intel Compiler
+Debugging Options</a></li>
+</ul></li>
+<li><a href="#installation" id="toc-installation"><span
+class="toc-section-number">2.2</span> Installation</a></li>
+<li><a href="#gdb" id="toc-gdb"><span
+class="toc-section-number">2.3</span> GDB</a>
+<ul>
+<li><a href="#backspace-does-not-work-in-gdb-ia-of-2019-version"
+id="toc-backspace-does-not-work-in-gdb-ia-of-2019-version"><span
+class="toc-section-number">2.3.1</span> Backspace does not work in
+<code>gdb-ia</code> of 2019 version</a></li>
+</ul></li>
+<li><a href="#mpi" id="toc-mpi"><span
+class="toc-section-number">2.4</span> MPI</a>
+<ul>
+<li><a href="#mpi-benchmark-test" id="toc-mpi-benchmark-test"><span
+class="toc-section-number">2.4.1</span> MPI benchmark test</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#vtune"><span class="toc-section-number">4</span> vtune</a>
+<li><a href="#mkl" id="toc-mkl"><span
+class="toc-section-number">3</span> MKL</a>
 <ul>
-<li><a href="#microarchitecture-exploration-analysis"><span class="toc-section-number">4.1</span> Microarchitecture Exploration Analysis</a></li>
+<li><a href="#data-fitting" id="toc-data-fitting"><span
+class="toc-section-number">3.1</span> Data fitting</a>
+<ul>
+<li><a href="#cubic-interpolation" id="toc-cubic-interpolation"><span
+class="toc-section-number">3.1.1</span> Cubic interpolation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#vtune" id="toc-vtune"><span
+class="toc-section-number">4</span> vtune</a>
+<ul>
+<li><a href="#microarchitecture-exploration-analysis"
+id="toc-microarchitecture-exploration-analysis"><span
+class="toc-section-number">4.1</span> Microarchitecture Exploration
+Analysis</a></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
-<h2 data-number="1.1" id="compilation-and-linking"><span class="header-section-number">1.1</span> Compilation and linking</h2>
-<h3 data-number="1.1.1" id="create-static-library"><span class="header-section-number">1.1.1</span> Create static library</h3>
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="compilation-and-linking"><span
+class="header-section-number">1.1</span> Compilation and linking</h2>
+<h3 data-number="1.1.1" id="create-static-library"><span
+class="header-section-number">1.1.1</span> Create static library</h3>
 <ol type="1">
-<li>Use the <code>c</code> option to generate object files from the source files:</li>
+<li>Use the <code>c</code> option to generate object files from the
+source files:</li>
 </ol>
 <pre><code>ifort -c my_source1.f90 my_source2.f90 my_source3.f90</code></pre>
 <ol start="2" type="1">
-<li>Use the Intel® xiar tool to create the library file from the object files:</li>
+<li>Use the Intel® xiar tool to create the library file from the object
+files:</li>
 </ol>
 <pre><code>xiar rc my_lib.a my_source1.o my_source2.o my_source3.o</code></pre>
 <ol start="3" type="1">
 <li>Compile and link your project with your new library:</li>
 </ol>
 <pre><code>ifort main.f90 my_lib.a</code></pre>
-<p><a href="https://software.intel.com/content/www/us/en/develop/documentation/fortran-compiler-developer-guide-and-reference/top/compiler-reference/libraries/creating-static-libraries.html">Reference</a></p>
-<h2 data-number="1.2" id="syntax"><span class="header-section-number">1.2</span> Syntax</h2>
-<h3 data-number="1.2.1" id="character-arrays-with-varying-component-lengths"><span class="header-section-number">1.2.1</span> Character arrays with varying component lengths</h3>
-<p>ifort allows that. However, gfortran does not allow that. For example, the following definition is invalid in gfortran while valid in ifort.</p>
+<p><a
+href="https://software.intel.com/content/www/us/en/develop/documentation/fortran-compiler-developer-guide-and-reference/top/compiler-reference/libraries/creating-static-libraries.html">Reference</a></p>
+<h2 data-number="1.2" id="syntax"><span
+class="header-section-number">1.2</span> Syntax</h2>
+<h3 data-number="1.2.1"
+id="character-arrays-with-varying-component-lengths"><span
+class="header-section-number">1.2.1</span> Character arrays with varying
+component lengths</h3>
+<p>ifort allows that. However, gfortran does not allow that. For
+example, the following definition is invalid in gfortran while valid in
+ifort.</p>
 <pre><code>program test
 character(10), dimension(5) :: models = (/&quot;feddes.swp&quot;, &quot;jarvis89.swp&quot;, &quot;jarvis10.swp&quot; ,   &quot;pem.swp&quot;, &quot;van.swp&quot;/)
 end</code></pre>
 <p>To be valid in gfortran, use the following statement,</p>
 <pre><code>character(len=12), dimension(5) :: models = [character(len=12) :: &quot;feddes.swp&quot;, &amp;
                 &quot;jarvis89.swp&quot;, &quot;jarvis10.swp&quot;, &quot;pem.swp&quot;, &quot;van.swp&quot;]</code></pre>
-<p><a href="https://stackoverflow.com/questions/21552430/gfortran-does-not-allow-character-arrays-with-varying-component-lengths">Reference</a></p>
-<p>Note strings are fixed length. Text that is shorter is padded on right with spaces, while text that is longer is truncated.</p>
-<p><a href="http://www.icl.utk.edu/~mgates3/docs/fortran.html#Strings">Reference</a></p>
-<h3 data-number="1.2.2" id="array-size0-when-not-allocated"><span class="header-section-number">1.2.2</span> Array <code>SIZE&gt;0</code> when not allocated</h3>
+<p><a
+href="https://stackoverflow.com/questions/21552430/gfortran-does-not-allow-character-arrays-with-varying-component-lengths">Reference</a></p>
+<p>Note strings are fixed length. Text that is shorter is padded on
+right with spaces, while text that is longer is truncated.</p>
+<p><a
+href="http://www.icl.utk.edu/~mgates3/docs/fortran.html#Strings">Reference</a></p>
+<h3 data-number="1.2.2" id="array-size0-when-not-allocated"><span
+class="header-section-number">1.2.2</span> Array <code>SIZE&gt;0</code>
+when not allocated</h3>
 <pre><code>program allocator
   double precision, dimension(:), allocatable:: x
   allocate(x(10))
@@ -289,47 +162,126 @@ end</code></pre>
   deallocate(x)
   write(*,*) size(x),allocated(x)  ! &gt;&gt; 10  f
 end program</code></pre>
-<p>The above program is valid. The size is only reliable if the array has been allocated.</p>
-<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
-<h2 data-number="2.1" id="compiler-configuration"><span class="header-section-number">2.1</span> Compiler configuration</h2>
-<h3 data-number="2.1.1" id="floating-point"><span class="header-section-number">2.1.1</span> Floating Point</h3>
-<p><code>fpe</code>: Allows some control over floating-point exception handling for the main program at run-time. <code>-fpe0</code>: abort execution if all exceptions occur. Set in debug mode.</p>
-<h3 data-number="2.1.2" id="avx-may-be-better-than-avx2"><span class="header-section-number">2.1.2</span> <code>AVX</code> may be better than <code>AVX2</code></h3>
-<p><code>AVX2</code> doubles width of integer vector instructions to 256 bits, and adds <code>FMA</code>.</p>
-<p>Reference: <a href="https://community.intel.com/t5/Intel-C-Compiler/Please-verify-that-both-the-operating-system-and-the-processor/m-p/1102367/highlight/true#M32232">Maybe in some cases AVX runs faster on an AVX2 platform</a></p>
-<h3 data-number="2.1.3" id="optimization-may-give-inaccurate-results"><span class="header-section-number">2.1.3</span> Optimization may give inaccurate results</h3>
-<p>O2/O3 optimisation using Intel compiler 2017 update 2 gives different results. It also occurs for NFS. So I change the OPT flags to <code>-O2 -xHost -fp-model precise</code>. <code>-fp-model precise</code> is critical and it does not affect NFS’s performance.</p>
-<p><a href="https://community.intel.com/t5/Intel-C-Compiler/Issue-with-O2-O3-optimisation-using-Intel-compiler-2017-update-2/td-p/1117630">Reference</a></p>
-<h3 data-number="2.1.4" id="brief-explanation-of-the-optimization-options"><span class="header-section-number">2.1.4</span> Brief explanation of the optimization options</h3>
-<p><a href="https://cvw.cac.cornell.edu/CodeOpt/compileroptsspecial">Reference: Code Optimization: Special Compiler Options</a></p>
-<h3 data-number="2.1.5" id="m--xhost"><span class="header-section-number">2.1.5</span> <code>-m, -xHost</code></h3>
-<p><code>-xHost</code> tells the compiler to generate instructions for the highest instruction set available on the compilation host processor. The specialized code generated by this option may only run on a subset of Intel® processors. The <code>-x</code> options enable additional optimizations not enabled with options <code>-m</code>.</p>
-<p><code>-m</code> tells the compiler which features it may target, including which instruction sets it may generate. Code generated with these options should execute on any compatible, non-Intel processor with support for the corresponding instruction set.</p>
-<p>Options <code>-x</code> and <code>-m</code> are mutually exclusive. If both are specified, the compiler uses the last one specified and generates a warning.</p>
-<p>So if you want to run programs on AMD processors, use <code>-mavx</code>.</p>
-<h3 data-number="2.1.6" id="recommended-intel-compiler-debugging-options"><span class="header-section-number">2.1.6</span> Recommended Intel Compiler Debugging Options</h3>
-<p>Check <a href="https://www.nas.nasa.gov/hecc/support/kb/recommended-intel-compiler-debugging-options_92.html">Recommended Intel Compiler Debugging Options</a>. Or check this <a href="RecommendedIntelCompilerDebuggingOptions.pdf">PDF</a>.</p>
-<h2 data-number="2.2" id="installation"><span class="header-section-number">2.2</span> Installation</h2>
-<p>The official installer URL of Intel Parallel Studio XE 2020 is <code>http://registrationcenter-download.intel.com/akdlm/IRC_NAS/tec/16744/parallel_studio_xe_2020_update2_cluster_edition.tgz</code>. This URL is given by <a href="https://aur.archlinux.org/packages/intel-fortran-compiler/">Arch Linux repo webpage for Intel Fortran Compiler</a>. For other versions, check it for updates.</p>
+<p>The above program is valid. The size is only reliable if the array
+has been allocated.</p>
+<h1 data-number="2" id="advanced"><span
+class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="compiler-configuration"><span
+class="header-section-number">2.1</span> Compiler configuration</h2>
+<h3 data-number="2.1.1" id="floating-point"><span
+class="header-section-number">2.1.1</span> Floating Point</h3>
+<p><code>fpe</code>: Allows some control over floating-point exception
+handling for the main program at run-time. <code>-fpe0</code>: abort
+execution if all exceptions occur. Set in debug mode.</p>
+<h3 data-number="2.1.2" id="avx-may-be-better-than-avx2"><span
+class="header-section-number">2.1.2</span> <code>AVX</code> may be
+better than <code>AVX2</code></h3>
+<p><code>AVX2</code> doubles width of integer vector instructions to 256
+bits, and adds <code>FMA</code>.</p>
+<p>Reference: <a
+href="https://community.intel.com/t5/Intel-C-Compiler/Please-verify-that-both-the-operating-system-and-the-processor/m-p/1102367/highlight/true#M32232">Maybe
+in some cases AVX runs faster on an AVX2 platform</a></p>
+<h3 data-number="2.1.3"
+id="optimization-may-give-inaccurate-results"><span
+class="header-section-number">2.1.3</span> Optimization may give
+inaccurate results</h3>
+<p>O2/O3 optimisation using Intel compiler 2017 update 2 gives different
+results. It also occurs for NFS. So I change the OPT flags to
+<code>-O2 -xHost -fp-model precise</code>.
+<code>-fp-model precise</code> is critical and it does not affect NFS’s
+performance.</p>
+<p><a
+href="https://community.intel.com/t5/Intel-C-Compiler/Issue-with-O2-O3-optimisation-using-Intel-compiler-2017-update-2/td-p/1117630">Reference</a></p>
+<h3 data-number="2.1.4"
+id="brief-explanation-of-the-optimization-options"><span
+class="header-section-number">2.1.4</span> Brief explanation of the
+optimization options</h3>
+<p><a
+href="https://cvw.cac.cornell.edu/CodeOpt/compileroptsspecial">Reference:
+Code Optimization: Special Compiler Options</a></p>
+<h3 data-number="2.1.5" id="m--xhost"><span
+class="header-section-number">2.1.5</span> <code>-m, -xHost</code></h3>
+<p><code>-xHost</code> tells the compiler to generate instructions for
+the highest instruction set available on the compilation host processor.
+The specialized code generated by this option may only run on a subset
+of Intel® processors. The <code>-x</code> options enable additional
+optimizations not enabled with options <code>-m</code>.</p>
+<p><code>-m</code> tells the compiler which features it may target,
+including which instruction sets it may generate. Code generated with
+these options should execute on any compatible, non-Intel processor with
+support for the corresponding instruction set.</p>
+<p>Options <code>-x</code> and <code>-m</code> are mutually exclusive.
+If both are specified, the compiler uses the last one specified and
+generates a warning.</p>
+<p>So if you want to run programs on AMD processors, use
+<code>-mavx</code>.</p>
+<h3 data-number="2.1.6"
+id="recommended-intel-compiler-debugging-options"><span
+class="header-section-number">2.1.6</span> Recommended Intel Compiler
+Debugging Options</h3>
+<p>Check <a
+href="https://www.nas.nasa.gov/hecc/support/kb/recommended-intel-compiler-debugging-options_92.html">Recommended
+Intel Compiler Debugging Options</a>. Or check this <a
+href="RecommendedIntelCompilerDebuggingOptions.pdf">PDF</a>.</p>
+<h2 data-number="2.2" id="installation"><span
+class="header-section-number">2.2</span> Installation</h2>
+<p>The official installer URL of Intel Parallel Studio XE 2020 is
+<code>http://registrationcenter-download.intel.com/akdlm/IRC_NAS/tec/16744/parallel_studio_xe_2020_update2_cluster_edition.tgz</code>.
+This URL is given by <a
+href="https://aur.archlinux.org/packages/intel-fortran-compiler/">Arch
+Linux repo webpage for Intel Fortran Compiler</a>. For other versions,
+check it for updates.</p>
 <ul>
-<li><a href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13002/parallel_studio_xe_2018_update3_composer_edition.tgz">Intel 2018 Update 3 Composer Edition: http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13002/parallel_studio_xe_2018_update3_composer_edition.tgz</a></li>
-<li><a href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13112/l_mpi_2018.3.222.tgz">Intel MPI 2018 Update 3: http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13112/l_mpi_2018.3.222.tgz</a></li>
-<li><a href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13005/l_mkl_2018.3.222.tgz">Intel MKL 2018 Update 3: http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13005/l_mkl_2018.3.222.tgz</a></li>
-<li><a href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/14850/parallel_studio_xe_2019_update1_cluster_edition.tgz">Intel 2019.1.144 Cluster Edition: http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/14850/parallel_studio_xe_2019_update1_cluster_edition.tgz</a></li>
-<li><a href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/15809/parallel_studio_xe_2019_update5_cluster_edition.tgz">Intel 2019 Update 5 Cluster Edition: http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/15809/parallel_studio_xe_2019_update5_cluster_edition.tgz</a></li>
+<li><a
+href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13002/parallel_studio_xe_2018_update3_composer_edition.tgz">Intel
+2018 Update 3 Composer Edition:
+http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13002/parallel_studio_xe_2018_update3_composer_edition.tgz</a></li>
+<li><a
+href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13112/l_mpi_2018.3.222.tgz">Intel
+MPI 2018 Update 3:
+http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13112/l_mpi_2018.3.222.tgz</a></li>
+<li><a
+href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13005/l_mkl_2018.3.222.tgz">Intel
+MKL 2018 Update 3:
+http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/13005/l_mkl_2018.3.222.tgz</a></li>
+<li><a
+href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/14850/parallel_studio_xe_2019_update1_cluster_edition.tgz">Intel
+2019.1.144 Cluster Edition:
+http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/14850/parallel_studio_xe_2019_update1_cluster_edition.tgz</a></li>
+<li><a
+href="http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/15809/parallel_studio_xe_2019_update5_cluster_edition.tgz">Intel
+2019 Update 5 Cluster Edition:
+http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/15809/parallel_studio_xe_2019_update5_cluster_edition.tgz</a></li>
 </ul>
-<h2 data-number="2.3" id="gdb"><span class="header-section-number">2.3</span> GDB</h2>
-<h3 data-number="2.3.1" id="backspace-does-not-work-in-gdb-ia-of-2019-version"><span class="header-section-number">2.3.1</span> Backspace does not work in <code>gdb-ia</code> of 2019 version</h3>
-<p>This was a known bug in some of the 2019 versions of our products. Please update your 2019 Intel products to Update 6 to get the fix. Or switch to the 2020 versions if available.</p>
-<p><a href="https://community.intel.com/t5/Intel-System-Bring-Up-Toolkit/backspace-not-working-in-gdb-ia/td-p/1171717">Reference</a>,</p>
-<h2 data-number="2.4" id="mpi"><span class="header-section-number">2.4</span> MPI</h2>
-<h3 data-number="2.4.1" id="mpi-benchmark-test"><span class="header-section-number">2.4.1</span> MPI benchmark test</h3>
-<p><a href="https://software.intel.com/content/www/us/en/develop/documentation/imb-user-guide/top.html">Intel MPI Benchmarks User Guide</a></p>
-<p>For NFS, the most used MPI subroutine should be <code>MPI_isend, MPI_irecv</code>. These 2 subroutines are tested by <code>IMB-MPI1 Exchange</code>.</p>
-<p>With the turbulence generation BC, <code>MPI_bcast</code> is also used heavily. It is tested by <code>IMB-MPI1 Bcast</code>.</p>
-<h1 data-number="3" id="mkl"><span class="header-section-number">3</span> MKL</h1>
-<h2 data-number="3.1" id="data-fitting"><span class="header-section-number">3.1</span> Data fitting</h2>
-<h3 data-number="3.1.1" id="cubic-interpolation"><span class="header-section-number">3.1.1</span> Cubic interpolation</h3>
+<h2 data-number="2.3" id="gdb"><span
+class="header-section-number">2.3</span> GDB</h2>
+<h3 data-number="2.3.1"
+id="backspace-does-not-work-in-gdb-ia-of-2019-version"><span
+class="header-section-number">2.3.1</span> Backspace does not work in
+<code>gdb-ia</code> of 2019 version</h3>
+<p>This was a known bug in some of the 2019 versions of our products.
+Please update your 2019 Intel products to Update 6 to get the fix. Or
+switch to the 2020 versions if available.</p>
+<p><a
+href="https://community.intel.com/t5/Intel-System-Bring-Up-Toolkit/backspace-not-working-in-gdb-ia/td-p/1171717">Reference</a>,</p>
+<h2 data-number="2.4" id="mpi"><span
+class="header-section-number">2.4</span> MPI</h2>
+<h3 data-number="2.4.1" id="mpi-benchmark-test"><span
+class="header-section-number">2.4.1</span> MPI benchmark test</h3>
+<p><a
+href="https://software.intel.com/content/www/us/en/develop/documentation/imb-user-guide/top.html">Intel
+MPI Benchmarks User Guide</a></p>
+<p>For NFS, the most used MPI subroutine should be
+<code>MPI_isend, MPI_irecv</code>. These 2 subroutines are tested by
+<code>IMB-MPI1 Exchange</code>.</p>
+<p>With the turbulence generation BC, <code>MPI_bcast</code> is also
+used heavily. It is tested by <code>IMB-MPI1 Bcast</code>.</p>
+<h1 data-number="3" id="mkl"><span
+class="header-section-number">3</span> MKL</h1>
+<h2 data-number="3.1" id="data-fitting"><span
+class="header-section-number">3.1</span> Data fitting</h2>
+<h3 data-number="3.1.1" id="cubic-interpolation"><span
+class="header-section-number">3.1.1</span> Cubic interpolation</h3>
 <p>Example.</p>
 <p>Main program file</p>
 <pre><code>include &#39;mkl_df.f90&#39;
@@ -412,11 +364,18 @@ end program</code></pre>
    1.95312500000000        8.00000000000000        34.3281250000000 
    125.000000000000        381.078125000000        1000.00000000000 
    2326.20312500000</code></pre>
-<h1 data-number="4" id="vtune"><span class="header-section-number">4</span> vtune</h1>
-<h2 data-number="4.1" id="microarchitecture-exploration-analysis"><span class="header-section-number">4.1</span> Microarchitecture Exploration Analysis</h2>
+<h1 data-number="4" id="vtune"><span
+class="header-section-number">4</span> vtune</h1>
+<h2 data-number="4.1" id="microarchitecture-exploration-analysis"><span
+class="header-section-number">4.1</span> Microarchitecture Exploration
+Analysis</h2>
 <p>Use this type of analysis to check the instructions retired.</p>
-<p><img src="https://software.intel.com/content/dam/dita/develop/vtune-help-dec4-try2/F878B436-D108-4D99-99CB-855AF8CF531F.gif/_jcr_content/renditions/original" /></p>
-<p>It requires the hardware event-based sampling collection. To enable it, you need to build and install the sampling driver. Check <a href="https://software.intel.com/content/www/us/en/develop/documentation/vtune-help/top/set-up-analysis-target/linux-targets/building-and-installing-the-sampling-drivers-for-linux-targets.html">this Intel official webpage</a> for reference.</p>
+<p><img
+src="https://software.intel.com/content/dam/dita/develop/vtune-help-dec4-try2/F878B436-D108-4D99-99CB-855AF8CF531F.gif/_jcr_content/renditions/original" /></p>
+<p>It requires the hardware event-based sampling collection. To enable
+it, you need to build and install the sampling driver. Check <a
+href="https://software.intel.com/content/www/us/en/develop/documentation/vtune-help/top/set-up-analysis-target/linux-targets/building-and-installing-the-sampling-drivers-for-linux-targets.html">this
+Intel official webpage</a> for reference.</p>
 </div>
 <div class="customHr">.</div>
 <footer>

@@ -5,199 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-04-28" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>GNU Compiler</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -206,45 +19,123 @@ footer {
 <h3 class="date">2021-04-28</h3>
 <div id="TOC">
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#compiler-options"><span class="toc-section-number">1.1</span> Compiler options</a>
+<li><a href="#gcc中-l--l和-i参数的解释"
+id="toc-gcc中-l--l和-i参数的解释"><span
+class="toc-section-number">1.1</span> GCC中-l, -L和-I参数的解释</a>
 <ul>
-<li><a href="#wl-rpath."><span class="toc-section-number">1.1.1</span> <code>-Wl,-rpath,.</code></a></li>
-<li><a href="#ld_library_path-and-ldflags"><span class="toc-section-number">1.1.2</span> <code>LD_LIBRARY_PATH</code> and <code>LDFLAGS</code></a></li>
+<li><a href="#编译过程" id="toc-编译过程"><span
+class="toc-section-number">1.1.1</span> 编译过程</a></li>
+<li><a href="#预处理中包含头文件" id="toc-预处理中包含头文件"><span
+class="toc-section-number">1.1.2</span> 预处理中包含头文件</a></li>
+<li><a href="#链接库" id="toc-链接库"><span
+class="toc-section-number">1.1.3</span> 链接库</a></li>
+</ul></li>
+<li><a href="#compiler-options" id="toc-compiler-options"><span
+class="toc-section-number">1.2</span> Compiler options</a>
+<ul>
+<li><a href="#wl-rpath." id="toc-wl-rpath."><span
+class="toc-section-number">1.2.1</span>
+<code>-Wl,-rpath,.</code></a></li>
+<li><a href="#ld_library_path-and-ldflags"
+id="toc-ld_library_path-and-ldflags"><span
+class="toc-section-number">1.2.2</span> <code>LD_LIBRARY_PATH</code> and
+<code>LDFLAGS</code></a></li>
 </ul></li>
 </ul></li>
-<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<li><a href="#advanced" id="toc-advanced"><span
+class="toc-section-number">2</span> Advanced</a>
 <ul>
-<li><a href="#floating-operation"><span class="toc-section-number">2.1</span> Floating operation</a>
+<li><a href="#floating-operation" id="toc-floating-operation"><span
+class="toc-section-number">2.1</span> Floating operation</a>
 <ul>
-<li><a href="#precision-loss"><span class="toc-section-number">2.1.1</span> Precision loss</a></li>
+<li><a href="#precision-loss" id="toc-precision-loss"><span
+class="toc-section-number">2.1.1</span> Precision loss</a></li>
 </ul></li>
-<li><a href="#misc"><span class="toc-section-number">2.2</span> Misc</a>
+<li><a href="#misc" id="toc-misc"><span
+class="toc-section-number">2.2</span> Misc</a>
 <ul>
-<li><a href="#compile-mpich-using-gcc-version-10"><span class="toc-section-number">2.2.1</span> Compile MPICH using GCC version 10</a></li>
+<li><a href="#compile-mpich-using-gcc-version-10"
+id="toc-compile-mpich-using-gcc-version-10"><span
+class="toc-section-number">2.2.1</span> Compile MPICH using GCC version
+10</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
-<h2 data-number="1.1" id="compiler-options"><span class="header-section-number">1.1</span> Compiler options</h2>
-<h3 data-number="1.1.1" id="wl-rpath."><span class="header-section-number">1.1.1</span> <code>-Wl,-rpath,.</code></h3>
-<p>The <code>-Wl,xxx</code> option for gcc passes a comma-separated list of tokens as a space-separated list of arguments to the linker. So</p>
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="gcc中-l--l和-i参数的解释"><span
+class="header-section-number">1.1</span> GCC中-l, -L和-I参数的解释</h2>
+<h3 data-number="1.1.1" id="编译过程"><span
+class="header-section-number">1.1.1</span> 编译过程</h3>
+<p>如图<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>所示，分为四个步骤：预处理 -&gt; 编译
+-&gt; 汇编 -&gt; 链接</p>
+<figure>
+<img src="./Compilation_Process.png" alt="Compilation_Process" />
+<figcaption aria-hidden="true">Compilation_Process</figcaption>
+</figure>
+<h3 data-number="1.1.2" id="预处理中包含头文件"><span
+class="header-section-number">1.1.2</span> 预处理中包含头文件</h3>
+<p><code>-I</code>参数是用来指定头文件目录，<code>/usr/include</code>
+目录一般是不用指定的，<code>gcc</code>知道去那里找，但是如果头文件不在<code>/usr/include</code>里我们就要用<code>-I</code>参数指定了，比如头文件放在<code>/myinclude</code>目录里，那编译命令行就要加上<code>-I/myinclude</code>参数了，如果不加你会得到一个<code>xxxx.h: No such file or directory</code>的错误。<code>-I</code>参数可以用相对路径，比如头文件在当前目录，可以用<code>-I.</code>来指定。</p>
+<h3 data-number="1.1.3" id="链接库"><span
+class="header-section-number">1.1.3</span> 链接库</h3>
+<h4 data-number="1.1.3.1" id="基本含义"><span
+class="header-section-number">1.1.3.1</span> 基本含义</h4>
+<p><code>-l</code>参数就是用来指定程序要链接的库，<code>-l</code>参数紧接着就是库名。那么库名跟真正的库文件名有什么关系呢？就拿数学库来说，他的库名是<code>m</code>，他的库文件名是<code>libm.so</code>，很容易看出，把库文件名的头<code>lib</code>和尾<code>.so</code>去掉就是库名了。</p>
+<h4 data-number="1.1.3.2" id="使用方法"><span
+class="header-section-number">1.1.3.2</span> 使用方法</h4>
+<p>好了现在我们知道怎么得到库名，当我们自已要用到一个第三方提供的库名字<code>libtest.so</code>，那么我们只要把<code>libtest.so</code>拷贝到<code>/usr/lib</code>里，编译时加上<code>-ltest</code>参数，我们就能用上<code>libtest.so</code>库了（当然要用<code>libtest.so</code>库里的函数，我们还需要与<code>libtest.so</code>配套的头文件）。</p>
+<h4 data-number="1.1.3.3" id="指定库文件位置"><span
+class="header-section-number">1.1.3.3</span> 指定库文件位置</h4>
+<p>放在<code>/lib</code>和<code>/usr/lib</code>和<code>/usr/local/lib</code>里的库直接用<code>-l</code>参数就能链接了，但如果库文件没放在这三个目录里，而是放在其他目录里，这时我们只用<code>-l</code>参数的话，链接还是会出错，出错信息大概是：<code>/usr/bin/ld: cannot find -lxxx</code>，也就是链接程序<code>ld</code>在那三个目录里找不到<code>libxxx.so</code>，这时另外一个参数<code>-L</code>就派上用场了，比如常用的<code>X11</code>的库，它在<code>/usr/X11R6/lib</code>目录下，我们编译时就要用<code>-L/usr/X11R6/lib -lX11</code>参数，<code>-L</code>参数跟着的是库文件所在的目录名。再比如我们把<code>libtest.so</code>放在<code>/aaa/bbb/ccc</code>目录下，那链接参数就是<code>-L/aaa/bbb/ccc -ltest</code></p>
+<h2 data-number="1.2" id="compiler-options"><span
+class="header-section-number">1.2</span> Compiler options</h2>
+<h3 data-number="1.2.1" id="wl-rpath."><span
+class="header-section-number">1.2.1</span>
+<code>-Wl,-rpath,.</code></h3>
+<p>The <code>-Wl,xxx</code> option for gcc passes a comma-separated list
+of tokens as a space-separated list of arguments to the linker. So</p>
 <pre><code>gcc -Wl,aaa,bbb,ccc</code></pre>
 <p>which eventually becomes a linker call</p>
 <pre><code>ld aaa bbb ccc</code></pre>
-<p>In your case, you want to say <code>ld -rpath .</code>, so you pass this to gcc as <code>-Wl,-rpath,.</code> or <code>-Wl,-rpath -Wl,.</code>.</p>
-<h3 data-number="1.1.2" id="ld_library_path-and-ldflags"><span class="header-section-number">1.1.2</span> <code>LD_LIBRARY_PATH</code> and <code>LDFLAGS</code></h3>
-<p><code>LD_LIBRARY_PATH</code> is used at runtime not compile time to find the correct libraries. You need to set <code>LDFLAGS</code> or set a configure option to find the library.</p>
-<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
-<h2 data-number="2.1" id="floating-operation"><span class="header-section-number">2.1</span> Floating operation</h2>
-<h3 data-number="2.1.1" id="precision-loss"><span class="header-section-number">2.1.1</span> Precision loss</h3>
-<p>With the debug mode <code>-O0 -g</code>, gfortran gives inaccurate result of the following code snippet while Intel compiler is OK.</p>
+<p>In your case, you want to say <code>ld -rpath .</code>, so you pass
+this to gcc as <code>-Wl,-rpath,.</code> or
+<code>-Wl,-rpath -Wl,.</code>.</p>
+<h3 data-number="1.2.2" id="ld_library_path-and-ldflags"><span
+class="header-section-number">1.2.2</span> <code>LD_LIBRARY_PATH</code>
+and <code>LDFLAGS</code></h3>
+<p><code>LD_LIBRARY_PATH</code> is used at runtime not compile time to
+find the correct libraries. You need to set <code>LDFLAGS</code> or set
+a configure option to find the library.</p>
+<h1 data-number="2" id="advanced"><span
+class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="floating-operation"><span
+class="header-section-number">2.1</span> Floating operation</h2>
+<h3 data-number="2.1.1" id="precision-loss"><span
+class="header-section-number">2.1.1</span> Precision loss</h3>
+<p>With the debug mode <code>-O0 -g</code>, gfortran gives inaccurate
+result of the following code snippet while Intel compiler is OK.</p>
 <pre><code>usp_ngb(1) = matmul(extrapneighcell_mat(1, 1:9), usp_ghs(1:9, 1))</code></pre>
-<p>And the data are as follows. With the help of <a href="https://babbage.cs.qc.cuny.edu/IEEE-754.old/64bit.html">IEEE-754 Floating-Point Conversion: From 64-bit Hexadecimal Representation To Decimal Floating-Point</a>. The hex number of <code>usp_ghs</code> are <code>0x[4005d800daac1039, 3ffe80007746d2d2, 4000e6006365931d, 401fdf4953631862, 400566edb9b4edd3, 3ffc162669b0c434, 4018836ece868caa, 401eaa5c4c981115, 400976c7ef0d2624]</code>. The corresponding double precision floating values are <code>[2.7304703792342733, 1.9062504443401633, 2.1123054280636910, 7.9680531529648720, 2.6752581127491140, 1.7554077271017947, 6.1283523816702345, 7.6663677184881370, 3.1829985309493782]</code> The hex number of <code>extrapneighcell_mat</code> are <code>0x[4018000000008a60, c02000000000769b, 400800000000c5ad, 0, 0, 0, 0, 0, 0]</code>. The corresponding double precision floating values are <code>[6.0000000000314630, -8.0000000000539360, 3.0000000000224730, 0, 0, 0, 0, 0, 0]</code></p>
-<p>Use the raw hex number to do multiplication in this website: <a href="http://www.ecs.umass.edu/ece/koren/arith/simulator/FPMul/">Floating Point Multiplication/Division</a>.</p>
+<p>And the data are as follows. With the help of <a
+href="https://babbage.cs.qc.cuny.edu/IEEE-754.old/64bit.html">IEEE-754
+Floating-Point Conversion: From 64-bit Hexadecimal Representation To
+Decimal Floating-Point</a>. The hex number of <code>usp_ghs</code> are
+<code>0x[4005d800daac1039, 3ffe80007746d2d2, 4000e6006365931d, 401fdf4953631862, 400566edb9b4edd3, 3ffc162669b0c434, 4018836ece868caa, 401eaa5c4c981115, 400976c7ef0d2624]</code>.
+The corresponding double precision floating values are
+<code>[2.7304703792342733, 1.9062504443401633, 2.1123054280636910, 7.9680531529648720, 2.6752581127491140, 1.7554077271017947, 6.1283523816702345, 7.6663677184881370, 3.1829985309493782]</code>
+The hex number of <code>extrapneighcell_mat</code> are
+<code>0x[4018000000008a60, c02000000000769b, 400800000000c5ad, 0, 0, 0, 0, 0, 0]</code>.
+The corresponding double precision floating values are
+<code>[6.0000000000314630, -8.0000000000539360, 3.0000000000224730, 0, 0, 0, 0, 0, 0]</code></p>
+<p>Use the raw hex number to do multiplication in this website: <a
+href="http://www.ecs.umass.edu/ece/koren/arith/simulator/FPMul/">Floating
+Point Multiplication/Division</a>.</p>
 <pre><code>4018000000008a60 * 4005d800daac1039 = 
 Round to Zero
 A*B  + 1.0000011000100000000010100100000000010110101010011111 *24 = 16.382822275491545
@@ -272,23 +163,59 @@ Round to Plus Infinity
 A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425
 Round to Minus Infinity
 A*B  + 1.1001010110010000000010010101000110010010110101110010 *22 = 6.3369162842385425</code></pre>
-<p>With the python <code>mpmath</code> package, it shows that with rounding to the neatest even mode, the final accurate result should be</p>
+<p>With the python <code>mpmath</code> package, it shows that with
+rounding to the neatest even mode, the final accurate result should
+be</p>
 <pre><code>from mpmath import mp, mpf, matrix
 mp.dps = 32
 mpf(&#39;16.38282227549155&#39;) + mpf(&#39;-15.25000355482412&#39;) + mpf(&#39;6.3369162842385425&#39;)
 Out[67]: mpf(&#39;7.4697350049059724999999999999999923&#39;)</code></pre>
-<p>gfortran gives <code>usp_ngb(1) = 7.469735004905969</code> while the Intel compiler gives <code>7.4697350049059708</code>. Thus the Intel compiler gives more accurate result. Note that both gfortran enables <code>-fno-unsafe-math-optimizations -frounding-math</code> and Intel compiler enables <code>-fp-model fast</code>. Changing to <code>-fp-model precise</code> does not change the value.</p>
-<p>With <code>-fno-rounding-math</code>, the rounding mode is known to be round to even. With <code>-frounding-math</code>, it is round-to-zero for all floating point to integer conversions, and round-to-nearest for all other arithmetic truncations.</p>
-<p>In gfortran, setting <code>-frounding-math -fsignaling-nans</code> lead to full IEEE 754 compliance. “Support infinities, NaNs, gradual underflow, signed zeros, exception flags and traps, setting rounding modes. Compare with C99’s #pragma STDC FENV ACCESS ON. Warning! GCC currently assumes that the same rounding mode is in effect everywhere”.</p>
-<p>Probably this error is due to the rounding in the intermediate calculation. Intel compiler uses more digits to ensure the double precision while gfortran probably requires additional compilation flag to do that. For details, maybe check <a href="https://stackoverflow.com/questions/7517588/different-floating-point-result-with-optimization-enabled-compiler-bug">Different floating point result with optimization enabled - compiler bug?</a>.</p>
+<p>gfortran gives <code>usp_ngb(1) = 7.469735004905969</code> while the
+Intel compiler gives <code>7.4697350049059708</code>. Thus the Intel
+compiler gives more accurate result. Note that both gfortran enables
+<code>-fno-unsafe-math-optimizations -frounding-math</code> and Intel
+compiler enables <code>-fp-model fast</code>. Changing to
+<code>-fp-model precise</code> does not change the value.</p>
+<p>With <code>-fno-rounding-math</code>, the rounding mode is known to
+be round to even. With <code>-frounding-math</code>, it is round-to-zero
+for all floating point to integer conversions, and round-to-nearest for
+all other arithmetic truncations.</p>
+<p>In gfortran, setting <code>-frounding-math -fsignaling-nans</code>
+lead to full IEEE 754 compliance. “Support infinities, NaNs, gradual
+underflow, signed zeros, exception flags and traps, setting rounding
+modes. Compare with C99’s #pragma STDC FENV ACCESS ON. Warning! GCC
+currently assumes that the same rounding mode is in effect
+everywhere”.</p>
+<p>Probably this error is due to the rounding in the intermediate
+calculation. Intel compiler uses more digits to ensure the double
+precision while gfortran probably requires additional compilation flag
+to do that. For details, maybe check <a
+href="https://stackoverflow.com/questions/7517588/different-floating-point-result-with-optimization-enabled-compiler-bug">Different
+floating point result with optimization enabled - compiler bug?</a>.</p>
 <p>Reference</p>
 <ul>
-<li><a href="https://gcc.gnu.org/wiki/FloatingPointMath">Semantics of Floating Point Math in GCC</a></li>
+<li><a href="https://gcc.gnu.org/wiki/FloatingPointMath">Semantics of
+Floating Point Math in GCC</a></li>
 </ul>
-<h2 data-number="2.2" id="misc"><span class="header-section-number">2.2</span> Misc</h2>
-<h3 data-number="2.2.1" id="compile-mpich-using-gcc-version-10"><span class="header-section-number">2.2.1</span> Compile MPICH using GCC version 10</h3>
+<h2 data-number="2.2" id="misc"><span
+class="header-section-number">2.2</span> Misc</h2>
+<h3 data-number="2.2.1" id="compile-mpich-using-gcc-version-10"><span
+class="header-section-number">2.2.1</span> Compile MPICH using GCC
+version 10</h3>
 <pre><code>export FFLAGS=&quot;-w -fallow-argument-mismatch -O2&quot;</code></pre>
-<p>Reference: <a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91731">Bug 91731 - Configure error on building MPICH</a></p>
+<p>Reference: <a
+href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91731">Bug 91731 -
+Configure error on building MPICH</a></p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a
+href="http://faculty.cs.niu.edu/~mcmahon/CS241/Notes/compile.html">The
+C++ compilation process</a><a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </div>
 <div class="customHr">.</div>
 <footer>

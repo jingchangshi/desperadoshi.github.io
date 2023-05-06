@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2014-01-19" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">使用Shell脚本和Fluent脚本自动化工作</h1>
+<h3 class="date">2014-01-19</h3>
+<div id="TOC">
+<ul>
+<li><a href="#使用shell脚本和fluent脚本自动化工作"
+id="toc-使用shell脚本和fluent脚本自动化工作"><span
+class="toc-section-number">1</span>
+使用Shell脚本和Fluent脚本自动化工作</a>
+<ul>
+<li><a href="#说明" id="toc-说明"><span
+class="toc-section-number">1.1</span> 说明</a></li>
+<li><a href="#应用实例" id="toc-应用实例"><span
+class="toc-section-number">1.2</span> 应用实例</a></li>
+<li><a href="#代码" id="toc-代码"><span
+class="toc-section-number">1.3</span> 代码</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="使用shell脚本和fluent脚本自动化工作"><span
+class="header-section-number">1</span>
+使用Shell脚本和Fluent脚本自动化工作</h1>
+<h2 data-number="1.1" id="说明"><span
+class="header-section-number">1.1</span> 说明</h2>
+<ul>
+<li><code>Fluent</code>软件可以记录软件操作过程，写入<code>Journal</code>文件。这个特性可以用来实现宏操作。</li>
+<li><code>Shell</code>脚本可以将<code>Fluent</code>作为一个命令执行，加上命令行参数即可自动化执行某些操作。</li>
+<li>现在常用这种方式重复导出<code>Fluent</code>中的某些数据至文件。</li>
+</ul>
+<h2 data-number="1.2" id="应用实例"><span
+class="header-section-number">1.2</span> 应用实例</h2>
+<p><code>Fluent</code>运行过程中似乎不会计算Q判据并存储该变量在数据文件中。后期我们想得到每个<code>dat</code>文件中的Q判据数据，并存入文件，以便对一系列Q判据文件作<code>POD</code>分析。当然，这要求所有的<code>dat</code>文件以相同的格式命名。</p>
+<p>执行步骤如下</p>
+<ul>
+<li>图形化打开<code>Fluent</code>软件，打开<code>Write to journal</code></li>
+<li>完整执行一遍计算并导出Q判据的过程</li>
+<li>通过菜单栏退出<code>Fluent</code></li>
+<li>此时得到<code>journal</code>文件，记录所需<code>Fluent</code>的操作</li>
+<li>编写<code>Shell</code>脚本文件，迭代所有的<code>dat</code>文件，重复执行<code>journal</code>文件里的操作</li>
+<li>得到所需的一系列Q判据数据文件</li>
+</ul>
+<p>对<code>Fluent</code>数据文件的说明</p>
+<ul>
+<li><code>cas</code>文件命名为<code>roundjet.cas</code></li>
+<li><code>dat</code>文件命名格式为<code>roundjet-0.0XXXXX.dat</code></li>
+<li><code>X</code>代表阿拉伯数字<code>0-9</code></li>
+<li>每个<code>dat</code>文件之间间隔<code>10</code>，即第<code>1</code>个文件是<code>15000</code>，第<code>2</code>个文件是<code>15010</code></li>
+</ul>
+<h2 data-number="1.3" id="代码"><span
+class="header-section-number">1.3</span> 代码</h2>
+<p>共有两个文件</p>
+<ul>
+<li><code>run.jou</code>是<code>Fluent</code>的<code>journal</code>文件，记录了<code>Fluent</code>操作</li>
+<li><code>run.sh</code>是<code>Shell</code>脚本文件，自动化替换需要操作的<code>dat</code>文件以及输出文件名</li>
+<li>见<a
+href="https://github.com/desperadoshi/Auto_Execute_Fluent_in_Shell">Github</a></li>
+</ul>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2014-01-19 with pandoc
+</footer>
+</body>
+</html>

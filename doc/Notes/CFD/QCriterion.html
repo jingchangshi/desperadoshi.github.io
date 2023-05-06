@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2018-09-14" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Q Criterion</h1>
+<h3 class="date">2018-09-14</h3>
+<div id="TOC">
+<ul>
+<li><a href="#q判据" id="toc-q判据"><span
+class="toc-section-number">1</span> Q判据</a>
+<ul>
+<li><a href="#计算公式" id="toc-计算公式"><span
+class="toc-section-number">1.1</span> 计算公式</a></li>
+<li><a href="#物理含义" id="toc-物理含义"><span
+class="toc-section-number">1.2</span> 物理含义</a></li>
+<li><a href="#相应脚本" id="toc-相应脚本"><span
+class="toc-section-number">1.3</span> 相应脚本</a>
+<ul>
+<li><a href="#tecplot使用的mcr文件" id="toc-tecplot使用的mcr文件"><span
+class="toc-section-number">1.3.1</span>
+<code>Tecplot</code>使用的<code>MCR</code>文件</a></li>
+<li><a href="#fluent使用自定义场函数"
+id="toc-fluent使用自定义场函数"><span
+class="toc-section-number">1.3.2</span>
+<code>Fluent</code>使用自定义场函数</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="q判据"><span
+class="header-section-number">1</span> Q判据</h1>
+<h2 data-number="1.1" id="计算公式"><span
+class="header-section-number">1.1</span> 计算公式</h2>
+<p>Vortices of an incompressible flow are identified as connected fluid
+regions with a positive second invariant of the velocity-gradient tensor
+<span class="math inline">\(\Delta u\)</span>, <span
+class="math inline">\(\Delta u = S + \Omega\)</span>, <span
+class="math inline">\(S\)</span> is the strain-rate tensor, <span
+class="math inline">\(\Omega\)</span> is the vorticity tensor. Formula
+is as follows,<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<p><span class="math display">\[
+\begin{aligned}
+Q &amp;= \frac{1}{2} ( u^{2}_{i,i} - u_{i,j} u_{j,i} ) \\
+  &amp;= - \frac{1}{2} u_{i,j} u_{j,i} \\
+  &amp;= \frac{1}{2} ( \Vert \Omega \Vert^{2} - \Vert S \Vert^{2} ) \\
+\end{aligned}
+\]</span></p>
+<h2 data-number="1.2" id="物理含义"><span
+class="header-section-number">1.2</span> 物理含义</h2>
+<ul>
+<li>待补充</li>
+</ul>
+<h2 data-number="1.3" id="相应脚本"><span
+class="header-section-number">1.3</span> 相应脚本</h2>
+<h3 data-number="1.3.1" id="tecplot使用的mcr文件"><span
+class="header-section-number">1.3.1</span>
+<code>Tecplot</code>使用的<code>MCR</code>文件</h3>
+<ul>
+<li><a
+href="http://download.tecplot.com/macros/Qcriterion.mcr">Qcriterion.mcr</a>
+<ul>
+<li>Using Tecplot’s Specify Equations tool this file calculates the
+components of the symmetric and antisymmetric parts of the velocity
+gradient tensor. Using these new tensors the lambda-2 and Q-criterion (Q
+criterion) is determined.</li>
+<li>实际使用中，载入该宏文件后，需要指定<code>X,Y,Z</code>方向的速度在<code>Data Set Info</code>中的<strong>序号</strong>。</li>
+<li>实际运行效率很低，对于三维算例运行时间较长，约半小时。</li>
+</ul></li>
+</ul>
+<h3 data-number="1.3.2" id="fluent使用自定义场函数"><span
+class="header-section-number">1.3.2</span>
+<code>Fluent</code>使用自定义场函数</h3>
+<ul>
+<li><p>使用<code>custom field function</code>，按照Q判据定义，计算出新的变量作为<code>Q-Criterion</code>。使用的计算式如下，</p>
+<pre><code>  Q-Criterion = 0.5 * ( {Vorticity Magnitude}^2 - {Strain Rate}^2 )</code></pre>
+<ul>
+<li>其中<code>Vorticity Magnitude</code>位于<code>Velocity</code>分类下，<code>Strain Rate</code>位于<code>Derivative</code>分类下。<a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></li>
+</ul></li>
+</ul>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Kolář V. Brief notes on vortex
+identification[C]//Proceedings of the 8th WSEAS International Conference
+on Fluid Mechanics and 8th WSEAS International Conf. on Heat and Mass
+Transfer. Stevens Port, WI: World Scientific and Engineering Academy and
+Society (WSEAS), 2011: 23-28.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>涡量与应变率的定义式见<a
+href="http://pan.baidu.com/s/1i3lLDFR">Vorticity_and_StrainRate.pdf</a><a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2018-09-14 with pandoc
+</footer>
+</body>
+</html>

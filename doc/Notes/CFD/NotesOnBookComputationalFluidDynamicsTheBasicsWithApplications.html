@@ -1,0 +1,943 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2017-09-05" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Notes on Book “Computational Fluid Dynamics - The
+Basics with Applications”</h1>
+<h3 class="date">2017-09-05</h3>
+<div id="TOC">
+<ul>
+<li><a href="#chapter-2-the-governing-equations-of-fluid-dynamics"
+id="toc-chapter-2-the-governing-equations-of-fluid-dynamics"><span
+class="toc-section-number">1</span> Chapter 2 The Governing Equations of
+Fluid Dynamics</a>
+<ul>
+<li><a href="#the-momentum-equation"
+id="toc-the-momentum-equation"><span
+class="toc-section-number">1.1</span> 2.6 The Momentum Equation</a></li>
+<li><a
+href="#forms-of-the-governing-equations-particularly-suited-for-cfd"
+id="toc-forms-of-the-governing-equations-particularly-suited-for-cfd"><span
+class="toc-section-number">1.2</span> 2.10 Forms of the Governing
+Equations Particularly Suited for CFD</a></li>
+</ul></li>
+<li><a href="#chapter-4-basic-aspects-of-discretization"
+id="toc-chapter-4-basic-aspects-of-discretization"><span
+class="toc-section-number">2</span> Chapter 4 Basic Aspects of
+Discretization</a>
+<ul>
+<li><a
+href="#explicit-and-implicit-approaches-definitions-and-contrasts"
+id="toc-explicit-and-implicit-approaches-definitions-and-contrasts"><span
+class="toc-section-number">2.1</span> 4.4 Explicit and Implicit
+Approaches: Definitions and Contrasts</a></li>
+<li><a href="#errors-and-an-analysis-of-stability"
+id="toc-errors-and-an-analysis-of-stability"><span
+class="toc-section-number">2.2</span> 4.5 Errors and An Analysis of
+Stability</a></li>
+</ul></li>
+<li><a href="#chapter-6-some-simple-cfd-techniques-a-beginning"
+id="toc-chapter-6-some-simple-cfd-techniques-a-beginning"><span
+class="toc-section-number">3</span> Chapter 6 Some Simple CFD
+Techniques: A Beginning</a>
+<ul>
+<li><a href="#the-lax-wendroff-technique"
+id="toc-the-lax-wendroff-technique"><span
+class="toc-section-number">3.1</span> 6.2 The Lax-Wendroff
+Technique</a></li>
+<li><a href="#maccormacks-technique"
+id="toc-maccormacks-technique"><span
+class="toc-section-number">3.2</span> 6.3 Maccormack’s
+Technique</a></li>
+<li><a
+href="#the-relaxation-techinique-and-its-use-with-low-speed-inviscid-flow"
+id="toc-the-relaxation-techinique-and-its-use-with-low-speed-inviscid-flow"><span
+class="toc-section-number">3.3</span> 6.5 The Relaxation Techinique and
+Its Use with Low-Speed Inviscid Flow</a></li>
+<li><a
+href="#aspects-of-numerical-dissipation-and-dispersion-artificial-viscousity"
+id="toc-aspects-of-numerical-dissipation-and-dispersion-artificial-viscousity"><span
+class="toc-section-number">3.4</span> 6.6 aspects of Numerical
+Dissipation and Dispersion; Artificial Viscousity</a></li>
+<li><a href="#the-alternating-direction-implicit-adi-technique"
+id="toc-the-alternating-direction-implicit-adi-technique"><span
+class="toc-section-number">3.5</span> 6.7 The Alternating-Direction
+Implicit (ADI) Technique</a></li>
+<li><a
+href="#the-pressure-correction-technique-application-to-imcompressible-viscous-flow"
+id="toc-the-pressure-correction-technique-application-to-imcompressible-viscous-flow"><span
+class="toc-section-number">3.6</span> 6.8 The Pressure Correction
+Technique: Application to Imcompressible Viscous Flow</a>
+<ul>
+<li><a href="#some-comments-on-central-differencing"
+id="toc-some-comments-on-central-differencing"><span
+class="toc-section-number">3.6.1</span> 6.8.2 Some Comments on Central
+Differencing</a></li>
+<li><a href="#the-philosophy-of-the-pressure-correction-method"
+id="toc-the-philosophy-of-the-pressure-correction-method"><span
+class="toc-section-number">3.6.2</span> 6.8.3 The Philosophy of the
+Pressure Correction Method</a></li>
+<li><a href="#sample-code-of-simple-algorithm-in-fortran-90"
+id="toc-sample-code-of-simple-algorithm-in-fortran-90"><span
+class="toc-section-number">3.6.3</span> Sample Code of SIMPLE Algorithm
+in Fortran 90</a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="#chapter-11-some-advanced-topics-in-modern-cfd-a-discussion"
+id="toc-chapter-11-some-advanced-topics-in-modern-cfd-a-discussion"><span
+class="toc-section-number">4</span> Chapter 11 Some Advanced Topics in
+Modern CFD: A Discussion</a>
+<ul>
+<li><a
+href="#the-conservation-form-of-the-governing-flow-equations-revisited-the-jacobians-of-the-system"
+id="toc-the-conservation-form-of-the-governing-flow-equations-revisited-the-jacobians-of-the-system"><span
+class="toc-section-number">4.1</span> 11.2 The Conservation Form of the
+Governing Flow Equations Revisited: The Jacobians of the System</a>
+<ul>
+<li><a href="#specialization-to-one-dimensional-flow"
+id="toc-specialization-to-one-dimensional-flow"><span
+class="toc-section-number">4.1.1</span> 11.2.1 Specialization to
+One-Dimensional Flow</a></li>
+</ul></li>
+<li><a href="#additional-considerations-for-implicit-methods"
+id="toc-additional-considerations-for-implicit-methods"><span
+class="toc-section-number">4.2</span> 11.3 Additional Considerations for
+Implicit Methods</a>
+<ul>
+<li><a
+href="#linearization-of-the-equations-the-beam-and-warming-method"
+id="toc-linearization-of-the-equations-the-beam-and-warming-method"><span
+class="toc-section-number">4.2.1</span> 11.3.1 Linearization of the
+Equations: The Beam and Warming Method</a></li>
+<li><a href="#the-multi-dimensional-problem-approximate-factorization"
+id="toc-the-multi-dimensional-problem-approximate-factorization"><span
+class="toc-section-number">4.2.2</span> 11.3.2 The Multi-Dimensional
+Problem: Approximate Factorization</a></li>
+<li><a href="#block-tridiagonal-matrices"
+id="toc-block-tridiagonal-matrices"><span
+class="toc-section-number">4.2.3</span> 11.3.3 Block Tridiagonal
+Matrices</a></li>
+</ul></li>
+<li><a href="#upwind-schemes" id="toc-upwind-schemes"><span
+class="toc-section-number">4.3</span> 11.4 Upwind Schemes</a>
+<ul>
+<li><a href="#flux-vector-splitting"
+id="toc-flux-vector-splitting"><span
+class="toc-section-number">4.3.1</span> 11.4.1 Flux-Vector
+Splitting</a></li>
+<li><a href="#the-godunov-approach" id="toc-the-godunov-approach"><span
+class="toc-section-number">4.3.2</span> 11.4.2 The Godunov
+Approach</a></li>
+</ul></li>
+<li><a href="#second-order-upwind-schemes"
+id="toc-second-order-upwind-schemes"><span
+class="toc-section-number">4.4</span> 11.5 Second-Order Upwind
+Schemes</a></li>
+<li><a href="#high-resolution-schemes-tvd-and-flux-limiters"
+id="toc-high-resolution-schemes-tvd-and-flux-limiters"><span
+class="toc-section-number">4.5</span> 11.6 High-Resolution Schemes: TVD
+and Flux Limiters</a></li>
+<li><a href="#multigrid-method" id="toc-multigrid-method"><span
+class="toc-section-number">4.6</span> 11.8 Multigrid Method</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1"
+id="chapter-2-the-governing-equations-of-fluid-dynamics"><span
+class="header-section-number">1</span> Chapter 2 The Governing Equations
+of Fluid Dynamics</h1>
+<h2 data-number="1.1" id="the-momentum-equation"><span
+class="header-section-number">1.1</span> 2.6 The Momentum Equation</h2>
+<p>Non-conservation form</p>
+<p><span class="math display">\[
+\begin{align}
+\rho \frac{D u_{i}}{D t} = - \frac{\partial p}{\partial x_{i}} +
+\frac{\partial \tau_{ji}}{\partial x_{j}} + \rho F_{i}
+\end{align}
+\]</span></p>
+<p>Conservation form</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial \rho u_{i}}{\partial t} + \nabla \cdot (\rho u_{i}
+\vec{u}) = - \frac{\partial p}{\partial x_{i}} + \frac{\partial
+\tau_{ji}}{\partial x_{j}} + \rho F_{i}
+\end{align}
+\]</span></p>
+<h2 data-number="1.2"
+id="forms-of-the-governing-equations-particularly-suited-for-cfd"><span
+class="header-section-number">1.2</span> 2.10 Forms of the Governing
+Equations Particularly Suited for CFD</h2>
+<p>Conservation form falls into 2 categories: strong and weak.</p>
+<ul>
+<li><p>Strong conservation form</p>
+<p><span class="math display">\[
+  \begin{align}
+  \frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} +
+\frac{\partial G}{\partial y} + \frac{\partial H}{\partial z} = J
+  \end{align}
+  \]</span></p></li>
+</ul>
+<p>The terms in strong conservation form have everything buried inside
+these derivatives.</p>
+<ul>
+<li><p>Weak conservation form</p>
+<p><span class="math display">\[
+  \begin{align}
+  \frac{\partial \rho u_{i}}{\partial t} + \nabla \cdot (\rho u_{i}
+\vec{u}) = - \frac{\partial p}{\partial x_{i}} + \frac{\partial
+\tau_{ji}}{\partial x_{j}} + \rho F_{i}
+  \end{align}
+  \]</span></p>
+<p>Weak conservation form has a number of <span class="math inline">\(x,
+y, z\)</span> derivatives explicitly appearing on the right hand
+side.</p></li>
+</ul>
+<h1 data-number="2" id="chapter-4-basic-aspects-of-discretization"><span
+class="header-section-number">2</span> Chapter 4 Basic Aspects of
+Discretization</h1>
+<h2 data-number="2.1"
+id="explicit-and-implicit-approaches-definitions-and-contrasts"><span
+class="header-section-number">2.1</span> 4.4 Explicit and Implicit
+Approaches: Definitions and Contrasts</h2>
+<p>Consider 1D heat conduction equation</p>
+<p><span class="math display">\[
+\frac{\partial T}{\partial t} = \alpha \big ( \frac{\partial^{2}
+T}{\partial x^{2}} \big )
+\]</span></p>
+<ol type="1">
+<li><p>An explicit finite difference approach</p>
+<p><span class="math display">\[
+\frac{T^{n+1}_{i} - T^{n}_{i}}{\Delta t} = \alpha \frac{T^{n}_{i+1} - 2
+T^{n}_{i} + T^{n}_{i-1}}{(\Delta x)^{2}}
+\]</span></p>
+<p>Solution method is as follows,</p>
+<p><span class="math display">\[
+T^{n+1}_{i} = T^{n}_{i} + \alpha \frac{\Delta t}{(\Delta x)^{2}} \big
+(T^{n}_{i+1} - 2 T^{n}_{i} + T^{n}_{i-1} \big )
+\]</span></p></li>
+<li><p>Crank-Nicolson form</p>
+<p>Implicit finite difference approach</p>
+<p><span class="math display">\[
+\frac{T^{n+1}_{i} - T^{n}_{i}}{\Delta t} = \alpha \frac{\frac{1}{2} \big
+( T^{n+1}_{i+1} + T^{n}_{i+1} \big ) - \frac{1}{2} \big ( 2 T^{n+1}_{i}
++ 2 T^{n}_{i} \big ) + \frac{1}{2} \big ( T^{n+1}_{i-1} + T^{n}_{i-1}
+\big ) }{(\Delta x)^{2}}
+\]</span></p>
+<p>Solution method can be in tridiagonal matrix form.</p>
+<p>Consider nonlinear parital differential equation.</p>
+<p><span class="math display">\[
+\frac{\partial T}{\partial t} = \alpha (T) \big ( \frac{\partial^{2}
+T}{\partial x^{2}} \big )
+\]</span></p>
+<p>While the nonlinearity has no effect on the explicit approach, it
+results in a nonlinear algebraic equations for CN form. To circumvent
+this difficulty, the difference equations are ‘linearized’, for example,
+the coefficient <span class="math inline">\(\alpha(T)\)</span> is simply
+evaluated as <span
+class="math inline">\(\alpha(T^{n}_{i})\)</span>.</p></li>
+</ol>
+<h2 data-number="2.2" id="errors-and-an-analysis-of-stability"><span
+class="header-section-number">2.2</span> 4.5 Errors and An Analysis of
+Stability</h2>
+<p>Consider 1D heat conduction equation as model equation,</p>
+<p><span class="math display">\[
+\frac{\partial T}{\partial t} = \alpha \frac{\partial^{2} T}{\partial
+x^{2}}
+\]</span></p>
+<p>Define discretization error is <span
+class="math inline">\(A-D\)</span>, round-off error is <span
+class="math inline">\(\epsilon = N - D\)</span>, where <span
+class="math inline">\(A\)</span> is analytical solution of partial
+differential equation, <span class="math inline">\(D\)</span> is exact
+solution of differce equation, <span class="math inline">\(N\)</span> is
+numerical solution from a real computer with finite accuracy.</p>
+<p>Then the exact solution <span class="math inline">\(D\)</span> and
+the numerical solution <span class="math inline">\(N\)</span> must
+satisfy the difference equation. Subtract <span
+class="math inline">\(D\)</span> part from <span
+class="math inline">\(N\)</span> equation, we get the round-off part.
+Obviously, the round-off error also satisfies the difference
+equation.</p>
+<p>Define stability condition,</p>
+<p><span class="math display">\[
+| \frac{\epsilon^{n+1}_{i}}{\epsilon^{n}_{i}} | \leq 1
+\]</span></p>
+<p>The value of <span class="math inline">\(\epsilon\)</span> is random
+with respect to spatial variable <span class="math inline">\(x\)</span>.
+Then it can be represented as Fourier series.</p>
+<p><span class="math display">\[
+\epsilon(x) = \sum_{m} A_{m} e^{i k_{m} x} = \sum_{m} A_{m} \big ( cos
+k_{m} x + i sin k_{m} x \big )
+\]</span></p>
+<p>where <span class="math inline">\(k_{m}\)</span> is the wavenumber.
+And the real part of the sum series is the round-off error.</p>
+<p>Define the length of the grid is <span
+class="math inline">\(L\)</span>, the minimum mesh size is <span
+class="math inline">\(\Delta x\)</span>, and there are <span
+class="math inline">\(N\)</span> intervals across the length <span
+class="math inline">\(L\)</span>. Then the wave length ranges <span
+class="math inline">\([2 \Delta x, L]\)</span>, with corresponding wave
+number ranges <span class="math inline">\([\frac{2 \pi}{L}, \frac{2
+\pi}{2 \Delta x} = \frac{2 \pi}{L} \frac{N}{2}]\)</span>.</p>
+<p>The wave number is given by</p>
+<p><span class="math display">\[
+k_{m} = \frac{2 \pi}{\lambda}
+\]</span></p>
+<p><span class="math inline">\(\epsilon\)</span> also varies with time.
+Assume the amplitude <span class="math inline">\(A_{m}\)</span> is an
+exponential function of time.</p>
+<p><span class="math display">\[
+\epsilon(x, t) = \sum^{N/2}_{m=1} A_{m}(t) e^{i k_{m} x} =
+\sum^{N/2}_{m=1} e^{a t} e^{i k_{m} x}
+\]</span></p>
+<p>where <span class="math inline">\(a\)</span> is constant.</p>
+<p>Take single term in series to analyse.</p>
+<p><span class="math display">\[
+\epsilon_{m}(x, t) = e^{a t} e^{i k_{m} x}
+\]</span></p>
+<p>Substitute it into the difference equation of round-off error,</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \frac{e^{a(t+\Delta t)} e^{i k_{m} x} - e^{a t} e^{i k_{m}
+x}}{\alpha \Delta t} \\
+= &amp; \frac{e^{a t} e^{i k_{m} (x + \Delta x)} - 2 e^{a t} e^{i k_{m}
+x} + e^{a t} e^{i k_{m} (x-\Delta x)}}{(\Delta x)^{2}}
+\end{align}
+\]</span></p>
+<p>Rearrange the equation, we obtain</p>
+<p><span class="math display">\[
+e^{a \Delta t} = 1 - \frac{4 \alpha \Delta t}{(\Delta x)^{2}} sin^{2}
+\frac{k_{m} \Delta x}{2}
+\]</span></p>
+<p>Then the stability requirement is</p>
+<p><span class="math display">\[
+\begin{align}
+|\frac{\epsilon^{n+1}_{i}}{\epsilon^{n}_{i}}| &amp;=
+|\frac{e^{a(t+\Delta t)} e^{i k_{m} x}}{e^{a t} e^{i k_{m} x}}| \\
+&amp;= |e^{a \Delta t}| \\
+&amp;\leq 1 \\
+\end{align}
+\]</span></p>
+<p>Evaluate it,</p>
+<p><span class="math display">\[
+\frac{\alpha \Delta t}{(\Delta x)^{2}} \leq \frac{1}{2}
+\]</span></p>
+<p>which is the explicit stability requirement.</p>
+<p>The above analysis is called von Neumann stability method, often used
+to study the stability properties of linear difference equations.</p>
+<h1 data-number="3"
+id="chapter-6-some-simple-cfd-techniques-a-beginning"><span
+class="header-section-number">3</span> Chapter 6 Some Simple CFD
+Techniques: A Beginning</h1>
+<h2 data-number="3.1" id="the-lax-wendroff-technique"><span
+class="header-section-number">3.1</span> 6.2 The Lax-Wendroff
+Technique</h2>
+<p>It’s a marching method.</p>
+<p>The value of flow variables at the grid point <span
+class="math inline">\((i, j)\)</span> at time <span
+class="math inline">\(t + \delta t\)</span> is given by Taylor series.
+The time derivatives in Taylor series are replaced by the spatial
+derivatives in the governing flow equations. With suitable finite
+difference scheme, the spatial derivatives are represented explicitly,
+using points around <span class="math inline">\((i, j)\)</span>. It’s
+illustrated in the following figure.</p>
+<p><img src="./P221_Fig_06_02.jpg" /></p>
+<h2 data-number="3.2" id="maccormacks-technique"><span
+class="header-section-number">3.2</span> 6.3 Maccormack’s Technique</h2>
+<p>It’s marching method, similar to Lax-Wendroff technique.</p>
+<p>However, it avoids the algebra of second order time derivatives.
+Instead, it employs the procedure of predictor step with first order
+forward difference and corrector step with first order rearward
+difference. The average of the results from predictor and corrector is
+the time derivative we use to determine the value at time <span
+class="math inline">\(t + \delta t\)</span>.</p>
+<h2 data-number="3.3"
+id="the-relaxation-techinique-and-its-use-with-low-speed-inviscid-flow"><span
+class="header-section-number">3.3</span> 6.5 The Relaxation Techinique
+and Its Use with Low-Speed Inviscid Flow</h2>
+<p>Low speed, subsonic inviscid flow is governed by elliptic partial
+differential equations. The relaxation rechnique is frequently applied
+to the solution of low speed sonic flow. Relaxation techniques can be
+explicit or implicit. Here, we discuss an explicit relaxation technique,
+called a point iterative method.</p>
+<p>Take the example of Laplace’s equation.</p>
+<p><span class="math display">\[
+\Delta \Phi = 0
+\]</span></p>
+<p>With <span class="math inline">\(2\)</span>nd order central
+differences, there will be a great many equations for each unknows on
+grid points of given meshes. Direct method can be Cramer’s rule or
+Gaussian elimination. However, the other way is relaxation
+technique.</p>
+<p>We can employ Jacobi method or Gauss-Seidel method. Further, the
+convergence can be enhanced by successive overrelaxation or
+underrelaxation.</p>
+<h2 data-number="3.4"
+id="aspects-of-numerical-dissipation-and-dispersion-artificial-viscousity"><span
+class="header-section-number">3.4</span> 6.6 aspects of Numerical
+Dissipation and Dispersion; Artificial Viscousity</h2>
+<p>Consider a model equation</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial t} + a \frac{\partial u}{\partial x} = 0
+\]</span></p>
+<p>with <span class="math inline">\(a &gt; 0\)</span>.</p>
+<p>Discretize this equation by <span class="math inline">\(1\)</span>st
+order forward difference in time and <span
+class="math inline">\(1\)</span>st order rearward difference in
+space.</p>
+<p>Then the difference equation is</p>
+<p><span class="math display">\[
+\frac{u^{t+\Delta t}_{i} - u^{t}_{i}}{\Delta t} + a \frac{u^{t}_{i} -
+u^{t}_{i-1}}{\Delta t} = 0
+\]</span></p>
+<p>Expand in Taylor series, we have</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \Big [ \big ( \frac{\partial u}{\partial t} \big )^{t}_{i} + (
+\frac{\partial^{2} u}{\partial t^{2}} \big )^{t}_{i} \frac{\Delta t}{2}
++ ... \Big ] \\
+&amp; a \Big [ \big ( \frac{\partial u}{\partial t} \big )^{t}_{i} - (
+\frac{\partial^{2} u}{\partial t^{2}} \big )^{t}_{i} \frac{\Delta x}{2}
++ ... \Big ] = 0 \\
+\end{align}
+\]</span></p>
+<p>Rearrange and drop the subscript <span
+class="math inline">\(i\)</span> and superscript <span
+class="math inline">\(t\)</span>, but keep in mind all derivatives are
+evaluated at point <span class="math inline">\(i\)</span> and at time
+<span class="math inline">\(t\)</span>.</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial t} + a \frac{\partial u}{\partial x} = -
+\frac{\partial^{2} u}{\partial t^{2}} \frac{\Delta t}{2} + a
+\frac{\partial^{2} u}{\partial x^{2}} \frac{\Delta x}{2} + ...
+\]</span></p>
+<p>The right side is the truncation error asscoiated with the difference
+equation.</p>
+<p>We want to replace <span class="math inline">\(\frac{\partial^{2}
+u}{\partial t^{2}}\)</span> with <span
+class="math inline">\(\frac{\partial^{2} u}{\partial x^{2}}\)</span>.
+Steps are as follows.</p>
+<p>Differentiate with respect to <span class="math inline">\(t\)</span>
+and <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial^{2} u}{\partial t^{2}} + a \frac{\partial^{2} u}{\partial
+t \partial x} = - \frac{\partial^{3} u}{\partial t^{3}} \frac{\Delta
+t}{2} + a \frac{\partial^{3} u}{\partial t \partial x^{2}} \frac{\Delta
+x}{2} + O((\Delta t)^{2}, (\Delta x)^{2}) \\
+a \frac{\partial^{2} u}{\partial x \partial t} + a^{2}
+\frac{\partial^{2} u}{\partial x^{2}} = - a \frac{\partial^{3}
+u}{\partial x \partial t^{2}} \frac{\Delta t}{2} + a^{2}
+\frac{\partial^{3} u}{\partial x^{3}} \frac{\Delta x}{2} + O((\Delta
+t)^{2}, (\Delta x)^{2}) \\
+\end{align}
+\]</span></p>
+<p>Combine and we get</p>
+<p><span class="math display">\[
+\frac{\partial^{2} u}{\partial t^{2}} = a^{2} \frac{\partial^{2}
+u}{\partial x^{2}} + \frac{\Delta t}{2} \Big ( - \frac{\partial^{3}
+u}{\partial t^{3}} + a \frac{\partial^{3} u}{\partial x \partial t^{2}}
+\Big ) + \frac{\Delta x}{2} \Big ( \frac{\partial^{3} u}{\partial t
+\partial x^{2}} - a^{2} \frac{\partial^{3} u}{\partial x^{3}} \Big ) +
+O((\Delta t)^{2}, (\Delta x)^{2}) \\
+\]</span></p>
+<p>Then we need to replace <span
+class="math inline">\(\frac{\partial^{3} u}{\partial t^{3}},
+\frac{\partial^{3} u}{\partial x \partial t^{2}}, \frac{\partial^{3}
+u}{\partial t \partial x^{2}}\)</span> with <span
+class="math inline">\(\frac{\partial^{3} u}{\partial
+x^{3}}\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial^{3} u}{\partial t^{3}} + a \frac{\partial^{3} u}{\partial
+x \partial t^{2}} &amp;= O(\Delta t, \Delta x) \\
+\frac{\partial^{3} u}{\partial t^{2} \partial x} + a \frac{\partial^{3}
+u}{\partial t \partial x^{2}} &amp;= O(\Delta t, \Delta x) \\
+a \frac{\partial^{3} u}{\partial x^{2} \partial t} + a^{2}
+\frac{\partial^{3} u}{\partial x^{3}} &amp;= O(\Delta t, \Delta x) \\
+\frac{\partial^{3} u}{\partial t^{3}} + a^{2} \frac{\partial^{3}
+u}{\partial x^{3}} &amp;= O(\Delta t, \Delta x) \\
+\end{align}
+\]</span></p>
+<p>Finally, the real PDE we solve after differencing is (6.56).</p>
+<p>which is the exact solution (no truncation error), called the
+modified equation.</p>
+<p><span class="math inline">\(2\)</span>nd order derivatives (actually
+even order derivatives) on the right side is numerical dessipation, the
+coefficients of <span class="math inline">\(\frac{a \Delta x}{2} (1 -
+\nu)\)</span> is the artificial viscosity. Effects of numerical
+dissipation is illustrated in Fig 6.5. Artificial viscosity compromises
+the accuracy of a solution and improve the stability of a solution.
+<span class="math inline">\(3\)</span>rd order derivatives (actually odd
+order derivatives) is numerical dispersion. Effects of dispersion is
+illustrated in Fig 6.6.</p>
+<h2 data-number="3.5"
+id="the-alternating-direction-implicit-adi-technique"><span
+class="header-section-number">3.5</span> 6.7 The Alternating-Direction
+Implicit (ADI) Technique</h2>
+<p>Consider unsteady 2D heat conduction equation.</p>
+<p><span class="math display">\[
+\frac{\partial T}{\partial t} = \alpha \big ( \frac{\partial^{2}
+T}{\partial x^{2}} + \frac{\partial^{2} T}{\partial y^{2}} \big )
+\]</span></p>
+<p>The multidimensionality involving more than single variable in
+addition to the marching variable destroys the tridiagonal nature of the
+difference equations in CN form. So we employ alternating direction
+implicit (ADI) scheme.</p>
+<p>In fact, it involves two step process. First, only the <span
+class="math inline">\(x\)</span> derivative is treated implicitly. ref
+(6.64).</p>
+<p>Second, <span class="math inline">\(y\)</span> is the target. ref
+(6.66).</p>
+<p>Then both can be arranged in tridigonal form.</p>
+<h2 data-number="3.6"
+id="the-pressure-correction-technique-application-to-imcompressible-viscous-flow"><span
+class="header-section-number">3.6</span> 6.8 The Pressure Correction
+Technique: Application to Imcompressible Viscous Flow</h2>
+<p>Inviscid incompressible flow, governed by elliptic differential
+equations, can be solved by the relaxation technique.</p>
+<p>Viscous incompressible flow, governed by mixed elliptic parabolic
+partial differential equations, can be solved by the pressure correction
+technique. This technique is embodied in SIMPLE (Semi-Implicit Method
+for Pressure-Linked Equations).</p>
+<p>By the Anderson’s experience, a compressible flow code run for a flow
+which is everywhere at a local Mach number of about <span
+class="math inline">\(0.2\)</span> or less takes a prohibitive amount of
+time to converge, and indeed has a tendency to be unstable.</p>
+<h3 data-number="3.6.1" id="some-comments-on-central-differencing"><span
+class="header-section-number">3.6.1</span> 6.8.2 Some Comments on
+Central Differencing</h3>
+<p>Take the 2D incompressible continuity equation as an example,</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0
+\]</span></p>
+<p>I apply a central difference equation, the equation becomes</p>
+<p><span class="math display">\[
+\frac{u_{i+1, j} - u_{i-1, j}}{2 \Delta x} + \frac{v_{i, j+1} - v_{i,
+j-1}}{2 \Delta y} = 0
+\]</span></p>
+<p>According to this difference scheme, if the following velocity
+distribution is given<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>, <img
+src="./P251_Fig_06_13.jpg" /></p>
+<p>Then a mathematically correct but physically nonsensical solution is
+obtained.</p>
+<p>We want to fix such weakness of central difference scheme. One fix is
+to use upwind differences, which will be discussed in Chapter 11.Another
+fix presented here is to maintain central differencing but stagger the
+grid.</p>
+<p>A staggered grid is illustrated as follows.</p>
+<p><img src="./P253_Fig_06_15.jpg" /></p>
+<p>The velocities are calculated at the open grid points. The central
+difference equation for point <span class="math inline">\((i,
+j)\)</span> is</p>
+<p><span class="math display">\[
+\frac{u_{i+1/2, j} - u_{i-1/2, j}}{\Delta x} + \frac{v_{i, j+1/2} -
+v_{i, j-1/2}}{\Delta y} = 0
+\]</span></p>
+<p>The velocity at point <span class="math inline">\((i, j)\)</span> is
+then interpolated by the calculated values.</p>
+<h3 data-number="3.6.2"
+id="the-philosophy-of-the-pressure-correction-method"><span
+class="header-section-number">3.6.2</span> 6.8.3 The Philosophy of the
+Pressure Correction Method</h3>
+<p>It’s basically an iterative approach. The process is as follows.</p>
+<ol type="1">
+<li>Guess the pressure field as <span
+class="math inline">\(p^{*}\)</span>.</li>
+<li>Substitute <span class="math inline">\(p^{*}\)</span> into momentum
+equation to solve for velocities, denoted by <span
+class="math inline">\(u^{*}, v^{*}, w^{*}\)</span>.</li>
+<li>Employ continuity equation to check <span
+class="math inline">\(p^{*}, u^{*}, v^{*}, w^{*}\)</span>. Generally
+they will not satisfy that equation. Hence, using continuity euqation,
+construct a pressure correction <span
+class="math inline">\(p^{\prime}\)</span>. Then the “corrected” pressure
+<span class="math inline">\(p = p^{*} + p^{\prime}\)</span>. Velocities
+are corrected correspondingly.</li>
+<li>Substitute the new pressure <span class="math inline">\(p\)</span>
+into the above iterative approach until a velocity field is found that
+does satisfy contuity equation.</li>
+</ol>
+<h3 data-number="3.6.3"
+id="sample-code-of-simple-algorithm-in-fortran-90"><span
+class="header-section-number">3.6.3</span> Sample Code of SIMPLE
+Algorithm in Fortran 90</h3>
+<p>To be added.</p>
+<h1 data-number="4"
+id="chapter-11-some-advanced-topics-in-modern-cfd-a-discussion"><span
+class="header-section-number">4</span> Chapter 11 Some Advanced Topics
+in Modern CFD: A Discussion</h1>
+<h2 data-number="4.1"
+id="the-conservation-form-of-the-governing-flow-equations-revisited-the-jacobians-of-the-system"><span
+class="header-section-number">4.1</span> 11.2 The Conservation Form of
+the Governing Flow Equations Revisited: The Jacobians of the System</h2>
+<p>It’s simply a habit that finite difference codes are based on the
+conservation form of NS equation. The generic form is</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} +
+\frac{\partial G}{\partial y} + \frac{\partial H}{\partial z} = J
+\]</span></p>
+<p>where <span class="math inline">\(U, F, G, H, J\)</span> are column
+vectors involving the flux variables. <span class="math inline">\(U =
+\big [ \rho, \rho u, \rho v, \rho w, \rho [e + (u^{2}+v^{2}+w^{2})/2]
+\big ]\)</span> and <span class="math inline">\(F=F(U), G=G(U),
+H=H(U)\)</span>. They are generally nonlinear functions. To examine the
+mathematical characteristics of the generic form, we first cast it in
+quasi-linear form.</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial U}
+\frac{\partial U}{\partial x} + \frac{\partial G}{\partial U}
+\frac{\partial U}{\partial x} + \frac{\partial H}{\partial U}
+\frac{\partial U}{\partial z} = J
+\]</span></p>
+<p>where <span class="math inline">\(\frac{\partial F}{\partial U},
+\frac{\partial G}{\partial U}, \frac{\partial H}{\partial U}\)</span>
+are called the jacobian matrices of the flux vectors <span
+class="math inline">\(F, G, H\)</span>.</p>
+<h3 data-number="4.1.1"
+id="specialization-to-one-dimensional-flow"><span
+class="header-section-number">4.1.1</span> 11.2.1 Specialization to
+One-Dimensional Flow</h3>
+<p>For the sake of analysis, specialize to an unsteady, 1D, inviscid
+flow with no body forces.</p>
+<p>Governing equations are</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} &amp;= 0
+\\
+\end{align}
+\]</span></p>
+<p>To eliminate <span class="math inline">\(p\)</span>, the perfect gas
+equation of state is written as <a href="#fn2" class="footnote-ref"
+id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[
+p = \rho R T = \rho (\gamma - 1) \frac{R}{\gamma - 1} T = (\gamma - 1)
+\rho C_{v} T = (\gamma - 1) \rho e
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\begin{align}
+\rho e &amp;= \rho (E - \frac{1}{2} u^{2}) = \epsilon - \frac{\rho
+u^{2}}{2} = \epsilon - \frac{m^{2}}{2 \rho} \\
+p &amp;= (\gamma - 1) (\epsilon - \frac{m^{2}}{2 \rho}) \\
+\end{align}
+\]</span></p>
+<p>Without <span class="math inline">\(p\)</span>,</p>
+<p><span class="math display">\[
+F =
+\begin{Bmatrix}
+m \\
+\frac{m^{2}}{\rho} + (\gamma-1)(\epsilon-\frac{m^{2}}{2 \rho}) \\
+\frac{m}{\rho} \Big [ \epsilon +
+(\gamma-1)(\epsilon-\frac{m^{2}}{2\rho}) \Big ] \\
+\end{Bmatrix}
+=
+\begin{Bmatrix}
+m \\
+M \\
+N \\
+\end{Bmatrix}
+\]</span></p>
+<p>In quasi-linear form,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial U}{\partial t} + A \frac{\partial U}{\partial x} &amp;= 0
+\\
+A &amp;=
+\begin{bmatrix}
+\frac{\partial m}{\partial \rho} &amp; \frac{\partial m}{\partial m}
+&amp; \frac{\partial m}{\partial \epsilon} \\
+\frac{\partial M}{\partial \rho} &amp; \frac{\partial M}{\partial m}
+&amp; \frac{\partial M}{\partial \epsilon} \\
+\frac{\partial N}{\partial \rho} &amp; \frac{\partial N}{\partial m}
+&amp; \frac{\partial N}{\partial \epsilon} \\
+\end{bmatrix} \\
+A &amp;=
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 \\
+(\gamma - 3) \frac{u^{2}}{2} &amp; (3 - \gamma) u &amp; \gamma - 1 \\
+(\gamma - 1) u^{3} - \gamma u E &amp; - \frac{3}{2} (\gamma - 1) u^{2} +
+\gamma E &amp; \gamma u \\
+\end{bmatrix} \\
+\end{align}
+\]</span></p>
+<p>Examine the eigenvalues of the jacobian matrix,</p>
+<p><span class="math display">\[
+| A - \lambda I | = 0
+\]</span></p>
+<p>Three solutions: <span class="math inline">\(\lambda_{1} = u,
+\lambda_{2} = u + c, \lambda_{3} = u - c\)</span>, where <span
+class="math inline">\(c\)</span> is the speed of sound.</p>
+<h2 data-number="4.2"
+id="additional-considerations-for-implicit-methods"><span
+class="header-section-number">4.2</span> 11.3 Additional Considerations
+for Implicit Methods</h2>
+<p>Novel ideas are used to preserve the tridiagonal nature of the
+implicit solution in spite of the nonlinearity and
+multidimensionality.</p>
+<h3 data-number="4.2.1"
+id="linearization-of-the-equations-the-beam-and-warming-method"><span
+class="header-section-number">4.2.1</span> 11.3.1 Linearization of the
+Equations: The Beam and Warming Method</h3>
+<p>A simple method is “Lagging coefficients” method, which evaluates the
+coefficients using known calues at the previous step.</p>
+<p>Another method is the Beam and Warming method.</p>
+<p>Consider the conservation form.</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial m}{\partial t} + \frac{\partial (m^{2}/\rho +
+p)}{\partial x} &amp;= 0 \\
+m &amp;= \rho u \\
+\end{align}
+\]</span></p>
+<p>Since an implicit method involves terms such as <span
+class="math inline">\((m^{2}/\rho + p)^{n+1}_{i+1}\)</span>. Then <span
+class="math inline">\((m^{2})^{n+1}_{i+1} / (\rho)^{n+1}_{i+1}\)</span>
+is an nonlinear term, which can not be computed directly.</p>
+<p>Consider</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} = 0
+\]</span></p>
+<p>CN scheme <a href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a> is applied,</p>
+<p><span class="math display">\[
+U^{n+1}_{i} = U^{n}_{i} - \frac{\Delta t}{2} \Big [ (\frac{\partial
+F}{\partial x})^{n}_{i} + (\frac{\partial F}{\partial x})^{n+1}_{i}\Big
+]
+\]</span></p>
+<p>Expand <span class="math inline">\(F\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+F^{n+1}_{i} &amp;= F^{n}_{i} + (\frac{\partial F}{\partial U})^{n}_{i}
+(U^{n+1}_{i} - U^{n}_{i}) + O(\Delta t) \\
+&amp;= F^{n}_{i} + A^{n}_{i} (U^{n+1}_{i} - U^{n}_{i})
+\end{align}
+\]</span></p>
+<p>Substitute <span class="math inline">\(F^{n+1}_{i}\)</span> and
+replace <span class="math inline">\(x\)</span> derivatives with central
+differences, finally we get a linear tridigonal matrix, which can be
+solved by Thomas’ algorithm.</p>
+<h3 data-number="4.2.2"
+id="the-multi-dimensional-problem-approximate-factorization"><span
+class="header-section-number">4.2.2</span> 11.3.2 The Multi-Dimensional
+Problem: Approximate Factorization</h3>
+<p>Consider</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} +
+\frac{\partial G}{\partial y} = 0
+\]</span></p>
+<p>Apply trapeziodal rule,</p>
+<p><span class="math display">\[
+U^{n+1} = U^{n} - \frac{\Delta t}{2} \Big [ (\frac{\partial F}{\partial
+x} + \frac{\partial G}{\partial y})^{n} + (\frac{\partial F}{\partial x}
++ \frac{\partial G}{\partial y})^{n+1} \Big ]
+\]</span></p>
+<p>With Beam-Warming method, we have</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \Big \{ I + \frac{\Delta t}{2} \big [ \frac{\partial }{\partial x}
+(A^{n}) + \frac{\partial }{\partial y} (B^{n}) \big ] \Big \} U^{n+1} =
+\\
+&amp; \Big \{ I + \frac{\Delta t}{2} \big [ \frac{\partial }{\partial x}
+(A^{n}) + \frac{\partial }{\partial y} (B^{n}) \big ] \Big \} U^{n} -
+\Delta t \big ( \frac{\partial F}{\partial x} + \frac{\partial
+G}{\partial y} \big )^{n} \\
+\end{align}
+\]</span></p>
+<p>Depending on the finite difference scheme, there will be different
+representations. If we choose central difference scheme, then a
+five-point difference module is obtained. However, the tremendous
+computational advantages of tridiagonal form is lost.</p>
+<p>Approximate factorization, rooted in ADI, is an improvement. In this
+procedure, rewrite the above equation in “approximate” form.</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial x} (A^{n})
+\Big ] \Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial y}
+(B^{n}) \Big ] U^{n+1} = \\
+&amp; \Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial x} (A^{n})
+\Big ] \Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial y}
+(B^{n}) \Big ] U^{n} - \Delta t \big ( \frac{\partial F}{\partial x} +
+\frac{\partial G}{\partial y} \big )^{n} \\
+\end{align}
+\]</span></p>
+<p>The extra terms <span class="math inline">\(\frac{(\Delta t)^{2}}{4}
+\Big [ \frac{\partial }{\partial x} (A^{n}) \frac{\partial }{\partial y}
+(B^{n}) \Big ] U^{n+1}, \frac{(\Delta t)^{2}}{4} \Big [ \frac{\partial
+}{\partial x} (A^{n}) \frac{\partial }{\partial y} (B^{n}) \Big ]
+U^{n}\)</span> involves <span class="math inline">\((\Delta
+t)^{2}\)</span> and so they do not affect the second order accuracy of
+the original form.</p>
+<p>The delta form shows the advantages.</p>
+<p><span class="math display">\[
+\begin{align}
+\Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial x} (A^{n}) \Big
+] \bar{\Delta U} &amp;= - \Delta t \big ( \frac{\partial F}{\partial x}
++ \frac{\partial G}{\partial y} \big )^{n} \\
+\Big [ I + \frac{\Delta t}{2} \frac{\partial }{\partial x} (B^{n}) \Big
+] \Delta U^{n} &amp;= \bar{\Delta U} \\
+\Delta U^{n} &amp;\equiv U^{n+1} - U^{n} \\
+\end{align}
+\]</span></p>
+<h3 data-number="4.2.3" id="block-tridiagonal-matrices"><span
+class="header-section-number">4.2.3</span> 11.3.3 Block Tridiagonal
+Matrices</h3>
+<p>In practice, <span class="math inline">\(U\)</span> consists of five
+elements. Therefore, there will be block tridiagonal matrix. Sample
+Fortran code is to be added.</p>
+<h2 data-number="4.3" id="upwind-schemes"><span
+class="header-section-number">4.3</span> 11.4 Upwind Schemes</h2>
+<p>Central difference scheme employed in flow field involving
+discontinuities causes severe oscillations.</p>
+<p>To explain the philosophy of upwind scheme, consider the first order
+wave equation,</p>
+<p><span class="math display">\[
+\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0
+\]</span></p>
+<p>Assume there is a discontinuity in <span
+class="math inline">\(u\)</span> across wave.</p>
+<p>If central difference scheme is used, then point <span
+class="math inline">\(i\)</span> is influenced by point <span
+class="math inline">\(i-1\)</span> and <span
+class="math inline">\(i+1\)</span>. In fact, the latter point is not
+within the domain of dependence of point <span
+class="math inline">\(i\)</span>. So, the information propagation is
+nonsensical. And the iteration will reach a blow-up.</p>
+<p>So, we apply an one-sided difference.</p>
+<p><span class="math display">\[
+\frac{u^{n+1}_{i} - u^{n}_{i}}{\Delta t} = -c \frac{u^{n}_{i} -
+u^{n}_{i-1}}{\Delta x}
+\]</span></p>
+<p>which is an upwind difference, leading to a stable iteration.</p>
+<p>Modern upwind schemes include Total Variation Diminishing (TVD)
+schemes, flux splitting, flux limiters, Godunov schemes, approximate
+Riemann solvers. And there schemes attempt to account for the
+propagation of information throughout the flow.</p>
+<h3 data-number="4.3.1" id="flux-vector-splitting"><span
+class="header-section-number">4.3.1</span> 11.4.1 Flux-Vector
+Splitting</h3>
+<p>Consider an unsteady 1D Euler equation governing subsonic flow,</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F}{\partial x} = 0
+\]</span></p>
+<p>With some algebra, we have</p>
+<p><span class="math display">\[
+\begin{align}
+F &amp;= A U \\
+A &amp;= \frac{\partial F}{\partial U} \\
+F &amp;= F^{+} + F^{-} \\
+&amp;= A^{+} U + A^{-} U \\
+&amp;= T [\lambda^{+}] T^{-1} U + T [\lambda^{-}] T^{-1} U \\
+[\lambda] &amp;= [\lambda^{+}] + [\lambda^{-}] \\
+&amp;=
+\begin{bmatrix}
+u &amp; &amp; \\
+&amp; u+c &amp; \\
+&amp; &amp; 0 \\
+\end{bmatrix}
++
+\begin{bmatrix}
+0 &amp; &amp; \\
+&amp; 0 &amp; \\
+&amp; &amp; u-c \\
+\end{bmatrix}
+\end{align}
+\]</span></p>
+<p>Then the equation is rewritten as</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F^{+}}{\partial x} +
+\frac{\partial F^{-}}{\partial x} = 0
+\]</span></p>
+<p>where <span class="math inline">\(\partial F^{+} / \partial
+x\)</span> will be replaced with a rearward difference while <span
+class="math inline">\(\partial F^{-} / \partial x\)</span> will be
+replaced with a forward difference.</p>
+<p>An important improvisation on flux-vector splitting is Van Leer’s
+flux splitting, which improves the performance of the numerical scheme
+for local Mach number near <span class="math inline">\(1\)</span>.</p>
+<h3 data-number="4.3.2" id="the-godunov-approach"><span
+class="header-section-number">4.3.2</span> 11.4.2 The Godunov
+Approach</h3>
+<p>The idea: exact solutions of Euler equations for a local region of
+the flow be pieced together to synthesize the general flow field.</p>
+<p>The numerical solution of finite difference is essentially a
+piecewise-constant distribution in space, illustrated in the following
+figure.</p>
+<p><img src="./P506_Fig_11_08.jpg" /></p>
+<p>The piecewise-constant distribution will trigger a series of
+mini-shock-tube problem. The numerical solution of the general flow
+field is being constructed by a local application of exact solution of
+the Riemann problem (the shock tube problem).</p>
+<h2 data-number="4.4" id="second-order-upwind-schemes"><span
+class="header-section-number">4.4</span> 11.5 Second-Order Upwind
+Schemes</h2>
+<p>First order upwind scheme is diffusive.</p>
+<p>Employ one-sided second order differences, we get second order upwind
+scheme, which improves it. However, the oscillations appear in second
+order upwind scheme. Hence, the disappearance of oscillations in first
+order upwind scheme is more due to the first order accuracy than to the
+philosophy of upwinding.</p>
+<h2 data-number="4.5"
+id="high-resolution-schemes-tvd-and-flux-limiters"><span
+class="header-section-number">4.5</span> 11.6 High-Resolution Schemes:
+TVD and Flux Limiters</h2>
+<p>Model equation</p>
+<p><span class="math display">\[
+\frac{\partial U}{\partial t} + \frac{\partial F(U)}{\partial x} = 0
+\]</span></p>
+<p>An property of physical solutions is that, <span
+class="math inline">\(TV = \int |\frac{\partial u}{\partial x}|
+dx\)</span>, do not increase with time. So for algorithms, if <span
+class="math inline">\((TV)^{n+1} \leq (TV)^{n}\)</span>, then it’s
+called Total Variation Diminishing (TVD).</p>
+<p>Oscillations of numerical origin destroy TVD. If we multiply some
+flux terms by appropriate functions, which are called flux limiters, we
+could force the difference equation to satisfy TVD.</p>
+<h2 data-number="4.6" id="multigrid-method"><span
+class="header-section-number">4.6</span> 11.8 Multigrid Method</h2>
+<p>It improves the convergence.</p>
+<p>The philosophy is to carry out early iterations on a fine grid and
+transfer to a series of coarser grids. Then the results on the coarsest
+grid are transfered back to the fine grid. The process is repeated until
+convergence on the fine grid is satisfactory.</p>
+<p>On mathematical basis, when computation are transfered to coarser
+grid, high frequency errors of small wavelength are lost and low
+frequency errors of large wavelength are damped at a faster rate.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>However, in practical computation, this problem is
+hardly encountered.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(\gamma =
+\frac{C_{p}}{C_{v}}, C_{p} = \frac{\gamma}{\gamma-1} R, C_{v} =
+\frac{1}{\gamma-1} R\)</span><a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>sometimes called the trapezoidal rule<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2017-09-05 with pandoc
+</footer>
+</body>
+</html>

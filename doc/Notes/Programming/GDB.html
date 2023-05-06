@@ -5,259 +5,12 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="date" content="2021-04-28" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.7.2/tufte.min.css">
-<link href="https://fonts.loli.net/css?family=Titillium+Web" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Oswald" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Abel" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
-<link href="https://fonts.loli.net/css?family=EB+Garamond:ital" rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous"> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script> -->
-<!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script> -->
-<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet">
-<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-<title>GDB</title>
-
-<style>
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-  width: 90%;
-  padding-left: 5%;
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  padding-right: 5%;
-}
-
-video {
-  display: block;
-  margin: 0 auto;
-}
-
-.column video {
-  width: -webkit-fill-available;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-figure {
-  max-width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-figcaption {
-  max-width: 100%;
-  float: left;
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-
-table {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  text-align: center;
-  border-top: 3px double black;
-  border-bottom: 3px double black;
-}
-table caption {
-  font-size: 1.2rem;
-  font-family: 'Abel', sans-serif;
-}
-th {
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid black;
-}
-td {
-  font-size: 1.4rem;
-}
-/* Alternating background colors */
-tr:nth-child(even) {
-  background: #A6A6A6
-  }
-tr:nth-child(odd) {
-  background: #FFF
-}
-
-code {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  color: #666;
-  font-family: 'Fira Code', monospace;
-
-}
-
-pre>code {
-  border-left: 3px solid #ffd772;
-  page-break-inside: avoid;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.5em 1em;
-  display: block;
-  word-wrap: break-word;
-  width: 90%;
-}
-
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  font-family: 'EB Garamond';
-  display: inline;
-}
-
-dl {
-  font-size: 1.4rem;
-  line-height: 2rem;
-}
-dt {
-  float: left;
-  width: 30%;
-  text-align: right;
-  font-weight: bold;
-  padding: .25em;
-  clear: left;
-}
-dd {
-  float: left;
-  width: 60%;
-  padding: .25em 0;
-}
-dt:after {
-  content: ":";
-}
-
-.columns {
-  display: flex;
-}
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-.column13 {
-  float: left;
-  width: 33%;
-}
-
-.column14 {
-  float: left;
-  width: 25%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.customHr {
-  width: 20%;
-  font-size: 1px;
-  color: rgba(0, 0, 0, 0);
-  line-height: 1px;
-  background-color: grey;
-  margin-left: 75%;
-  margin-right: 5%;
-}
-
-footer {
-  font-size: 1.0rem;
-  text-align: right;
-  margin-right: 5%;
-}
-
-</style>
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; } /* Alert */
-code span.an { color: #008000; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #0000ff; } /* ControlFlow */
-code span.ch { color: #008080; } /* Char */
-code span.cn { } /* Constant */
-code span.co { color: #008000; } /* Comment */
-code span.cv { color: #008000; } /* CommentVar */
-code span.do { color: #008000; } /* Documentation */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.im { } /* Import */
-code span.in { color: #008000; } /* Information */
-code span.kw { color: #0000ff; } /* Keyword */
-code span.op { } /* Operator */
-code span.ot { color: #ff4000; } /* Other */
-code span.pp { color: #ff4000; } /* Preprocessor */
-code span.sc { color: #008080; } /* SpecialChar */
-code span.ss { color: #008080; } /* SpecialString */
-code span.st { color: #008080; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #008080; } /* VerbatimString */
-code span.wa { color: #008000; font-weight: bold; } /* Warning */
-</style>
-
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -266,59 +19,122 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <h3 class="date">2021-04-28</h3>
 <div id="TOC">
 <ul>
-<li><a href="#basics"><span class="toc-section-number">1</span> Basics</a>
+<li><a href="#basics" id="toc-basics"><span
+class="toc-section-number">1</span> Basics</a>
 <ul>
-<li><a href="#operations"><span class="toc-section-number">1.1</span> Operations</a>
+<li><a href="#operations" id="toc-operations"><span
+class="toc-section-number">1.1</span> Operations</a>
 <ul>
-<li><a href="#conditional-break"><span class="toc-section-number">1.1.1</span> Conditional break</a></li>
-<li><a href="#remove-a-variable-from-the-auto-display"><span class="toc-section-number">1.1.2</span> Remove A Variable from the Auto Display</a></li>
-<li><a href="#list-class-methods"><span class="toc-section-number">1.1.3</span> List Class Methods</a></li>
-<li><a href="#print-an-element-of-2d-array"><span class="toc-section-number">1.1.4</span> Print An Element of 2D Array</a></li>
-<li><a href="#print-multiple-variables"><span class="toc-section-number">1.1.5</span> Print Multiple Variables</a></li>
-<li><a href="#call-stack"><span class="toc-section-number">1.1.6</span> Call Stack</a></li>
-<li><a href="#debug-core-file"><span class="toc-section-number">1.1.7</span> Debug core file</a></li>
+<li><a href="#conditional-break" id="toc-conditional-break"><span
+class="toc-section-number">1.1.1</span> Conditional break</a></li>
+<li><a href="#remove-a-variable-from-the-auto-display"
+id="toc-remove-a-variable-from-the-auto-display"><span
+class="toc-section-number">1.1.2</span> Remove A Variable from the Auto
+Display</a></li>
+<li><a href="#list-class-methods" id="toc-list-class-methods"><span
+class="toc-section-number">1.1.3</span> List Class Methods</a></li>
+<li><a href="#print-an-element-of-2d-array"
+id="toc-print-an-element-of-2d-array"><span
+class="toc-section-number">1.1.4</span> Print An Element of 2D
+Array</a></li>
+<li><a href="#print-multiple-variables"
+id="toc-print-multiple-variables"><span
+class="toc-section-number">1.1.5</span> Print Multiple
+Variables</a></li>
+<li><a href="#call-stack" id="toc-call-stack"><span
+class="toc-section-number">1.1.6</span> Call Stack</a></li>
+<li><a href="#debug-core-file" id="toc-debug-core-file"><span
+class="toc-section-number">1.1.7</span> Debug core file</a></li>
 </ul></li>
-<li><a href="#configuration"><span class="toc-section-number">1.2</span> Configuration</a>
+<li><a href="#configuration" id="toc-configuration"><span
+class="toc-section-number">1.2</span> Configuration</a>
 <ul>
-<li><a href="#print-to-file-instead-of-stdout"><span class="toc-section-number">1.2.1</span> Print to file instead of stdout</a></li>
-<li><a href="#limit-of-number-of-elements-in-print-setting"><span class="toc-section-number">1.2.2</span> Limit of number of elements in print setting</a></li>
+<li><a href="#print-to-file-instead-of-stdout"
+id="toc-print-to-file-instead-of-stdout"><span
+class="toc-section-number">1.2.1</span> Print to file instead of
+stdout</a></li>
+<li><a href="#limit-of-number-of-elements-in-print-setting"
+id="toc-limit-of-number-of-elements-in-print-setting"><span
+class="toc-section-number">1.2.2</span> Limit of number of elements in
+print setting</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#advanced"><span class="toc-section-number">2</span> Advanced</a>
+<li><a href="#advanced" id="toc-advanced"><span
+class="toc-section-number">2</span> Advanced</a>
 <ul>
-<li><a href="#hexdump"><span class="toc-section-number">2.1</span> <code>hexdump</code></a>
+<li><a href="#hexdump" id="toc-hexdump"><span
+class="toc-section-number">2.1</span> <code>hexdump</code></a>
 <ul>
-<li><a href="#view-the-content-of-a-binary-file"><span class="toc-section-number">2.1.1</span> View the content of a binary file</a></li>
+<li><a href="#view-the-content-of-a-binary-file"
+id="toc-view-the-content-of-a-binary-file"><span
+class="toc-section-number">2.1.1</span> View the content of a binary
+file</a></li>
 </ul></li>
-<li><a href="#operations-1"><span class="toc-section-number">2.2</span> Operations</a>
+<li><a href="#operations-1" id="toc-operations-1"><span
+class="toc-section-number">2.2</span> Operations</a>
 <ul>
-<li><a href="#check-the-value-at-a-memory-address"><span class="toc-section-number">2.2.1</span> Check the Value at a Memory Address</a></li>
-<li><a href="#watchpoint-a-fixed-address"><span class="toc-section-number">2.2.2</span> Watchpoint a fixed address</a></li>
-<li><a href="#print-whole-string-verbatim"><span class="toc-section-number">2.2.3</span> Print whole string verbatim</a></li>
-<li><a href="#display-the-elements-of-vector"><span class="toc-section-number">2.2.4</span> Display the elements of vector</a></li>
-<li><a href="#gdb-gives-sqrt3.0-0"><span class="toc-section-number">2.2.5</span> GDB Gives SQRT(3.0) = 0?</a></li>
-<li><a href="#check-16-bytes-floating-number"><span class="toc-section-number">2.2.6</span> Check 16-bytes Floating Number</a></li>
-<li><a href="#reversible-debugging"><span class="toc-section-number">2.2.7</span> Reversible Debugging</a></li>
+<li><a href="#check-the-value-at-a-memory-address"
+id="toc-check-the-value-at-a-memory-address"><span
+class="toc-section-number">2.2.1</span> Check the Value at a Memory
+Address</a></li>
+<li><a href="#watchpoint-a-fixed-address"
+id="toc-watchpoint-a-fixed-address"><span
+class="toc-section-number">2.2.2</span> Watchpoint a fixed
+address</a></li>
+<li><a href="#print-whole-string-verbatim"
+id="toc-print-whole-string-verbatim"><span
+class="toc-section-number">2.2.3</span> Print whole string
+verbatim</a></li>
+<li><a href="#display-the-elements-of-vector"
+id="toc-display-the-elements-of-vector"><span
+class="toc-section-number">2.2.4</span> Display the elements of
+vector</a></li>
+<li><a href="#gdb-gives-sqrt3.0-0" id="toc-gdb-gives-sqrt3.0-0"><span
+class="toc-section-number">2.2.5</span> GDB Gives SQRT(3.0) =
+0?</a></li>
+<li><a href="#check-16-bytes-floating-number"
+id="toc-check-16-bytes-floating-number"><span
+class="toc-section-number">2.2.6</span> Check 16-bytes Floating
+Number</a></li>
+<li><a href="#reversible-debugging" id="toc-reversible-debugging"><span
+class="toc-section-number">2.2.7</span> Reversible Debugging</a></li>
 </ul></li>
-<li><a href="#python-support"><span class="toc-section-number">2.3</span> Python support</a>
+<li><a href="#python-support" id="toc-python-support"><span
+class="toc-section-number">2.3</span> Python support</a>
 <ul>
-<li><a href="#enable-python-support"><span class="toc-section-number">2.3.1</span> Enable Python Support</a></li>
-<li><a href="#usage"><span class="toc-section-number">2.3.2</span> Usage</a></li>
-<li><a href="#example-1-read-and-replace-data"><span class="toc-section-number">2.3.3</span> Example 1: Read and Replace Data</a></li>
+<li><a href="#enable-python-support"
+id="toc-enable-python-support"><span
+class="toc-section-number">2.3.1</span> Enable Python Support</a></li>
+<li><a href="#usage" id="toc-usage"><span
+class="toc-section-number">2.3.2</span> Usage</a></li>
+<li><a href="#example-1-read-and-replace-data"
+id="toc-example-1-read-and-replace-data"><span
+class="toc-section-number">2.3.3</span> Example 1: Read and Replace
+Data</a></li>
 </ul></li>
-<li><a href="#misc"><span class="toc-section-number">2.4</span> Misc</a>
+<li><a href="#misc" id="toc-misc"><span
+class="toc-section-number">2.4</span> Misc</a>
 <ul>
-<li><a href="#ptrace-operation-not-permitted-using-gdb-in-docker"><span class="toc-section-number">2.4.1</span> <code>ptrace operation not permitted</code> using GDB in docker</a></li>
+<li><a href="#ptrace-operation-not-permitted-using-gdb-in-docker"
+id="toc-ptrace-operation-not-permitted-using-gdb-in-docker"><span
+class="toc-section-number">2.4.1</span>
+<code>ptrace operation not permitted</code> using GDB in docker</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 <div id="wrapper">
-<h1 data-number="1" id="basics"><span class="header-section-number">1</span> Basics</h1>
-<h2 data-number="1.1" id="operations"><span class="header-section-number">1.1</span> Operations</h2>
-<h3 data-number="1.1.1" id="conditional-break"><span class="header-section-number">1.1.1</span> Conditional break</h3>
+<h1 data-number="1" id="basics"><span
+class="header-section-number">1</span> Basics</h1>
+<h2 data-number="1.1" id="operations"><span
+class="header-section-number">1.1</span> Operations</h2>
+<h3 data-number="1.1.1" id="conditional-break"><span
+class="header-section-number">1.1.1</span> Conditional break</h3>
 <pre><code>break x:20 if strcmp(y, &quot;hello&quot;) == 0</code></pre>
-<h3 data-number="1.1.2" id="remove-a-variable-from-the-auto-display"><span class="header-section-number">1.1.2</span> Remove A Variable from the Auto Display</h3>
+<h3 data-number="1.1.2"
+id="remove-a-variable-from-the-auto-display"><span
+class="header-section-number">1.1.2</span> Remove A Variable from the
+Auto Display</h3>
 <pre><code>(gdb) display a
 1: a = 32767
 (gdb) display b
@@ -330,40 +146,74 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 6  b = 2;
 1: a = 1
 3: c = 0</code></pre>
-<h3 data-number="1.1.3" id="list-class-methods"><span class="header-section-number">1.1.3</span> List Class Methods</h3>
+<h3 data-number="1.1.3" id="list-class-methods"><span
+class="header-section-number">1.1.3</span> List Class Methods</h3>
 <pre><code>ptype</code></pre>
-<h3 data-number="1.1.4" id="print-an-element-of-2d-array"><span class="header-section-number">1.1.4</span> Print An Element of 2D Array</h3>
+<h3 data-number="1.1.4" id="print-an-element-of-2d-array"><span
+class="header-section-number">1.1.4</span> Print An Element of 2D
+Array</h3>
 <p>In C,</p>
 <pre><code>p arr[1][3]</code></pre>
-<h3 data-number="1.1.5" id="print-multiple-variables"><span class="header-section-number">1.1.5</span> Print Multiple Variables</h3>
+<h3 data-number="1.1.5" id="print-multiple-variables"><span
+class="header-section-number">1.1.5</span> Print Multiple Variables</h3>
 <p>Use the following command</p>
 <pre><code>printf &quot;%d,%d\n&quot;, a, b</code></pre>
-<h3 data-number="1.1.6" id="call-stack"><span class="header-section-number">1.1.6</span> Call Stack</h3>
-<p>Each time your program performs a function call, information about the call is generated. The information is saved in a block of data called a stack frame. The stack frames are allocated in a region of memory called the call stack.</p>
-<p>A backtrace is a summary of how your program got where it is. It shows one line per frame, for many frames, starting with the currently executing frame (frame zero), followed by its caller (frame one), and on up the stack.</p>
+<h3 data-number="1.1.6" id="call-stack"><span
+class="header-section-number">1.1.6</span> Call Stack</h3>
+<p>Each time your program performs a function call, information about
+the call is generated. The information is saved in a block of data
+called a stack frame. The stack frames are allocated in a region of
+memory called the call stack.</p>
+<p>A backtrace is a summary of how your program got where it is. It
+shows one line per frame, for many frames, starting with the currently
+executing frame (frame zero), followed by its caller (frame one), and on
+up the stack.</p>
 <ul>
-<li><code>backtrace</code> or <code>bt</code>: Print a backtrace of the entire stack: one line per frame for all frames in the stack.</li>
+<li><code>backtrace</code> or <code>bt</code>: Print a backtrace of the
+entire stack: one line per frame for all frames in the stack.</li>
 </ul>
-<h3 data-number="1.1.7" id="debug-core-file"><span class="header-section-number">1.1.7</span> Debug core file</h3>
-<p>When your program fails during the runtime, a core file would be dumped out if <code>ulimit -c unlimited</code> is already executed.</p>
-<p>Then <code>gdb your_program</code> even if the command to run your program is <code>gdb --args your_program input_file</code>. Remember that <code>.gdbinit</code> file should be not presented. Otherwise, <code>gdb</code> would follow the commands in <code>.gdbinit</code> to run. When <code>gdb</code> starts, type <code>core core.114172</code> to load the core file. Then <code>bt</code> shows the backtrace.</p>
+<h3 data-number="1.1.7" id="debug-core-file"><span
+class="header-section-number">1.1.7</span> Debug core file</h3>
+<p>When your program fails during the runtime, a core file would be
+dumped out if <code>ulimit -c unlimited</code> is already executed.</p>
+<p>Then <code>gdb your_program</code> even if the command to run your
+program is <code>gdb --args your_program input_file</code>. Remember
+that <code>.gdbinit</code> file should be not presented. Otherwise,
+<code>gdb</code> would follow the commands in <code>.gdbinit</code> to
+run. When <code>gdb</code> starts, type <code>core core.114172</code> to
+load the core file. Then <code>bt</code> shows the backtrace.</p>
 <p>Use <code>frame num</code> to go to that frame.</p>
-<h2 data-number="1.2" id="configuration"><span class="header-section-number">1.2</span> Configuration</h2>
-<h3 data-number="1.2.1" id="print-to-file-instead-of-stdout"><span class="header-section-number">1.2.1</span> Print to file instead of stdout</h3>
+<h2 data-number="1.2" id="configuration"><span
+class="header-section-number">1.2</span> Configuration</h2>
+<h3 data-number="1.2.1" id="print-to-file-instead-of-stdout"><span
+class="header-section-number">1.2.1</span> Print to file instead of
+stdout</h3>
 <p>You need to enable logging.</p>
 <pre><code>(gdb) set logging on</code></pre>
 <p>You can tell it which file to use.</p>
 <pre><code>(gdb) set logging file my_god_object.log</code></pre>
 <p>And you can examine current logging configuration.</p>
 <pre><code>(gdb) show logging</code></pre>
-<h3 data-number="1.2.2" id="limit-of-number-of-elements-in-print-setting"><span class="header-section-number">1.2.2</span> Limit of number of elements in print setting</h3>
+<h3 data-number="1.2.2"
+id="limit-of-number-of-elements-in-print-setting"><span
+class="header-section-number">1.2.2</span> Limit of number of elements
+in print setting</h3>
 <pre><code>set print elements number-of-elements </code></pre>
 <blockquote>
-<p>Set a limit on how many elements of an array GDB will print. If GDB is printing a large array, it stops printing after it has printed the number of elements set by the set print elements command. This limit also applies to the display of strings. When GDB starts, this limit is set to 200. Setting number-of-elements to zero means that the printing is unlimited.</p>
+<p>Set a limit on how many elements of an array GDB will print. If GDB
+is printing a large array, it stops printing after it has printed the
+number of elements set by the set print elements command. This limit
+also applies to the display of strings. When GDB starts, this limit is
+set to 200. Setting number-of-elements to zero means that the printing
+is unlimited.</p>
 </blockquote>
-<h1 data-number="2" id="advanced"><span class="header-section-number">2</span> Advanced</h1>
-<h2 data-number="2.1" id="hexdump"><span class="header-section-number">2.1</span> <code>hexdump</code></h2>
-<h3 data-number="2.1.1" id="view-the-content-of-a-binary-file"><span class="header-section-number">2.1.1</span> View the content of a binary file</h3>
+<h1 data-number="2" id="advanced"><span
+class="header-section-number">2</span> Advanced</h1>
+<h2 data-number="2.1" id="hexdump"><span
+class="header-section-number">2.1</span> <code>hexdump</code></h2>
+<h3 data-number="2.1.1" id="view-the-content-of-a-binary-file"><span
+class="header-section-number">2.1.1</span> View the content of a binary
+file</h3>
 <pre><code>$ hexdump -v -n 28 -e &#39;1/4 &quot;%08d &quot; &quot;\n&quot;&#39; Restart_files/out.149403.done.rst 
 00000004 
 00000005 
@@ -374,23 +224,45 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 00149403</code></pre>
 <p>Explanations</p>
 <ul>
-<li><code>-v</code> outputs all the content and does not collapse duplicates</li>
-<li><code>-n 28</code> outputs 28 bytes. Note that integer-32 is 32 bits or say 4 bytes. Thus 28 bytes means 7 integer-32 numbers.</li>
-<li><code>-e '1/4 "%08d " "\n"'</code> specifies the output format. <code>1/4</code> means that the iteration count is <code>1</code> and the byte count is <code>4</code>. Thus the number of bytes to be formatted as a group is <code>4</code>. <code>"%08d " "\n"</code> is the C <code>printf</code> format notation. Note that <code>4/1</code> does not work as <code>1/4</code>.</li>
+<li><code>-v</code> outputs all the content and does not collapse
+duplicates</li>
+<li><code>-n 28</code> outputs 28 bytes. Note that integer-32 is 32 bits
+or say 4 bytes. Thus 28 bytes means 7 integer-32 numbers.</li>
+<li><code>-e '1/4 "%08d " "\n"'</code> specifies the output format.
+<code>1/4</code> means that the iteration count is <code>1</code> and
+the byte count is <code>4</code>. Thus the number of bytes to be
+formatted as a group is <code>4</code>. <code>"%08d " "\n"</code> is the
+C <code>printf</code> format notation. Note that <code>4/1</code> does
+not work as <code>1/4</code>.</li>
 </ul>
-<h2 data-number="2.2" id="operations-1"><span class="header-section-number">2.2</span> Operations</h2>
-<h3 data-number="2.2.1" id="check-the-value-at-a-memory-address"><span class="header-section-number">2.2.1</span> Check the Value at a Memory Address</h3>
+<h2 data-number="2.2" id="operations-1"><span
+class="header-section-number">2.2</span> Operations</h2>
+<h3 data-number="2.2.1" id="check-the-value-at-a-memory-address"><span
+class="header-section-number">2.2.1</span> Check the Value at a Memory
+Address</h3>
 <pre><code>p usp_ngb(1, 1, ws)
 $1 = 7.4697350049059708
 p &amp;usp_ngb(1, 1, ws)
 $2 = (PTR TO -&gt; ( real(kind=8) )) 0x7fffffff7af0
 x/xg &amp;usp_ngb(1, 1, ws)
 0x7fffffff7af0: 0x401de102368f6e20</code></pre>
-<p>Use this website <a href="https://babbage.cs.qc.cuny.edu/IEEE-754.old/64bit.html">IEEE-754 Floating-Point Conversion: From 64-bit Hexadecimal Representation To Decimal Floating-Point</a> to see that <code>0x401de102368f6e20</code> is <code>7.4697350049059710</code>.</p>
-<p>For the format, refer to <a href="https://sourceware.org/gdb/onlinedocs/gdb/Memory.html">10.6 Examining Memory</a> and <a href="https://sourceware.org/gdb/onlinedocs/gdb/Output-Formats.html">10.5 Output Formats</a>.</p>
-<h3 data-number="2.2.2" id="watchpoint-a-fixed-address"><span class="header-section-number">2.2.2</span> Watchpoint a fixed address</h3>
+<p>Use this website <a
+href="https://babbage.cs.qc.cuny.edu/IEEE-754.old/64bit.html">IEEE-754
+Floating-Point Conversion: From 64-bit Hexadecimal Representation To
+Decimal Floating-Point</a> to see that <code>0x401de102368f6e20</code>
+is <code>7.4697350049059710</code>.</p>
+<p>For the format, refer to <a
+href="https://sourceware.org/gdb/onlinedocs/gdb/Memory.html">10.6
+Examining Memory</a> and <a
+href="https://sourceware.org/gdb/onlinedocs/gdb/Output-Formats.html">10.5
+Output Formats</a>.</p>
+<h3 data-number="2.2.2" id="watchpoint-a-fixed-address"><span
+class="header-section-number">2.2.2</span> Watchpoint a fixed
+address</h3>
 <pre><code>watch *0x10793ad0</code></pre>
-<h3 data-number="2.2.3" id="print-whole-string-verbatim"><span class="header-section-number">2.2.3</span> Print whole string verbatim</h3>
+<h3 data-number="2.2.3" id="print-whole-string-verbatim"><span
+class="header-section-number">2.2.3</span> Print whole string
+verbatim</h3>
 <pre><code>(gdb) p &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
 $6 = &#39;a&#39; &lt;repeats 30 times&gt;
 (gdb) set print repeats 0
@@ -399,12 +271,17 @@ $7 = &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
 (gdb) set print repeats 10
 (gdb) p &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
 $8 = &#39;a&#39; &lt;repeats 30 times&gt;</code></pre>
-<h3 data-number="2.2.4" id="display-the-elements-of-vector"><span class="header-section-number">2.2.4</span> Display the elements of vector</h3>
-<p><del>It’s really difficult. <a href="http://math-linux.com/c/faq-c/faq-c-stl/article/how-to-print-the-elements-of-a-c-std-vector-with-gnu-debugger-gdb">Link</a></del></p>
+<h3 data-number="2.2.4" id="display-the-elements-of-vector"><span
+class="header-section-number">2.2.4</span> Display the elements of
+vector</h3>
+<p><del>It’s really difficult. <a
+href="http://math-linux.com/c/faq-c/faq-c-stl/article/how-to-print-the-elements-of-a-c-std-vector-with-gnu-debugger-gdb">Link</a></del></p>
 <p>For now, I cannot see the difficulty.</p>
-<h3 data-number="2.2.5" id="gdb-gives-sqrt3.0-0"><span class="header-section-number">2.2.5</span> GDB Gives SQRT(3.0) = 0?</h3>
+<h3 data-number="2.2.5" id="gdb-gives-sqrt3.0-0"><span
+class="header-section-number">2.2.5</span> GDB Gives SQRT(3.0) = 0?</h3>
 <p>The reason is that GDB has no debug info about the math function.</p>
-<p>Use <code>info func sqrt</code> to check the available math functions.</p>
+<p>Use <code>info func sqrt</code> to check the available math
+functions.</p>
 <p>Usually <code>__sqrt</code> is available in GDB.</p>
 <pre><code>(gdb) p (double) sin(4.0)
 $16 = -0.7568024953079282
@@ -414,33 +291,65 @@ $17 = -1.98266328e+18
 $18 = 2
 (gdb) p (float) sqrt(4.0)
 $19 = 0</code></pre>
-<p>Note you should use <code>double</code> as the type of the return value.</p>
-<h3 data-number="2.2.6" id="check-16-bytes-floating-number"><span class="header-section-number">2.2.6</span> Check 16-bytes Floating Number</h3>
-<p>Use gdb to debug Fortran program. Normally, you cannot print correctly the values of 16-bytes floating number.</p>
+<p>Note you should use <code>double</code> as the type of the return
+value.</p>
+<h3 data-number="2.2.6" id="check-16-bytes-floating-number"><span
+class="header-section-number">2.2.6</span> Check 16-bytes Floating
+Number</h3>
+<p>Use gdb to debug Fortran program. Normally, you cannot print
+correctly the values of 16-bytes floating number.</p>
 <p>You can examine the memory by the following commands.</p>
 <pre><code>(gdb) p &amp;(xy_qp(2))
 $31 = (PTR TO -&gt; ( real(kind=16) )) 0x7fffffffc410
 (gdb) x/2xg 0x7fffffffc410
 0x7fffffffc410: 0x0000000000000000  0xbfff000000000000</code></pre>
 <ul>
-<li><code>xy_qp(2)</code> is actually <code>-1.0</code> in 16-bytes format.</li>
-<li>In <code>x/2xg</code>, the first <code>x</code> is the command of examining the content of a memory address, the second <code>x</code> is the format of hex, <code>g</code> is the unit size as giant word (8-bytes) and <code>2</code> means repeating twice.</li>
-<li>Note: since the real content of this 16-bytes number is split into 2 parts, <code>x/2xg</code> gives reversed order of the split parts. The real content is actually <code>0xbfff000000000000 0x0000000000000000</code>, i.e. <code>0xbfff0000000000000000000000000000</code></li>
-<li>Use the Python function defined in <a href="http://desperadoshi.github.io/doc/programming/python_scientific.html">Python Scientific Notes</a> to get the decimal expression of this 16-bytes number.</li>
+<li><code>xy_qp(2)</code> is actually <code>-1.0</code> in 16-bytes
+format.</li>
+<li>In <code>x/2xg</code>, the first <code>x</code> is the command of
+examining the content of a memory address, the second <code>x</code> is
+the format of hex, <code>g</code> is the unit size as giant word
+(8-bytes) and <code>2</code> means repeating twice.</li>
+<li>Note: since the real content of this 16-bytes number is split into 2
+parts, <code>x/2xg</code> gives reversed order of the split parts. The
+real content is actually
+<code>0xbfff000000000000 0x0000000000000000</code>,
+i.e. <code>0xbfff0000000000000000000000000000</code></li>
+<li>Use the Python function defined in <a
+href="http://desperadoshi.github.io/doc/programming/python_scientific.html">Python
+Scientific Notes</a> to get the decimal expression of this 16-bytes
+number.</li>
 </ul>
-<h3 data-number="2.2.7" id="reversible-debugging"><span class="header-section-number">2.2.7</span> Reversible Debugging</h3>
-<p><a href="https://www.youtube.com/watch?v=-n9Fkq1e6sg&amp;feature=youtu.be&amp;t=37m36s">Reversible Debugging</a></p>
-<h2 data-number="2.3" id="python-support"><span class="header-section-number">2.3</span> Python support</h2>
-<h3 data-number="2.3.1" id="enable-python-support"><span class="header-section-number">2.3.1</span> Enable Python Support</h3>
+<h3 data-number="2.2.7" id="reversible-debugging"><span
+class="header-section-number">2.2.7</span> Reversible Debugging</h3>
+<p><a
+href="https://www.youtube.com/watch?v=-n9Fkq1e6sg&amp;feature=youtu.be&amp;t=37m36s">Reversible
+Debugging</a></p>
+<h2 data-number="2.3" id="python-support"><span
+class="header-section-number">2.3</span> Python support</h2>
+<h3 data-number="2.3.1" id="enable-python-support"><span
+class="header-section-number">2.3.1</span> Enable Python Support</h3>
 <p>Compile gdb source codes as follows,</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/home/jcshi/Softwares/gdb-8.3.1 <span class="at">--with-python</span><span class="op">=</span>/home/jcshi/Softwares/Python/bin/python3</span>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span>/home/jcshi/Softwares/gdb-8.3.1 <span class="at">--with-python</span><span class="op">=</span>/home/jcshi/Softwares/Python/bin/python3</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="at">-j</span> 4</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> install</span></code></pre></div>
-<p>Note: If python is compiled from source codes by <code>--enable-shared</code>, configuring gdb will complain that <code>no usable python</code>. I tried to debug the configure script of gdb, but I failed. So I turn back to re-compile python without <code>--enable-shared</code>. However, <code>--enable-shared</code> seems to be required by <code>pyinstaller</code>. Maybe I should use a virtual environment for <code>pyinstaller</code>.</p>
-<h3 data-number="2.3.2" id="usage"><span class="header-section-number">2.3.2</span> Usage</h3>
-<p>Load python script in <code>.gdbinit</code>: <code>source python_script.py</code></p>
-<h3 data-number="2.3.3" id="example-1-read-and-replace-data"><span class="header-section-number">2.3.3</span> Example 1: Read and Replace Data</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os.path <span class="im">import</span> join</span>
+<p>Note: If python is compiled from source codes by
+<code>--enable-shared</code>, configuring gdb will complain that
+<code>no usable python</code>. I tried to debug the configure script of
+gdb, but I failed. So I turn back to re-compile python without
+<code>--enable-shared</code>. However, <code>--enable-shared</code>
+seems to be required by <code>pyinstaller</code>. Maybe I should use a
+virtual environment for <code>pyinstaller</code>.</p>
+<h3 data-number="2.3.2" id="usage"><span
+class="header-section-number">2.3.2</span> Usage</h3>
+<p>Load python script in <code>.gdbinit</code>:
+<code>source python_script.py</code></p>
+<h3 data-number="2.3.3" id="example-1-read-and-replace-data"><span
+class="header-section-number">2.3.3</span> Example 1: Read and Replace
+Data</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os.path <span class="im">import</span> join</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gdb</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read2DMat(in_fpath):</span>
@@ -473,11 +382,16 @@ $31 = (PTR TO -&gt; ( real(kind=16) )) 0x7fffffffc410
 <span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>            gdb_cmd_str <span class="op">=</span> <span class="st">&quot;set cdof</span><span class="sc">%%</span><span class="st">v(</span><span class="sc">%d</span><span class="st">,</span><span class="sc">%d</span><span class="st">)=</span><span class="sc">%23.15e</span><span class="st">&quot;</span><span class="op">%</span>(iq<span class="op">+</span><span class="dv">1</span>,isp,ref_q_data[isp<span class="op">-</span>beg_sp][iq])</span>
 <span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>            gdb.execute( gdb_cmd_str )</span></code></pre></div>
-<h2 data-number="2.4" id="misc"><span class="header-section-number">2.4</span> Misc</h2>
-<h3 data-number="2.4.1" id="ptrace-operation-not-permitted-using-gdb-in-docker"><span class="header-section-number">2.4.1</span> <code>ptrace operation not permitted</code> using GDB in docker</h3>
+<h2 data-number="2.4" id="misc"><span
+class="header-section-number">2.4</span> Misc</h2>
+<h3 data-number="2.4.1"
+id="ptrace-operation-not-permitted-using-gdb-in-docker"><span
+class="header-section-number">2.4.1</span>
+<code>ptrace operation not permitted</code> using GDB in docker</h3>
 <p>Exit and run a new docker with the following option,</p>
 <pre><code>docker run --cap-add=SYS_PTRACE</code></pre>
-<p><a href="https://stackoverflow.com/questions/19215177/how-to-solve-ptrace-operation-not-permitted-when-trying-to-attach-gdb-to-a-pro/46676868">Reference</a></p>
+<p><a
+href="https://stackoverflow.com/questions/19215177/how-to-solve-ptrace-operation-not-permitted-when-trying-to-attach-gdb-to-a-pro/46676868">Reference</a></p>
 </div>
 <div class="customHr">.</div>
 <footer>

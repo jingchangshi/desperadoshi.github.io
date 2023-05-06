@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2014-04-26" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Ordinary Differential Equations</h1>
+<h3 class="date">2014-04-26</h3>
+<div id="TOC">
+<ul>
+<li><a href="#order-ode" id="toc-order-ode"><span
+class="toc-section-number">1</span> 1 order ODE</a>
+<ul>
+<li><a href="#separable-variable-equation"
+id="toc-separable-variable-equation"><span
+class="toc-section-number">1.1</span> Separable variable
+equation</a></li>
+<li><a href="#exact-equation" id="toc-exact-equation"><span
+class="toc-section-number">1.2</span> Exact equation</a></li>
+<li><a href="#inexact-equation---integration-factor"
+id="toc-inexact-equation---integration-factor"><span
+class="toc-section-number">1.3</span> Inexact equation - integration
+factor</a></li>
+</ul></li>
+<li><a href="#high-order-linear-ode-with-constant-coefficients"
+id="toc-high-order-linear-ode-with-constant-coefficients"><span
+class="toc-section-number">2</span> High order linear ODE with constant
+coefficients</a>
+<ul>
+<li><a href="#wronskian" id="toc-wronskian"><span
+class="toc-section-number">2.1</span> Wronskian</a></li>
+<li><a href="#find-complementary-solution"
+id="toc-find-complementary-solution"><span
+class="toc-section-number">2.2</span> Find complementary
+solution</a></li>
+<li><a href="#find-particular-solution"
+id="toc-find-particular-solution"><span
+class="toc-section-number">2.3</span> Find particular solution</a></li>
+<li><a href="#laplace-transform-method"
+id="toc-laplace-transform-method"><span
+class="toc-section-number">2.4</span> Laplace transform method</a></li>
+</ul></li>
+<li><a href="#high-order-linear-ode-with-variable-coefficients"
+id="toc-high-order-linear-ode-with-variable-coefficients"><span
+class="toc-section-number">3</span> High order linear ODE with variable
+coefficients</a>
+<ul>
+<li><a href="#order-linear-ode" id="toc-order-linear-ode"><span
+class="toc-section-number">3.1</span> 2-order linear ODE</a></li>
+<li><a href="#series-solution-of-linear-ode"
+id="toc-series-solution-of-linear-ode"><span
+class="toc-section-number">3.2</span> Series solution of linear ODE</a>
+<ul>
+<li><a href="#basics-on-series-solution-of-2-order-linear-ode"
+id="toc-basics-on-series-solution-of-2-order-linear-ode"><span
+class="toc-section-number">3.2.1</span> Basics on series solution of
+2-order linear ODE</a></li>
+<li><a href="#series-solutions-of-2-order-linear-ode"
+id="toc-series-solutions-of-2-order-linear-ode"><span
+class="toc-section-number">3.2.2</span> Series solutions of 2-order
+linear ODE</a></li>
+<li><a href="#on-the-indicial-equation"
+id="toc-on-the-indicial-equation"><span
+class="toc-section-number">3.2.3</span> On the indicial
+equation</a></li>
+<li><a href="#on-the-methods-to-find-the-second-solution"
+id="toc-on-the-methods-to-find-the-second-solution"><span
+class="toc-section-number">3.2.4</span> On the methods to find the
+second solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#nonlinear-ode" id="toc-nonlinear-ode"><span
+class="toc-section-number">4</span> Nonlinear ODE</a></li>
+<li><a href="#miscellaneous" id="toc-miscellaneous"><span
+class="toc-section-number">5</span> Miscellaneous</a></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1" id="order-ode"><span
+class="header-section-number">1</span> 1 order ODE</h1>
+<p>Solution is categorized as + closed form + infinite series</p>
+<h2 data-number="1.1" id="separable-variable-equation"><span
+class="header-section-number">1.1</span> Separable variable
+equation</h2>
+<p>The general form is</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{dy}{dx} = f(x) g(y)
+\end{equation}
+\]</span></p>
+<p>Then rearrange the equation as</p>
+<p><span class="math display">\[
+\begin{equation}
+\int \frac{dy}{g(y)} = \int f(x) dx
+\end{equation}
+\]</span></p>
+<h2 data-number="1.2" id="exact-equation"><span
+class="header-section-number">1.2</span> Exact equation</h2>
+<p>Exact equation is of this form</p>
+<p><span class="math display">\[
+\begin{equation}
+A(x, y) dx + B(x, y) dy = 0, \quad \frac{\partial A}{\partial y} =
+\frac{\partial B}{\partial x}
+\end{equation}
+\]</span></p>
+<p><span class="math inline">\(A(x, y) dx + B(x, y) dy\)</span> is an
+exact differential. We restate it as</p>
+<p><span class="math display">\[
+\begin{equation}
+A(x, y) dx + B(x, y) dy = dU = \frac{\partial U}{\partial x} dx +
+\frac{\partial U}{\partial y} dy
+\end{equation}
+\]</span></p>
+<p>The above statement requires</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{\partial A}{\partial y} = \frac{\partial B}{\partial x}
+\end{equation}
+\]</span></p>
+<p>By apply the following equations,</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial U}{\partial x} &amp;= A(x, y) \\
+\frac{\partial U}{\partial y} &amp;= B(x, y) \\
+\end{align}
+\]</span></p>
+<p>We obtain <span class="math inline">\(U(x, y)\)</span>. So, the exact
+equation can be integrated directly.<a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><span class="math display">\[
+\begin{equation}
+\int dU = C
+\end{equation}
+\]</span></p>
+<p>For example, solve the following ODE.</p>
+<p><span class="math display">\[
+(3x + y) dx + x dy = 0
+\]</span></p>
+<p>Regard <span class="math inline">\(A(x, y) = 3x + y, B(x, y) =
+x\)</span>. Then we get</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial U}{\partial x} &amp;= 3x + y \\
+\frac{\partial U}{\partial y} &amp;= x \\
+\end{align}
+\]</span></p>
+<p>Integrate the second equation with respect to <span
+class="math inline">\(y\)</span>, we get <span
+class="math inline">\(U(x, y) = xy + f(x)\)</span>. Substitute the
+solution into the first equation, we will get <span
+class="math inline">\(y + f^{\prime}(x) = y + 3x\)</span>. Obviously,
+<span class="math inline">\(U(x, y) = xy + 3/2 x^{2} + C_{0}\)</span>.
+The integration <span class="math inline">\(\int dU = C_{1}\)</span> is
+equivalent to <span class="math inline">\(U(x, y) = C_{1}\)</span>. So,
+the final solution is <span class="math inline">\(xy + 3/2 x^{2} =
+C\)</span>.</p>
+<h2 data-number="1.3" id="inexact-equation---integration-factor"><span
+class="header-section-number">1.3</span> Inexact equation - integration
+factor</h2>
+<p>Inexact equation is of this form</p>
+<p><span class="math display">\[
+\begin{equation}
+A(x, y) dx + B(x, y) dy = 0, \quad \frac{\partial A}{\partial y} \neq
+\frac{\partial B}{\partial x}
+\end{equation}
+\]</span></p>
+<p>Although the above equation is inexact, it can be exact by multiply
+an integration factor.</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{\partial \mu A}{\partial y} = \frac{\partial \mu B}{\partial x}
+\end{equation}
+\]</span></p>
+<p>Integration factor <span class="math inline">\(\mu\)</span> cannot be
+a function of both <span class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span>. Instead, it is just a function of
+single <span class="math inline">\(x\)</span> or single <span
+class="math inline">\(y\)</span>. Then this equation can be solved by
+the following method. For instance, <span class="math inline">\(\mu(x,
+y)\)</span> is just function of <span class="math inline">\(x\)</span>.
+Then the above equation is reduced to be</p>
+<p><span class="math display">\[
+\begin{equation}
+\mu \frac{\partial A}{\partial y} = \mu \frac{\partial B}{\partial x} +
+B \frac{d \mu}{dx}
+\end{equation}
+\]</span></p>
+<p>Then rearrange it as</p>
+<p><span class="math display">\[
+\begin{equation}
+\frac{d \mu}{\mu} = \Big ( \frac{\partial A}{\partial y} -
+\frac{\partial B}{\partial x} \Big ) \frac{dx}{B}
+\end{equation}
+\]</span></p>
+<p>Here, another assumption is <span class="math inline">\(\Big (
+\frac{\partial A}{\partial y} - \frac{\partial B}{\partial x} \Big
+)\)</span> is just function of single <span
+class="math inline">\(x\)</span>. Then integrate above equation, we can
+get the integration factor expression. Substitute into the original
+equation and get exact equation.</p>
+<h1 data-number="2"
+id="high-order-linear-ode-with-constant-coefficients"><span
+class="header-section-number">2</span> High order linear ODE with
+constant coefficients</h1>
+<p>The general form is</p>
+<p><span class="math display">\[
+\begin{equation}
+a_{n}(x) \frac{d^{n}y}{dx^{n}} + a_{n-1}(x) \frac{d^{n-1}y}{dx^{n-1}} +
+... + a_{1}(x) \frac{dy}{dx} + a_{0}(x) y  = f(x)
+\end{equation}
+\]</span></p>
+<p>Find complementary solution first and then find particular solution.
+Combine them.</p>
+<h2 data-number="2.1" id="wronskian"><span
+class="header-section-number">2.1</span> Wronskian</h2>
+<p>Whether high order linear ODE is linear or not depends on
+Wronskian.</p>
+<h2 data-number="2.2" id="find-complementary-solution"><span
+class="header-section-number">2.2</span> Find complementary
+solution</h2>
+<p>The solution is to assume <span class="math inline">\(y = A
+e^{\lambda x}\)</span> and substitute into the original equation. Get
+rid of the exponential part, we are left with the auxiliary
+equation.</p>
+<p><span class="math display">\[
+\begin{equation}
+a_{n}(x) \lambda^{n} + a_{n-1}(x) \lambda^{n-1} + ... + a_{1}(x)
+\lambda^{1} + a_{0}(x)  = 0
+\end{equation}
+\]</span></p>
+<p>Three main cases on the solution of auxiliary equation. + All roots
+are real and distinct + Some roots are complex + Some roots are
+repeated</p>
+<h2 data-number="2.3" id="find-particular-solution"><span
+class="header-section-number">2.3</span> Find particular solution</h2>
+<p>There is no generally applicable method to find a particular
+solution. However, there are some standard situations where we can
+employ the method of undetermined coefficients.</p>
+<p>We can use the method of Variation of Parameters to find a particular
+solution of equation in this form.</p>
+<p><span class="math display">\[
+\begin{equation}
+y^{\prime \prime} + P(x) y^{\prime} + Q(x) y = 0
+\end{equation}
+\]</span></p>
+<h2 data-number="2.4" id="laplace-transform-method"><span
+class="header-section-number">2.4</span> Laplace transform method</h2>
+<p>Taking Laplace transform method transforms the original ODE into a
+purely algebraic equation. Once the solution of the algebric equation is
+obtained, taking inverse Laplace transform will get the solution of the
+original ODE. Specifically, employ 2 formulas from the Laplace theory to
+transform the original ODE. And the right side of the equation is also
+transformed by Laplace transform method, in which circumstances it is
+always done by referring the standard table. Formulas are as follows</p>
+<p><span class="math display">\[
+\begin{align}
+\bar{f}(s) &amp;= \int^{\infty}_{0} e^{-sx} f(x) dx \\
+\bar{f^{n}}(s) &amp;= s^{n} \bar{f}(s) - s^{n-1} f(0) - s^{n-2}
+f^{\prime}(0) - ... - s f^{n-2}(0) - f^{n-1}(0) \\
+\end{align}
+\]</span></p>
+<h1 data-number="3"
+id="high-order-linear-ode-with-variable-coefficients"><span
+class="header-section-number">3</span> High order linear ODE with
+variable coefficients</h1>
+<p>There is no generally applicable method to find solution of this type
+ODE. Nevertheless, there are some cases in which a solution is
+possible.</p>
+<h2 data-number="3.1" id="order-linear-ode"><span
+class="header-section-number">3.1</span> 2-order linear ODE</h2>
+<p>Standard form</p>
+<p><span class="math display">\[
+\begin{equation}
+y^{\prime \prime} + P(x) y^{\prime} + Q(x) y = 0
+\end{equation}
+\]</span></p>
+<p>If we have a solution <span class="math inline">\(y_{1}(x)\)</span>,
+then we can define <span class="math inline">\(y = u(x)
+y_{1}(x)\)</span>, the derivative <span class="math inline">\(y^{\prime}
+= u^{\prime} y_{1} + u y^{\prime}_{1}, y^{\prime \prime} = u^{\prime
+\prime} y_{1} + 2 u^{\prime} y^{\prime}_{1} + u y^{\prime
+\prime}_{1}\)</span>. Substitute into the original equation</p>
+<p><span class="math display">\[
+\begin{equation}
+y^{\prime \prime} + P y^{\prime} + Q y = u ( y^{\prime \prime}_{1} + P
+y^{\prime}_{1} + Q y_{1} ) + u^{\prime} ( 2 y^{\prime}_{1} + P y_{1} ) +
+u^{\prime \prime} y_{1} = 0
+\end{equation}
+\]</span></p>
+<p>Define <span class="math inline">\(w = u^{\prime}\)</span>, then</p>
+<p><span class="math display">\[
+\begin{equation}
+y_{1} w^{\prime} + ( 2 y^{\prime}_{1} + P y_{1} ) w = 0
+\end{equation}
+\]</span></p>
+<p>Separate variables</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{dw}{w} + \frac{2 y^{\prime}_{1}}{y_{1}} dx + P dx &amp;= 0 \\
+\int \frac{1}{w} dw + \int \frac{2 y^{\prime}_{1}}{y_{1}} dx + \int P dx
+&amp;= 0
+\end{align}
+\]</span></p>
+<h2 data-number="3.2" id="series-solution-of-linear-ode"><span
+class="header-section-number">3.2</span> Series solution of linear
+ODE</h2>
+<p>A method for obtaining solutions to linear ODEs in the form of
+convergent series.</p>
+<p>Indeed, some elementary functions can be seen as convergent series
+and they are given special names such as <span class="math inline">\(sin
+x\)</span>, <span class="math inline">\(cos x\)</span> or <span
+class="math inline">\(exp x\)</span>.</p>
+<h3 data-number="3.2.1"
+id="basics-on-series-solution-of-2-order-linear-ode"><span
+class="header-section-number">3.2.1</span> Basics on series solution of
+2-order linear ODE</h3>
+<ol type="1">
+<li><p>the general form</p>
+<p><span class="math display">\[
+\begin{align}
+y^{\prime \prime} + p(x) y^{\prime} + q(x) y = 0
+\end{align}
+\]</span></p>
+<p>The general form of solutions is as follows</p>
+<p><span class="math display">\[
+\begin{align}
+y(x) = c_{1} y_{1}(x) + c_{2} y_{2}(x)
+\end{align}
+\]</span></p>
+<p>To determine whether <span class="math inline">\(y_{1}\)</span> and
+<span class="math inline">\(y_{2}\)</span> are independent, use
+Wronskian.</p>
+<p><span class="math display">\[
+\begin{align}
+W(x) =
+\begin{vmatrix}
+y_{1} &amp; y_{2} \\
+y^{\prime}_{1} &amp; y^{\prime}_{2} \\
+\end{vmatrix}
+= y_{1} y^{\prime}_{2} - y_{2} y^{\prime}_{1}
+\end{align}
+\]</span></p>
+<p>If Wronskian is not <span class="math inline">\(0\)</span> everywhere
+in a given interval, then <span class="math inline">\(y_{1},
+y_{2}\)</span> are linearly independent in that interval.</p>
+<p>Another way to evaluate Wronskian</p>
+<p><span class="math display">\[
+\begin{align}
+W^{\prime} = y_{1} y^{\prime \prime}_{2} - y_{2} y^{\prime \prime}_{1} =
+- p W
+\end{align}
+\]</span></p>
+<p>Integrate and we find</p>
+<p><span class="math display">\[
+\begin{align}
+W(x) = C exp \{ - \int^{x} p(u) du \}
+\end{align}
+\]</span></p></li>
+<li><p>Points classification</p>
+<p>At some point <span class="math inline">\(z = z_{0}\)</span>,
+coefficient <span class="math inline">\(p(z), q(z)\)</span> are finite
+and can be expressed as complex power series, then we say <span
+class="math inline">\(p(z), q(z)\)</span> are analytic at <span
+class="math inline">\(z = z_{0}\)</span> and <span
+class="math inline">\(z = z_{0}\)</span> is an ordinary point. If <span
+class="math inline">\(p(z), q(z)\)</span> or both diverge, then this
+point is singular point.</p>
+<p>If ODE is singular at <span class="math inline">\(z = z_{0}\)</span>,
+it may still possess a non-singular (finite) solution at <span
+class="math inline">\(z = z_{0}\)</span>. The necessary and sufficient
+condition for such a solution to exist is that <span
+class="math inline">\((z - z_{0}) p(z), (z - z_{0})^{2} q(z)\)</span>
+are both analytic at <span class="math inline">\(z = z_{0}\)</span>.
+Under such condition, this point is called regular singular point. If
+not, this point is called irregular or essential singularity.</p>
+<p>Sometimes we want to investigate <span class="math inline">\(|z|
+\rightarrow \infty\)</span>, substitute <span class="math inline">\(w =
+1/z\)</span>.</p></li>
+</ol>
+<h3 data-number="3.2.2"
+id="series-solutions-of-2-order-linear-ode"><span
+class="header-section-number">3.2.2</span> Series solutions of 2-order
+linear ODE</h3>
+<ol type="1">
+<li><p>ordinary point</p>
+<p>There is power series of such form</p>
+<p><span class="math display">\[
+\begin{align}
+y(z) = \sum^{\infty}_{n=0} a_{n} z^{n}
+\end{align}
+\]</span></p>
+<p>The convergence radius <span class="math inline">\(R\)</span> is the
+distance from <span class="math inline">\(z = 0\)</span> to the nearest
+singularity point.</p>
+<p>Substitute power series of the above form into the original ODE, we
+can get recurrence relation. Then by the recurrence relation, we get all
+coefficients.</p></li>
+<li><p>regular singular point</p>
+<p>Suppose <span class="math inline">\(z = 0\)</span> is a regular
+singular point of the equation</p>
+<p><span class="math display">\[
+\begin{align}
+y^{\prime \prime} + p(x) y^{\prime} + q(x) y = 0
+\end{align}
+\]</span></p>
+<p>Fuch’s theorem shows that there exist at least 1 solution of the
+form</p>
+<p><span class="math display">\[
+\begin{align}
+y = z^{\sigma} \sum^{\infty}_{n=0} a_{n} z^{n}
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\sigma\)</span> is real or complex
+number, <span class="math inline">\(a_{0} \neq 0\)</span>.</p>
+<p>Such series is Frobenius series.</p>
+<p>The convergence radius <span class="math inline">\(R\)</span> is the
+distance from <span class="math inline">\(z = 0\)</span> to the nearest
+singularity point.</p>
+<p>Rearrange ODE and substitute Frobenius series, we obtain</p>
+<p><span class="math display">\[
+\begin{align}
+\sum^{\infty}_{n=0} \Big [ (n + \sigma)(n + \sigma - 1) + s(z) (n +
+\sigma) + t(z) \Big ] a_{n} z^{n} = 0
+\end{align}
+\]</span></p>
+<p>The solution is about <span class="math inline">\(z = 0\)</span>, so
+at this point, we get indicial equation</p>
+<p><span class="math display">\[
+\begin{align}
+\sigma (\sigma - 1) + s(0) \sigma + t(0) = 0
+\end{align}
+\]</span></p></li>
+</ol>
+<h3 data-number="3.2.3" id="on-the-indicial-equation"><span
+class="header-section-number">3.2.3</span> On the indicial equation</h3>
+<ul>
+<li><p><span class="math inline">\(\sigma_{1} - \sigma_{2} \neq
+integer\)</span></p>
+<p>There are two linearly independent solutions of the ODE</p>
+<p><span class="math display">\[
+  \begin{align}
+  y_{1}(z) &amp;= Z^{\sigma_{1}} \sum^{\infty}_{n=0} a_{n} z^{n} \\
+  y_{2}(z) &amp;= Z^{\sigma_{2}} \sum^{\infty}_{n=0} b_{n} z^{n} \\
+  \end{align}
+  \]</span></p>
+<p>Maybe the linear independence of solutions can be verified by the
+Wronskian.</p></li>
+<li><p><span class="math inline">\(\sigma_{1} = \sigma_{2}\)</span></p>
+<p>Obviously only one solution in the form of Frobenius series can be
+found. We must use another method to find the second solution.</p></li>
+<li><p><span class="math inline">\(\sigma_{1} - \sigma_{2} =
+integer\)</span></p>
+<p>The root of larger real part always lead to a solution. Under this
+condition, the root of the smaller real part may or may not lead to a
+second linearly independent solution. We must use another method to find
+the second solution.</p></li>
+</ul>
+<h3 data-number="3.2.4"
+id="on-the-methods-to-find-the-second-solution"><span
+class="header-section-number">3.2.4</span> On the methods to find the
+second solution</h3>
+<h1 data-number="4" id="nonlinear-ode"><span
+class="header-section-number">4</span> Nonlinear ODE</h1>
+<p>There is no generally applicable method to find solution of this type
+ODE.</p>
+<h1 data-number="5" id="miscellaneous"><span
+class="header-section-number">5</span> Miscellaneous</h1>
+<ol type="1">
+<li><p>Homogeneous boundary condition in BVP means the values at
+boundary are <span class="math inline">\(0\)</span>.</p></li>
+<li><p>In BVP, if the boundary condition is homogeneous, then there
+exists trivial solution <span class="math inline">\(y = 0\)</span>.
+However, what has practical values is non-trivial solution, which
+requires the determination of eigenvalues to find non-trivial solution.
+That is the eigenvalue problem.</p></li>
+</ol>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I cannot understand the next step, which is already
+listed in any ODE textbook. I think that direct integration of this
+equation is apparent.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2014-04-26 with pandoc
+</footer>
+</body>
+</html>

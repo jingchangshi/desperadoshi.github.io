@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2012-08-22" />
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/tufte.min.css">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://shijingchang.cn/doc/assets/css/extra.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/katex.min.js"></script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.6/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+<div id="header">
+<h1 class="title">Fedora16下使用shell编程实现锐捷免费上网自动化</h1>
+<h3 class="date">2012-08-22</h3>
+<div id="TOC">
+<ul>
+<li><a href="#fedora16下使用shell编程实现锐捷免费上网自动化"
+id="toc-fedora16下使用shell编程实现锐捷免费上网自动化"><span
+class="toc-section-number">1</span>
+Fedora16下使用shell编程实现锐捷免费上网自动化</a>
+<ul>
+<li><a href="#shell编程命令基础" id="toc-shell编程命令基础"><span
+class="toc-section-number">1.1</span> shell编程命令基础</a></li>
+<li><a href="#具体实现代码" id="toc-具体实现代码"><span
+class="toc-section-number">1.2</span> 具体实现代码</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="wrapper">
+<h1 data-number="1"
+id="fedora16下使用shell编程实现锐捷免费上网自动化"><span
+class="header-section-number">1</span>
+Fedora16下使用shell编程实现锐捷免费上网自动化</h1>
+<h2 data-number="1.1" id="shell编程命令基础"><span
+class="header-section-number">1.1</span> shell编程命令基础</h2>
+<ol type="1">
+<li><code>echo “you are a idiot ...”</code><br />
+此命令用于在控制台中输出文本<br />
+</li>
+<li><code>#!/bin/sh</code><br />
+此命令必须写在文件的第一行，用于指示系统执行该文件的shell。<br />
+</li>
+<li><code>gnome-terminal</code><br />
+此命令用于打开一个新的console；如果你想打开一个console并执行一个命令，那么可以使用以下命令：<br />
+<code>gnome-terminal -e &lt;command&gt;</code><br />
+这个命令执行后会立即关闭其新建的gnome
+terminal。你可以测试以下两个命令看看效果：<br />
+<code>gnome-terminal -e echo "you are a genius"</code><br />
+<code>gnome-terminal -e gnome-terminal</code><br />
+你会看到第一个命令会使屏幕闪烁一下，而后什么也没发生；而第二个命令会出现另一个gnome
+terminal。<br />
+如果你想打开一个gnome terminal并执行一个命令之后继续使用该gnome
+terminal，那么你可以使用以下命令：<br />
+<code>gnome-terminal -x bash -c "echo 'you are a genius'; exec bash"</code><br />
+这里换成了参数x，并且参数x后面紧跟着命令bash。bash后面双引号里面的内容是bash要执行的命令。<br />
+（这里存在一个疑问，就是怎样使用参数e实现上述功能？）<br />
+注：gnome-terminal以及bash的用法及命令参数可以通过<code>--help</code>查询。<br />
+</li>
+<li><code>if [ -f /etc/mentohust/8021x.exe]; then echo "/etc/mentohust/ do exist"; else echo "/etc/mentohust/ do not exist"; fi</code><br />
+上述命令就是shell中的if-else控制流程语句，与C语言中的if-else控制语句差别不大，但是注意两点：<code>-f</code>与其前的大括号<code>[</code>间隔一个空格；结尾一定要加上结尾标志<code>fi</code><br />
+</li>
+<li><code>echo &lt;password&gt; | sudo -S &lt;command&gt;</code><br />
+上述命令实现了执行sudo命令时提前输入密码的功能。其中<code>|</code>是管道命令，即将一个进程的标准输出流与另一个进程的标准输入流连接起来。<br />
+</li>
+<li><code>' " `</code><br />
++单引号 <code>'</code><br />
+两个单引号包围起来的字符串就是普通的字符串，它将保留原始的字面意思。<br />
++双引号 <code>"</code><br />
+两个双引号包围起来的字符串，部分特殊字符将起到它们的作用。<br />
++反引号 <code>`</code><br />
+两个反引号包围起来的字符串，将作为命令来运行，
+执行的输出结果作为该反引号的内容，称为命令替换， 它有另一种更好的写法:
+$(command)。<br />
+（引用自：<a
+href="http://www.igigo.net/archives/128">Bash引号的那点事</a>）</li>
+</ol>
+<h2 data-number="1.2" id="具体实现代码"><span
+class="header-section-number">1.2</span> 具体实现代码</h2>
+<ol type="1">
+<li><p>锐捷付费上网代码</p>
+<pre><code> #!/bin/sh
+ if [ -f /etc/mentohust/8021x.exe ]; then
+     echo &quot;/etc/mentohust/ do exist&quot;;
+     echo &quot;execute RuiJieCharged application -- mentohust&quot;;
+     gnome-terminal -x bash -c &quot;echo sjc | sudo -S mv /etc/mentohust/ /etc/mentohust.bak/ &amp;&amp; sudo -S mentohust -u2010301563 -pbxsjc0728 -np5p1 -a1 -d3 -w; exec bash&quot;;
+ else
+     echo &quot;/etc/mentohust.bak/ do exist&quot;;
+     echo &quot;execute RuiJieCharged application -- mentohust&quot;;
+     gnome-terminal -x bash -c &quot;echo sjc | sudo -S mentohust -u2010301563 -pbxsjc0728 -np5p1 -a1 -d3 -w; exec bash&quot;;
+ fi</code></pre></li>
+<li><p>锐捷免费上网代码</p>
+<pre><code> #!/bin/sh
+ if [ -f /etc/mentohust/8021x.exe ]; then
+     echo &quot;/etc/mentohust/ do exist&quot;;
+     echo &quot;execute RuiJieFree applicantion&quot;;
+     gnome-terminal -x bash -c &quot;echo sjc | sudo -S /home/aerosjc/Downloads/mentonpu/mnfree -u2010301563 -pbxsjc0728 -np5p1 -a1 -d3; exec bash&quot;;
+     echo &quot;execute SouGou Proxy&quot;;
+     gnome-terminal -x bash -c &quot;/home/aerosjc/Downloads/mentonpu/proxy.py; exec bash&quot;;
+     echo &quot;execute Google-Chrome&quot;;
+     gnome-terminal -x bash -c &quot;google-chrome --proxy-server=localhost:1998; exec bash&quot;;
+ else
+     echo &quot;/etc/mentohust.bak/ do exist&quot;;
+     echo &quot;execute RuiJieFree applicantion&quot;;
+     gnome-terminal -x bash -c &quot;echo sjc | sudo -S mv /etc/mentohust.bak/ /etc/mentohust/ &amp;&amp; sudo -S /home/aerosjc/Downloads/mentonpu/mnfree -u2010301563 -pbxsjc0728 -np5p1 -a1 -d3; exec bash&quot;;
+     echo &quot;execute SouGou Proxy&quot;;
+     gnome-terminal -x bash -c &quot;/home/aerosjc/Downloads/mentonpu/proxy.py; exec bash&quot;;
+     echo &quot;execute Google-Chrome&quot;;
+     gnome-terminal -x bash -c &quot;google-chrome --proxy-server=localhost:1998; exec bash&quot;;
+ fi</code></pre></li>
+</ol>
+<p>另附<a href="http://os.51cto.com/art/201003/186779.htm">详细介绍Linux
+shell脚本基础学习</a></p>
+</div>
+<div class="customHr">.</div>
+<footer>
+  Created on 2012-08-22 with pandoc
+</footer>
+</body>
+</html>

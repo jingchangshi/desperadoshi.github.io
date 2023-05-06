@@ -1,13 +1,10 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
-<script src="lunr_index.js"></script>
-<script src="lunrclient.js"></script>
-<link href="https://fonts.loli.net/css?family=Fira+Code" rel="stylesheet">
+<link href="https://fonts.loli.net/css2?family=Fira+Code&display=swap" rel="stylesheet">
 <style>
   body {
-    font-family: 'Fira Code';
+    font-family: 'Fira Code', monospace;
   }
   .link_text {
     font-weight: bold;
@@ -80,15 +77,48 @@
 <li><a href="Notes\CFD\Gmsh.html" target="_blank"><span class="link_text">Gmsh.html</span></a></li><br>
 <li><a href="Notes\CFD\Gnuplot.html" target="_blank"><span class="link_text">Gnuplot.html</span></a></li><br>
 <li><a href="Notes\CFD\NondimensionalizeFluidDynamicVariables.html" target="_blank"><span class="link_text">NondimensionalizeFluidDynamicVariables.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnBookComputationalFluidDynamicsTheBasicsWithApplications.html" target="_blank"><span class="link_text">NotesOnBookComputationalFluidDynamicsTheBasicsWithApplications.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnBookTurbulentFlows.html" target="_blank"><span class="link_text">NotesOnBookTurbulentFlows.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnBoundaryLayerTheory.html" target="_blank"><span class="link_text">NotesOnBoundaryLayerTheory.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnShearLayerControl.html" target="_blank"><span class="link_text">NotesOnShearLayerControl.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnViscosityStressVorticity.html" target="_blank"><span class="link_text">NotesOnViscosityStressVorticity.html</span></a></li><br>
+<li><a href="Notes\CFD\NotesOnViscousTermInNSEq.html" target="_blank"><span class="link_text">NotesOnViscousTermInNSEq.html</span></a></li><br>
 <li><a href="Notes\CFD\NumericalSchlieren.html" target="_blank"><span class="link_text">NumericalSchlieren.html</span></a></li><br>
+<li><a href="Notes\CFD\QCriterion.html" target="_blank"><span class="link_text">QCriterion.html</span></a></li><br>
 <li><a href="Notes\CFD\Reynolds Stress in Coding.html" target="_blank"><span class="link_text">Reynolds Stress in Coding.html</span></a></li><br>
 <li><a href="Notes\CFD\ShockRelations.html" target="_blank"><span class="link_text">ShockRelations.html</span></a></li><br>
 <li><a href="Notes\CFD\Tecplot.html" target="_blank"><span class="link_text">Tecplot.html</span></a></li><br>
+<li><a href="Notes\CFD\Wave.html" target="_blank"><span class="link_text">Wave.html</span></a></li><br>
+<ul>
+<h3><input type="button" id="2" value="➕" onclick="toggleSection(this.id)"></button>Copy_of_Shear_Layer_Control</h3>
+<div id="section-2" style="display: none">
 </div>
 </ul>
 <ul>
-<h2><input type="button" id="2" value="➕" onclick="toggleSection(this.id)"></button>Programming</h2>
-<div id="section-2" style="display: none">
+<h3><input type="button" id="3" value="➕" onclick="toggleSection(this.id)"></button>NoteOnBoundaryLayerTheory_20141129</h3>
+<div id="section-3" style="display: none">
+</div>
+</ul>
+</div>
+</ul>
+<ul>
+<h2><input type="button" id="4" value="➕" onclick="toggleSection(this.id)"></button>Math</h2>
+<div id="section-4" style="display: none">
+<li><a href="Notes\Math\ChebyshevExpansion.html" target="_blank"><span class="link_text">ChebyshevExpansion.html</span></a></li><br>
+<li><a href="Notes\Math\NotesOnBookIntroductionToPerturbationTheory.html" target="_blank"><span class="link_text">NotesOnBookIntroductionToPerturbationTheory.html</span></a></li><br>
+<li><a href="Notes\Math\ODE.html" target="_blank"><span class="link_text">ODE.html</span></a></li><br>
+<li><a href="Notes\Math\PDE.html" target="_blank"><span class="link_text">PDE.html</span></a></li><br>
+<li><a href="Notes\Math\VectorTensor.html" target="_blank"><span class="link_text">VectorTensor.html</span></a></li><br>
+<ul>
+<h3><input type="button" id="5" value="➕" onclick="toggleSection(this.id)"></button>Notes_on_PDE</h3>
+<div id="section-5" style="display: none">
+</div>
+</ul>
+</div>
+</ul>
+<ul>
+<h2><input type="button" id="6" value="➕" onclick="toggleSection(this.id)"></button>Programming</h2>
+<div id="section-6" style="display: none">
 <li><a href="Notes\Programming\CMake.html" target="_blank"><span class="link_text">CMake.html</span></a></li><br>
 <li><a href="Notes\Programming\Collection.html" target="_blank"><span class="link_text">Collection.html</span></a></li><br>
 <li><a href="Notes\Programming\Fortran.html" target="_blank"><span class="link_text">Fortran.html</span></a></li><br>
@@ -107,9 +137,10 @@
 </div>
 </ul>
 <ul>
-<h2><input type="button" id="3" value="➕" onclick="toggleSection(this.id)"></button>Tool</h2>
-<div id="section-3" style="display: none">
+<h2><input type="button" id="7" value="➕" onclick="toggleSection(this.id)"></button>Tool</h2>
+<div id="section-7" style="display: none">
 <li><a href="Notes\Tool\Docker.html" target="_blank"><span class="link_text">Docker.html</span></a></li><br>
+<li><a href="Notes\Tool\Fedora16ShellScriptRuijieFreeOnline.html" target="_blank"><span class="link_text">Fedora16ShellScriptRuijieFreeOnline.html</span></a></li><br>
 <li><a href="Notes\Tool\Git.html" target="_blank"><span class="link_text">Git.html</span></a></li><br>
 <li><a href="Notes\Tool\Gnuplot.html" target="_blank"><span class="link_text">Gnuplot.html</span></a></li><br>
 <li><a href="Notes\Tool\ipe.html" target="_blank"><span class="link_text">ipe.html</span></a></li><br>
@@ -117,6 +148,7 @@
 <li><a href="Notes\Tool\Linux.html" target="_blank"><span class="link_text">Linux.html</span></a></li><br>
 <li><a href="Notes\Tool\Pandoc.html" target="_blank"><span class="link_text">Pandoc.html</span></a></li><br>
 <li><a href="Notes\Tool\ParaView.html" target="_blank"><span class="link_text">ParaView.html</span></a></li><br>
+<li><a href="Notes\Tool\ShellScriptAutoRunningFluent.html" target="_blank"><span class="link_text">ShellScriptAutoRunningFluent.html</span></a></li><br>
 <li><a href="Notes\Tool\Tmux.html" target="_blank"><span class="link_text">Tmux.html</span></a></li><br>
 <li><a href="Notes\Tool\Vim.html" target="_blank"><span class="link_text">Vim.html</span></a></li><br>
 <li><a href="Notes\Tool\VirtualBox.html" target="_blank"><span class="link_text">VirtualBox.html</span></a></li><br>
@@ -124,20 +156,17 @@
 </div>
 </ul>
   </div>
-  <div class="column">
-    <br>
-    <form id="lunrSearchForm" name="lunrSearchForm">
-      <input class="search-input" name="q" placeholder="Enter search term" type="text">
-      <input class="search-input" type="submit" value="Search">
-    </form>
-    <div class="loading" id="loading-div">
-      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-      <span class="sr-only">Loading...</span>
-    </div>
-    <p>Search results will be written below:</p>
-    <div class="resultCount" id="resultCount"></div>
-    <div id="searchResults"></div>
-  </div>
+  <link href="https://shijingchang.cn/doc/_pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="https://shijingchang.cn/doc/_pagefind/pagefind-ui.js" type="text/javascript"></script>
+  <div id="search"></div>
+  <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+          new PagefindUI({
+            element: "#search",
+            showImages: false
+          });
+      });
+  </script>
 </div>
 </body>
 </html>
